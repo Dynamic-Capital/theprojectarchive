@@ -1,6 +1,6 @@
 function animateStats(root) {
   const elements = root.querySelectorAll('.stat-number');
-  elements.forEach((el) => {
+  const animateElement = (el) => {
     const target = parseInt(el.dataset.target, 10);
     if (isNaN(target)) return;
 
@@ -20,7 +20,21 @@ function animateStats(root) {
     };
 
     update();
-  });
+  };
+
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateElement(entry.target);
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.6 }
+  );
+
+  elements.forEach((el) => observer.observe(el));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
