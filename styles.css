@@ -35,6 +35,11 @@ a:hover {
   text-decoration: underline;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 /* Overlay navigation */
 .overlay-nav {
   position: fixed;
@@ -157,6 +162,39 @@ a:hover {
   padding: 4rem 1.5rem;
   max-width: 1000px;
   margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  .cta-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .cta-group .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (min-width: 768px) {
+  .overlay-nav {
+    position: static;
+    flex-direction: row;
+    justify-content: flex-end;
+    background: none;
+    opacity: 1;
+    pointer-events: auto;
+    gap: 2rem;
+  }
+
+  .overlay-nav a {
+    font-size: 1rem;
+    line-height: normal;
+  }
+
+  .hamburger {
+    display: none;
+  }
 }
 
 .section h2 {
