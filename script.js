@@ -164,7 +164,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   if (window.Typed && document.querySelector('.tagline')) {
     new Typed('.tagline', {
-      strings: ["Photographer", "Storyteller", "Creative Director"],
+      strings: [
+        "Professional Photography",
+        "Videography Services",
+        "Media Production & Editing"
+      ],
       typeSpeed: 50, backSpeed: 30, backDelay: 1200, loop: true
     });
   }
