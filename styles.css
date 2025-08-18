@@ -372,3 +372,29 @@ body.loaded .fade-in {
 .contact-form button:hover {
   background-color: #a0214d;
 }
+
+.scroll-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 3rem;
+  height: 3rem;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1500;
+}
+
+.scroll-top.show {
+  opacity: 1;
+  pointer-events: auto;
+}
