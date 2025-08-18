@@ -1,0 +1,7 @@
+static_sites:
+  - name: theprojectarchive
+    source_dir: /
+    build_command: ""
+    output_dir: /
+    routes:
+      - path: /

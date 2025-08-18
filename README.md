@@ -1,13 +1,11 @@
 # The Project Archive
 
-This repository contains the marketing site for The Project Archive, a creative studio based in the Maldives. The site now features individual pages for each key section—About, Mission, Approach, In Numbers, Services, and Contact—linked from a global navigation bar. The Services page also showcases a small photo gallery of past projects.
+This repository contains the static marketing site for The Project Archive, a creative studio based in the Maldives. The site features individual pages for each key section—About, Mission, Approach, In Numbers, Services, and Contact—linked from a global navigation bar. The Services page also showcases a small photo gallery of past projects.
 
-Install dependencies and start the development server to view the site locally:
+To view the site locally without any build step, serve the repository root with a simple static server such as Python:
 
 ```bash
-npm install
-npm start
+python -m http.server 8080
 ```
 
-This launches [live-server](https://www.npmjs.com/package/live-server) on port 8080. You can also open `index.html` directly in a browser after installing dependencies.
-
+Then open [http://localhost:8080/](http://localhost:8080/) in your browser.

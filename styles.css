@@ -33,6 +33,7 @@ a {
 
 a:hover {
   text-decoration: underline;
+  color: var(--accent-color);
 }
 
 img {
@@ -203,8 +204,11 @@ img {
 
 .section h2 {
   font-size: 2rem;
-  margin-bottom: 1rem;
+  margin: 0 auto 1rem;
   text-align: center;
+  border-bottom: 2px solid var(--accent-color);
+  display: inline-block;
+  padding-bottom: 0.25rem;
 }
 
 .section p {
