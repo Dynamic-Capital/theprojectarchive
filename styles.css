@@ -1,7 +1,7 @@
  :root {
   --accent-color: #C92F6D; /* rich magenta/red */
   --text-color: #FFFFFF;
-  --bg-color: #000000;
+  --bg-color: rgba(246, 243, 232, 1);
   --panel-bg: rgba(255, 255, 255, 0.06);
   --panel-border: rgba(255, 255, 255, 0.18);
 }
