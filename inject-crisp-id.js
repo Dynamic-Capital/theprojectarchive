@@ -3,8 +3,10 @@ const path = require('path');
 
 const crispId = process.env.CRISP_WEBSITE_ID;
 if (!crispId) {
-  console.error('CRISP_WEBSITE_ID environment variable is not set.');
-  process.exit(1);
+  console.warn(
+    'CRISP_WEBSITE_ID environment variable is not set. Skipping Crisp chat injection.'
+  );
+  process.exit(0);
 }
 
 const distFile = path.join(__dirname, 'dist', 'chatbot.js');

@@ -14,3 +14,4 @@ This launches [live-server](https://www.npmjs.com/package/live-server) on port 8
 ## Chat Support
 
 The site integrates the [Crisp](https://crisp.chat) chat widget for real-time messaging with visitors. To keep configuration secure, provide your Crisp website ID via an environment variable named `CRISP_WEBSITE_ID` when deploying the site. The value is injected into `chatbot.js`, so no keys are stored in the repository.
+If this variable is not provided, the build process skips the injection and the chat widget is disabled.
