@@ -4,7 +4,8 @@
   "description": "Static marketing site for The Project Archive",
   "scripts": {
     "start": "live-server --port=8080",
-    "test": "echo \"No tests\""
+    "test": "echo \"No tests\"",
+    "build": "rm -rf dist && mkdir -p dist && cp -r *.html *.css *.js dist/"
   },
   "dependencies": {
     "typed.js": "^2.1.0"
