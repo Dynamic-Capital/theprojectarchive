@@ -41,6 +41,12 @@ img {
   height: auto;
 }
 
+.site-header {
+  padding: 1rem 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
 /* Overlay navigation */
 .overlay-nav {
   position: fixed;
@@ -267,6 +273,7 @@ img {
 .footer {
   text-align: center;
   background-color: #111;
+  padding: 1rem 1.5rem;
 }
 
 .footer a {
