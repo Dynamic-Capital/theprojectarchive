@@ -53,5 +53,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  fetch('footer.html')
+    .then((r) => r.text())
+    .then((html) => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const footer = doc.querySelector('footer');
+      const container = document.querySelector('footer.footer');
+      if (footer && container) {
+        container.innerHTML = footer.innerHTML;
+      }
+    })
+    .catch((err) => console.error('Failed to load footer:', err));
+
   animateStats(document);
 });
