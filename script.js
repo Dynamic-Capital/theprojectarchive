@@ -162,31 +162,12 @@ document.addEventListener('DOMContentLoaded', () => {
       closeLightbox();
     }
   });
-
-    // Typed tagline
-    const tgt = document.getElementById('typed-tagline');
-    if (tgt && window.Typed) {
-      new Typed('#typed-tagline', {
-        strings: ['Photographer', 'Storyteller', 'Creative Director'],
-        typeSpeed: 60,
-        backSpeed: 30,
-        backDelay: 1400,
-        loop: true,
-      });
-    }
-
-    // Typed title
-    const titleEl = document.getElementById('typed-title');
-    if (titleEl && window.Typed) {
-      new Typed('#typed-title', {
-        strings: ['Services', 'The Project Archive'],
-        typeSpeed: 80,
-        backSpeed: 40,
-        backDelay: 1400,
-        showCursor: false,
-        loop: false,
-      });
-    }
+  if (window.Typed && document.querySelector('.tagline')) {
+    new Typed('.tagline', {
+      strings: ["Photographer", "Storyteller", "Creative Director"],
+      typeSpeed: 50, backSpeed: 30, backDelay: 1200, loop: true
+    });
+  }
 
   // Lightbox gallery
   const lightbox = document.querySelector('.lightbox');
