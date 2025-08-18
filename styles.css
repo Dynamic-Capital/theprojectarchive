@@ -228,6 +228,11 @@ img {
   padding-bottom: 0.25rem;
 }
 
+.section h1 {
+  max-width: 800px;
+  margin: 0 auto 1rem;
+}
+
 .section p {
   max-width: 800px;
   margin: 0 auto;
