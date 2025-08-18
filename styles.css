@@ -8,6 +8,10 @@ html {
   scroll-behavior: smooth;
 }
 
+section {
+  scroll-margin-top: 80px;
+}
+
 body {
   font-family: 'Montserrat', system-ui, sans-serif;
   line-height: 1.6;
