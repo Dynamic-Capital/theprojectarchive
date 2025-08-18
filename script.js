@@ -23,6 +23,47 @@ function animateStats(root) {
   });
 }
 
+function initChatBot() {
+  if (document.getElementById('chat-widget')) return;
+
+  const widget = document.createElement('div');
+  widget.id = 'chat-widget';
+  widget.innerHTML = `
+    <div class="chat-header">Chat</div>
+    <div class="chat-box">
+      <div class="chat-messages"></div>
+      <input type="text" class="chat-input" placeholder="Type a message..." />
+    </div>
+  `;
+  document.body.appendChild(widget);
+
+  const header = widget.querySelector('.chat-header');
+  const box = widget.querySelector('.chat-box');
+  const input = widget.querySelector('.chat-input');
+  const messages = widget.querySelector('.chat-messages');
+
+  header.addEventListener('click', () => {
+    box.classList.toggle('open');
+  });
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && input.value.trim()) {
+      const user = document.createElement('div');
+      user.textContent = input.value;
+      user.className = 'user-msg';
+      messages.appendChild(user);
+
+      const bot = document.createElement('div');
+      bot.textContent = 'Thanks for reaching out!';
+      bot.className = 'bot-msg';
+      messages.appendChild(bot);
+
+      input.value = '';
+      messages.scrollTop = messages.scrollHeight;
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   document.body.classList.add('loaded');
 
@@ -54,4 +95,5 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   animateStats(document);
+  initChatBot();
 });
