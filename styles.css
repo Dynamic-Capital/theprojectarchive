@@ -6,16 +6,28 @@ body {
   margin: 0;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-family: system-ui, sans-serif;
+  font-family: 'Montserrat', system-ui, sans-serif;
   font-size: clamp(1rem, 2vw + 0.5rem, 1.5rem);
+  color: #fff;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1920&q=80')
+      center/cover no-repeat fixed;
   padding: 1rem;
 }
 
 h1 {
-  font-size: clamp(2rem, 6vw, 3rem);
+  font-size: clamp(2.5rem, 8vw, 4rem);
+}
+
+.tagline {
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+a {
+  color: #ffe17d;
 }
 
