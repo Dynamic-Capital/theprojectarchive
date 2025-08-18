@@ -177,3 +177,56 @@ body.loaded .fade-in {
 .gallery img:hover {
   transform: scale(1.05);
 }
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 600px;
+  margin: 1rem auto;
+}
+
+.contact-form label {
+  font-weight: 700;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.contact-form button {
+  align-self: flex-start;
+  padding: 0.5rem 1rem;
+  background: #ffe17d;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.contact-form button:hover {
+  background: #ffd54d;
+}
+
+.form-status {
+  margin-top: 1rem;
+  font-weight: 700;
+}
+
+.form-status.success {
+  color: #4caf50;
+}
+
+.form-status.error {
+  color: #f44336;
+}
+
+.direct-email a {
+  color: #ffe17d;
+  font-weight: 700;
+}

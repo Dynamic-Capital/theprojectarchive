@@ -23,6 +23,38 @@ function animateStats(root) {
   });
 }
 
+function initContactForm(root) {
+  const form = root.querySelector('#contact-form');
+  const status = root.querySelector('#form-status');
+  if (!form || !status) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    status.textContent = 'Sending...';
+    status.className = 'form-status sending';
+
+    try {
+      const formData = new FormData(form);
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: { Accept: 'application/json' },
+      });
+      if (response.ok) {
+        status.textContent = 'Thanks for your inquiry!';
+        status.className = 'form-status success';
+        form.reset();
+      } else {
+        status.textContent = 'Sorry, there was a problem sending your inquiry.';
+        status.className = 'form-status error';
+      }
+    } catch (err) {
+      status.textContent = 'Sorry, there was a problem sending your inquiry.';
+      status.className = 'form-status error';
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   document.body.classList.add('loaded');
 
@@ -47,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (main) {
             container.innerHTML = main.innerHTML;
             animateStats(container);
+            initContactForm(container);
           }
         })
         .catch((err) => console.error(`Failed to load ${url}:`, err));
@@ -54,4 +87,5 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   animateStats(document);
+  initContactForm(document);
 });

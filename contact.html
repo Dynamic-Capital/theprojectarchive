@@ -24,7 +24,23 @@
 
   <main class="section glass fade-in">
     <h1>Contact</h1>
-    <p>Email: <a href="mailto:hello@theprojectarchive.mv">hello@theprojectarchive.mv</a></p>
+
+    <form id="contact-form" class="contact-form" action="https://formspree.io/f/mvonwokr" method="POST">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" required></textarea>
+
+      <button type="submit">Send</button>
+    </form>
+
+    <p id="form-status" class="form-status" aria-live="polite"></p>
+
+    <p class="direct-email"><a href="mailto:hello@theprojectarchive.mv">Email us directly</a></p>
     <p>Phone: +960 7495687</p>
     <p>Social: <a href="https://theprojectarchive.mv">theprojectarchive.mv</a></p>
   </main>
