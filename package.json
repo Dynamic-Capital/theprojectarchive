@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Static marketing site for The Project Archive",
   "scripts": {
-    "start": "live-server --port=8080",
+    "start": "node server.js",
     "test": "echo \"No tests\"",
     "build": "rm -rf dist && mkdir -p dist && cp -r *.html *.css *.js dist/"
   },
