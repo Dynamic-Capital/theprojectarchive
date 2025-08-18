@@ -10,21 +10,28 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="site-header">
-    <nav class="nav">
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#mission">Mission</a>
-      <a href="#approach">Approach</a>
-      <a href="#numbers">In Numbers</a>
-      <a href="#services">Services</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+  <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <nav class="overlay-nav" aria-hidden="true">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#mission">Mission</a>
+    <a href="#approach">Approach</a>
+    <a href="#numbers">In Numbers</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
   <section id="home" class="hero glass fade-in">
     <h1>The Project Archive</h1>
-    <p class="tagline">Capturing life's most meaningful moments</p>
+    <p class="tagline"><span id="typed-tagline"></span></p>
+    <div class="cta-group">
+      <a class="btn btn-outline" href="#services">View Portfolio</a>
+      <a class="btn btn-outline" href="#contact">Contact Me</a>
+    </div>
   </section>
 
   <section id="about" class="section glass fade-in"></section>
@@ -36,6 +43,12 @@
 
   <footer class="footer"></footer>
 
+  <div class="lightbox" aria-hidden="true">
+    <img src="" alt="">
+    <button class="close-btn" aria-label="Close image">&times;</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0"></script>
   <script src="script.js"></script>
   <script src="chatbot.js"></script>
 </body>
