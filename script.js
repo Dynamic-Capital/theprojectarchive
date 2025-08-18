@@ -72,9 +72,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const body = document.body;
   const hamburger = document.querySelector('.hamburger');
   const overlayNav = document.querySelector('.overlay-nav');
+
+  const mq = window.matchMedia('(min-width: 768px)');
+  const handleNavVisibility = (e) => {
+    if (e.matches) {
+      overlayNav.classList.remove('open');
+      body.classList.remove('open');
+      hamburger.classList.remove('open');
+      overlayNav.setAttribute('aria-hidden', 'false');
+      hamburger.style.display = 'none';
+    } else {
+      overlayNav.setAttribute('aria-hidden', 'true');
+      hamburger.style.display = '';
+    }
+  };
+  handleNavVisibility(mq);
+  mq.addEventListener('change', handleNavVisibility);
+
   let lastFocusedElement = null;
 
   const closeMenu = () => {
+    if (mq.matches) return;
     overlayNav.classList.remove('open');
     body.classList.remove('open');
     hamburger.classList.remove('open');
@@ -107,13 +125,13 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   overlayNav.addEventListener('click', (e) => {
-    if (e.target.matches('a')) {
+    if (e.target.matches('a') && !mq.matches) {
       closeMenu();
     }
   });
 
   overlayNav.addEventListener('keydown', (e) => {
-    if (!overlayNav.classList.contains('open') || e.key !== 'Tab') return;
+    if (mq.matches || !overlayNav.classList.contains('open') || e.key !== 'Tab') return;
     const focusable = overlayNav.querySelectorAll('a');
     if (!focusable.length) return;
     const first = focusable[0];
