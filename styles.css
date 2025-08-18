@@ -125,6 +125,10 @@ img {
   margin-bottom: 0.5rem;
 }
 
+#typed-title {
+  font: inherit;
+}
+
 .tagline {
   font-size: 1.25rem;
   margin-bottom: 2rem;
