@@ -24,37 +24,39 @@
     </nav>
   </header>
 
-  <main class="section fade-in py-16 px-4 space-y-8">
-    <h1 class="text-3xl font-bold text-center">Contact</h1>
-    <form class="contact-form max-w-2xl mx-auto flex flex-col gap-4" action="https://formspree.io/f/hello@theprojectarchive.mv" method="POST">
-      <label class="text-left" for="name">Name</label>
-      <input class="border p-2 rounded" type="text" id="name" name="name" required>
+  <main class="section fade-in">
+    <div class="container space-y-8">
+      <h1 class="section-title text-center">Contact</h1>
+      <form class="contact-form max-w-2xl mx-auto flex flex-col gap-4" action="https://formspree.io/f/hello@theprojectarchive.mv" method="POST">
+        <label class="text-left" for="name">Name</label>
+        <input class="border p-2 rounded" type="text" id="name" name="name" required>
 
-      <label class="text-left" for="email">Email</label>
-      <input class="border p-2 rounded" type="email" id="email" name="email" required>
+        <label class="text-left" for="email">Email</label>
+        <input class="border p-2 rounded" type="email" id="email" name="email" required>
 
-      <label class="text-left" for="subject">Subject</label>
-      <input class="border p-2 rounded" type="text" id="subject" name="subject" required>
+        <label class="text-left" for="subject">Subject</label>
+        <input class="border p-2 rounded" type="text" id="subject" name="subject" required>
 
-      <label class="text-left" for="message">Message</label>
-      <textarea class="border p-2 rounded" id="message" name="message" rows="5" required></textarea>
+        <label class="text-left" for="message">Message</label>
+        <textarea class="border p-2 rounded" id="message" name="message" rows="5" required></textarea>
 
-      <button class="bg-red-600 text-white px-6 py-2 rounded self-start" type="submit">Send</button>
-    </form>
+        <button class="bg-red-600 text-white px-6 py-2 rounded self-start" type="submit">Send</button>
+      </form>
 
-    <div class="contact-bottom max-w-2xl mx-auto space-y-6">
-      <div class="contact-row flex flex-col md:flex-row justify-between gap-4">
-        <div class="headline text-2xl font-bold text-red-600">Say hello.</div>
-        <div class="details text-right space-y-1">
-          <p class="email font-semibold text-red-600"><a href="mailto:hello@theprojectarchive.mv">hello@theprojectarchive.mv</a></p>
-          <p class="info phone">+960 7495687</p>
-          <p class="info location">Maldives</p>
+      <div class="contact-bottom max-w-2xl mx-auto space-y-6">
+        <div class="contact-row flex flex-col md:flex-row justify-between gap-4">
+          <div class="headline text-2xl font-bold text-red-600">Say hello.</div>
+          <div class="details text-right space-y-1">
+            <p class="email font-semibold text-red-600"><a href="mailto:hello@theprojectarchive.mv">hello@theprojectarchive.mv</a></p>
+            <p class="info phone">+960 7495687</p>
+            <p class="info location">Maldives</p>
+          </div>
         </div>
-      </div>
-      <div class="social-icons flex gap-4 text-xl justify-center md:justify-start">
-        <a class="hover:text-red-600" href="mailto:hello@theprojectarchive.mv" aria-label="Email"><i class="fas fa-envelope"></i></a>
-        <a class="hover:text-red-600" href="tel:+9607495687" aria-label="Phone"><i class="fas fa-phone"></i></a>
-        <a class="hover:text-red-600" href="https://theprojectarchive.mv" aria-label="Website"><i class="fas fa-globe"></i></a>
+        <div class="social-icons flex gap-4 text-xl justify-center md:justify-start">
+          <a class="hover:text-red-600" href="mailto:hello@theprojectarchive.mv" aria-label="Email"><i class="fas fa-envelope"></i></a>
+          <a class="hover:text-red-600" href="tel:+9607495687" aria-label="Phone"><i class="fas fa-phone"></i></a>
+          <a class="hover:text-red-600" href="https://theprojectarchive.mv" aria-label="Website"><i class="fas fa-globe"></i></a>
+        </div>
       </div>
     </div>
   </main>

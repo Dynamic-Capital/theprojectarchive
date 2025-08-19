@@ -405,24 +405,10 @@ a:hover {
   border-radius: var(--radius-lg);
 }
 
-.stats-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  align-items: center;
-}
-
-@media (min-width: 600px) {
-  .stats-grid {
-    flex-direction: row;
-    justify-content: center;
-  }
-}
-
 .stat-number {
   display: block;
-  font-size: 3rem;
-  font-weight: 800;
+  font-size: var(--text-4xl);
+  font-weight: var(--font-bold);
   color: var(--color-accent);
 }
 
@@ -724,21 +710,13 @@ a:hover {
   }
 }
 
-.testimonial-card {
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: var(--radius-md);
-  padding: 1.5rem;
-  color: var(--color-text);
-}
-
-.testimonial-card blockquote {
-  margin: 0 0 1rem 0;
+.card blockquote {
+  margin: 0 0 var(--space-md) 0;
   font-style: italic;
 }
 
-.testimonial-card figcaption {
-  font-weight: 700;
+.card figcaption {
+  font-weight: var(--font-bold);
   text-align: right;
 }
 
@@ -794,9 +772,10 @@ a:hover {
 /* Components - Task 3 */
 .card {
   background-color: var(--color-card);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
-  padding: var(--space-md);
+  padding: var(--space-lg);
 }
 
 .grid {
