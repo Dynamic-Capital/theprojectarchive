@@ -70,6 +70,45 @@ function observeServiceCards(root) {
   }
 }
 
+function observeSections(root) {
+  const elements = root.querySelectorAll('.fade-in');
+  if (!elements.length) return;
+
+  if (window.motion) {
+    const { animate, scroll } = motion;
+    elements.forEach((el) => {
+      if (el.dataset.observed) return;
+      el.dataset.observed = 'true';
+      scroll(
+        animate(
+          el,
+          { opacity: [0, 1], y: [20, 0] },
+          { duration: 0.6, easing: 'ease-out' }
+        ),
+        { target: el, offset: ['start 85%', 'start 55%'] }
+      );
+    });
+  } else {
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    elements.forEach((el) => {
+      if (el.dataset.observed) return;
+      el.dataset.observed = 'true';
+      observer.observe(el);
+    });
+  }
+}
+
 function initGalleryScroll(root) {
   const gallery = root.querySelector('.gallery');
   const leftBtn = root.querySelector('.gallery-scroll-left');
@@ -132,14 +171,7 @@ function initServiceRail(root) {
 
 document.addEventListener('DOMContentLoaded', () => {
   document.body.classList.add('loaded');
-
-  if (window.motion) {
-    const { animate, stagger } = motion;
-    animate('.fade-in', { opacity: [0, 1], transform: ['translateY(20px)', 'translateY(0)'] }, {
-      delay: stagger(0.2),
-      duration: 0.6
-    });
-  }
+  observeSections(document);
 
   const sections = {
     about: 'about.html',
@@ -165,6 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
             observeServiceCards(container);
             initGalleryScroll(container);
             initServiceRail(container);
+            observeSections(container);
           }
           })
         .catch((err) => {
