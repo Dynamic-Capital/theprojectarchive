@@ -7,50 +7,53 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="font-sans bg-gray-50 text-gray-800">
-  <header class="site-header bg-white shadow">
-    <nav class="nav flex flex-wrap items-center justify-center gap-4 p-4">
-      <a class="hover:text-red-600" href="index.html">Home</a>
-      <a class="hover:text-red-600" href="about.html">About</a>
-      <a class="hover:text-red-600" href="mission.html">Mission</a>
-      <a class="hover:text-red-600" href="approach.html">Approach</a>
-      <a class="hover:text-red-600" href="numbers.html">In Numbers</a>
-      <a class="hover:text-red-600" href="services.html">Services</a>
-      <a class="hover:text-red-600" href="contact.html">Contact</a>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="mission.html">Mission</a>
+      <a href="approach.html">Approach</a>
+      <a href="numbers.html">In Numbers</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </header>
 
-  <main class="section fade-in py-16 px-4 text-center space-y-8">
-    <h1 class="text-3xl font-bold">In Numbers</h1>
-    <div class="stats-grid grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
-      <div class="stat text-xl font-semibold"><span class="stat-number text-4xl text-red-600" data-target="100">0</span>+ Moments Captured</div>
-      <div class="stat text-xl font-semibold"><span class="stat-number text-4xl text-red-600" data-target="98">0</span>% Client Satisfaction</div>
-    </div>
+  <main class="fade-in">
+    <section class="section">
+      <div class="container text-center stack">
+        <h1 class="section-title">In Numbers</h1>
+        <div class="stats-grid">
+          <div class="stat"><span class="stat-number" data-target="100">0</span>+ Moments Captured</div>
+          <div class="stat"><span class="stat-number" data-target="98">0</span>% Client Satisfaction</div>
+        </div>
 
-    <section class="testimonials space-y-6">
-      <h2 class="text-2xl font-bold">What Clients Say</h2>
-      <div class="testimonials-grid grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <figure class="testimonial-card bg-white p-4 rounded shadow">
-          <blockquote class="italic mb-2">
-            “The Project Archive captured our wedding perfectly. Each photo is a treasure!”
-          </blockquote>
-          <figcaption class="text-right font-semibold">— Aishath & Ahmed</figcaption>
-        </figure>
-        <figure class="testimonial-card bg-white p-4 rounded shadow">
-          <blockquote class="italic mb-2">
-            “Their attention to detail is unmatched. We relive the day every time we look at our album.”
-          </blockquote>
-          <figcaption class="text-right font-semibold">— Leena</figcaption>
-        </figure>
-        <figure class="testimonial-card bg-white p-4 rounded shadow">
-          <blockquote class="italic mb-2">
-            “Professional, friendly, and incredibly talented. Highly recommend!”
-          </blockquote>
-          <figcaption class="text-right font-semibold">— Mariyam</figcaption>
-        </figure>
+        <section class="testimonials stack">
+          <h2 class="section-title">What Clients Say</h2>
+          <div class="testimonials-grid">
+            <figure class="testimonial-card">
+              <blockquote>
+                “The Project Archive captured our wedding perfectly. Each photo is a treasure!”
+              </blockquote>
+              <figcaption>— Aishath & Ahmed</figcaption>
+            </figure>
+            <figure class="testimonial-card">
+              <blockquote>
+                “Their attention to detail is unmatched. We relive the day every time we look at our album.”
+              </blockquote>
+              <figcaption>— Leena</figcaption>
+            </figure>
+            <figure class="testimonial-card">
+              <blockquote>
+                “Professional, friendly, and incredibly talented. Highly recommend!”
+              </blockquote>
+              <figcaption>— Mariyam</figcaption>
+            </figure>
+          </div>
+        </section>
       </div>
     </section>
   </main>

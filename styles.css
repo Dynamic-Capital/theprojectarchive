@@ -151,6 +151,8 @@ a:hover {
   justify-content: space-between;
   padding: 1rem 1.5rem;
   z-index: var(--z-nav);
+  background-color: var(--color-card);
+  box-shadow: var(--shadow-sm);
 }
 
 .logo {
@@ -669,6 +671,13 @@ a:hover {
   margin-top: 1.5rem;
   display: flex;
   gap: 1rem;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .social-icons {
+    justify-content: flex-start;
+  }
 }
 
 .social-icons a {
@@ -784,7 +793,7 @@ a:hover {
   text-transform: uppercase; margin-bottom: 10px;
 }
 .srv-title { font-size: clamp(22px, 3.2vw, 38px); line-height: 1.1; color: var(--color-text-dark); margin: 0 0 12px; }
-.srv-desc { color: var(--color-muted); margin: 0 0 16px; }
+.srv-desc { color: var(--color-muted); margin: 0 0 16px; list-style: disc; padding-left: var(--space-md); }
 .srv-cta {
   display: inline-block; padding: 10px 14px; border-radius: var(--radius-full);
   border: 1px solid currentColor; color: var(--color-blue); text-decoration: none;
@@ -814,6 +823,46 @@ a:hover {
   display: grid;
   gap: var(--space-sm);
   border-radius: var(--radius-md);
+}
+
+.container {
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+}
+
+.nav a:hover {
+  color: var(--color-accent);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.stat {
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+}
+
+.input {
+  padding: var(--space-sm);
+  border: 1px solid #ccc;
+  border-radius: var(--radius-md);
+}
+
+.gallery-controls {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
 }
 
 img.rounded {
