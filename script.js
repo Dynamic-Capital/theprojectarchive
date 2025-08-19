@@ -289,3 +289,49 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+(function () {
+  const rail = document.querySelector('.srv-track');
+  if (!rail) return;
+
+  const left = document.querySelector('.srv-arrow.left');
+  const right = document.querySelector('.srv-arrow.right');
+
+  function updateArrows() {
+    const max = rail.scrollWidth - rail.clientWidth - 1;
+    left.disabled = rail.scrollLeft <= 0;
+    right.disabled = rail.scrollLeft >= max;
+  }
+  function scrollByCard(dir = 1) {
+    const amount = Math.min(rail.clientWidth * 0.9, 700);
+    rail.scrollBy({ left: dir * amount, behavior: 'smooth' });
+    setTimeout(updateArrows, 400);
+  }
+
+  left?.addEventListener('click', () => scrollByCard(-1));
+  right?.addEventListener('click', () => scrollByCard(1));
+  rail.addEventListener('scroll', updateArrows);
+  window.addEventListener('resize', updateArrows);
+  updateArrows();
+
+  // drag-to-scroll
+  let isDown = false, startX = 0, startLeft = 0;
+  rail.addEventListener('pointerdown', (e) => {
+    isDown = true; rail.setPointerCapture(e.pointerId);
+    startX = e.clientX; startLeft = rail.scrollLeft;
+  });
+  rail.addEventListener('pointermove', (e) => {
+    if (!isDown) return;
+    const dx = e.clientX - startX;
+    rail.scrollLeft = startLeft - dx;
+  });
+  rail.addEventListener('pointerup', () => (isDown = false));
+  rail.addEventListener('pointercancel', () => (isDown = false));
+
+  // keyboard support (when rail is focused)
+  rail.tabIndex = 0;
+  rail.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); scrollByCard(1); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); scrollByCard(-1); }
+  });
+})();
