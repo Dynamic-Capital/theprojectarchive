@@ -41,33 +41,41 @@ function observeServiceCards(root) {
   const cards = root.querySelectorAll('.service-card, .srv-card');
   if (!cards.length) return;
 
-  cards.forEach((card, i) => {
-    card.dataset.index = i;
-  });
-
-  const observer = new IntersectionObserver(
-    (entries, obs) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const idx = parseInt(entry.target.dataset.index, 10) || 0;
-          if (window.motion) {
-            const { animate } = motion;
-            animate(
-              entry.target,
-              { opacity: [0, 1], transform: ['translateY(20px)', 'translateY(0)'] },
-              { duration: 0.6, delay: idx * 0.2 }
-            );
-          } else {
-            entry.target.classList.add('show');
+  if (window.motion && typeof motion.scroll === 'function') {
+    const { animate, scroll } = motion;
+    cards.forEach((card) => {
+      scroll(
+        animate(
+          card,
+          { opacity: [0, 1], y: [20, 0] },
+          { duration: 0.6, easing: 'ease-out' }
+        ),
+        { target: card, offset: ['start 85%', 'start 55%'] }
+      );
+    });
+  } else {
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (window.motion) {
+              motion.animate(
+                entry.target,
+                { opacity: [0, 1], y: [20, 0] },
+                { duration: 0.6, easing: 'ease-out' }
+              );
+            } else {
+              entry.target.classList.add('show');
+            }
+            obs.unobserve(entry.target);
           }
-          obs.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.2 }
-  );
+        });
+      },
+      { threshold: 0.2 }
+    );
 
-  cards.forEach((card) => observer.observe(card));
+    cards.forEach((card) => observer.observe(card));
+  }
 }
 
 function initGalleryScroll(root) {
