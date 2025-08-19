@@ -37,6 +37,25 @@ function animateStats(root) {
   elements.forEach((el) => observer.observe(el));
 }
 
+function observeServiceCards(root) {
+  const cards = root.querySelectorAll('.service-card');
+  if (!cards.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  cards.forEach((card) => observer.observe(card));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   document.body.classList.add('loaded');
 
@@ -66,11 +85,12 @@ document.addEventListener('DOMContentLoaded', () => {
           const parser = new DOMParser();
           const doc = parser.parseFromString(html, 'text/html');
           const main = doc.querySelector('main');
-          if (main) {
-            container.innerHTML = main.innerHTML;
+            if (main) {
+              container.innerHTML = main.innerHTML;
             animateStats(container);
-          }
-        })
+            observeServiceCards(container);
+            }
+          })
         .catch((err) => {
           console.error(`Failed to load ${url}:`, err);
           container.innerHTML =
@@ -99,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
   animateStats(document);
+  observeServiceCards(document);
 
   // Hamburger / overlay navigation
   const body = document.body;
