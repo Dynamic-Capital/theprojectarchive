@@ -41,11 +41,25 @@ function observeServiceCards(root) {
   const cards = root.querySelectorAll('.service-card');
   if (!cards.length) return;
 
+  cards.forEach((card, i) => {
+    card.dataset.index = i;
+  });
+
   const observer = new IntersectionObserver(
     (entries, obs) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('show');
+          const idx = parseInt(entry.target.dataset.index, 10) || 0;
+          if (window.motion) {
+            const { animate } = motion;
+            animate(
+              entry.target,
+              { opacity: [0, 1], transform: ['translateY(20px)', 'translateY(0)'] },
+              { duration: 0.6, delay: idx * 0.2 }
+            );
+          } else {
+            entry.target.classList.add('show');
+          }
           obs.unobserve(entry.target);
         }
       });
