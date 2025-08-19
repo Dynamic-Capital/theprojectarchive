@@ -7,36 +7,37 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="site-header fixed top-0 left-0 right-0 flex items-center justify-between p-4 bg-white/80 backdrop-blur-md shadow z-50">
-    <a href="#home" class="logo text-xl font-bold text-gray-800">The Project Archive</a>
-    <button class="hamburger flex flex-col justify-between w-8 h-6" aria-label="Open menu" aria-expanded="false">
-      <span class="block h-0.5 bg-gray-800"></span>
-      <span class="block h-0.5 bg-gray-800"></span>
-      <span class="block h-0.5 bg-gray-800"></span>
+  <header class="site-header">
+    <a href="#home" class="logo">The Project Archive</a>
+    <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
   </header>
-  <nav class="overlay-nav space-y-6 text-2xl font-bold" aria-hidden="true">
-    <a class="hover:text-red-600" href="#home">Home</a>
-    <a class="hover:text-red-600" href="#about">About</a>
-    <a class="hover:text-red-600" href="#mission">Mission</a>
-    <a class="hover:text-red-600" href="#approach">Approach</a>
-    <a class="hover:text-red-600" href="#numbers">In Numbers</a>
-    <a class="hover:text-red-600" href="#services">Services</a>
-    <a class="hover:text-red-600" href="#contact">Contact</a>
+  <nav class="overlay-nav" aria-hidden="true">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#mission">Mission</a>
+    <a href="#approach">Approach</a>
+    <a href="#numbers">In Numbers</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
   </nav>
 
-    <section id="home" class="hero fade-in relative min-h-screen flex items-center justify-center text-center">
-      <img class="hero-media absolute inset-0 w-full h-full object-cover" src="https://picsum.photos/1920/1080?random=11" alt="A creative workspace with a camera and photo prints on a desk">
-    <div class="relative z-10 bg-black/50 p-8 rounded-lg max-w-xl mx-auto">
-      <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">The Project Archive</h1>
-      <p class="tagline text-lg text-gray-200 mb-6"></p>
-      <div class="cta-group flex flex-col sm:flex-row gap-4 justify-center">
-        <a class="btn bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded" href="#services">View Portfolio</a>
-        <a class="btn bg-white text-gray-800 px-6 py-3 rounded hover:bg-gray-100" href="#contact">Contact Me</a>
+  <section id="home" class="section hero fade-in">
+    <img class="hero-media img-rounded" src="https://picsum.photos/1920/1080?random=11" alt="A creative workspace with a camera and photo prints on a desk">
+    <div class="container">
+      <div class="stack hero-content">
+        <h1>The Project Archive</h1>
+        <p class="tagline"></p>
+        <div class="cta-group">
+          <a class="btn btn--primary" href="#services">View Portfolio</a>
+          <a class="btn btn--ghost" href="#contact">Contact Me</a>
+        </div>
       </div>
     </div>
   </section>
