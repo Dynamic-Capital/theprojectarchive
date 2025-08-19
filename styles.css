@@ -418,13 +418,6 @@ body.loaded .fade-in {
   cursor: pointer;
 }
 
-.gallery-scroll-left {
-  left: 0.5rem;
-}
-
-.gallery-scroll-right {
-  right: 0.5rem;
-}
 
 .project-card {
   position: relative;
