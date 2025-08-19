@@ -318,6 +318,12 @@ a:hover {
   padding: 4rem 1.5rem;
 }
 
+.container {
+  max-width: var(--content-max);
+  margin-inline: auto;
+  width: 100%;
+}
+
 @media (min-width: 768px) {
   .section {
     padding: 6rem 2rem;
@@ -356,32 +362,8 @@ a:hover {
   margin: 0 auto;
 }
 
-.info-card {
-  background: var(--color-background-light);
-  border-radius: var(--radius-2xl);
-  padding: 2rem;
-  margin: 2rem auto;
-  position: relative;
-}
-
-.info-card h1 {
-  color: #666;
-  font-weight: 400;
-}
-
-.info-card h1 strong,
-.info-card strong {
-  color: #111;
-  font-weight: 700;
-}
-
-.info-card p {
-  color: #666;
-  margin-top: 1rem;
-}
-
 .secondary {
-  color: #999;
+  color: var(--color-muted);
 }
 
 .micro-illustration {
@@ -799,6 +781,10 @@ a:hover {
   padding: var(--space-md);
 }
 
+.card--xl {
+  padding: var(--space-xl);
+}
+
 .grid {
   display: grid;
   gap: var(--space-md);
@@ -827,3 +813,13 @@ img.rounded {
 .rounded-xl { border-radius: var(--radius-xl); }
 .rounded-2xl { border-radius: var(--radius-2xl); }
 .rounded-full { border-radius: var(--radius-full); }
+
+.relative { position: relative; }
+
+.text-accent { color: var(--color-accent); }
+
+.input {
+  padding: var(--space-sm);
+  border: 1px solid var(--color-surface-border);
+  border-radius: var(--radius-md);
+}
