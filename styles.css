@@ -1,9 +1,12 @@
- :root {
+:root {
   --accent-color: #ef3c23; /* vibrant red */
   --text-color: #333333;
   --bg-color: rgba(246, 243, 232, 1);
   --panel-bg: rgba(255, 255, 255, 0.06);
   --panel-border: rgba(255, 255, 255, 0.18);
+  --accent-blue: 99, 102, 241;
+  --accent-pink: 236, 72, 153;
+  --accent-violet: 168, 85, 247;
 }
 
 * {
@@ -285,6 +288,42 @@ img {
 .service ul {
   list-style: disc;
   padding-left: 1.25rem;
+}
+
+.service-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-top: 2rem;
+}
+
+.service-card img {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+}
+
+.service-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.service-card p {
+  margin-bottom: 1rem;
+}
+
+.service-blue {
+  background-color: rgba(var(--accent-blue), 0.15);
+}
+
+.service-pink {
+  background-color: rgba(var(--accent-pink), 0.15);
+}
+
+.service-violet {
+  background-color: rgba(var(--accent-violet), 0.15);
 }
 
 .footer {
