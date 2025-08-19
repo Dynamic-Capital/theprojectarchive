@@ -87,6 +87,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const hamburger = document.querySelector('.hamburger');
   const overlayNav = document.querySelector('.overlay-nav');
 
+  // hide overlay links by default
+  overlayNav.classList.remove('open');
+  overlayNav.setAttribute('aria-hidden', 'true');
+
   const mq = window.matchMedia('(min-width: 768px)');
   const handleNavVisibility = (e) => {
     if (e.matches) {
