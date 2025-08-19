@@ -31,9 +31,16 @@ a {
   color: var(--accent-color);
 }
 
-a:hover {
+a:focus {
   text-decoration: underline;
   color: var(--accent-color);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  a:hover {
+    text-decoration: underline;
+    color: var(--accent-color);
+  }
 }
 
 img {
@@ -76,10 +83,16 @@ img {
   padding: 0.5rem 0;
 }
 
-.overlay-nav a:hover,
 .overlay-nav a:focus {
   text-decoration: underline;
   text-decoration-color: var(--accent-color);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .overlay-nav a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--accent-color);
+  }
 }
 
 .hamburger {
@@ -166,10 +179,16 @@ img {
   color: var(--text-color);
 }
 
-.btn-outline:hover,
 .btn-outline:focus {
   background: var(--accent-color);
   color: var(--bg-color);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-outline:hover {
+    background: var(--accent-color);
+    color: var(--bg-color);
+  }
 }
 
 .section {
@@ -251,18 +270,38 @@ img {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.stats-grid {
+
+.cards {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 2rem;
-  align-items: center;
 }
 
-@media (min-width: 600px) {
-  .stats-grid {
-    flex-direction: row;
-    justify-content: center;
+.card {
+  flex: 1;
+  padding: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .cards {
+    flex-direction: column;
   }
+  .card {
+    font-size: 0.95rem;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    font-size: 0.9rem;
+    padding: 0.75rem;
+  }
+}
+
+.stats-grid {
+  justify-content: center;
+  align-items: center;
 }
 
 .stat-number {
@@ -270,10 +309,6 @@ img {
   font-size: 3rem;
   font-weight: 800;
   color: var(--accent-color);
-}
-
-.service {
-  margin-top: 2rem;
 }
 
 .service h3 {
@@ -332,9 +367,11 @@ body.loaded .fade-in {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.gallery img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+@media (hover: hover) and (pointer: fine) {
+  .gallery img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  }
 }
 
 .lightbox {
@@ -418,8 +455,14 @@ body.loaded .fade-in {
   cursor: pointer;
 }
 
-.contact-form button:hover {
+.contact-form button:focus {
   background-color: #a0214d;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .contact-form button:hover {
+    background-color: #a0214d;
+  }
 }
 
 .scroll-top {
