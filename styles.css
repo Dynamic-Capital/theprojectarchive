@@ -5,6 +5,7 @@
   --panel-bg: rgba(255, 255, 255, 0.06);
   --panel-border: rgba(255, 255, 255, 0.18);
   --bg-light: #ffffff;
+  --color-dark-text: #333333;
 }
 
 * {
@@ -507,15 +508,17 @@ body.loaded .fade-in {
 
 .contact-form label {
   font-weight: 700;
+  color: var(--accent-color);
+  opacity: 1;
 }
 
 .contact-form input,
 .contact-form textarea {
   padding: 0.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid #ccc;
   border-radius: 4px;
-  background: rgba(0, 0, 0, 0.5);
-  color: #fff;
+  background: var(--bg-light);
+  color: var(--color-dark-text);
 }
 
 .contact-form button {
@@ -556,6 +559,8 @@ body.loaded .fade-in {
 .contact-bottom .headline {
   font-weight: 700;
   font-size: 1.5rem;
+  color: var(--accent-color);
+  opacity: 1;
 }
 
 .contact-bottom .details {
@@ -569,7 +574,7 @@ body.loaded .fade-in {
 
 .contact-bottom .details .info {
   color: var(--text-color);
-  opacity: 0.7;
+  opacity: 1;
 }
 
 .social-icons {
