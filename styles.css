@@ -112,6 +112,7 @@ body {
   line-height: 1.6;
   color: var(--color-text);
   background-color: var(--color-background);
+  overflow-x: hidden;
 }
 
 section {
@@ -170,16 +171,12 @@ a:hover {
   align-items: center;
   justify-content: center;
   background: rgba(246, 243, 232, 0.95);
-  backdrop-filter: blur(5px);
-  opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.3s ease;
   z-index: var(--z-overlay);
 }
 
 .overlay-nav.open {
-  opacity: 1;
   visibility: visible;
   pointer-events: auto;
 }
@@ -455,15 +452,6 @@ a:hover {
   color: var(--color-accent);
 }
 
-body {
-  opacity: 0;
-  transition: opacity 0.5s ease-in;
-}
-
-body.loaded {
-  opacity: 1;
-}
-
 .fade-in {
   opacity: 0;
   transform: translateY(20px);
@@ -519,10 +507,10 @@ body.loaded {
   overflow: hidden;
   background: linear-gradient(135deg, var(--color-accent), #ff7a5c);
   transition: transform 0.3s ease;
-  width: 322px;
-  height: 480px;
+  max-width: 322px;
+  aspect-ratio: 322 / 480;
   cursor: pointer;
-  flex: 0 0 322px;
+  flex: 1 1 322px;
 }
 
 .project-card img {
