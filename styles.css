@@ -670,18 +670,11 @@ body.loaded .fade-in {
 .services { padding: 80px 0; background: var(--bg-light); }
 .section-title { color: var(--text-dark); font-size: clamp(28px, 4vw, 44px); margin: 0 0 28px; }
 
-.srv-rail { position: relative; }
-.srv-track {
+
+.srv-stack {
   display: grid;
-  grid-auto-flow: row;
   gap: 28px;
-  max-height: 80vh;
-  overflow-y: auto;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-  padding: 16px 8px;
 }
-.srv-track::-webkit-scrollbar { width: 0; }
 
 .srv-card {
   background: var(--card-bg);
@@ -691,7 +684,6 @@ body.loaded .fade-in {
   grid-template-columns: 1.2fr 1fr;
   align-items: center;
   padding: 28px;
-  scroll-snap-align: start;
   min-height: 360px;
   opacity: 0;
   transform: translateY(20px);
@@ -721,24 +713,6 @@ body.loaded .fade-in {
   border: 1px solid currentColor; color: var(--accent-blue); text-decoration: none;
 }
 .srv-cta:hover { background: var(--accent-blue); color: #fff; }
-
-.srv-arrow {
-  position: absolute; left: 50%; transform: translateX(-50%);
-  z-index: 3;
-  width: 40px; height: 40px; border-radius: 999px;
-  border: none; background: #fff; color: var(--text-dark);
-  box-shadow: 0 6px 18px rgba(5,25,45,.12); cursor: pointer;
-}
-.srv-arrow.up { top: 8px; }
-.srv-arrow.down { bottom: 8px; }
-.srv-arrow:disabled { opacity: .4; cursor: default; }
-
-.srv-fade {
-  pointer-events: none; position: absolute; left: 0; right: 0; height: 56px; z-index: 2;
-  background: linear-gradient(to bottom, var(--bg-light), rgba(248,249,251,0));
-}
-.srv-fade.top { top: 0; }
-.srv-fade.bottom { bottom: 0; transform: scaleY(-1); }
 
 @media (max-width: 900px) {
   .srv-card { grid-template-columns: 1fr; gap: 14px; min-height: 0; }
