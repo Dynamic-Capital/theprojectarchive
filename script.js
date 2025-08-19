@@ -37,8 +37,26 @@ function animateStats(root) {
   elements.forEach((el) => observer.observe(el));
 }
 
+function revealOnScroll(root) {
+  const elements = root.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  elements.forEach((el) => observer.observe(el));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   document.body.classList.add('loaded');
+  revealOnScroll(document);
 
   const sections = {
     about: 'about.html',
@@ -61,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (main) {
             container.innerHTML = main.innerHTML;
             animateStats(container);
+            revealOnScroll(container);
           }
         })
         .catch((err) => console.error(`Failed to load ${url}:`, err));

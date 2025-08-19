@@ -313,7 +313,7 @@ body.loaded {
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-body.loaded .fade-in {
+.fade-in.visible {
   opacity: 1;
   transform: translateY(0);
 }
@@ -446,4 +446,18 @@ body.loaded .fade-in {
 .scroll-top.show {
   opacity: 1;
   pointer-events: auto;
+}
+
+/* Horizontal project strip */
+.project-strip {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.project-card {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
 }
