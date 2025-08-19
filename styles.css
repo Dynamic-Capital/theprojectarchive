@@ -438,9 +438,10 @@ body.loaded {
   overflow: hidden;
   background: linear-gradient(135deg, var(--accent-color), #ff7a5c);
   transition: transform 0.3s ease;
-  aspect-ratio: 4 / 3;
+  width: 322px;
+  height: 480px;
   cursor: pointer;
-  flex: 0 0 250px;
+  flex: 0 0 322px;
 }
 
 .project-card img {
