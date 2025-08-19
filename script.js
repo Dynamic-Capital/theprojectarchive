@@ -1,3 +1,8 @@
+// Temporary redirect to coming soon page
+if (!window.location.pathname.endsWith("comingsoon.html")) {
+  window.location.replace("comingsoon.html");
+}
+
 function animateStats(root) {
   const elements = root.querySelectorAll('.stat-number');
   const animateElement = (el) => {
