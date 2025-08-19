@@ -193,6 +193,12 @@ img {
 .tagline {
   font-size: 1.25rem;
   margin-bottom: 2rem;
+  font-weight: 700;
+  color: var(--accent-color);
+}
+
+.typed-cursor {
+  color: var(--accent-color);
 }
 
 .cta-group {
@@ -306,7 +312,6 @@ img {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .stats-grid {
@@ -377,23 +382,20 @@ body.loaded .fade-in {
 }
 
 .gallery {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-bottom: 1rem;
   margin-top: 2rem;
 }
 
 .project-card {
   position: relative;
-  flex: 0 0 80%;
-  min-width: 250px;
-  scroll-snap-align: start;
   border-radius: 8px;
   overflow: hidden;
   background: linear-gradient(135deg, var(--accent-color), #ff7a5c);
   transition: transform 0.3s ease;
+  aspect-ratio: 4 / 3;
+  cursor: pointer;
 }
 
 .project-card img {
@@ -612,7 +614,6 @@ body.loaded .fade-in {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   padding: 1.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   color: var(--text-color);
 }
 

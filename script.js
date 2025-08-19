@@ -182,7 +182,14 @@ document.addEventListener('DOMContentLoaded', () => {
         "Videography Services",
         "Media Production & Editing"
       ],
-      typeSpeed: 50, backSpeed: 30, backDelay: 1200, loop: true
+      startDelay: 300,
+      typeSpeed: 60,
+      backSpeed: 40,
+      backDelay: 1500,
+      smartBackspace: true,
+      fadeOut: true,
+      loop: true,
+      showCursor: true
     });
   }
 
