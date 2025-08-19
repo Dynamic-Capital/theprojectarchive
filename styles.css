@@ -235,9 +235,15 @@ img {
  }
 
 .section {
+  width: 100%;
+  min-height: 100vh;
   padding: 4rem 1.5rem;
-  max-width: 1000px;
-  margin: 2rem auto;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 6rem 2rem;
+  }
 }
 
 @media (max-width: 600px) {

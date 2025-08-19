@@ -169,6 +169,24 @@ function initServiceRail(root) {
   });
 }
 
+function setupNavTransitions() {
+  if (!window.motion) return;
+  const { animate } = motion;
+  const scrollElement = document.scrollingElement || document.documentElement;
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const id = link.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      const y = target.getBoundingClientRect().top + window.scrollY - 70;
+      animate(scrollElement, { scrollTop: y }, { duration: 0.8, easing: 'ease-in-out' }).finished.then(() => {
+        animate(target, { opacity: [0, 1], y: [40, 0] }, { duration: 0.5, easing: 'ease-out' });
+      });
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   document.body.classList.add('loaded');
   observeSections(document);
@@ -231,6 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
   observeServiceCards(document);
   initGalleryScroll(document);
   initServiceRail(document);
+  setupNavTransitions();
 
   // Hamburger / overlay navigation
   const body = document.body;
