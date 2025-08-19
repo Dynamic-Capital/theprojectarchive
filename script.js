@@ -70,6 +70,23 @@ function observeServiceCards(root) {
   }
 }
 
+function stackServiceCards(root) {
+  if (!window.motion) return;
+  const stack = root.querySelector('.srv-stack');
+  if (!stack) return;
+  const cards = stack.querySelectorAll('.srv-card');
+  if (!cards.length) return;
+
+  const { animate, scroll } = motion;
+  cards.forEach((card, i) => {
+    card.style.zIndex = cards.length - i;
+    scroll(
+      animate(card, { y: [0, -i * 40] }, { easing: 'linear' }),
+      { target: stack, offset: ['start end', 'end start'] }
+    );
+  });
+}
+
 function observeSections(root) {
   const elements = root.querySelectorAll('.fade-in');
   if (!elements.length) return;
@@ -215,6 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
             observeServiceCards(container);
             initGalleryScroll(container);
             initServiceRail(container);
+            stackServiceCards(container);
             observeSections(container);
           }
           })
@@ -249,6 +267,7 @@ document.addEventListener('DOMContentLoaded', () => {
   observeServiceCards(document);
   initGalleryScroll(document);
   initServiceRail(document);
+  stackServiceCards(document);
   setupNavTransitions();
 
   // Hamburger / overlay navigation
