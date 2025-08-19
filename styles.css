@@ -4,6 +4,7 @@
   --bg-color: rgba(246, 243, 232, 1);
   --panel-bg: rgba(255, 255, 255, 0.06);
   --panel-border: rgba(255, 255, 255, 0.18);
+  --bg-light: #ffffff;
 }
 
 * {
@@ -236,6 +237,43 @@ img {
 .section p {
   max-width: 800px;
   margin: 0 auto;
+}
+
+.info-card {
+  background: var(--bg-light);
+  border-radius: 24px;
+  padding: 2rem;
+  margin: 2rem auto;
+  position: relative;
+}
+
+.info-card h1 {
+  color: #666;
+  font-weight: 400;
+}
+
+.info-card h1 strong,
+.info-card strong {
+  color: #111;
+  font-weight: 700;
+}
+
+.info-card p {
+  color: #666;
+  margin-top: 1rem;
+}
+
+.secondary {
+  color: #999;
+}
+
+.micro-illustration {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 80px;
+  height: 80px;
+  pointer-events: none;
 }
 
 .section.alt {
