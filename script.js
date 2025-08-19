@@ -40,6 +40,14 @@ function animateStats(root) {
 document.addEventListener('DOMContentLoaded', () => {
   document.body.classList.add('loaded');
 
+  if (window.motion) {
+    const { animate, stagger } = motion;
+    animate('.fade-in', { opacity: [0, 1], transform: ['translateY(20px)', 'translateY(0)'] }, {
+      delay: stagger(0.2),
+      duration: 0.6
+    });
+  }
+
   const sections = {
     about: 'about.html',
     mission: 'mission.html',
