@@ -2,10 +2,10 @@
   --accent-color: #ef3c23; /* vibrant red */
   --text-color: #333333;
   --bg-color: rgba(246, 243, 232, 1);
-  --panel-bg: rgba(255, 255, 255, 0.06);
   --panel-border: rgba(255, 255, 255, 0.18);
   --bg-light: #ffffff;
-}
+  --color-dark-text: #111111;
+ }
 
 * {
   box-sizing: border-box;
@@ -25,7 +25,7 @@ body {
   font-family: 'Montserrat', system-ui, sans-serif;
   line-height: 1.6;
   color: var(--text-color);
-  background-color: var(--bg-color);
+  background-color: var(--bg-light);
 }
 
 a {
@@ -329,12 +329,11 @@ img {
 }
 
 .glass {
-  background: var(--panel-bg);
+  background: var(--bg-light);
   border: 1px solid var(--panel-border);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: var(--color-dark-text);
 }
 
 .stats-grid {
