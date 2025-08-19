@@ -383,7 +383,7 @@ body.loaded {
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-body.loaded .fade-in {
+.fade-in.show {
   opacity: 1;
   transform: translateY(0);
 }
