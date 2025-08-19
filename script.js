@@ -70,6 +70,20 @@ function observeServiceCards(root) {
   cards.forEach((card) => observer.observe(card));
 }
 
+function initGalleryScroll(root) {
+  const gallery = root.querySelector('.gallery');
+  const leftBtn = root.querySelector('.gallery-scroll-left');
+  const rightBtn = root.querySelector('.gallery-scroll-right');
+  if (!gallery || !leftBtn || !rightBtn) return;
+  const scrollAmount = gallery.clientWidth * 0.8;
+  leftBtn.addEventListener('click', () => {
+    gallery.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+  });
+  rightBtn.addEventListener('click', () => {
+    gallery.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   document.body.classList.add('loaded');
 
@@ -103,6 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
               container.innerHTML = main.innerHTML;
             animateStats(container);
             observeServiceCards(container);
+            initGalleryScroll(container);
             }
           })
         .catch((err) => {
@@ -134,6 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   animateStats(document);
   observeServiceCards(document);
+  initGalleryScroll(document);
 
   // Hamburger / overlay navigation
   const body = document.body;
