@@ -524,6 +524,61 @@ body.loaded .fade-in {
   background-color: #a0214d;
 }
 
+.contact-bottom {
+  margin-top: 2rem;
+  padding: 2rem;
+  background-color: var(--bg-light);
+  border-radius: 8px;
+}
+
+.contact-bottom .contact-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .contact-bottom .contact-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+}
+
+.contact-bottom .headline {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.contact-bottom .details {
+  text-align: right;
+}
+
+.contact-bottom .details .email {
+  color: var(--accent-color);
+  font-weight: 700;
+}
+
+.contact-bottom .details .info {
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.social-icons {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.social-icons a {
+  color: var(--text-color);
+  font-size: 1.25rem;
+}
+
+.social-icons a:hover {
+  color: var(--accent-color);
+}
+
 .scroll-top {
   position: fixed;
   bottom: 2rem;

@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
   <header class="site-header">
@@ -24,27 +25,36 @@
 
   <main class="section glass fade-in">
     <h1>Contact</h1>
-    <div class="contact-columns">
-      <div class="contact-info">
-        <p>Email: <a href="mailto:hello@theprojectarchive.mv">hello@theprojectarchive.mv</a></p>
-        <p>Phone: +960 7495687</p>
-        <p>Social: <a href="https://theprojectarchive.mv">theprojectarchive.mv</a></p>
+    <form class="contact-form" action="https://formspree.io/f/hello@theprojectarchive.mv" method="POST">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="subject">Subject</label>
+      <input type="text" id="subject" name="subject" required>
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+
+      <button type="submit">Send</button>
+    </form>
+
+    <div class="contact-bottom">
+      <div class="contact-row">
+        <div class="headline">Say hello.</div>
+        <div class="details">
+          <p class="email"><a href="mailto:hello@theprojectarchive.mv">hello@theprojectarchive.mv</a></p>
+          <p class="info phone">+960 7495687</p>
+          <p class="info location">Maldives</p>
+        </div>
       </div>
-      <form class="contact-form" action="https://formspree.io/f/hello@theprojectarchive.mv" method="POST">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" required>
-
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="subject">Subject</label>
-        <input type="text" id="subject" name="subject" required>
-
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
-
-        <button type="submit">Send</button>
-      </form>
+      <div class="social-icons">
+        <a href="mailto:hello@theprojectarchive.mv" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        <a href="tel:+9607495687" aria-label="Phone"><i class="fas fa-phone"></i></a>
+        <a href="https://theprojectarchive.mv" aria-label="Website"><i class="fas fa-globe"></i></a>
+      </div>
     </div>
   </main>
 
