@@ -63,22 +63,32 @@ document.addEventListener('DOMContentLoaded', () => {
             animateStats(container);
           }
         })
-        .catch((err) => console.error(`Failed to load ${url}:`, err));
+        .catch((err) => {
+          console.error(`Failed to load ${url}:`, err);
+          container.innerHTML =
+            '<p class="fallback">Section unavailable. Please try again later.</p>';
+        });
     }
   });
 
+  const footerContainer = document.querySelector('footer.footer');
   fetch('footer.html')
     .then((r) => r.text())
     .then((html) => {
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
       const footer = doc.querySelector('footer');
-      const container = document.querySelector('footer.footer');
-      if (footer && container) {
-        container.innerHTML = footer.innerHTML;
+      if (footer && footerContainer) {
+        footerContainer.innerHTML = footer.innerHTML;
       }
     })
-    .catch((err) => console.error('Failed to load footer:', err));
+    .catch((err) => {
+      console.error('Failed to load footer:', err);
+      if (footerContainer) {
+        footerContainer.innerHTML =
+          '<p class="fallback">Section unavailable. Please try again later.</p>';
+      }
+    });
 
   animateStats(document);
 
