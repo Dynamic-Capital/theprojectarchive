@@ -24,36 +24,68 @@
   </header>
 
   <main class="section fade-in py-16 px-4 space-y-8">
-    <h1 class="text-3xl font-bold text-center">Services</h1>
-    <div class="services flex flex-col gap-8">
-      <div class="service-card bg-white rounded shadow p-6 space-y-4">
-        <h3 class="text-xl font-semibold">Professional Photography</h3>
-        <ul class="list-disc pl-5 space-y-1">
-          <li>Corporate and business photography</li>
-          <li>Event coverage (conferences, corporate events, private functions)</li>
-          <li>Product photography for e-commerce and marketing</li>
-          <li>Lifestyle and portrait photography</li>
-        </ul>
+    <section id="services" class="services">
+      <div class="container">
+        <h2 class="section-title">Services</h2>
+
+        <div class="srv-rail">
+          <button class="srv-arrow left" aria-label="Scroll left" tabindex="0">‹</button>
+
+          <div class="srv-track" role="list" aria-label="Our services">
+            <!-- Card 1 -->
+            <article class="srv-card" role="listitem">
+              <div class="srv-card__copy">
+                <span class="srv-eyebrow">E-COMMERCE</span>
+                <h3 class="srv-title">Build your online store,<br>make selling easy.</h3>
+                <p class="srv-desc">
+                  Store setup, payments, product pages, and analytics configured for growth.
+                </p>
+                <a class="srv-cta" href="#contact">Learn more →</a>
+              </div>
+              <div class="srv-card__media">
+                <img src="images/ecommerce.jpg" alt="E-commerce storefront preview" loading="lazy">
+              </div>
+            </article>
+
+            <!-- Card 2 -->
+            <article class="srv-card" role="listitem">
+              <div class="srv-card__copy">
+                <span class="srv-eyebrow">HUMANLOT</span>
+                <h3 class="srv-title">For productive teams &amp;<br>happier employees</h3>
+                <p class="srv-desc">
+                  HR tools that streamline attendance, leave, and performance in one place.
+                </p>
+                <a class="srv-cta" href="#contact">Learn more →</a>
+              </div>
+              <div class="srv-card__media">
+                <img src="images/hr-app.jpg" alt="HR mobile app preview" loading="lazy">
+              </div>
+            </article>
+
+            <!-- Card 3 (example) -->
+            <article class="srv-card" role="listitem">
+              <div class="srv-card__copy">
+                <span class="srv-eyebrow">CONTENT</span>
+                <h3 class="srv-title">Brand content that feels<br>alive &amp; consistent</h3>
+                <p class="srv-desc">
+                  Campaign strategy, photo/video production, and social systems that scale.
+                </p>
+                <a class="srv-cta" href="#contact">Learn more →</a>
+              </div>
+              <div class="srv-card__media">
+                <img src="images/content.jpg" alt="Content production preview" loading="lazy">
+              </div>
+            </article>
+          </div>
+
+          <button class="srv-arrow right" aria-label="Scroll right" tabindex="0">›</button>
+
+          <!-- fade edges -->
+          <div class="srv-fade left"></div>
+          <div class="srv-fade right"></div>
+        </div>
       </div>
-      <div class="service-card bg-white rounded shadow p-6 space-y-4">
-        <h3 class="text-xl font-semibold">Videography Services</h3>
-        <ul class="list-disc pl-5 space-y-1">
-          <li>Commercial and promotional videos</li>
-          <li>Documentary-style storytelling</li>
-          <li>Wedding and event videography</li>
-          <li>Real estate and architectural videography</li>
-        </ul>
-      </div>
-      <div class="service-card bg-white rounded shadow p-6 space-y-4">
-        <h3 class="text-xl font-semibold">Media Production &amp; Editing</h3>
-        <ul class="list-disc pl-5 space-y-1">
-          <li>High-end video editing and post-production</li>
-          <li>Motion graphics and animation</li>
-          <li>Color grading and visual effects</li>
-          <li>Professional sound design and voiceovers</li>
-        </ul>
-      </div>
-    </div>
+    </section>
 
     <h2 class="text-2xl font-bold text-center">Gallery</h2>
     <div class="gallery-wrapper">
