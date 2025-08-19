@@ -549,3 +549,40 @@ body.loaded .fade-in {
   opacity: 1;
   pointer-events: auto;
 }
+
+/* Testimonials */
+.testimonials-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 600px) {
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .testimonials-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.testimonial-card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: var(--text-color);
+}
+
+.testimonial-card blockquote {
+  margin: 0 0 1rem 0;
+  font-style: italic;
+}
+
+.testimonial-card figcaption {
+  font-weight: 700;
+  text-align: right;
+}
