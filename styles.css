@@ -842,6 +842,10 @@ a:hover {
   color: var(--color-background);
 }
 
+.error {
+  color: var(--color-accent);
+}
+
 img.rounded {
   border-radius: var(--radius-md);
 }
