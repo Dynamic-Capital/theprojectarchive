@@ -14,6 +14,22 @@
   <div>
     <h1 class="text-4xl font-bold mb-4">We're Coming Soon</h1>
     <p class="text-gray-600">Our website is under construction. Please check back soon.</p>
+
+    <div class="mt-8" id="promos">
+      <h2 class="text-2xl font-bold mb-4">Active Promotions</h2>
+      <form id="promo-form" class="space-y-4">
+        <label for="promo-select" class="block">Select a promo code:</label>
+        <select id="promo-select" class="border rounded p-2">
+          <option value="">-- Choose a promo --</option>
+          <option value="NEWMEMBER20">NEWMEMBER20 - 20%</option>
+          <option value="VIP50">VIP50 - $50</option>
+          <option value="VIPBOTLAUNCH50">VIPBOTLAUNCH50 - 50%</option>
+        </select>
+        <button type="submit" class="btn--primary rounded px-4 py-2">Apply</button>
+      </form>
+      <p id="promo-message" class="mt-4" aria-live="polite"></p>
+    </div>
   </div>
+  <script src="promo.js"></script>
 </body>
 </html>
