@@ -17,22 +17,35 @@ export default function App() {
   const toggleNav = () => setNavOpen((o) => !o);
   const closeNav = () => setNavOpen(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const openLightbox = () => setLightboxOpen(true);
+  const [lightboxImg, setLightboxImg] = useState('');
+  const openLightbox = (img) => {
+    setLightboxImg(img);
+    setLightboxOpen(true);
+  };
   const closeLightbox = () => setLightboxOpen(false);
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 300], [100, 0]);
   const opacity = useTransform(scrollY, [0, 300], [0, 1]);
 
+  const serviceImages = [
+    'https://picsum.photos/400/300?random=31',
+    'https://picsum.photos/400/300?random=32',
+    'https://picsum.photos/400/300?random=33',
+    'https://picsum.photos/400/300?random=34',
+    'https://picsum.photos/400/300?random=35',
+    'https://picsum.photos/400/300?random=36',
+  ];
+
   return (
     <>
-      <Header onToggle={toggleNav} />
+      <Header onToggle={toggleNav} open={navOpen} />
       <OverlayNav open={navOpen} onLink={closeNav} />
       <Hero />
       <About />
       <Mission />
       <Approach />
       <Numbers />
-      <Services />
+      <Services openLightbox={openLightbox} images={serviceImages} />
       <Contact />
       <Footer />
       <AnimatePresence>
@@ -44,7 +57,7 @@ export default function App() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
           >
-            <img src="https://picsum.photos/400/300?random=12" alt="" />
+            <img src={lightboxImg} alt="" />
             <motion.button
               className="close-btn"
               aria-label="Close image"
