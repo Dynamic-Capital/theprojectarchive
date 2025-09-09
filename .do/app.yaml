@@ -2,7 +2,9 @@ static_sites:
   - name: theprojectarchive
     source_dir: /
     build_command: "npm install && npm run build"
-    output_dir: dist
+    # Generated assets are written to the "dist" directory by Vite.
+    # Make the path explicit so the App Platform knows where to find them.
+    output_dir: ./dist
     buildpack: paketo-buildpacks/nodejs-legacy
     routes:
       - path: /
