@@ -1,11 +1,20 @@
 # The Project Archive
 
-This repository contains the static marketing site for The Project Archive, a creative studio based in the Maldives. The site features individual pages for each key section—About, Mission, Approach, In Numbers, Services, and Contact—linked from a global navigation bar. The Services page also showcases a small photo gallery of past projects.
+This repository contains the marketing site for The Project Archive, a creative studio based in the Maldives. The site has been converted into a React application powered by [Vite](https://vitejs.dev/) and animated with [Framer Motion](https://www.framer.com/motion/).
 
-To view the site locally without any build step, serve the repository root with a simple static server such as Python:
+## Development
+
+Install dependencies and start the development server:
 
 ```bash
-python -m http.server 8080
+npm install
+npm run dev
 ```
 
-Then open [http://localhost:8080/](http://localhost:8080/) in your browser.
+## Production build
+
+Create an optimized production build in a top-level `dist` folder:
+
+```bash
+npm run build
+```
