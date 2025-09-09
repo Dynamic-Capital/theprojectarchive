@@ -40,3 +40,15 @@ GitHub Actions in `.github/workflows/deploy.yml` builds the site and deploys the
 - `DO_DEPLOY_PATH` – Target path on the Droplet
 
 Optional assets can be served from a DigitalOcean Space; see `.env.example` for configuration.
+
+## Buildpack Deployment
+
+The site can be built and deployed using [Paketo Buildpacks](https://paketo.io/). The included `project.toml` configures the `paketo-buildpacks/nodejs-legacy` buildpack and pins Node.js to version `18.x`.
+
+When deploying to platforms like DigitalOcean App Platform, the `.do/app.yaml` file specifies the build command and output directory so the built assets in `dist/` are served.
+
+### Environment variables
+
+- `BP_NODE_VERSION` – Node runtime used during build (e.g., `18.x`).
+- `NODE_ENV` – set to `production` for optimized runtime behavior.
+

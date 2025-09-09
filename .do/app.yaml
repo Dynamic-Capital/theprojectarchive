@@ -1,7 +1,8 @@
 static_sites:
   - name: theprojectarchive
     source_dir: /
-    build_command: ""
-    output_dir: /
+    build_command: "npm install && npm run build"
+    output_dir: dist
+    buildpack: paketo-buildpacks/nodejs-legacy
     routes:
       - path: /
