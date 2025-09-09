@@ -1,5 +1,11 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import ParallaxSection from './ParallaxSection';
+
+const textVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0 },
+};
 
 export default function Mission() {
   return (
@@ -7,10 +13,24 @@ export default function Mission() {
       id="mission"
       image="https://picsum.photos/1920/1080?random=22"
     >
-      <h2 className="text-3xl font-bold mb-4">Mission</h2>
-      <p className="max-w-md mx-auto">
+      <motion.h2
+        className="text-3xl font-bold mb-4"
+        variants={textVariants}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.5 }}
+      >
+        Mission
+      </motion.h2>
+      <motion.p
+        className="max-w-md mx-auto"
+        variants={textVariants}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.5 }}
+      >
         Our mission is to deliver striking visuals that tell compelling stories for every client.
-      </p>
+      </motion.p>
     </ParallaxSection>
   );
 }

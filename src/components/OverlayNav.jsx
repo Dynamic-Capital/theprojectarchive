@@ -30,26 +30,37 @@ export default function OverlayNav({ open, onLink }) {
   return (
     <AnimatePresence>
       {open && (
-        <motion.nav
-          className="overlay-nav space-y-6 text-2xl font-bold"
-          aria-hidden={!open}
-          variants={navVariants}
-          initial="hidden"
-          animate="show"
-          exit="exit"
-        >
-          {links.map((l) => (
-            <motion.a
-              key={l.href}
-              className="hover:text-red-600"
-              href={l.href}
-              onClick={onLink}
-              variants={linkVariants}
-            >
-              {l.label}
-            </motion.a>
-          ))}
-        </motion.nav>
+        <>
+          <motion.div
+            key="backdrop"
+            className="fixed inset-0 bg-black/50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onLink}
+          />
+          <motion.nav
+            key="nav"
+            className="overlay-nav open space-y-6 text-2xl font-bold"
+            aria-hidden={!open}
+            variants={navVariants}
+            initial="hidden"
+            animate="show"
+            exit="exit"
+          >
+            {links.map((l) => (
+              <motion.a
+                key={l.href}
+                className="hover:text-red-600"
+                href={l.href}
+                onClick={onLink}
+                variants={linkVariants}
+              >
+                {l.label}
+              </motion.a>
+            ))}
+          </motion.nav>
+        </>
       )}
     </AnimatePresence>
   );
