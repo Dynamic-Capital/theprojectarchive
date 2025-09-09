@@ -1,5 +1,10 @@
 [[build.buildpacks]]
 id = "paketo-buildpacks/nodejs-legacy"
 
+[[build.buildpacks]]
+id = "paketo-buildpacks/web-servers"
+
 [[build.env]]
 BP_NODE_VERSION = "18.x"
+BP_WEB_SERVER = "nginx"
+BP_WEB_SERVER_ROOT = "dist"
