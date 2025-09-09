@@ -1,5 +1,5 @@
 import React from 'react';
-import ParallaxSection from './ParallaxSection.jsx';
+import ParallaxSection from './ParallaxSection';
 
 export default function Mission() {
   return (

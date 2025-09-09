@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import './styles.css';
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
-import Header from './components/Header.jsx';
-import OverlayNav from './components/OverlayNav.jsx';
-import Hero from './components/Hero.jsx';
-import About from './components/About.jsx';
-import Mission from './components/Mission.jsx';
-import Approach from './components/Approach.jsx';
-import Numbers from './components/Numbers.jsx';
-import Services from './components/Services.jsx';
-import Contact from './components/Contact.jsx';
-import Footer from './components/Footer.jsx';
+import Header from './components/Header';
+import OverlayNav from './components/OverlayNav';
+import Hero from './components/Hero';
+import About from './components/About';
+import Mission from './components/Mission';
+import Approach from './components/Approach';
+import Numbers from './components/Numbers';
+import Services from './components/Services';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
 
 export default function App() {
   const [navOpen, setNavOpen] = useState(false);

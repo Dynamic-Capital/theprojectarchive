@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useInView, animate } from 'framer-motion';
-import ParallaxSection from './ParallaxSection.jsx';
+import ParallaxSection from './ParallaxSection';
 
 function Counter({ value }) {
   const ref = useRef(null);
