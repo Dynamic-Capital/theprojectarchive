@@ -43,12 +43,29 @@ Optional assets can be served from a DigitalOcean Space; see `.env.example` for 
 
 ## Buildpack Deployment
 
-The site can be built and deployed using [Paketo Buildpacks](https://paketo.io/). The included `project.toml` configures the `paketo-buildpacks/nodejs-legacy` buildpack and pins Node.js to version `18.x`.
+The site can be built and deployed using [Paketo Buildpacks](https://paketo.io/). The `project.toml` configures both the Node.js runtime and an Nginx web server so the static files in `dist/` are served automatically.
 
-When deploying to platforms like DigitalOcean App Platform, the `.do/app.yaml` file specifies the build command and output directory so the built assets in `dist/` are served.
+```toml
+[[build.buildpacks]]
+id = "paketo-buildpacks/nodejs-legacy"
+
+[[build.buildpacks]]
+id = "paketo-buildpacks/web-servers"
+
+[[build.env]]
+BP_NODE_VERSION = "18.x"
+BP_WEB_SERVER = "nginx"
+BP_WEB_SERVER_ROOT = "dist"
+```
+
+When deploying to platforms like DigitalOcean App Platform, the `.do/app.yaml` file lists both buildpacks so the build image includes Nginx to serve the contents of `dist/`.
+
+The `npm start` script builds the project and serves the generated `dist/` directory using `npx serve`, enabling local preview or platforms that rely on `npm start`.
 
 ### Environment variables
 
 - `BP_NODE_VERSION` – Node runtime used during build (e.g., `18.x`).
+- `BP_WEB_SERVER` – web server to run (e.g., `nginx`).
+- `BP_WEB_SERVER_ROOT` – directory containing built assets (`dist`).
 - `NODE_ENV` – set to `production` for optimized runtime behavior.
 
