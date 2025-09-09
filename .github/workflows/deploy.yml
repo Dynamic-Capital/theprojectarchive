@@ -4,6 +4,9 @@ on:
   push:
     branches: [ main ]
 
+env:
+  BUILD_DIR: dist
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,7 +21,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: dist
-          path: dist
+          path: ${{ env.BUILD_DIR }}
 
   deploy:
     needs: build
@@ -27,12 +30,12 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: dist
-          path: dist
+          path: ${{ env.BUILD_DIR }}
       - name: Deploy to DigitalOcean
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.DO_SSH_HOST }}
           username: ${{ secrets.DO_SSH_USER }}
           key: ${{ secrets.DO_SSH_KEY }}
-          source: "dist/*"
+          source: "${{ env.BUILD_DIR }}/*"
           target: ${{ secrets.DO_DEPLOY_PATH }}
