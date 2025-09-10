@@ -11,7 +11,7 @@ const buildDir = path.join(projectDir, '.next');
 const outDir = path.join(projectDir, 'out');
 // Copy the static build output to the repository root so the buildpack can
 // serve it via the web server configured in project.toml.
-const targetDir = path.resolve(projectDir, '..', 'out');
+const targetDir = path.resolve(projectDir, '..', 'build');
 
 if (!existsSync(buildDir)) {
   console.log('Running next build...');
