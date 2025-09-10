@@ -26,13 +26,13 @@ Spacing, radii, typography, and color tokens are defined as CSS custom propertie
 
 ## Production build
 
-Create an optimized production build in the `out` folder and sync it to the top-level `_static` directory:
+Create an optimized production build in the `out` folder. The resulting `_static` directory is generated from `out/` and is excluded from version control:
 
 ```bash
 npm run build
 ```
 
-To rebuild automatically when files in `app/` change and refresh `_static`:
+To rebuild automatically when files in `app/` change and refresh the local `_static` directory:
 
 ```bash
 npm run watch-static
