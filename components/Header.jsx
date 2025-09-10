@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+"use client";
+import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 const topBar = {
@@ -28,7 +28,7 @@ export default function Header({ onToggle, open }) {
       animate={{ y: 0, opacity: 1 }}
       style={{ y }}
     >
-      <Link to="/home" className="logo text-xl font-bold text-gray-800">
+      <Link href="/main" className="logo text-xl font-bold text-gray-800">
         The Project Archive
       </Link>
       <motion.button

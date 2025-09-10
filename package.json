@@ -4,14 +4,12 @@
   "description": "This repository contains the static marketing site for The Project Archive, a creative studio based in the Maldives. The site features individual pages for each key section—About, Mission, Approach, In Numbers, Services, and Contact—linked from a global navigation bar. The Services page also showcases a small photo gallery of past projects.",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build --outDir dist",
-    "preview": "vite preview",
-    "start": "npm run build && npx serve -s dist",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "test": "vitest run",
     "lint": "eslint . --ext js,jsx",
-    "format": "prettier . --write",
-    "watch:root": "chokidar 'index.html' 'package.json' 'README.md' -c 'npm run format && npm run build'"
+    "format": "prettier . --write"
   },
   "keywords": [],
   "author": "",
@@ -21,15 +19,14 @@
   },
   "dependencies": {
     "framer-motion": "^12.23.12",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "react-router-dom": "^7.8.2"
+    "next": "^14.2.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.13",
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",
-    "@vitejs/plugin-react": "^4.7.0",
     "autoprefixer": "^10.4.21",
     "axe-core": "^4.10.3",
     "chokidar-cli": "^3.0.0",
@@ -41,7 +38,6 @@
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",
     "tailwindcss": "^4.1.13",
-    "vite": "^5.4.20",
     "vitest": "^3.2.4",
     "vitest-axe": "^0.1.0"
   }

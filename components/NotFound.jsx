@@ -1,6 +1,6 @@
-import React from 'react';
+"use client";
 import { motion, useReducedMotion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 const glitch = {
   initial: {
@@ -28,7 +28,7 @@ const glitch = {
 
 export default function NotFound() {
   const shouldReduceMotion = useReducedMotion();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   return (
     <motion.div
@@ -50,7 +50,7 @@ export default function NotFound() {
         </motion.h1>
       )}
       <motion.button
-        onClick={() => navigate('/')}
+        onClick={() => router.push('/')}
         whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
         whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
         className="px-4 py-2 bg-blue-500 text-white rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400"

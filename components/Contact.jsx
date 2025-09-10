@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import { motion } from 'framer-motion';
 import ParallaxSection from './ParallaxSection';
@@ -7,12 +8,12 @@ const textVariants = {
   show: { opacity: 1, y: 0 },
 };
 
-export default function About() {
+export default function Contact() {
   return (
     <ParallaxSection
-      id="about"
-      image="https://picsum.photos/1920/1080?random=21"
-      alt="Background image for About section"
+      id="contact"
+      image="https://picsum.photos/1920/1080?random=25"
+      alt="Background image for Contact section"
     >
       <motion.h2
         className="text-3xl font-bold mb-4"
@@ -21,7 +22,7 @@ export default function About() {
         whileInView="show"
         viewport={{ once: true, amount: 0.5 }}
       >
-        About
+        Contact
       </motion.h2>
       <motion.p
         className="max-w-md mx-auto"
@@ -30,8 +31,8 @@ export default function About() {
         whileInView="show"
         viewport={{ once: true, amount: 0.5 }}
       >
-        Learn more about our passion for capturing moments and the story behind
-        our studio.
+        Get in touch to discuss your project or schedule a session with our
+        team.
       </motion.p>
     </ParallaxSection>
   );
