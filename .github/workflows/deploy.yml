@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 env:
-  BUILD_DIR: _static
+  BUILD_DIR: build
 
 jobs:
   lint-and-test:
