@@ -57,7 +57,7 @@ export default function Testimonials() {
       alt="Background image for Testimonials section"
     >
       <motion.h2
-        className="text-3xl font-bold mb-8"
+        style={{ fontSize: 'var(--fs-4)', fontWeight: 750, marginBottom: 'var(--space-6)' }}
         variants={cardVariants(reduceMotion)}
         initial="hidden"
         whileInView="show"
@@ -65,11 +65,26 @@ export default function Testimonials() {
       >
         Testimonials
       </motion.h2>
-      <div className="relative mt-8 mx-auto max-w-xl overflow-hidden">
+      <div
+        style={{
+          position: 'relative',
+          marginTop: 'var(--space-6)',
+          marginInline: 'auto',
+          maxWidth: '36rem',
+          overflow: 'hidden'
+        }}
+      >
         <AnimatePresence mode="wait">
           <motion.figure
             key={index}
-            className="testimonial-card text-center"
+            style={{
+              textAlign: 'center',
+              padding: 'var(--space-5)',
+              background: 'var(--surface)',
+              border: 'var(--border-1)',
+              borderRadius: 'var(--radius-md)',
+              boxShadow: 'var(--shadow-1)'
+            }}
             variants={slideVariants(reduceMotion)}
             initial="enter"
             animate="center"
@@ -80,7 +95,7 @@ export default function Testimonials() {
           </motion.figure>
         </AnimatePresence>
         <motion.button
-          className="absolute left-0 top-1/2 -translate-y-1/2 p-2"
+          style={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)', padding: 'var(--space-2)' }}
           aria-label="Previous testimonial"
           onClick={prev}
           whileHover={reduceMotion ? undefined : { scale: 1.1 }}
@@ -89,7 +104,7 @@ export default function Testimonials() {
           &#8592;
         </motion.button>
         <motion.button
-          className="absolute right-0 top-1/2 -translate-y-1/2 p-2"
+          style={{ position: 'absolute', right: 0, top: '50%', transform: 'translateY(-50%)', padding: 'var(--space-2)' }}
           aria-label="Next testimonial"
           onClick={next}
           whileHover={reduceMotion ? undefined : { scale: 1.1 }}

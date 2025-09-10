@@ -34,12 +34,29 @@ export default function Services({ openLightbox, images = [] }) {
       title="Services"
       description="Explore the range of photography services we offer for individuals and businesses."
     >
-      <div className="relative w-72 h-52 md:w-[400px] md:h-[300px] mx-auto mt-lg">
+      <div
+        style={{
+          position: 'relative',
+          width: '18rem',
+          height: '13rem',
+          marginInline: 'auto',
+          marginTop: 'var(--space-6)'
+        }}
+      >
         {cards.slice(0, 3).map((img, i) => (
           <motion.div
             key={img}
-            className="absolute inset-0 rounded-lg shadow-lg overflow-hidden cursor-grab"
-            style={{ zIndex: cards.length - i, top: i * 6, left: i * 6 }}
+            style={{
+              position: 'absolute',
+              inset: 0,
+              borderRadius: 'var(--radius-md)',
+              boxShadow: 'var(--shadow-2)',
+              overflow: 'hidden',
+              cursor: 'grab',
+              zIndex: cards.length - i,
+              top: i * 6,
+              left: i * 6
+            }}
             variants={stackCardVariants(i, reduceMotion)}
             initial="initial"
             animate="animate"
@@ -54,7 +71,7 @@ export default function Services({ openLightbox, images = [] }) {
               alt={`Gallery image ${i + 1}`}
               fill
               sizes="100%"
-              className="object-cover"
+              style={{ objectFit: 'cover' }}
               draggable={false}
             />
           </motion.div>

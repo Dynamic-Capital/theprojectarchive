@@ -33,16 +33,25 @@ export default function NotFound() {
 
   return (
     <motion.div
-      className="flex flex-col items-center justify-center min-h-screen gap-6 p-4 text-center"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100dvh',
+        gap: 'var(--space-5)',
+        padding: 'var(--space-4)',
+        textAlign: 'center'
+      }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: shouldReduceMotion ? 0 : 0.5 }}
     >
       {shouldReduceMotion ? (
-        <p className="text-2xl font-bold">404 Not Found</p>
+        <p style={{ fontSize: 'var(--fs-3)', fontWeight: 750 }}>404 Not Found</p>
       ) : (
         <motion.h1
-          className="text-6xl font-extrabold"
+          style={{ fontSize: '3rem', fontWeight: 800 }}
           variants={glitch}
           initial="initial"
           animate="animate"
@@ -50,10 +59,7 @@ export default function NotFound() {
           404 Not Found
         </motion.h1>
       )}
-      <Button
-        onClick={() => router.push('/')}
-        variant="primary"
-      >
+      <Button onClick={() => router.push('/')} variant="primary">
         Go Home
       </Button>
     </motion.div>

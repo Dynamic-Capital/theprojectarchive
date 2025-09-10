@@ -5,13 +5,22 @@ import { motion } from 'framer-motion';
 export default function ComingSoon() {
   return (
     <motion.main
-      className="flex flex-col items-center justify-center min-h-screen gap-6 p-4 text-center"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100dvh',
+        gap: 'var(--space-5)',
+        padding: 'var(--space-4)',
+        textAlign: 'center'
+      }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
       <motion.h1
-        className="text-4xl font-bold"
+        style={{ fontSize: 'var(--fs-5)', fontWeight: 750 }}
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.2 }}
@@ -19,7 +28,7 @@ export default function ComingSoon() {
         Coming Soon
       </motion.h1>
       <motion.p
-        className="text-lg"
+        style={{ fontSize: 'var(--fs-2)' }}
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.4 }}
@@ -27,55 +36,35 @@ export default function ComingSoon() {
         Our new site is on the way. Stay tuned!
       </motion.p>
       <motion.div
-        className="space-y-2"
+        style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6 }}
       >
         <p>
           Contact us at{' '}
-          <a
-            href="mailto:info@theprojectarchive.com"
-            className="text-blue-500 hover:underline"
-          >
+          <a href="mailto:info@theprojectarchive.com">
             info@theprojectarchive.com
           </a>
         </p>
         <p>
           Call{' '}
-          <a href="tel:+9601234567" className="text-blue-500 hover:underline">
-            +960 123-4567
-          </a>
+          <a href="tel:+9601234567">+960 123-4567</a>
         </p>
       </motion.div>
       <motion.div
-        className="flex space-x-4"
+        style={{ display: 'flex', gap: 'var(--space-4)' }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8 }}
       >
-        <a
-          href="https://twitter.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-500 hover:underline"
-        >
+        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
           Twitter
         </a>
-        <a
-          href="https://facebook.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-500 hover:underline"
-        >
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
           Facebook
         </a>
-        <a
-          href="https://instagram.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-500 hover:underline"
-        >
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
           Instagram
         </a>
       </motion.div>

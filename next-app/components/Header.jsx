@@ -29,30 +29,54 @@ export default function Header({ onToggle, open }) {
 
   return (
     <motion.header
-      className="site-header fixed top-0 left-0 right-0 flex items-center justify-between p-4 bg-[var(--bg)]/80 backdrop-blur-md shadow z-50 text-[var(--text)]"
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: 'var(--space-4)',
+        background: 'color-mix(in oklab, var(--bg), transparent 20%)',
+        backdropFilter: 'blur(12px)',
+        boxShadow: 'var(--shadow-1)',
+        zIndex: 'var(--z-sticky)',
+        color: 'var(--text)',
+        y
+      }}
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      style={{ y }}
     >
-      <Link href="/" className="logo text-xl font-bold">
+      <Link href="/" style={{ fontSize: 'var(--fs-2)', fontWeight: 750 }}>
         The Project Archive
       </Link>
-      <div className="flex items-center gap-4">
+      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)' }}>
         {mounted && (
-          <button onClick={toggleTheme} aria-label="Toggle theme" className="text-xl">
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            style={{ fontSize: 'var(--fs-2)' }}
+          >
             {theme === 'light' ? '🌙' : '☀️'}
           </button>
         )}
         <motion.button
-          className="hamburger flex flex-col justify-between w-8 h-6"
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            width: '2rem',
+            height: '1.5rem'
+          }}
           aria-label={open ? 'Close menu' : 'Open menu'}
           onClick={onToggle}
           initial={false}
           animate={open ? 'open' : 'closed'}
         >
-          <motion.span className="block h-0.5 bg-[var(--text)]" variants={topBar}></motion.span>
-          <motion.span className="block h-0.5 bg-[var(--text)]" variants={middleBar}></motion.span>
-          <motion.span className="block h-0.5 bg-[var(--text)]" variants={bottomBar}></motion.span>
+          <motion.span style={{ display: 'block', height: '2px', background: 'var(--text)' }} variants={topBar}></motion.span>
+          <motion.span style={{ display: 'block', height: '2px', background: 'var(--text)' }} variants={middleBar}></motion.span>
+          <motion.span style={{ display: 'block', height: '2px', background: 'var(--text)' }} variants={bottomBar}></motion.span>
         </motion.button>
       </div>
     </motion.header>
