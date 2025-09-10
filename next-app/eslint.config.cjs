@@ -20,7 +20,7 @@ module.exports = [
     },
     settings: { react: { version: 'detect' } },
     rules: {
-      'no-unused-vars': 'off',
+      'no-unused-vars': 'warn',
     },
   },
 ];
