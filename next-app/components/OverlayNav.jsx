@@ -1,6 +1,7 @@
-"use client";
+'use client';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
+import navLinks from './navLinks';
 
 const navVariants = {
   hidden: { y: -30, opacity: 0 },
@@ -17,18 +18,6 @@ const linkVariants = {
   show: { opacity: 1, y: 0 },
 };
 
-const links = [
-  { to: '/', label: 'Home' },
-  { to: '/about', label: 'About' },
-  { to: '/mission', label: 'Mission' },
-  { to: '/approach', label: 'Approach' },
-  { to: '/numbers', label: 'In Numbers' },
-  { to: '/starters', label: 'Starters' },
-  { to: '/services', label: 'Services' },
-  { to: '/testimonials', label: 'Testimonials' },
-  { to: '/contact', label: 'Contact' }
-];
-
 export default function OverlayNav({ open, onLink }) {
   return (
     <AnimatePresence>
@@ -36,7 +25,7 @@ export default function OverlayNav({ open, onLink }) {
         <>
           <motion.div
             key="backdrop"
-            className="fixed inset-0 bg-black/50"
+            className="fixed inset-0 bg-black/50 md:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -44,14 +33,14 @@ export default function OverlayNav({ open, onLink }) {
           />
           <motion.nav
             key="nav"
-            className="overlay-nav open space-y-6 text-2xl font-bold"
+            className="overlay-nav open space-y-6 text-2xl font-bold md:hidden"
             aria-hidden={!open}
             variants={navVariants}
             initial="hidden"
             animate="show"
             exit="exit"
           >
-            {links.map((l) => (
+            {navLinks.map((l) => (
               <motion.span key={l.to} variants={linkVariants}>
                 <Link
                   href={l.to}
