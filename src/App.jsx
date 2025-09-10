@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles.css';
 import {
   AnimatePresence,
@@ -29,6 +29,17 @@ export default function App() {
     setLightboxOpen(true);
   };
   const closeLightbox = () => setLightboxOpen(false);
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        closeLightbox();
+      }
+    };
+    if (lightboxOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxOpen]);
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 300], [100, 0]);
   const opacity = useTransform(scrollY, [0, 300], [0, 1]);
