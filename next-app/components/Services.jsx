@@ -3,25 +3,7 @@ import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
 import ParallaxSection from './ParallaxSection';
-
-const spring = { type: 'spring', stiffness: 100, damping: 20 };
-const textVariants = (reduce) => ({
-  hidden: { opacity: 0, y: reduce ? 0 : 20 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: reduce ? { duration: 0 } : spring,
-  },
-});
-
-const cardVariants = (reduce) => ({
-  hidden: { opacity: 0, y: reduce ? 0 : 40 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: reduce ? { duration: 0 } : spring,
-  },
-});
+import { cardVariants } from '../lib/animations';
 
 export default function Services({ openLightbox, images = [] }) {
   const reduceMotion = useReducedMotion();
@@ -42,27 +24,10 @@ export default function Services({ openLightbox, images = [] }) {
       id="services"
       image="https://picsum.photos/1920/1080?random=24"
       alt="Background image for Services section"
+      title="Services"
+      description="Explore the range of photography services we offer for individuals and businesses."
     >
-      <motion.h2
-        className="text-3xl font-bold mb-4"
-        variants={textVariants(reduceMotion)}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.5 }}
-      >
-        Services
-      </motion.h2>
-      <motion.p
-        className="max-w-md mx-auto"
-        variants={textVariants(reduceMotion)}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.5 }}
-      >
-        Explore the range of photography services we offer for individuals and
-        businesses.
-      </motion.p>
-      <div className="mt-6 grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
+      <div className="mt-lg grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
         {cards.map((img, i) => (
           <motion.div
             key={img}

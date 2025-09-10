@@ -871,6 +871,19 @@ a:hover {
   color: var(--color-background);
 }
 
+.btn--secondary {
+  background: var(--color-background);
+  color: var(--text);
+  border: 2px solid var(--text);
+}
+
+.btn--secondary:hover,
+.btn--secondary:focus {
+  background: var(--color-background);
+  color: var(--text);
+  opacity: 0.9;
+}
+
 img.rounded {
   border-radius: var(--radius-md);
 }

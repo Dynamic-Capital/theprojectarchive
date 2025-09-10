@@ -1,6 +1,7 @@
 "use client";
 import { motion, useReducedMotion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
+import Button from './Button';
 
 export default function Error({ reset }) {
   const shouldReduceMotion = useReducedMotion();
@@ -22,14 +23,9 @@ export default function Error({ reset }) {
       transition={{ duration: shouldReduceMotion ? 0 : 0.5 }}
     >
       <p className="text-2xl font-bold">Something went wrong</p>
-      <motion.button
-        onClick={handleClick}
-        whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
-        whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
-        className="px-4 py-2 bg-blue-500 text-white rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400"
-      >
+      <Button onClick={handleClick} variant="primary">
         Try Again
-      </motion.button>
+      </Button>
     </motion.div>
   );
 }

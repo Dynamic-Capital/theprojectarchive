@@ -1,6 +1,6 @@
 # The Project Archive
 
-This repository contains the marketing site for The Project Archive, a creative studio based in the Maldives. The site is built with [Next.js](https://nextjs.org/) and animated with [Framer Motion](https://www.framer.com/motion/). It now also supports simple 3D scenes via [Three.js](https://threejs.org/) and [@react-three/fiber](https://github.com/pmndrs/react-three-fiber), animated with [framer-motion-3d](https://github.com/pmndrs/react-three-fiber).
+This repository contains the marketing site for The Project Archive, a creative studio based in the Maldives. The site is built with [Next.js](https://nextjs.org/) and animated with [Framer Motion](https://www.framer.com/motion/). It now also supports simple 3D scenes via [Three.js](https://threejs.org/) and [@react-three/fiber](https://github.com/pmndrs/react-three-fiber).
 
 Tailwind CSS is compiled during the build using PostCSS instead of a CDN runtime.
 
@@ -15,6 +15,14 @@ npm run dev
 ```
 
 Update `NEXT_ALLOWED_ORIGIN` and `SPACE_BUCKET_URL` in `.env` to match your environment.
+
+## Design Tokens
+
+Spacing, radii, and typography tokens are defined as CSS custom properties in `app/globals.css` and exposed through Tailwind utilities. Use these classes for consistent styling:
+
+- Spacing: `p-xs`, `p-sm`, `p-md`, `p-lg`, `p-xl`, `p-2xl`
+- Radius: `rounded-xs`, `rounded-sm`, `rounded-md`, `rounded-lg`, `rounded-xl`, `rounded-2xl`, `rounded-full`
+- Font size: `text-xs`, `text-sm`, `text-base`, `text-lg`, `text-xl`, `text-2xl`, `text-3xl`, `text-4xl`
 
 ## Production build
 
@@ -32,7 +40,7 @@ npm run watch-static
 
 ## 3D Animation
 
-The hero section showcases a rotating 3D cube using `three`, `@react-three/fiber`, and `framer-motion-3d`. Animations respect the user's `prefers-reduced-motion` setting and fall back to a static placeholder when motion is reduced. Import `Hero3D` into any component to render the scene.
+The hero section showcases a rotating 3D cube using `three` and `@react-three/fiber`. Animations respect the user's `prefers-reduced-motion` setting and fall back to a static placeholder when motion is reduced. Import `Hero3D` into any component to render the scene.
 
 ## Docker
 

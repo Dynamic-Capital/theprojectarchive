@@ -1,6 +1,7 @@
 "use client";
 import { motion, useReducedMotion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
+import Button from './Button';
 
 const glitch = {
   initial: {
@@ -49,14 +50,12 @@ export default function NotFound() {
           404 Not Found
         </motion.h1>
       )}
-      <motion.button
+      <Button
         onClick={() => router.push('/')}
-        whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
-        whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
-        className="px-4 py-2 bg-accent text-background rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent"
+        variant="primary"
       >
         Go Home
-      </motion.button>
+      </Button>
     </motion.div>
   );
 }

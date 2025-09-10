@@ -2,8 +2,16 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
+import SectionHeader from './SectionHeader';
 
-export default function ParallaxSection({ id, image, alt = '', children }) {
+export default function ParallaxSection({
+  id,
+  image,
+  alt = '',
+  title,
+  description,
+  children,
+}) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -32,12 +40,15 @@ export default function ParallaxSection({ id, image, alt = '', children }) {
         />
       </motion.div>
       <motion.div
-        className="relative z-10 glass p-8 text-center"
+        className="relative z-10 glass p-xl text-center"
         initial={{ opacity: 0, y: reduceMotion ? 0 : 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: reduceMotion ? 0 : 0.6 }}
       >
+        {title && (
+          <SectionHeader title={title}>{description}</SectionHeader>
+        )}
         {children}
       </motion.div>
     </section>
