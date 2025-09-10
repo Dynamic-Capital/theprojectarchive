@@ -1,13 +1,13 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
 import ParallaxSection from './ParallaxSection';
-import { cardVariants } from '../lib/animations';
+import { stackCardVariants } from '../lib/animations';
 
 export default function Services({ openLightbox, images = [] }) {
   const reduceMotion = useReducedMotion();
-  const cards =
+  const [cards, setCards] = useState(
     images.length > 0
       ? images
       : [
@@ -17,7 +17,14 @@ export default function Services({ openLightbox, images = [] }) {
           'https://picsum.photos/400/300?random=34',
           'https://picsum.photos/400/300?random=35',
           'https://picsum.photos/400/300?random=36',
-        ];
+        ]
+  );
+
+  const handleDragEnd = (_, info) => {
+    if (info.offset.x > 100) {
+      setCards((c) => [...c.slice(1), c[0]]);
+    }
+  };
 
   return (
     <ParallaxSection
@@ -27,23 +34,28 @@ export default function Services({ openLightbox, images = [] }) {
       title="Services"
       description="Explore the range of photography services we offer for individuals and businesses."
     >
-      <div className="mt-lg grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
-        {cards.map((img, i) => (
+      <div className="relative w-72 h-52 md:w-[400px] md:h-[300px] mx-auto mt-lg">
+        {cards.slice(0, 3).map((img, i) => (
           <motion.div
             key={img}
-            className="srv-card cursor-pointer overflow-hidden rounded shadow"
-            variants={cardVariants(reduceMotion)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
+            className="absolute inset-0 rounded-lg shadow-lg overflow-hidden cursor-grab"
+            style={{ zIndex: cards.length - i, top: i * 6, left: i * 6 }}
+            variants={stackCardVariants(i, reduceMotion)}
+            initial="initial"
+            animate="animate"
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            whileDrag={{ rotate: 5 }}
+            onDragEnd={handleDragEnd}
             onClick={() => openLightbox && openLightbox(img)}
           >
             <Image
               src={img}
               alt={`Gallery image ${i + 1}`}
-              width={400}
-              height={300}
-              className="object-cover w-full h-full"
+              fill
+              sizes="100%"
+              className="object-cover"
+              draggable={false}
             />
           </motion.div>
         ))}
