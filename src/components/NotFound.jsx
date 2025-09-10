@@ -2,6 +2,30 @@ import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
+const glitch = {
+  initial: {
+    textShadow: '0 0 0 #fff',
+  },
+  animate: {
+    textShadow: [
+      '0.05em 0 0 #ff00c1, -0.05em 0 0 #00fff9',
+      '-0.05em -0.025em 0 #ff00c1, 0.05em 0.025em 0 #00fff9',
+      '-0.05em 0 0 #ff00c1, 0.05em 0 0 #00fff9',
+      '0.05em 0.025em 0 #ff00c1, -0.05em -0.025em 0 #00fff9',
+      '0 0 0 #ff00c1, 0 0 0 #00fff9',
+      '0 0 0 #fff',
+    ],
+    x: [0, -2, 2, -2, 2, 0],
+    transition: {
+      duration: 0.5,
+      ease: 'linear',
+      repeat: Infinity,
+      repeatType: 'loop',
+      repeatDelay: 1,
+    },
+  },
+};
+
 export default function NotFound() {
   const shouldReduceMotion = useReducedMotion();
   const navigate = useNavigate();
@@ -14,13 +38,16 @@ export default function NotFound() {
       transition={{ duration: shouldReduceMotion ? 0 : 0.5 }}
     >
       {shouldReduceMotion ? (
-        <p className="text-xl">Page not found</p>
+        <p className="text-2xl font-bold">404 Not Found</p>
       ) : (
-        <img
-          src="https://media.giphy.com/media/14uQ3cOFteDaU/giphy.gif"
-          alt="Animated loop of a confused traveler searching for a missing page"
-          className="w-64 h-64"
-        />
+        <motion.h1
+          className="text-6xl font-extrabold"
+          variants={glitch}
+          initial="initial"
+          animate="animate"
+        >
+          404 Not Found
+        </motion.h1>
       )}
       <motion.button
         onClick={() => navigate('/')}
