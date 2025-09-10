@@ -10,7 +10,7 @@ export default function Footer() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
     >
-      <p>&copy; {new Date().getFullYear()} The Project Archive is all you need is</p>
+      <p>&copy; {new Date().getFullYear()} The Project Archive</p>
       <nav aria-label="Footer" className="footer-nav">
         <a href="/privacy">Privacy</a>
         <a href="/terms">Terms</a>

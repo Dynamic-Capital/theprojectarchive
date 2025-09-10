@@ -52,7 +52,7 @@ export default function Hero() {
       />
       <div className="container relative z-10 bg-background/50 p-8 rounded-lg max-w-xl flex flex-col items-center justify-center text-center">
         <motion.h1 className="sr-only" variants={itemUp(reduceMotion)}>
-          The Project Archive is all you need is
+          The Project Archive
         </motion.h1>
         <motion.div
           className="mb-4"
@@ -61,12 +61,12 @@ export default function Hero() {
         >
           {reduceMotion ? (
             <span className="text-text text-xl tracking-widest">
-              The Project Archive is all you need is
+              The Project Archive
             </span>
           ) : (
             <CurvedLoop
               text={{
-                text: 'The Project Archive is all you need is',
+                text: 'The Project Archive',
                 font: { fontFamily: 'sans-serif', fontWeight: '400', fontSize: 32 },
                 color: 'var(--text)',
               }}
@@ -82,7 +82,7 @@ export default function Hero() {
           className="tagline text-lg text-text mb-6"
           variants={itemDown(reduceMotion)}
         >
-          More about the project
+          Creative studio for design, development, and photography.
         </motion.p>
         <motion.div
           className="cta-group flex flex-col sm:flex-row gap-4 justify-center"
