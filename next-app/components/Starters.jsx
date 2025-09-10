@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import ParallaxSection from './ParallaxSection';
+import LiquidGlass from './LiquidGlass';
 
 const textVariants = (reduce) => ({
   hidden: { opacity: 0, y: reduce ? 0 : 20 },
@@ -84,17 +85,17 @@ export default function Starters() {
       </motion.h2>
       <div className="grid gap-4 max-w-3xl mx-auto sm:grid-cols-2">
         {starters.map((s, i) => (
-          <motion.div
+          <LiquidGlass
             key={s.title}
-            className="p-4 glass rounded text-left"
-            variants={cardVariants(reduceMotion)}
-            initial="hidden"
-            whileInView="show"
+            className="p-4 text-left"
+            initial={{ opacity: 0, y: reduceMotion ? 0 : 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: reduceMotion ? 0 : 0.5 }}
           >
             <h3 className="font-semibold text-xl mb-2">{s.title}</h3>
             <p className="text-sm">{s.description}</p>
-          </motion.div>
+          </LiquidGlass>
         ))}
       </div>
     </ParallaxSection>

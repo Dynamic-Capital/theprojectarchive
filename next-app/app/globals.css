@@ -423,6 +423,7 @@ a:hover {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: var(--radius-lg);
+  overflow: hidden;
 }
 
 .stats-grid {

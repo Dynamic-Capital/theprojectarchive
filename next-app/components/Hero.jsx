@@ -3,6 +3,7 @@ import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
 import CurvedLoop from './CurvedLoopText.js';
+import LiquidGlass from './LiquidGlass';
 
 const container = {
   hidden: { opacity: 0 },
@@ -50,7 +51,7 @@ export default function Hero() {
         sizes="100vw"
         priority
       />
-      <div className="container relative z-10 bg-background/50 p-8 rounded-lg max-w-xl flex flex-col items-center justify-center text-center">
+      <LiquidGlass className="container relative z-10 p-8 max-w-xl flex flex-col items-center justify-center text-center">
         <motion.h1 className="sr-only" variants={itemUp(reduceMotion)}>
           The Project Archive is all you need is
         </motion.h1>
@@ -107,7 +108,7 @@ export default function Hero() {
             Contact Me
           </motion.a>
         </motion.div>
-      </div>
+      </LiquidGlass>
     </motion.section>
   );
 }
