@@ -15,7 +15,6 @@ import About from './About';
 import Mission from './Mission';
 import Approach from './Approach';
 import Numbers from './Numbers';
-import Starters from './Starters';
 import Services from './Services';
 import Testimonials from './Testimonials';
 import Contact from './Contact';
@@ -98,7 +97,6 @@ export default function Home() {
       <Mission />
       <Approach />
       <Numbers />
-      <Starters />
       <Services openLightbox={openLightbox} images={serviceImages} />
       <Testimonials />
       <Contact />
