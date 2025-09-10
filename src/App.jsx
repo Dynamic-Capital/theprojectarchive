@@ -19,6 +19,7 @@ import Services from './components/Services';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import NotFound from './components/NotFound';
+import ComingSoon from './components/ComingSoon';
 
 function Home() {
   const [navOpen, setNavOpen] = useState(false);
@@ -54,12 +55,16 @@ function Home() {
       if (el) {
         try {
           el.scrollIntoView({ behavior: 'smooth' });
-        } catch {}
+        } catch {
+          /* empty */
+        }
       }
     } else {
       try {
         window.scrollTo({ top: 0, behavior: 'smooth' });
-      } catch {}
+      } catch {
+        /* empty */
+      }
     }
   }, [location]);
 
@@ -131,7 +136,8 @@ function Home() {
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<ComingSoon />} />
+      <Route path="/main" element={<Home />} />
       <Route path="/about" element={<Home />} />
       <Route path="/mission" element={<Home />} />
       <Route path="/approach" element={<Home />} />

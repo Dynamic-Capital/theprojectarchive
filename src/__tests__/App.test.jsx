@@ -11,7 +11,20 @@ beforeAll(() => {
   };
 });
 
-test('renders site header link', () => {
+test('renders coming soon message on root', () => {
+  window.history.pushState({}, '', '/');
+  render(
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>,
+  );
+  expect(
+    screen.getByRole('heading', { name: /coming soon/i }),
+  ).toBeInTheDocument();
+});
+
+test('renders site header link on /main', () => {
+  window.history.pushState({}, '', '/main');
   render(
     <BrowserRouter>
       <App />
@@ -22,7 +35,8 @@ test('renders site header link', () => {
   ).toBeInTheDocument();
 });
 
-test('renders starters section', () => {
+test('renders starters section on /main', () => {
+  window.history.pushState({}, '', '/main');
   render(
     <BrowserRouter>
       <App />
@@ -34,6 +48,7 @@ test('renders starters section', () => {
 });
 
 test('closes lightbox on Escape key', async () => {
+  window.history.pushState({}, '', '/main');
   render(
     <BrowserRouter>
       <App />
