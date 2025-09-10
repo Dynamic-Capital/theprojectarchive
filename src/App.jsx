@@ -6,6 +6,7 @@ import {
   useScroll,
   useTransform,
 } from 'framer-motion';
+import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import OverlayNav from './components/OverlayNav';
 import Hero from './components/Hero';
@@ -17,8 +18,9 @@ import Starters from './components/Starters';
 import Services from './components/Services';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import NotFound from './components/NotFound';
 
-export default function App() {
+function Home() {
   const [navOpen, setNavOpen] = useState(false);
   const toggleNav = () => setNavOpen((o) => !o);
   const closeNav = () => setNavOpen(false);
@@ -105,5 +107,14 @@ export default function App() {
         &#8679;
       </motion.button>
     </>
+  );
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }
