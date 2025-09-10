@@ -1,0 +1,17 @@
+name: Deploy Preview
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DO_API_TOKEN }}
+      - name: Deploy preview app
+        run: |
+          doctl apps create --spec <(sed "s/name: theprojectarchive/name: theprojectarchive-pr-${{ github.event.number }}/" .do/app.yaml)
