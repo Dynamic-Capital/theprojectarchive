@@ -29,6 +29,7 @@ export default function Services({ openLightbox, images = [] }) {
     <ParallaxSection
       id="services"
       image="https://picsum.photos/1920/1080?random=24"
+      alt="Background image for Services section"
     >
       <motion.h2
         className="text-3xl font-bold mb-4"
@@ -46,7 +47,8 @@ export default function Services({ openLightbox, images = [] }) {
         whileInView="show"
         viewport={{ once: true, amount: 0.5 }}
       >
-        Explore the range of photography services we offer for individuals and businesses.
+        Explore the range of photography services we offer for individuals and
+        businesses.
       </motion.p>
       <div className="mt-6 grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
         {cards.map((img, i) => (
@@ -59,11 +61,14 @@ export default function Services({ openLightbox, images = [] }) {
             viewport={{ once: true, amount: 0.3 }}
             onClick={() => openLightbox && openLightbox(img)}
           >
-            <img src={img} alt="" className="w-full h-full object-cover" />
+            <img
+              src={img}
+              alt={`Gallery image ${i + 1}`}
+              className="w-full h-full object-cover"
+            />
           </motion.div>
         ))}
       </div>
     </ParallaxSection>
   );
 }
-

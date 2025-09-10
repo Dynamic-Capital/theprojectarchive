@@ -12,6 +12,7 @@ export default function Contact() {
     <ParallaxSection
       id="contact"
       image="https://picsum.photos/1920/1080?random=25"
+      alt="Background image for Contact section"
     >
       <motion.h2
         className="text-3xl font-bold mb-4"
@@ -29,9 +30,9 @@ export default function Contact() {
         whileInView="show"
         viewport={{ once: true, amount: 0.5 }}
       >
-        Get in touch to discuss your project or schedule a session with our team.
+        Get in touch to discuss your project or schedule a session with our
+        team.
       </motion.p>
     </ParallaxSection>
   );
 }
-

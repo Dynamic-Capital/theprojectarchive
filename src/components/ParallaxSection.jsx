@@ -1,9 +1,12 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
-export default function ParallaxSection({ id, image, children }) {
+export default function ParallaxSection({ id, image, alt = '', children }) {
   const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
   const y = useTransform(scrollYProgress, [0, 1], ['-20%', '20%']);
 
   return (
@@ -14,7 +17,7 @@ export default function ParallaxSection({ id, image, children }) {
     >
       <motion.img
         src={image}
-        alt=""
+        alt={alt}
         className="absolute inset-0 w-full h-full object-cover"
         style={{ y }}
       />
@@ -30,4 +33,3 @@ export default function ParallaxSection({ id, image, children }) {
     </section>
   );
 }
-

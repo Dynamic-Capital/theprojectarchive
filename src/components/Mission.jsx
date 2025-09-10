@@ -12,6 +12,7 @@ export default function Mission() {
     <ParallaxSection
       id="mission"
       image="https://picsum.photos/1920/1080?random=22"
+      alt="Background image for Mission section"
     >
       <motion.h2
         className="text-3xl font-bold mb-4"
@@ -29,9 +30,9 @@ export default function Mission() {
         whileInView="show"
         viewport={{ once: true, amount: 0.5 }}
       >
-        Our mission is to deliver striking visuals that tell compelling stories for every client.
+        Our mission is to deliver striking visuals that tell compelling stories
+        for every client.
       </motion.p>
     </ParallaxSection>
   );
 }
-

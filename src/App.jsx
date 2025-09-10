@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import './styles.css';
-import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
+import {
+  AnimatePresence,
+  motion,
+  useScroll,
+  useTransform,
+} from 'framer-motion';
 import Header from './components/Header';
 import OverlayNav from './components/OverlayNav';
 import Hero from './components/Hero';
@@ -57,7 +62,7 @@ export default function App() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
           >
-            <img src={lightboxImg} alt="" />
+            <img src={lightboxImg} alt="Selected service image" />
             <motion.button
               className="close-btn"
               aria-label="Close image"
