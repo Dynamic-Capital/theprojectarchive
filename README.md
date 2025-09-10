@@ -54,6 +54,12 @@ Use `scripts/deploy-do-app.sh` to deploy the app to DigitalOcean App Platform wi
 
 The script checks `DO_APP_ID_<ENV>` for an existing App Platform ID. If set, the app is updated; otherwise a new one is created using `.do/app.yaml`.
 
+#### Output Directory
+
+The output directory is an optional path to where the build assets will be located,
+relative to the build context. If not set, App Platform will automatically scan for
+these directory names: `_static`, `dist`, `public`, `build`.
+
 ## Buildpack Deployment
 
 The site can be built and deployed using [Paketo Buildpacks](https://paketo.io/). The `project.toml` configures both the Node.js runtime and an Nginx web server so the static files in `out/` are served automatically.
