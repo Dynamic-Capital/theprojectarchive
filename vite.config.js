@@ -4,6 +4,8 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
+  // Ensure Vite copies over any assets placed in the `public` directory
+  publicDir: 'public',
   build: {
     outDir: 'dist',
     rollupOptions: {

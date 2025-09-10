@@ -4,7 +4,7 @@ static_sites:
     build_command: "npm ci && npm run build"
     # Generated assets are written to the "dist" directory by Vite.
     # Make the path explicit so the App Platform knows where to find them.
-    output_dir: ./dist
+    output_dir: dist
     buildpacks:
       - paketo-buildpacks/nodejs-legacy
       - paketo-buildpacks/web-servers
