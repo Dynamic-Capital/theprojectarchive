@@ -1,0 +1,16 @@
+{
+  "name": "theprojectarchive-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "postinstall": "npm --prefix next-app install",
+    "dev": "npm --prefix next-app run dev",
+    "build": "npm --prefix next-app run build",
+    "start": "npm --prefix next-app run start",
+    "test": "npm --prefix next-app run test",
+    "lint": "npm --prefix next-app run lint",
+    "format": "npm --prefix next-app run format",
+    "sync-static": "npm --prefix next-app run sync-static",
+    "watch-static": "npm --prefix next-app run watch-static"
+  }
+}
