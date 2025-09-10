@@ -4,14 +4,14 @@
 
 :root {
   /* Colors */
-  --color-accent: #ef3c23;
-  --color-text: #333333;
-  --color-background: #f6f3e8;
+  --color-accent: #ff3d00;
+  --color-text: #070707;
+  --color-background: #373737;
   --color-surface: rgba(255, 255, 255, 0.06);
   --color-surface-border: rgba(255, 255, 255, 0.18);
   --color-background-light: #f8f9fb;
   --color-text-dark: #05192d;
-  --color-muted: #6b7280;
+  --color-muted: #909195;
   --color-card: #ffffff;
   --color-blue: #2b60ff;
   --color-pink: #ff4175;
@@ -41,7 +41,7 @@
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.15);
 
   /* Typography */
-  --font-sans: 'Montserrat', system-ui, sans-serif;
+  --font-sans: 'SFT Schrifted Sans', system-ui, sans-serif;
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-base: 1rem;
