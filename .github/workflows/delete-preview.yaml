@@ -1,0 +1,19 @@
+name: Delete Preview
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  delete:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DO_API_TOKEN }}
+      - name: Delete preview app
+        run: |
+          APP_ID=$(doctl apps list --format ID,Spec.Name --no-header | awk '$2=="theprojectarchive-pr-${{ github.event.number }}" {print $1}')
+          if [ -n "$APP_ID" ]; then
+            doctl apps delete "$APP_ID" --force
+          fi

@@ -1,0 +1,16 @@
+name: Deploy App
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DO_API_TOKEN }}
+      - name: Deploy to DigitalOcean App Platform
+        run: ./scripts/deploy-do-app.sh production ${{ secrets.DO_API_TOKEN }}
