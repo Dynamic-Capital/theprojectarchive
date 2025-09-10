@@ -12,13 +12,21 @@ export const metadata = {
   },
   description:
     'Creative studio in the Maldives offering design, development, and photography services.',
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="bg-[var(--bg)] text-[var(--text)]">
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={false}
+        >
           <ClientLayout>{children}</ClientLayout>
         </ThemeProvider>
       </body>

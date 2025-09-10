@@ -1,8 +1,9 @@
-"use client";
+'use client';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTheme } from 'next-themes';
+import navLinks from './navLinks';
 
 const topBar = {
   closed: { rotate: 0, y: 0 },
@@ -38,21 +39,41 @@ export default function Header({ onToggle, open }) {
         The Project Archive is all you need is
       </Link>
       <div className="flex items-center gap-4">
+        <nav className="hidden md:flex gap-4">
+          {navLinks.map((l) => (
+            <Link key={l.to} href={l.to} className="hover:text-accent">
+              {l.label}
+            </Link>
+          ))}
+        </nav>
         {mounted && (
-          <button onClick={toggleTheme} aria-label="Toggle theme" className="text-xl">
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="text-xl"
+          >
             {theme === 'light' ? '🌙' : '☀️'}
           </button>
         )}
         <motion.button
-          className="hamburger flex flex-col justify-between w-8 h-6"
+          className="hamburger md:hidden flex flex-col justify-between w-8 h-6"
           aria-label={open ? 'Close menu' : 'Open menu'}
           onClick={onToggle}
           initial={false}
           animate={open ? 'open' : 'closed'}
         >
-          <motion.span className="block h-0.5 bg-[var(--text)]" variants={topBar}></motion.span>
-          <motion.span className="block h-0.5 bg-[var(--text)]" variants={middleBar}></motion.span>
-          <motion.span className="block h-0.5 bg-[var(--text)]" variants={bottomBar}></motion.span>
+          <motion.span
+            className="block h-0.5 bg-[var(--text)]"
+            variants={topBar}
+          ></motion.span>
+          <motion.span
+            className="block h-0.5 bg-[var(--text)]"
+            variants={middleBar}
+          ></motion.span>
+          <motion.span
+            className="block h-0.5 bg-[var(--text)]"
+            variants={bottomBar}
+          ></motion.span>
         </motion.button>
       </div>
     </motion.header>
