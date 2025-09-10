@@ -19,7 +19,10 @@ function Counter({ value }) {
   }, [isInView, value]);
 
   return (
-    <span ref={ref} className="text-4xl font-bold block">
+    <span
+      ref={ref}
+      style={{ fontSize: 'var(--fs-5)', fontWeight: 750, display: 'block' }}
+    >
       {display}
     </span>
   );
@@ -32,17 +35,21 @@ export default function Numbers() {
       image="https://picsum.photos/1920/1080?random=30"
       alt="Background image for In Numbers section"
     >
-      <h2 className="text-3xl font-bold mb-8">In Numbers</h2>
-      <div className="flex gap-8 justify-center">
-        <div className="text-center">
+      <h2 style={{ fontSize: 'var(--fs-4)', fontWeight: 750, marginBottom: 'var(--space-6)' }}>
+        In Numbers
+      </h2>
+      <div
+        style={{ display: 'flex', gap: 'var(--space-6)', justifyContent: 'center' }}
+      >
+        <div style={{ textAlign: 'center' }}>
           <Counter value={150} />
           <p>Projects</p>
         </div>
-        <div className="text-center">
+        <div style={{ textAlign: 'center' }}>
           <Counter value={85} />
           <p>Clients</p>
         </div>
-        <div className="text-center">
+        <div style={{ textAlign: 'center' }}>
           <Counter value={12} />
           <p>Awards</p>
         </div>

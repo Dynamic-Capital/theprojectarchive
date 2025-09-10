@@ -21,21 +21,20 @@ export default function Contact() {
     >
       <motion.form
         onSubmit={handleSubmit}
-        className="form max-w-md mx-auto text-left"
+        style={{ maxWidth: '32rem', marginInline: 'auto', textAlign: 'left' }}
         variants={textVariants(reduceMotion)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.5 }}
       >
         <label htmlFor="name">Name</label>
-        <input id="name" name="name" type="text" className="input" required />
+        <input id="name" name="name" type="text" required />
 
         <label htmlFor="email">Email</label>
         <input
           id="email"
           name="email"
           type="email"
-          className="input"
           required
         />
 
@@ -43,12 +42,11 @@ export default function Contact() {
         <textarea
           id="message"
           name="message"
-          className="textarea"
           rows="5"
           required
         />
 
-        <Button type="submit" className="mt-xs">
+        <Button type="submit" style={{ marginTop: 'var(--space-2)' }}>
           Send Message
         </Button>
       </motion.form>

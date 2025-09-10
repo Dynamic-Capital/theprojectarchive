@@ -17,12 +17,21 @@ export default function Error({ reset }) {
 
   return (
     <motion.div
-      className="flex flex-col items-center justify-center min-h-screen gap-6 p-4 text-center"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100dvh',
+        gap: 'var(--space-5)',
+        padding: 'var(--space-4)',
+        textAlign: 'center'
+      }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: shouldReduceMotion ? 0 : 0.5 }}
     >
-      <p className="text-2xl font-bold">Something went wrong</p>
+      <p style={{ fontSize: 'var(--fs-3)', fontWeight: 750 }}>Something went wrong</p>
       <Button onClick={handleClick} variant="primary">
         Try Again
       </Button>

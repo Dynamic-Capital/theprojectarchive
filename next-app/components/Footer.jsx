@@ -5,17 +5,31 @@ import { motion } from 'framer-motion';
 export default function Footer() {
   return (
     <motion.footer
-      className="footer bg-[var(--bg)] text-[var(--text)]"
+      style={{
+        background: 'var(--bg)',
+        color: 'var(--text)',
+        padding: 'var(--space-4)',
+        textAlign: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 'var(--space-3)'
+      }}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
     >
       <p>Copyright &copy; 2025 The project archive. All rights reserved.</p>
-      <nav aria-label="Footer" className="footer-nav">
+      <nav
+        aria-label="Footer"
+        style={{ display: 'flex', gap: 'var(--space-4)', justifyContent: 'center' }}
+      >
         <a href="/privacy">Privacy</a>
         <a href="/terms">Terms</a>
       </nav>
-      <div className="social-links" aria-label="Social media links">
+      <div
+        style={{ display: 'flex', gap: 'var(--space-4)', justifyContent: 'center' }}
+        aria-label="Social media links"
+      >
         <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
           Twitter
         </a>

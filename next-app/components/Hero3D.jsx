@@ -18,15 +18,15 @@ function RotatingBox({ reduceMotion }) {
   );
 }
 
-export default function Hero3D({ className = 'w-48 h-48 mb-6' }) {
+export default function Hero3D({ style = { width: '12rem', height: '12rem', marginBottom: 'var(--space-5)' } }) {
   const reduceMotion = useReducedMotion();
 
   if (reduceMotion) {
-    return <div className={className} aria-hidden="true" />;
+    return <div style={style} aria-hidden="true" />;
   }
 
   return (
-    <Canvas className={className} camera={{ position: [0, 0, 5] }}>
+    <Canvas style={style} camera={{ position: [0, 0, 5] }}>
       <ambientLight intensity={0.5} />
       <RotatingBox reduceMotion={reduceMotion} />
     </Canvas>

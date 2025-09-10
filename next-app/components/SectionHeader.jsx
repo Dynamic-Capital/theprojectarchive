@@ -7,7 +7,7 @@ export default function SectionHeader({ title, children }) {
   return (
     <>
       <motion.h2
-        className="text-3xl font-bold mb-md"
+        style={{ marginBottom: 'var(--space-4)' }}
         variants={textVariants(reduceMotion)}
         initial="hidden"
         whileInView="show"
@@ -17,7 +17,7 @@ export default function SectionHeader({ title, children }) {
       </motion.h2>
       {children && (
         <motion.p
-          className="max-w-md mx-auto"
+          style={{ maxWidth: '32rem', marginInline: 'auto' }}
           variants={textVariants(reduceMotion)}
           initial="hidden"
           whileInView="show"

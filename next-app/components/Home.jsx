@@ -104,7 +104,15 @@ export default function Home() {
         {lightboxOpen && (
           <motion.div
             ref={lightboxRef}
-            className="lightbox"
+            style={{
+              position: 'fixed',
+              inset: 0,
+              background: 'rgba(0,0,0,0.8)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 'var(--z-modal)'
+            }}
             role="dialog"
             aria-modal="true"
             aria-hidden={!lightboxOpen}
@@ -122,6 +130,20 @@ export default function Home() {
             />
             <motion.button
               className="close-btn"
+              style={{
+                position: 'absolute',
+                top: 'var(--space-4)',
+                right: 'var(--space-4)',
+                width: '2rem',
+                height: '2rem',
+                borderRadius: '50%',
+                border: 'var(--border-1)',
+                background: 'var(--surface)',
+                color: 'var(--text)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
               aria-label="Close image"
               onClick={closeLightbox}
               whileHover={reduceMotion ? undefined : { scale: 1.2 }}
@@ -133,9 +155,21 @@ export default function Home() {
         )}
       </AnimatePresence>
       <motion.button
-        className="scroll-top"
+        style={{
+          position: 'fixed',
+          bottom: 'var(--space-4)',
+          right: 'var(--space-4)',
+          width: '3rem',
+          height: '3rem',
+          borderRadius: '50%',
+          border: 'var(--border-1)',
+          background: 'var(--surface)',
+          color: 'var(--text)',
+          boxShadow: 'var(--shadow-1)',
+          y,
+          opacity
+        }}
         aria-label="Scroll to top"
-        style={{ y, opacity }}
         onClick={() =>
           window.scrollTo({
             top: 0,

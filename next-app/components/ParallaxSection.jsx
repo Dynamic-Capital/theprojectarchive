@@ -24,23 +24,41 @@ export default function ParallaxSection({
     <section
       id={id}
       ref={ref}
-      className="relative h-screen flex items-center justify-center overflow-hidden"
+      style={{
+        position: 'relative',
+        minHeight: '100dvh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden'
+      }}
     >
       <motion.div
-        className="absolute inset-0"
-        style={{ y: reduceMotion ? 0 : y }}
+        style={{
+          position: 'absolute',
+          inset: 0,
+          y: reduceMotion ? 0 : y
+        }}
       >
         <Image
           src={image}
           alt={alt}
           fill
           sizes="100vw"
-          className="object-cover"
           priority={true}
+          style={{ objectFit: 'cover' }}
         />
       </motion.div>
       <motion.div
-        className="relative z-10 glass p-xl text-center"
+        style={{
+          position: 'relative',
+          zIndex: 10,
+          background: 'color-mix(in oklab, var(--surface), transparent 30%)',
+          backdropFilter: 'blur(8px)',
+          padding: 'var(--space-6)',
+          borderRadius: 'var(--radius-md)',
+          textAlign: 'center'
+        }}
         initial={{ opacity: 0, y: reduceMotion ? 0 : 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.5 }}

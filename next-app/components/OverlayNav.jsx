@@ -35,7 +35,7 @@ export default function OverlayNav({ open, onLink }) {
         <>
           <motion.div
             key="backdrop"
-            className="fixed inset-0 bg-black/50"
+            style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -43,7 +43,18 @@ export default function OverlayNav({ open, onLink }) {
           />
           <motion.nav
             key="nav"
-            className="overlay-nav open space-y-6 text-2xl font-bold"
+            style={{
+              position: 'fixed',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 'var(--space-5)',
+              fontSize: 'var(--fs-3)',
+              fontWeight: 750,
+              textAlign: 'center'
+            }}
             aria-hidden={!open}
             variants={navVariants}
             initial="hidden"
@@ -52,11 +63,7 @@ export default function OverlayNav({ open, onLink }) {
           >
             {links.map((l) => (
               <motion.span key={l.to} variants={linkVariants}>
-                <Link
-                  href={l.to}
-                  className="hover:text-accent"
-                  onClick={onLink}
-                >
+                <Link href={l.to} onClick={onLink}>
                   {l.label}
                 </Link>
               </motion.span>

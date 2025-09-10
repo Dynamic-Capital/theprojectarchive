@@ -1,4 +1,6 @@
-import './globals.css';
+import '../styles/reset.css';
+import '../styles/tokens.css';
+import '../styles/globals.css';
 import ClientLayout from '../components/ClientLayout';
 import { ThemeProvider } from 'next-themes';
 import { logRuntimeInfo } from '../lib/logRuntime';
@@ -20,7 +22,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="bg-[var(--bg)] text-[var(--text)]">
+      <body>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <ClientLayout>{children}</ClientLayout>
         </ThemeProvider>
