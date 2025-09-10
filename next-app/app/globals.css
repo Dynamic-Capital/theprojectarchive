@@ -456,6 +456,15 @@ a:hover {
   color: var(--color-accent);
 }
 
+.footer-nav,
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
 .fade-in {
   opacity: 0;
   transform: translateY(20px);

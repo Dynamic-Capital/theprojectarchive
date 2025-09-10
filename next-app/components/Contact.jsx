@@ -9,6 +9,10 @@ const textVariants = {
 };
 
 export default function Contact() {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <ParallaxSection
       id="contact"
@@ -24,16 +28,44 @@ export default function Contact() {
       >
         Contact
       </motion.h2>
-      <motion.p
-        className="max-w-md mx-auto"
+      <motion.form
+        onSubmit={handleSubmit}
+        className="form max-w-md mx-auto text-left"
         variants={textVariants}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.5 }}
       >
-        Get in touch to discuss your project or schedule a session with our
-        team.
-      </motion.p>
+        <label htmlFor="name">Name</label>
+        <input id="name" name="name" type="text" className="input" required />
+
+        <label htmlFor="email">Email</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          className="input"
+          required
+        />
+
+        <label htmlFor="message">Message</label>
+        <textarea
+          id="message"
+          name="message"
+          className="textarea"
+          rows="5"
+          required
+        />
+
+        <motion.button
+          type="submit"
+          className="btn btn--primary mt-2"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          Send Message
+        </motion.button>
+      </motion.form>
     </ParallaxSection>
   );
 }

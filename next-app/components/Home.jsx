@@ -17,6 +17,7 @@ import Approach from './Approach';
 import Numbers from './Numbers';
 import Starters from './Starters';
 import Services from './Services';
+import Testimonials from './Testimonials';
 import Contact from './Contact';
 
 export default function Home() {
@@ -99,6 +100,7 @@ export default function Home() {
       <Numbers />
       <Starters />
       <Services openLightbox={openLightbox} images={serviceImages} />
+      <Testimonials />
       <Contact />
       <AnimatePresence>
         {lightboxOpen && (
