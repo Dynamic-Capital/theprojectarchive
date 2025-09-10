@@ -79,14 +79,18 @@
 }
 
 /* Reset */
+html {
+  box-sizing: border-box;
+}
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+  box-sizing: inherit;
 }
 
 * {
   margin: 0;
+  padding: 0;
 }
 
 body {
@@ -124,6 +128,81 @@ h6 {
 #root,
 #__next {
   isolation: isolate;
+}
+
+/* Typography scale */
+.title-1 {
+  font-size: 4.125rem;
+  line-height: 4.875rem;
+  font-weight: 800;
+}
+
+.title-2 {
+  font-size: 4rem;
+  line-height: 4.625rem;
+  font-weight: 800;
+}
+
+.heading-1 {
+  font-size: 2.375rem;
+  line-height: 2.75rem;
+  font-weight: 700;
+}
+
+.heading-2 {
+  font-size: 2rem;
+  line-height: 2.75rem;
+  font-weight: 700;
+}
+
+.heading-3 {
+  font-size: 1.75rem;
+  line-height: 2rem;
+  font-weight: 700;
+}
+
+.heading-4 {
+  font-size: 1.5rem;
+  line-height: 1.875rem;
+  font-weight: 700;
+}
+
+.heading-5 {
+  font-size: 1.375rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+}
+
+.heading-6 {
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  font-weight: 700;
+}
+
+.lead-text {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.body-text {
+  font-size: 1rem;
+  line-height: 1.75rem;
+}
+
+.ui-text {
+  font-size: 1rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+}
+
+.caption {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.small {
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 
 /* Layout */
