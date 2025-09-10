@@ -1,19 +1,21 @@
 "use client";
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import Image from 'next/image';
 import ParallaxSection from './ParallaxSection';
 
-const textVariants = {
-  hidden: { opacity: 0, y: 20 },
+const textVariants = (reduce) => ({
+  hidden: { opacity: 0, y: reduce ? 0 : 20 },
   show: { opacity: 1, y: 0 },
-};
+});
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
+const cardVariants = (reduce) => ({
+  hidden: { opacity: 0, y: reduce ? 0 : 40 },
   show: { opacity: 1, y: 0 },
-};
+});
 
 export default function Services({ openLightbox, images = [] }) {
+  const reduceMotion = useReducedMotion();
   const cards =
     images.length > 0
       ? images
@@ -34,7 +36,7 @@ export default function Services({ openLightbox, images = [] }) {
     >
       <motion.h2
         className="text-3xl font-bold mb-4"
-        variants={textVariants}
+        variants={textVariants(reduceMotion)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.5 }}
@@ -43,7 +45,7 @@ export default function Services({ openLightbox, images = [] }) {
       </motion.h2>
       <motion.p
         className="max-w-md mx-auto"
-        variants={textVariants}
+        variants={textVariants(reduceMotion)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.5 }}
@@ -56,16 +58,18 @@ export default function Services({ openLightbox, images = [] }) {
           <motion.div
             key={img}
             className="srv-card cursor-pointer overflow-hidden rounded shadow"
-            variants={cardVariants}
+            variants={cardVariants(reduceMotion)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
             onClick={() => openLightbox && openLightbox(img)}
           >
-            <img
+            <Image
               src={img}
               alt={`Gallery image ${i + 1}`}
-              className="w-full h-full object-cover"
+              width={400}
+              height={300}
+              className="object-cover w-full h-full"
             />
           </motion.div>
         ))}

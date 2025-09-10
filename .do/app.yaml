@@ -2,9 +2,8 @@ static_sites:
   - name: theprojectarchive
     source_dir: /
     build_command: "npm ci && npm run build"
-    # Generated assets are written to the "dist" directory by Vite.
-    # Make the path explicit so the App Platform knows where to find them.
-    output_dir: dist
+    # Next.js generates static files in the "out" directory.
+    output_dir: out
     buildpacks:
       - paketo-buildpacks/nodejs-legacy
       - paketo-buildpacks/web-servers
