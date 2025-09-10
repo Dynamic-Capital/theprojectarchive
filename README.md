@@ -32,6 +32,12 @@ Create an optimized production build in the repository's `build` folder, which i
 npm run build
 ```
 
+After building, preview the static site locally:
+
+```bash
+npm run start
+```
+
 To rebuild automatically when files in `app/` change and refresh the local `build/` directory:
 
 ```bash
@@ -117,7 +123,7 @@ BP_WEB_SERVER_ROOT = "build"
 
 When deploying to platforms like DigitalOcean App Platform, the `.do/app.yaml` file lists both buildpacks so the build image includes Nginx to serve the contents of `build/`.
 
-The `npm start` script runs the Next.js server for local preview.
+The `npm start` script serves the contents of `build/` locally using `serve`.
 
 ### Environment variables
 
