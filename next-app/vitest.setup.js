@@ -12,6 +12,7 @@ vi.mock('next/link', () => ({
 
 vi.mock('next/navigation', () => ({
   useRouter: () => ({ push: vi.fn() }),
+  usePathname: () => '/',
 }));
 
 class MockIntersectionObserver {
@@ -22,6 +23,14 @@ class MockIntersectionObserver {
 }
 
 global.IntersectionObserver = MockIntersectionObserver;
+class MockResizeObserver {
+  constructor() {}
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
+
+global.ResizeObserver = MockResizeObserver;
 window.scrollTo = vi.fn();
 HTMLCanvasElement.prototype.getContext = vi.fn();
 
