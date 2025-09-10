@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import App from '../App';
 import { expect, test, beforeAll } from 'vitest';
 
@@ -20,4 +20,14 @@ test('renders site header link', () => {
 test('renders starters section', () => {
   render(<App />);
   expect(screen.getByRole('heading', { name: /Starters/i })).toBeInTheDocument();
+});
+
+test('closes lightbox on Escape key', async () => {
+  render(<App />);
+  fireEvent.click(screen.getAllByAltText(/Gallery image/i)[0]);
+  expect(screen.getByRole('dialog')).toBeInTheDocument();
+  fireEvent.keyDown(window, { key: 'Escape' });
+  await waitFor(() => {
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  });
 });

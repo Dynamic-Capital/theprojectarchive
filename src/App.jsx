@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles.css';
 import {
   AnimatePresence,
@@ -29,6 +29,16 @@ export default function App() {
     setLightboxOpen(true);
   };
   const closeLightbox = () => setLightboxOpen(false);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        closeLightbox();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [closeLightbox]);
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 300], [100, 0]);
   const opacity = useTransform(scrollY, [0, 300], [0, 1]);
@@ -59,12 +69,19 @@ export default function App() {
         {lightboxOpen && (
           <motion.div
             className="lightbox"
+            role="dialog"
+            aria-modal="true"
             aria-hidden={!lightboxOpen}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
+            onClick={closeLightbox}
           >
-            <img src={lightboxImg} alt="Selected service image" />
+            <img
+              src={lightboxImg}
+              alt="Selected service image"
+              onClick={(e) => e.stopPropagation()}
+            />
             <motion.button
               className="close-btn"
               aria-label="Close image"
