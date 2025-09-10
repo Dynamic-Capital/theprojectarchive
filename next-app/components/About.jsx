@@ -1,14 +1,19 @@
 "use client";
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import ParallaxSection from './ParallaxSection';
 
-const textVariants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 },
-};
+const textVariants = (reduce) => ({
+  hidden: { opacity: 0, y: reduce ? 0 : 20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: reduce ? 0 : 0.5 },
+  },
+});
 
 export default function About() {
+  const reduceMotion = useReducedMotion();
   return (
     <ParallaxSection
       id="about"
@@ -17,7 +22,7 @@ export default function About() {
     >
       <motion.h2
         className="text-3xl font-bold mb-4"
-        variants={textVariants}
+        variants={textVariants(reduceMotion)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.5 }}
@@ -26,7 +31,7 @@ export default function About() {
       </motion.h2>
       <motion.p
         className="max-w-md mx-auto"
-        variants={textVariants}
+        variants={textVariants(reduceMotion)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.5 }}

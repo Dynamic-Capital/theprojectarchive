@@ -50,7 +50,7 @@ export default function Hero() {
         sizes="100vw"
         priority
       />
-      <div className="container relative z-10 bg-black/50 p-8 rounded-lg max-w-xl flex flex-col items-center justify-center text-center">
+      <div className="container relative z-10 bg-background/50 p-8 rounded-lg max-w-xl flex flex-col items-center justify-center text-center">
         <motion.h1 className="sr-only" variants={itemUp(reduceMotion)}>
           The Project Archive is all you need is
         </motion.h1>
@@ -60,7 +60,7 @@ export default function Hero() {
           aria-hidden="true"
         >
           {reduceMotion ? (
-            <span className="text-white text-xl tracking-widest">
+            <span className="text-text text-xl tracking-widest">
               The Project Archive is all you need is
             </span>
           ) : (
@@ -68,7 +68,7 @@ export default function Hero() {
               text={{
                 text: 'The Project Archive is all you need is',
                 font: { fontFamily: 'sans-serif', fontWeight: '400', fontSize: 32 },
-                color: '#ffffff',
+                color: 'var(--text)',
               }}
               direction="left"
               baseVelocity={50}
@@ -79,7 +79,7 @@ export default function Hero() {
           )}
         </motion.div>
         <motion.p
-          className="tagline text-lg text-white mb-6"
+          className="tagline text-lg text-text mb-6"
           variants={itemDown(reduceMotion)}
         >
           More about the project
@@ -89,7 +89,7 @@ export default function Hero() {
           variants={ctaContainer}
         >
           <motion.a
-            className="btn bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded"
+            className="btn bg-accent hover:bg-accent/90 text-background px-6 py-3 rounded"
             href="#services"
             variants={itemDown(reduceMotion)}
             whileHover={reduceMotion ? undefined : { scale: 1.05 }}
@@ -98,7 +98,7 @@ export default function Hero() {
             View Portfolio
           </motion.a>
           <motion.a
-            className="btn bg-white text-gray-800 px-6 py-3 rounded hover:bg-gray-100"
+            className="btn bg-background text-text px-6 py-3 rounded hover:bg-background/90"
             href="#contact"
             variants={itemDown(reduceMotion)}
             whileHover={reduceMotion ? undefined : { scale: 1.05 }}

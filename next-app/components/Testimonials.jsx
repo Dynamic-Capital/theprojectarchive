@@ -1,11 +1,15 @@
 "use client";
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import ParallaxSection from './ParallaxSection';
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 },
-};
+const cardVariants = (reduce) => ({
+  hidden: { opacity: 0, y: reduce ? 0 : 20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: reduce ? 0 : 0.5 },
+  },
+});
 
 export default function Testimonials() {
   const testimonials = [
@@ -23,6 +27,7 @@ export default function Testimonials() {
     },
   ];
 
+  const reduceMotion = useReducedMotion();
   return (
     <ParallaxSection
       id="testimonials"
@@ -31,7 +36,7 @@ export default function Testimonials() {
     >
       <motion.h2
         className="text-3xl font-bold mb-8"
-        variants={cardVariants}
+        variants={cardVariants(reduceMotion)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.5 }}
@@ -43,7 +48,7 @@ export default function Testimonials() {
           <motion.figure
             key={idx}
             className="testimonial-card"
-            variants={cardVariants}
+            variants={cardVariants(reduceMotion)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}

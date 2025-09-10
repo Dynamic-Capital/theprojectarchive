@@ -1,17 +1,23 @@
 "use client";
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import ParallaxSection from './ParallaxSection';
 
-const textVariants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 },
-};
+const textVariants = (reduce) => ({
+  hidden: { opacity: 0, y: reduce ? 0 : 20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: reduce ? 0 : 0.5 },
+  },
+});
 
 export default function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+
+  const reduceMotion = useReducedMotion();
 
   return (
     <ParallaxSection
@@ -21,7 +27,7 @@ export default function Contact() {
     >
       <motion.h2
         className="text-3xl font-bold mb-4"
-        variants={textVariants}
+        variants={textVariants(reduceMotion)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.5 }}
@@ -31,7 +37,7 @@ export default function Contact() {
       <motion.form
         onSubmit={handleSubmit}
         className="form max-w-md mx-auto text-left"
-        variants={textVariants}
+        variants={textVariants(reduceMotion)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.5 }}
@@ -60,8 +66,8 @@ export default function Contact() {
         <motion.button
           type="submit"
           className="btn btn--primary mt-2"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={reduceMotion ? undefined : { scale: 1.05 }}
+          whileTap={reduceMotion ? undefined : { scale: 0.95 }}
         >
           Send Message
         </motion.button>

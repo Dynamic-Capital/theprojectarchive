@@ -1,17 +1,25 @@
 "use client";
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import ParallaxSection from './ParallaxSection';
 
-const textVariants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 },
-};
+const textVariants = (reduce) => ({
+  hidden: { opacity: 0, y: reduce ? 0 : 20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: reduce ? 0 : 0.5 },
+  },
+});
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  show: { opacity: 1, y: 0 },
-};
+const cardVariants = (reduce) => ({
+  hidden: { opacity: 0, y: reduce ? 0 : 40 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: reduce ? 0 : 0.5 },
+  },
+});
 
 export default function Starters() {
   const starters = [
@@ -58,6 +66,7 @@ export default function Starters() {
     },
   ];
 
+  const reduceMotion = useReducedMotion();
   return (
     <ParallaxSection
       id="starters"
@@ -66,7 +75,7 @@ export default function Starters() {
     >
       <motion.h2
         className="text-3xl font-bold mb-6"
-        variants={textVariants}
+        variants={textVariants(reduceMotion)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.5 }}
@@ -78,7 +87,7 @@ export default function Starters() {
           <motion.div
             key={s.title}
             className="p-4 glass rounded text-left"
-            variants={cardVariants}
+            variants={cardVariants(reduceMotion)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
