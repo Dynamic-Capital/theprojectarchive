@@ -7,6 +7,9 @@ import Footer from '../components/Footer';
 
 export const metadata = {
   title: 'The Project Archive',
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({ children }) {
