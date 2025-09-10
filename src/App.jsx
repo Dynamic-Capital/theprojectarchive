@@ -13,6 +13,7 @@ import About from './components/About';
 import Mission from './components/Mission';
 import Approach from './components/Approach';
 import Numbers from './components/Numbers';
+import Starters from './components/Starters';
 import Services from './components/Services';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -50,6 +51,7 @@ export default function App() {
       <Mission />
       <Approach />
       <Numbers />
+      <Starters />
       <Services openLightbox={openLightbox} images={serviceImages} />
       <Contact />
       <Footer />
