@@ -60,6 +60,15 @@ export default function Hero() {
         style={{ objectFit: 'cover' }}
       />
       <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7))',
+          zIndex: 1,
+        }}
+      />
+      <div
         className="container"
         style={{
           position: 'relative',
@@ -117,23 +126,24 @@ export default function Hero() {
           }}
           variants={itemDown(reduceMotion)}
         >
-          Your journey fuels our achievements. Together, we create an impact, one at a time.
+          Your journey fuels our creativity. Together, we'll craft an impact, one story at a time.
         </motion.p>
         <motion.div
           className="cta-group"
           style={{
             display: 'flex',
-            flexDirection: 'column',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
             gap: 'var(--space-4)',
             justifyContent: 'center'
           }}
           variants={ctaContainer}
         >
-          <Button href="#services" variant="primary" variants={itemDown(reduceMotion)}>
-            Explore Portfolio
+          <Button href="#contact" variant="primary" variants={itemDown(reduceMotion)}>
+            Contact Us
           </Button>
-          <Button href="#contact" variant="secondary" variants={itemDown(reduceMotion)}>
-            Get in Touch
+          <Button href="#services" variant="secondary" variants={itemDown(reduceMotion)}>
+            Explore Portfolio
           </Button>
         </motion.div>
       </div>
