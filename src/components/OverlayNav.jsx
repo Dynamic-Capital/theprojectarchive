@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const navVariants = {
@@ -17,15 +18,17 @@ const linkVariants = {
 };
 
 const links = [
-  { href: '#home', label: 'Home' },
-  { href: '#about', label: 'About' },
-  { href: '#mission', label: 'Mission' },
-  { href: '#approach', label: 'Approach' },
-  { href: '#numbers', label: 'In Numbers' },
-  { href: '#starters', label: 'Starters' },
-  { href: '#services', label: 'Services' },
-  { href: '#contact', label: 'Contact' }
+  { to: '/home', label: 'Home' },
+  { to: '/about', label: 'About' },
+  { to: '/mission', label: 'Mission' },
+  { to: '/approach', label: 'Approach' },
+  { to: '/numbers', label: 'In Numbers' },
+  { to: '/starters', label: 'Starters' },
+  { to: '/services', label: 'Services' },
+  { to: '/contact', label: 'Contact' }
 ];
+
+const MotionLink = motion(Link);
 
 export default function OverlayNav({ open, onLink }) {
   return (
@@ -50,15 +53,15 @@ export default function OverlayNav({ open, onLink }) {
             exit="exit"
           >
             {links.map((l) => (
-              <motion.a
-                key={l.href}
+              <MotionLink
+                key={l.to}
                 className="hover:text-red-600"
-                href={l.href}
+                to={l.to}
                 onClick={onLink}
                 variants={linkVariants}
               >
                 {l.label}
-              </motion.a>
+              </MotionLink>
             ))}
           </motion.nav>
         </>

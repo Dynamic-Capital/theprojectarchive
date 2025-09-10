@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 const topBar = {
@@ -27,7 +28,9 @@ export default function Header({ onToggle, open }) {
       animate={{ y: 0, opacity: 1 }}
       style={{ y }}
     >
-      <a href="#home" className="logo text-xl font-bold text-gray-800">The Project Archive</a>
+      <Link to="/home" className="logo text-xl font-bold text-gray-800">
+        The Project Archive
+      </Link>
       <motion.button
         className="hamburger flex flex-col justify-between w-8 h-6"
         aria-label={open ? 'Close menu' : 'Open menu'}
