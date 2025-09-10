@@ -20,7 +20,7 @@
     "node": ">=18"
   },
   "dependencies": {
-    "@react-three/fiber": "^8.2.2",
+    "@react-three/fiber": "^8.18.0",
     "focus-trap": "^7.5.4",
     "framer-motion": "^12.23.12",
     "next": "^14.2.3",
