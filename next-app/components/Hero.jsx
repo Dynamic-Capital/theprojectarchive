@@ -54,7 +54,7 @@ export default function Hero() {
       />
       <div className="container relative z-10 bg-background/50 p-8 rounded-lg max-w-xl flex flex-col items-center justify-center text-center">
         <motion.h1 className="sr-only" variants={itemUp(reduceMotion)}>
-          The Project Archive
+          We're a Creative studio capturing stories in the Maldives
         </motion.h1>
         <motion.div
           className="mb-4"
@@ -63,12 +63,12 @@ export default function Hero() {
         >
           {reduceMotion ? (
             <span className="text-text text-xl tracking-widest">
-              The Project Archive
+              We're a Creative studio capturing stories in the Maldives
             </span>
           ) : (
             <CurvedLoop
               text={{
-                text: 'The Project Archive',
+                text: "We're a Creative studio capturing stories in the Maldives",
                 font: { fontFamily: 'sans-serif', fontWeight: '400', fontSize: 32 },
                 color: 'var(--text)',
               }}
@@ -85,7 +85,7 @@ export default function Hero() {
           className="tagline text-lg text-text mb-6"
           variants={itemDown(reduceMotion)}
         >
-          Creative studio for design, development, and photography.
+          Your journey fuels our achievements. Together, we create an impact, one at a time.
         </motion.p>
         <motion.div
           className="cta-group flex flex-col sm:flex-row gap-4 justify-center"
@@ -97,7 +97,7 @@ export default function Hero() {
             className="px-lg py-sm"
             variants={itemDown(reduceMotion)}
           >
-            View Portfolio
+            Explore Portfolio
           </Button>
           <Button
             href="#contact"
@@ -105,7 +105,7 @@ export default function Hero() {
             className="px-lg py-sm"
             variants={itemDown(reduceMotion)}
           >
-            Contact Me
+            Get in Touch
           </Button>
         </motion.div>
       </div>

@@ -6,7 +6,9 @@ describe('Hero', () => {
   it('renders title', () => {
     render(<Hero />);
     expect(
-      screen.getByRole('heading', { name: /the project archive/i })
+      screen.getByRole('heading', {
+        name: /we're a creative studio capturing stories in the maldives/i,
+      })
     ).toBeInTheDocument();
   });
 });
