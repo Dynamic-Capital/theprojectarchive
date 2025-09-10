@@ -6,7 +6,7 @@ import {
   useScroll,
   useTransform,
 } from 'framer-motion';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import OverlayNav from './components/OverlayNav';
 import Hero from './components/Hero';
@@ -44,6 +44,24 @@ function Home() {
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 300], [100, 0]);
   const opacity = useTransform(scrollY, [0, 300], [0, 1]);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    const section = location.pathname.slice(1);
+    if (section) {
+      const el = document.getElementById(section);
+      if (el) {
+        try {
+          el.scrollIntoView({ behavior: 'smooth' });
+        } catch {}
+      }
+    } else {
+      try {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch {}
+    }
+  }, [location]);
 
   const serviceImages = [
     'https://picsum.photos/400/300?random=31',
@@ -114,6 +132,13 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/about" element={<Home />} />
+      <Route path="/mission" element={<Home />} />
+      <Route path="/approach" element={<Home />} />
+      <Route path="/numbers" element={<Home />} />
+      <Route path="/starters" element={<Home />} />
+      <Route path="/services" element={<Home />} />
+      <Route path="/contact" element={<Home />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
