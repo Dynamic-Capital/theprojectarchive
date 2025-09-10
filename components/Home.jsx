@@ -46,7 +46,9 @@ export default function Home() {
 
   const pathname = usePathname();
 
-  const supportsSmoothScroll = 'scrollBehavior' in document.documentElement.style;
+  const supportsSmoothScroll =
+    typeof document !== 'undefined' &&
+    'scrollBehavior' in document.documentElement.style;
   useEffect(() => {
     const section = pathname.slice(1);
     if (section && section !== 'main') {

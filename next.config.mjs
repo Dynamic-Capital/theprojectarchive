@@ -1,5 +1,5 @@
 /* eslint-env node */
-/* global process */
+/* global process, URL */
 /** @type {import('next').NextConfig} */
 const allowedOrigin = process.env.NEXT_ALLOWED_ORIGIN ?? 'https://theprojectarchive.com';
 
