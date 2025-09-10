@@ -10,8 +10,11 @@ Install dependencies and start the development server:
 
 ```bash
 npm install
+cp .env.example .env
 npm run dev
 ```
+
+Update `NEXT_ALLOWED_ORIGIN` in `.env` if your app runs on a different URL.
 
 ## Production build
 
