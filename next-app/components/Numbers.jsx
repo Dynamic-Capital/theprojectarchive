@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useInView, animate } from 'framer-motion';
 import ParallaxSection from './ParallaxSection';
 
@@ -29,7 +29,7 @@ export default function Numbers() {
   return (
     <ParallaxSection
       id="numbers"
-      image="https://picsum.photos/1920/1080?random=30"
+      image="/images/numbers.svg"
       alt="Background image for In Numbers section"
     >
       <h2 className="text-3xl font-bold mb-8">In Numbers</h2>

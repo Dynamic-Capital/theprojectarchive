@@ -1,5 +1,4 @@
 "use client";
-import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
 import CurvedLoop from './CurvedLoopText.js';
@@ -44,7 +43,7 @@ export default function Hero() {
     >
       <Image
         className="hero-media absolute inset-0 object-cover"
-        src="https://picsum.photos/1920/1080?random=11"
+        src="/images/hero.svg"
         alt="A creative workspace with a camera and photo prints on a desk"
         fill
         sizes="100vw"
@@ -52,7 +51,7 @@ export default function Hero() {
       />
       <div className="container relative z-10 bg-black/50 p-8 rounded-lg max-w-xl flex flex-col items-center justify-center text-center">
         <motion.h1 className="sr-only" variants={itemUp(reduceMotion)}>
-          The Project Archive is all you need is
+          The Project Archive is all you need
         </motion.h1>
         <motion.div
           className="mb-4"
@@ -61,12 +60,12 @@ export default function Hero() {
         >
           {reduceMotion ? (
             <span className="text-white text-xl tracking-widest">
-              The Project Archive is all you need is
+              The Project Archive is all you need
             </span>
           ) : (
             <CurvedLoop
               text={{
-                text: 'The Project Archive is all you need is',
+                text: 'The Project Archive is all you need',
                 font: { fontFamily: 'sans-serif', fontWeight: '400', fontSize: 32 },
                 color: '#ffffff',
               }}

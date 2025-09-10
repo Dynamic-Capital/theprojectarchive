@@ -26,7 +26,7 @@ export default function Testimonials() {
   return (
     <ParallaxSection
       id="testimonials"
-      image="https://picsum.photos/1920/1080?random=40"
+      image="/images/testimonials.svg"
       alt="Background image for Testimonials section"
     >
       <motion.h2
@@ -39,9 +39,9 @@ export default function Testimonials() {
         Testimonials
       </motion.h2>
       <div className="testimonials-grid mt-8 text-left">
-        {testimonials.map((t, idx) => (
+        {testimonials.map((t) => (
           <motion.figure
-            key={idx}
+            key={t.author}
             className="testimonial-card"
             variants={cardVariants}
             initial="hidden"

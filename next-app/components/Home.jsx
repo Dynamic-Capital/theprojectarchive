@@ -83,12 +83,12 @@ export default function Home() {
   }, [lightboxOpen]);
 
   const serviceImages = [
-    'https://picsum.photos/400/300?random=31',
-    'https://picsum.photos/400/300?random=32',
-    'https://picsum.photos/400/300?random=33',
-    'https://picsum.photos/400/300?random=34',
-    'https://picsum.photos/400/300?random=35',
-    'https://picsum.photos/400/300?random=36',
+    '/images/service1.svg',
+    '/images/service2.svg',
+    '/images/service3.svg',
+    '/images/service4.svg',
+    '/images/service5.svg',
+    '/images/service6.svg',
   ];
 
   return (

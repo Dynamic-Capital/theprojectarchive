@@ -6,7 +6,7 @@ import { logRuntimeInfo } from '../lib/logRuntime';
 logRuntimeInfo();
 
 export const metadata = {
-  title: 'The Project Archive is all you need is',
+  title: 'The Project Archive is all you need',
   icons: {
     icon: '/favicon.svg',
   },

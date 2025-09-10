@@ -1,6 +1,8 @@
 "use client";
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
+import { createFocusTrap } from 'focus-trap';
 
 const navVariants = {
   hidden: { y: -30, opacity: 0 },
@@ -30,6 +32,32 @@ const links = [
 ];
 
 export default function OverlayNav({ open, onLink }) {
+  const navRef = useRef(null);
+
+  useEffect(() => {
+    let trap;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        onLink();
+      }
+    };
+    if (open && navRef.current) {
+      document.addEventListener('keydown', handleKeyDown);
+      trap = createFocusTrap(navRef.current, {
+        initialFocus: navRef.current.querySelector('a'),
+        clickOutsideDeactivates: true,
+        escapeDeactivates: true,
+        returnFocusOnDeactivate: true,
+        onDeactivate: onLink,
+      });
+      trap.activate();
+    }
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      trap?.deactivate();
+    };
+  }, [open, onLink]);
+
   return (
     <AnimatePresence>
       {open && (
@@ -44,8 +72,11 @@ export default function OverlayNav({ open, onLink }) {
           />
           <motion.nav
             key="nav"
+            ref={navRef}
             className="overlay-nav open space-y-6 text-2xl font-bold"
             aria-hidden={!open}
+            role="dialog"
+            aria-modal="true"
             variants={navVariants}
             initial="hidden"
             animate="show"

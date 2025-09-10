@@ -1,5 +1,4 @@
 "use client";
-import React from 'react';
 import { motion } from 'framer-motion';
 import ParallaxSection from './ParallaxSection';
 
@@ -61,7 +60,7 @@ export default function Starters() {
   return (
     <ParallaxSection
       id="starters"
-      image="https://picsum.photos/1920/1080?random=26"
+      image="/images/starters.svg"
       alt="Background image for Starters section"
     >
       <motion.h2
@@ -74,7 +73,7 @@ export default function Starters() {
         Starters
       </motion.h2>
       <div className="grid gap-4 max-w-3xl mx-auto sm:grid-cols-2">
-        {starters.map((s, i) => (
+        {starters.map((s) => (
           <motion.div
             key={s.title}
             className="p-4 glass rounded text-left"

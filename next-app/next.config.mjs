@@ -6,12 +6,7 @@ const allowedOrigin = process.env.NEXT_ALLOWED_ORIGIN ?? 'https://theprojectarch
 // configured in SPACE_BUCKET_URL in addition to the default sample images.
 const bucketUrl = process.env.SPACE_BUCKET_URL;
 
-const remotePatterns = [
-  {
-    protocol: 'https',
-    hostname: 'picsum.photos',
-  },
-];
+const remotePatterns = [];
 
 if (bucketUrl) {
   try {

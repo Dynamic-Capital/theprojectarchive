@@ -1,5 +1,4 @@
 "use client";
-import React from 'react';
 import { motion } from 'framer-motion';
 import ParallaxSection from './ParallaxSection';
 
@@ -16,7 +15,7 @@ export default function Contact() {
   return (
     <ParallaxSection
       id="contact"
-      image="https://picsum.photos/1920/1080?random=25"
+      image="/images/contact.svg"
       alt="Background image for Contact section"
     >
       <motion.h2

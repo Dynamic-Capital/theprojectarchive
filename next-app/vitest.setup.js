@@ -14,6 +14,14 @@ vi.mock('next/navigation', () => ({
   useRouter: () => ({ push: vi.fn() }),
 }));
 
+vi.mock('next-themes', () => ({
+  useTheme: () => ({ theme: 'light', setTheme: vi.fn() }),
+}));
+
+vi.mock('focus-trap', () => ({
+  createFocusTrap: () => ({ activate: vi.fn(), deactivate: vi.fn() }),
+}));
+
 class MockIntersectionObserver {
   constructor() {}
   observe() {}

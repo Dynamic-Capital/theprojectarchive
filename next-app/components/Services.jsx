@@ -1,5 +1,4 @@
 "use client";
-import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
 import ParallaxSection from './ParallaxSection';
@@ -20,18 +19,18 @@ export default function Services({ openLightbox, images = [] }) {
     images.length > 0
       ? images
       : [
-          'https://picsum.photos/400/300?random=31',
-          'https://picsum.photos/400/300?random=32',
-          'https://picsum.photos/400/300?random=33',
-          'https://picsum.photos/400/300?random=34',
-          'https://picsum.photos/400/300?random=35',
-          'https://picsum.photos/400/300?random=36',
+          '/images/service1.svg',
+          '/images/service2.svg',
+          '/images/service3.svg',
+          '/images/service4.svg',
+          '/images/service5.svg',
+          '/images/service6.svg',
         ];
 
   return (
     <ParallaxSection
       id="services"
-      image="https://picsum.photos/1920/1080?random=24"
+      image="/images/services-bg.svg"
       alt="Background image for Services section"
     >
       <motion.h2
@@ -55,14 +54,22 @@ export default function Services({ openLightbox, images = [] }) {
       </motion.p>
       <div className="mt-6 grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
         {cards.map((img, i) => (
-          <motion.div
+          <motion.button
             key={img}
-            className="srv-card cursor-pointer overflow-hidden rounded shadow"
+            type="button"
+            className="srv-card cursor-pointer overflow-hidden rounded shadow focus:outline-none"
             variants={cardVariants(reduceMotion)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
             onClick={() => openLightbox && openLightbox(img)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openLightbox && openLightbox(img);
+              }
+            }}
+            aria-label={`View gallery image ${i + 1}`}
           >
             <Image
               src={img}
@@ -71,7 +78,7 @@ export default function Services({ openLightbox, images = [] }) {
               height={300}
               className="object-cover w-full h-full"
             />
-          </motion.div>
+          </motion.button>
         ))}
       </div>
     </ParallaxSection>

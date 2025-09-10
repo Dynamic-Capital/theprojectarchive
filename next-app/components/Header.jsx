@@ -35,7 +35,7 @@ export default function Header({ onToggle, open }) {
       style={{ y }}
     >
       <Link href="/" className="logo text-xl font-bold">
-        The Project Archive is all you need is
+        The Project Archive is all you need
       </Link>
       <div className="flex items-center gap-4">
         {mounted && (
@@ -46,6 +46,7 @@ export default function Header({ onToggle, open }) {
         <motion.button
           className="hamburger flex flex-col justify-between w-8 h-6"
           aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
           onClick={onToggle}
           initial={false}
           animate={open ? 'open' : 'closed'}
