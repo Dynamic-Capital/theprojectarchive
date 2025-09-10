@@ -2,6 +2,9 @@ static_sites:
   - name: theprojectarchive
     source_dir: /
     build_command: "npm ci && npm run build"
+    # The output directory is an optional path to where the build assets will be
+    # located, relative to the build context. If not set, App Platform will
+    # automatically scan for these directory names: _static, dist, public, build.
     # Next.js generates static files in the "out" directory.
     output_dir: out
     buildpacks:
