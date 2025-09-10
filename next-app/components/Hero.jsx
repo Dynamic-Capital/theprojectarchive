@@ -3,6 +3,7 @@ import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
 import CurvedLoop from './CurvedLoopText.js';
+import Hero3D from './Hero3D';
 
 const container = {
   hidden: { opacity: 0 },
@@ -78,6 +79,7 @@ export default function Hero() {
             />
           )}
         </motion.div>
+        <Hero3D />
         <motion.p
           className="tagline text-lg text-text mb-6"
           variants={itemDown(reduceMotion)}

@@ -1,6 +1,6 @@
 # The Project Archive
 
-This repository contains the marketing site for The Project Archive, a creative studio based in the Maldives. The site is built with [Next.js](https://nextjs.org/) and animated with [Framer Motion](https://www.framer.com/motion/).
+This repository contains the marketing site for The Project Archive, a creative studio based in the Maldives. The site is built with [Next.js](https://nextjs.org/) and animated with [Framer Motion](https://www.framer.com/motion/). It now also supports simple 3D scenes via [Three.js](https://threejs.org/) and [@react-three/fiber](https://github.com/pmndrs/react-three-fiber), animated with [framer-motion-3d](https://github.com/pmndrs/react-three-fiber).
 
 Tailwind CSS is compiled during the build using PostCSS instead of a CDN runtime.
 
@@ -29,6 +29,10 @@ To rebuild automatically when files in `app/` change and refresh `_static`:
 ```bash
 npm run watch-static
 ```
+
+## 3D Animation
+
+The hero section showcases a rotating 3D cube using `three`, `@react-three/fiber`, and `framer-motion-3d`. Animations respect the user's `prefers-reduced-motion` setting and fall back to a static placeholder when motion is reduced. Import `Hero3D` into any component to render the scene.
 
 ## Docker
 

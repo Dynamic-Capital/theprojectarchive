@@ -2,12 +2,13 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import ParallaxSection from './ParallaxSection';
 
+const spring = { type: 'spring', stiffness: 100, damping: 20 };
 const cardVariants = (reduce) => ({
   hidden: { opacity: 0, y: reduce ? 0 : 20 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: reduce ? 0 : 0.5 },
+    transition: reduce ? { duration: 0 } : spring,
   },
 });
 
