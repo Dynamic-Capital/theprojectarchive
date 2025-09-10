@@ -1,8 +1,9 @@
 import './globals.css';
 import ClientLayout from '../components/ClientLayout';
+import { ThemeProvider } from 'next-themes';
 
 export const metadata = {
-  title: 'The Project Archive',
+  title: 'The Project Archive is all you need is',
   icons: {
     icon: '/favicon.svg',
   },
@@ -13,8 +14,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
-        <ClientLayout>{children}</ClientLayout>
+      <body className="bg-[var(--bg)] text-[var(--text)]">
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+          <ClientLayout>{children}</ClientLayout>
+        </ThemeProvider>
       </body>
     </html>
   );

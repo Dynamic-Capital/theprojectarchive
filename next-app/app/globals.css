@@ -4,6 +4,8 @@
 
 :root {
   /* Colors */
+  --bg: #ffffff;
+  --text: #000000;
   --color-accent: #ff3d00;
   --color-text: #070707;
   --color-background: #373737;
@@ -60,6 +62,11 @@
   --z-overlay: 1200;
   --z-menu: 1300;
   --z-modal: 1500;
+}
+
+.dark {
+  --bg: #000000;
+  --text: #ffffff;
 }
 
 /* Reset */
