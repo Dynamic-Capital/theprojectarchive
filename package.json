@@ -10,7 +10,8 @@
     "start": "npm run build && npx serve -s dist",
     "test": "vitest run",
     "lint": "eslint . --ext js,jsx",
-    "format": "prettier . --write"
+    "format": "prettier . --write",
+    "watch:root": "chokidar 'index.html' 'package.json' 'README.md' -c 'npm run format && npm run build'"
   },
   "keywords": [],
   "author": "",
@@ -31,6 +32,7 @@
     "@vitejs/plugin-react": "^4.7.0",
     "autoprefixer": "^10.4.21",
     "axe-core": "^4.10.3",
+    "chokidar-cli": "^3.0.0",
     "eslint": "^9.35.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react": "^7.37.5",
