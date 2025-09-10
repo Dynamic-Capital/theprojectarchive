@@ -53,7 +53,7 @@ export default function Services({ openLightbox, images = [] }) {
       <div className="mt-6 grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
         {cards.map((img, i) => (
           <motion.div
-            key={i}
+            key={img}
             className="srv-card cursor-pointer overflow-hidden rounded shadow"
             variants={cardVariants}
             initial="hidden"

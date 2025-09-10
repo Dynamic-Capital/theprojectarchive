@@ -75,7 +75,7 @@ export default function Starters() {
       <div className="grid gap-4 max-w-3xl mx-auto sm:grid-cols-2">
         {starters.map((s, i) => (
           <motion.div
-            key={i}
+            key={s.title}
             className="p-4 glass rounded text-left"
             variants={cardVariants}
             initial="hidden"
