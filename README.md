@@ -14,7 +14,11 @@ cp .env.example .env
 npm run dev
 ```
 
-Update `NEXT_ALLOWED_ORIGIN` and `SPACE_BUCKET_URL` in `.env` to match your environment.
+Update `NEXT_ALLOWED_ORIGIN`, `SPACE_BUCKET_URL`, and `MAINTENANCE_MODE` in `.env` to match your environment.
+
+## Maintenance mode
+
+Set `MAINTENANCE_MODE=true` to redirect all traffic to `/coming-soon`. The middleware in `next-app/middleware.ts` reads `process.env.MAINTENANCE_MODE`, similar to how `next-app/next.config.mjs` uses `SPACE_BUCKET_URL`.
 
 ## Design Tokens
 
@@ -125,6 +129,7 @@ The `npm start` script runs the Next.js server for local preview.
 - `BP_WEB_SERVER` – web server to run (e.g., `nginx`).
 - `BP_WEB_SERVER_ROOT` – directory containing built assets (`out`).
 - `NODE_ENV` – set to `production` for optimized runtime behavior.
+- `MAINTENANCE_MODE` – set to `true` to redirect users to `/coming-soon`.
 
 ## Accessibility
 
