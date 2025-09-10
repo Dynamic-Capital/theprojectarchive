@@ -29,6 +29,7 @@ export default function Numbers() {
     <ParallaxSection
       id="numbers"
       image="https://picsum.photos/1920/1080?random=30"
+      alt="Background image for In Numbers section"
     >
       <h2 className="text-3xl font-bold mb-8">In Numbers</h2>
       <div className="flex gap-8 justify-center">
@@ -48,4 +49,3 @@ export default function Numbers() {
     </ParallaxSection>
   );
 }
-

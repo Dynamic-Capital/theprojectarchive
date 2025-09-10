@@ -12,6 +12,7 @@ export default function About() {
     <ParallaxSection
       id="about"
       image="https://picsum.photos/1920/1080?random=21"
+      alt="Background image for About section"
     >
       <motion.h2
         className="text-3xl font-bold mb-4"
@@ -29,9 +30,9 @@ export default function About() {
         whileInView="show"
         viewport={{ once: true, amount: 0.5 }}
       >
-        Learn more about our passion for capturing moments and the story behind our studio.
+        Learn more about our passion for capturing moments and the story behind
+        our studio.
       </motion.p>
     </ParallaxSection>
   );
 }
-

@@ -2,13 +2,26 @@ name: Deploy
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 env:
   BUILD_DIR: dist
 
 jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+
   build:
+    needs: lint-and-test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -37,5 +50,5 @@ jobs:
           host: ${{ secrets.DO_SSH_HOST }}
           username: ${{ secrets.DO_SSH_USER }}
           key: ${{ secrets.DO_SSH_KEY }}
-          source: "${{ env.BUILD_DIR }}/*"
+          source: '${{ env.BUILD_DIR }}/*'
           target: ${{ secrets.DO_DEPLOY_PATH }}

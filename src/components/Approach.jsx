@@ -12,6 +12,7 @@ export default function Approach() {
     <ParallaxSection
       id="approach"
       image="https://picsum.photos/1920/1080?random=23"
+      alt="Background image for Approach section"
     >
       <motion.h2
         className="text-3xl font-bold mb-4"
@@ -29,9 +30,9 @@ export default function Approach() {
         whileInView="show"
         viewport={{ once: true, amount: 0.5 }}
       >
-        We combine technical expertise with artistic vision to craft memorable imagery.
+        We combine technical expertise with artistic vision to craft memorable
+        imagery.
       </motion.p>
     </ParallaxSection>
   );
 }
-
