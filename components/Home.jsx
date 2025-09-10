@@ -51,7 +51,7 @@ export default function Home() {
     'scrollBehavior' in document.documentElement.style;
   useEffect(() => {
     const section = pathname.slice(1);
-    if (section && section !== 'main') {
+    if (section) {
       const el = document.getElementById(section);
       if (el) {
         try {

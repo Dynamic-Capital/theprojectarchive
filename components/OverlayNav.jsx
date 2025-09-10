@@ -18,7 +18,7 @@ const linkVariants = {
 };
 
 const links = [
-  { to: '/main', label: 'Home' },
+  { to: '/', label: 'Home' },
   { to: '/about', label: 'About' },
   { to: '/mission', label: 'Mission' },
   { to: '/approach', label: 'Approach' },
