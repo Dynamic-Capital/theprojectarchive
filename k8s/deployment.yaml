@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tpa-site
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tpa-site
+  template:
+    metadata:
+      labels:
+        app: tpa-site
+    spec:
+      containers:
+        - name: tpa-site
+          image: ${IMAGE}
+          ports:
+            - containerPort: 80

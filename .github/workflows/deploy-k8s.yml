@@ -1,0 +1,38 @@
+name: Deploy to Kubernetes
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+env:
+  IMAGE: registry.digitalocean.com/${{ secrets.DO_REGISTRY }}/tpa-site:${{ github.sha }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DO_API_TOKEN }}
+      - name: Log in to registry
+        run: doctl registry login
+      - name: Build and push image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ env.IMAGE }}
+      - name: Save kubeconfig
+        run: doctl kubernetes cluster kubeconfig save ${{ secrets.DO_K8S_CLUSTER }}
+      - name: Deploy manifests
+        env:
+          IMAGE: ${{ env.IMAGE }}
+        run: |
+          envsubst < k8s/deployment.yaml | kubectl apply -f -
+          kubectl apply -f k8s/service.yaml
+          if [ -f k8s/ingress.yaml ]; then
+            kubectl apply -f k8s/ingress.yaml
+          fi
+

@@ -70,6 +70,22 @@ The output directory is an optional path to where the build assets will be locat
 relative to the build context. If not set, App Platform will automatically scan for
 these directory names: `_static`, `dist`, `public`, `build`.
 
+### Kubernetes
+
+Manifests for running the site in a Kubernetes cluster are in `k8s/`. Build and push the container image and apply the manifests with:
+
+```bash
+./scripts/deploy-k8s.sh registry.digitalocean.com/<registry>/tpa-site:latest
+```
+
+Ensure `kubectl` is configured for your cluster and you are authenticated to the container registry.
+
+The workflow `.github/workflows/deploy-k8s.yml` automates this process. Configure these secrets:
+
+- `DO_API_TOKEN` – DigitalOcean API token
+- `DO_REGISTRY` – Container registry name
+- `DO_K8S_CLUSTER` – Kubernetes cluster name or ID
+
 ## Buildpack Deployment
 
 The site can be built and deployed using [Paketo Buildpacks](https://paketo.io/). The `project.toml` configures both the Node.js runtime and an Nginx web server so the static files in `out/` are served automatically.
