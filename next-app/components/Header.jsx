@@ -35,7 +35,7 @@ export default function Header({ onToggle, open }) {
       style={{ y }}
     >
       <Link href="/" className="logo text-xl font-bold">
-        The Project Archive is all you need is
+        The Project Archive
       </Link>
       <div className="flex items-center gap-4">
         {mounted && (
