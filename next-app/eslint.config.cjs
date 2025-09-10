@@ -5,7 +5,7 @@ const globals = require('globals');
 module.exports = [
   js.configs.recommended,
   {
-    files: ['**/*.{js,jsx}'],
+    files: ['**/*.{js,jsx,mjs}'],
     plugins: { react: reactPlugin },
     languageOptions: {
       parserOptions: {

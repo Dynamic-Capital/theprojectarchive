@@ -5,11 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && npm run sync-static",
     "start": "next start",
     "test": "vitest run",
-    "lint": "eslint . --ext js,jsx",
-    "format": "prettier . --write"
+    "lint": "eslint . --ext js,jsx,mjs",
+    "format": "prettier . --write",
+    "sync-static": "node scripts/update-static.mjs",
+    "watch-static": "chokidar \"app/**\" -c \"npm run build\""
   },
   "keywords": [],
   "author": "",
