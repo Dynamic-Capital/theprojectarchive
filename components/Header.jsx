@@ -28,7 +28,7 @@ export default function Header({ onToggle, open }) {
       animate={{ y: 0, opacity: 1 }}
       style={{ y }}
     >
-      <Link href="/main" className="logo text-xl font-bold text-gray-800">
+      <Link href="/" className="logo text-xl font-bold text-gray-800">
         The Project Archive
       </Link>
       <motion.button
