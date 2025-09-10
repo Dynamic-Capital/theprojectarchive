@@ -30,7 +30,7 @@ export default function Header({ onToggle, open }) {
       <a href="#home" className="logo text-xl font-bold text-gray-800">The Project Archive</a>
       <motion.button
         className="hamburger flex flex-col justify-between w-8 h-6"
-        aria-label="Open menu"
+        aria-label={open ? 'Close menu' : 'Open menu'}
         onClick={onToggle}
         initial={false}
         animate={open ? 'open' : 'closed'}
