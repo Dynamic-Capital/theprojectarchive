@@ -8,7 +8,7 @@
     "build": "next build && npm run sync-static",
     "start": "npx -y serve@latest out",
     "test": "vitest run",
-    "lint": "eslint . --ext js,jsx,mjs",
+    "lint": "eslint . --ext js,jsx,mjs --no-error-on-unmatched-pattern",
     "format": "prettier . --write",
     "sync-static": "node scripts/update-static.mjs",
     "watch-static": "chokidar \"app/**\" -c \"npm run build\""
