@@ -5,12 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && npm run sync-static",
+    "build": "node scripts/update-static.mjs",
     "start": "npx -y serve@latest ../build",
     "test": "vitest run",
     "lint": "eslint . --ext js,jsx,mjs --no-error-on-unmatched-pattern",
     "format": "prettier . --write",
-    "sync-static": "node scripts/update-static.mjs",
     "watch-static": "chokidar \"app/**\" -c \"npm run build\""
   },
   "keywords": [],

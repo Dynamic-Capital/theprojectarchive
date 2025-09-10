@@ -10,7 +10,6 @@
     "test": "npm --prefix next-app run test",
     "lint": "npm --prefix next-app run lint",
     "format": "npm --prefix next-app run format",
-    "sync-static": "npm --prefix next-app run sync-static",
     "watch-static": "npm --prefix next-app run watch-static"
   }
 }
