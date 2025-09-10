@@ -41,6 +41,16 @@ GitHub Actions in `.github/workflows/deploy.yml` builds the site and deploys the
 
 Optional assets can be served from a DigitalOcean Space; see `.env.example` for configuration.
 
+### DigitalOcean App Platform
+
+Use `scripts/deploy-do-app.sh` to deploy the app to DigitalOcean App Platform with `doctl`:
+
+```bash
+./scripts/deploy-do-app.sh <environment> <access_token>
+```
+
+The script checks `DO_APP_ID_<ENV>` for an existing App Platform ID. If set, the app is updated; otherwise a new one is created using `.do/app.yaml`.
+
 ## Buildpack Deployment
 
 The site can be built and deployed using [Paketo Buildpacks](https://paketo.io/). The `project.toml` configures both the Node.js runtime and an Nginx web server so the static files in `dist/` are served automatically.
