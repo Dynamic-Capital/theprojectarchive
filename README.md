@@ -26,13 +26,13 @@ Spacing, radii, typography, and color tokens are defined as CSS custom propertie
 
 ## Production build
 
-Create an optimized production build in the `out` folder. The resulting `_static` directory is generated from `out/` and is excluded from version control:
+Create an optimized production build in the repository's `out` folder, which is excluded from version control:
 
 ```bash
 npm run build
 ```
 
-To rebuild automatically when files in `app/` change and refresh the local `_static` directory:
+To rebuild automatically when files in `app/` change and refresh the local `out/` directory:
 
 ```bash
 npm run watch-static
@@ -79,8 +79,8 @@ The script checks `DO_APP_ID_<ENV>` for an existing App Platform ID. If set, the
 #### Output Directory
 
 The output directory is an optional path to where the build assets will be located,
-relative to the build context. If not set, App Platform will automatically scan for
-these directory names: `_static`, `dist`, `public`, `build`.
+relative to the build context. This project writes its static build to `out/`. If not set,
+App Platform will automatically scan for these directory names: `_static`, `dist`, `public`, `build`.
 
 ### Kubernetes
 
