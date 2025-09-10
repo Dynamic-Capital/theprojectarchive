@@ -1,6 +1,9 @@
 import './globals.css';
 import ClientLayout from '../components/ClientLayout';
 import { ThemeProvider } from 'next-themes';
+import { logRuntimeInfo } from '../lib/logRuntime';
+
+logRuntimeInfo();
 
 export const metadata = {
   title: 'The Project Archive is all you need is',
