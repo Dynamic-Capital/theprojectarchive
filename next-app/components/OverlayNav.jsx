@@ -1,6 +1,8 @@
-"use client";
+'use client';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
+import { createFocusTrap } from 'focus-trap';
 
 const navVariants = {
   hidden: { y: -30, opacity: 0 },
@@ -25,17 +27,43 @@ const links = [
   { to: '/numbers', label: 'In Numbers' },
   { to: '/services', label: 'Services' },
   { to: '/testimonials', label: 'Testimonials' },
-  { to: '/contact', label: 'Contact' }
+  { to: '/contact', label: 'Contact' },
 ];
 
 export default function OverlayNav({ open, onLink }) {
+  const trapRef = useRef(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const trap = createFocusTrap(trapRef.current, {
+      fallbackFocus: trapRef.current,
+    });
+    trap.activate();
+    return () => trap.deactivate();
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        onLink();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [open, onLink]);
+
   return (
     <AnimatePresence>
       {open && (
-        <>
+        <div ref={trapRef}>
           <motion.div
             key="backdrop"
-            style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)' }}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              background: 'rgba(0,0,0,0.5)',
+            }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -53,7 +81,7 @@ export default function OverlayNav({ open, onLink }) {
               gap: 'var(--space-5)',
               fontSize: 'var(--fs-3)',
               fontWeight: 750,
-              textAlign: 'center'
+              textAlign: 'center',
             }}
             aria-hidden={!open}
             variants={navVariants}
@@ -69,7 +97,7 @@ export default function OverlayNav({ open, onLink }) {
               </motion.span>
             ))}
           </motion.nav>
-        </>
+        </div>
       )}
     </AnimatePresence>
   );

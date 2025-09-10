@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { useState, useEffect, useRef } from 'react';
 import {
   AnimatePresence,
@@ -30,6 +30,7 @@ export default function Home() {
   const closeLightbox = () => setLightboxOpen(false);
 
   useEffect(() => {
+    if (!lightboxOpen) return;
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
         closeLightbox();
@@ -37,7 +38,7 @@ export default function Home() {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [lightboxOpen]);
 
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 300], [100, 0]);
@@ -55,14 +56,19 @@ export default function Home() {
       const el = document.getElementById(section);
       if (el) {
         try {
-          el.scrollIntoView({ behavior: supportsSmoothScroll ? 'smooth' : 'auto' });
+          el.scrollIntoView({
+            behavior: supportsSmoothScroll ? 'smooth' : 'auto',
+          });
         } catch (err) {
           console.error('Scroll into view failed', err);
         }
       }
     } else {
       try {
-        window.scrollTo({ top: 0, behavior: supportsSmoothScroll ? 'smooth' : 'auto' });
+        window.scrollTo({
+          top: 0,
+          behavior: supportsSmoothScroll ? 'smooth' : 'auto',
+        });
       } catch (err) {
         console.error('Scroll to top failed', err);
       }
@@ -111,7 +117,7 @@ export default function Home() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              zIndex: 'var(--z-modal)'
+              zIndex: 'var(--z-modal)',
             }}
             role="dialog"
             aria-modal="true"
@@ -142,7 +148,7 @@ export default function Home() {
                 color: 'var(--text)',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
               }}
               aria-label="Close image"
               onClick={closeLightbox}
@@ -167,7 +173,7 @@ export default function Home() {
           color: 'var(--text)',
           boxShadow: 'var(--shadow-1)',
           y,
-          opacity
+          opacity,
         }}
         aria-label="Scroll to top"
         onClick={() =>

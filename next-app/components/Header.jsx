@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
@@ -43,7 +43,7 @@ export default function Header({ onToggle, open }) {
         boxShadow: 'var(--shadow-1)',
         zIndex: 'var(--z-sticky)',
         color: 'var(--text)',
-        y
+        y,
       }}
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
@@ -51,7 +51,9 @@ export default function Header({ onToggle, open }) {
       <Link href="/" style={{ fontSize: 'var(--fs-2)', fontWeight: 750 }}>
         The Project Archive
       </Link>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)' }}>
+      <div
+        style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)' }}
+      >
         {mounted && (
           <button
             onClick={toggleTheme}
@@ -67,16 +69,38 @@ export default function Header({ onToggle, open }) {
             flexDirection: 'column',
             justifyContent: 'space-between',
             width: '2rem',
-            height: '1.5rem'
+            height: '1.5rem',
           }}
+          type="button"
           aria-label={open ? 'Close menu' : 'Open menu'}
           onClick={onToggle}
           initial={false}
           animate={open ? 'open' : 'closed'}
         >
-          <motion.span style={{ display: 'block', height: '2px', background: 'var(--text)' }} variants={topBar}></motion.span>
-          <motion.span style={{ display: 'block', height: '2px', background: 'var(--text)' }} variants={middleBar}></motion.span>
-          <motion.span style={{ display: 'block', height: '2px', background: 'var(--text)' }} variants={bottomBar}></motion.span>
+          <motion.span
+            style={{
+              display: 'block',
+              height: '2px',
+              background: 'var(--text)',
+            }}
+            variants={topBar}
+          ></motion.span>
+          <motion.span
+            style={{
+              display: 'block',
+              height: '2px',
+              background: 'var(--text)',
+            }}
+            variants={middleBar}
+          ></motion.span>
+          <motion.span
+            style={{
+              display: 'block',
+              height: '2px',
+              background: 'var(--text)',
+            }}
+            variants={bottomBar}
+          ></motion.span>
         </motion.button>
       </div>
     </motion.header>
