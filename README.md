@@ -16,6 +16,14 @@ npm run dev
 
 Update `NEXT_ALLOWED_ORIGIN` and `SPACE_BUCKET_URL` in `.env` to match your environment.
 
+## Design Tokens
+
+Spacing, radii, and typography tokens are defined as CSS custom properties in `app/globals.css` and exposed through Tailwind utilities. Use these classes for consistent styling:
+
+- Spacing: `p-xs`, `p-sm`, `p-md`, `p-lg`, `p-xl`, `p-2xl`
+- Radius: `rounded-xs`, `rounded-sm`, `rounded-md`, `rounded-lg`, `rounded-xl`, `rounded-2xl`, `rounded-full`
+- Font size: `text-xs`, `text-sm`, `text-base`, `text-lg`, `text-xl`, `text-2xl`, `text-3xl`, `text-4xl`
+
 ## Production build
 
 Create an optimized production build in the `out` folder and sync it to the top-level `_static` directory:

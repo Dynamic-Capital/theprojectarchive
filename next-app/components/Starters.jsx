@@ -1,24 +1,7 @@
 "use client";
 import { motion, useReducedMotion } from 'framer-motion';
 import ParallaxSection from './ParallaxSection';
-
-const textVariants = (reduce) => ({
-  hidden: { opacity: 0, y: reduce ? 0 : 20 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: reduce ? 0 : 0.5 },
-  },
-});
-
-const cardVariants = (reduce) => ({
-  hidden: { opacity: 0, y: reduce ? 0 : 40 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: reduce ? 0 : 0.5 },
-  },
-});
+import { cardVariants } from '../lib/animations';
 
 export default function Starters() {
   const starters = [
@@ -71,16 +54,8 @@ export default function Starters() {
       id="starters"
       image="https://picsum.photos/1920/1080?random=26"
       alt="Background image for Starters section"
+      title="Starters"
     >
-      <motion.h2
-        className="text-3xl font-bold mb-6"
-        variants={textVariants(reduceMotion)}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.5 }}
-      >
-        Starters
-      </motion.h2>
       <div className="grid gap-4 max-w-3xl mx-auto sm:grid-cols-2">
         {starters.map((s) => (
           <motion.div

@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
 import CurvedLoop from './CurvedLoopText.js';
 import Hero3D from './Hero3D';
+import Button from './Button';
 
 const container = {
   hidden: { opacity: 0 },
@@ -90,24 +91,22 @@ export default function Hero() {
           className="cta-group flex flex-col sm:flex-row gap-4 justify-center"
           variants={ctaContainer}
         >
-          <motion.a
-            className="btn bg-accent hover:bg-accent/90 text-background px-6 py-3 rounded"
+          <Button
             href="#services"
+            variant="primary"
+            className="px-lg py-sm"
             variants={itemDown(reduceMotion)}
-            whileHover={reduceMotion ? undefined : { scale: 1.05 }}
-            whileTap={reduceMotion ? undefined : { scale: 0.95 }}
           >
             View Portfolio
-          </motion.a>
-          <motion.a
-            className="btn bg-background text-text px-6 py-3 rounded hover:bg-background/90"
+          </Button>
+          <Button
             href="#contact"
+            variant="secondary"
+            className="px-lg py-sm"
             variants={itemDown(reduceMotion)}
-            whileHover={reduceMotion ? undefined : { scale: 1.05 }}
-            whileTap={reduceMotion ? undefined : { scale: 0.95 }}
           >
             Contact Me
-          </motion.a>
+          </Button>
         </motion.div>
       </div>
     </motion.section>

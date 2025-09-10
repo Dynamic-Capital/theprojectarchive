@@ -2,15 +2,8 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import ParallaxSection from './ParallaxSection';
-
-const textVariants = (reduce) => ({
-  hidden: { opacity: 0, y: reduce ? 0 : 20 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: reduce ? 0 : 0.5 },
-  },
-});
+import { textVariants } from '../lib/animations';
+import Button from './Button';
 
 export default function Contact() {
   const handleSubmit = (e) => {
@@ -24,16 +17,8 @@ export default function Contact() {
       id="contact"
       image="https://picsum.photos/1920/1080?random=25"
       alt="Background image for Contact section"
+      title="Contact"
     >
-      <motion.h2
-        className="text-3xl font-bold mb-4"
-        variants={textVariants(reduceMotion)}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.5 }}
-      >
-        Contact
-      </motion.h2>
       <motion.form
         onSubmit={handleSubmit}
         className="form max-w-md mx-auto text-left"
@@ -63,14 +48,9 @@ export default function Contact() {
           required
         />
 
-        <motion.button
-          type="submit"
-          className="btn btn--primary mt-2"
-          whileHover={reduceMotion ? undefined : { scale: 1.05 }}
-          whileTap={reduceMotion ? undefined : { scale: 0.95 }}
-        >
+        <Button type="submit" className="mt-xs">
           Send Message
-        </motion.button>
+        </Button>
       </motion.form>
     </ParallaxSection>
   );
