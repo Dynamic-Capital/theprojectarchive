@@ -1,30 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import './styles.css';
-import {
-  AnimatePresence,
-  motion,
-  useScroll,
-  useTransform,
-} from 'framer-motion';
-import { Routes, Route, useLocation } from 'react-router-dom';
-import Header from './components/Header';
-import OverlayNav from './components/OverlayNav';
-import Hero from './components/Hero';
-import About from './components/About';
-import Mission from './components/Mission';
-import Approach from './components/Approach';
-import Numbers from './components/Numbers';
-import Starters from './components/Starters';
-import Services from './components/Services';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import NotFound from './components/NotFound';
-import ComingSoon from './components/ComingSoon';
+"use client";
+import { useState, useEffect } from 'react';
+import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
+import { usePathname } from 'next/navigation';
+import Hero from './Hero';
+import About from './About';
+import Mission from './Mission';
+import Approach from './Approach';
+import Numbers from './Numbers';
+import Starters from './Starters';
+import Services from './Services';
+import Contact from './Contact';
 
-function Home() {
-  const [navOpen, setNavOpen] = useState(false);
-  const toggleNav = () => setNavOpen((o) => !o);
-  const closeNav = () => setNavOpen(false);
+export default function Home() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImg, setLightboxImg] = useState('');
   const openLightbox = (img) => {
@@ -41,16 +28,17 @@ function Home() {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [closeLightbox]);
+  }, []);
+
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 300], [100, 0]);
   const opacity = useTransform(scrollY, [0, 300], [0, 1]);
 
-  const location = useLocation();
+  const pathname = usePathname();
 
   useEffect(() => {
-    const section = location.pathname.slice(1);
-    if (section) {
+    const section = pathname.slice(1);
+    if (section && section !== 'main') {
       const el = document.getElementById(section);
       if (el) {
         try {
@@ -66,7 +54,7 @@ function Home() {
         /* empty */
       }
     }
-  }, [location]);
+  }, [pathname]);
 
   const serviceImages = [
     'https://picsum.photos/400/300?random=31',
@@ -79,8 +67,6 @@ function Home() {
 
   return (
     <>
-      <Header onToggle={toggleNav} open={navOpen} />
-      <OverlayNav open={navOpen} onLink={closeNav} />
       <Hero />
       <About />
       <Mission />
@@ -89,7 +75,6 @@ function Home() {
       <Starters />
       <Services openLightbox={openLightbox} images={serviceImages} />
       <Contact />
-      <Footer />
       <AnimatePresence>
         {lightboxOpen && (
           <motion.div
@@ -130,22 +115,5 @@ function Home() {
         &#8679;
       </motion.button>
     </>
-  );
-}
-
-export default function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<ComingSoon />} />
-      <Route path="/main" element={<Home />} />
-      <Route path="/about" element={<Home />} />
-      <Route path="/mission" element={<Home />} />
-      <Route path="/approach" element={<Home />} />
-      <Route path="/numbers" element={<Home />} />
-      <Route path="/starters" element={<Home />} />
-      <Route path="/services" element={<Home />} />
-      <Route path="/contact" element={<Home />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
   );
 }

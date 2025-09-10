@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+"use client";
+import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const navVariants = {
@@ -18,7 +18,7 @@ const linkVariants = {
 };
 
 const links = [
-  { to: '/home', label: 'Home' },
+  { to: '/main', label: 'Home' },
   { to: '/about', label: 'About' },
   { to: '/mission', label: 'Mission' },
   { to: '/approach', label: 'Approach' },
@@ -27,8 +27,6 @@ const links = [
   { to: '/services', label: 'Services' },
   { to: '/contact', label: 'Contact' }
 ];
-
-const MotionLink = motion(Link);
 
 export default function OverlayNav({ open, onLink }) {
   return (
@@ -53,15 +51,15 @@ export default function OverlayNav({ open, onLink }) {
             exit="exit"
           >
             {links.map((l) => (
-              <MotionLink
-                key={l.to}
-                className="hover:text-red-600"
-                to={l.to}
-                onClick={onLink}
-                variants={linkVariants}
-              >
-                {l.label}
-              </MotionLink>
+              <motion.span key={l.to} variants={linkVariants}>
+                <Link
+                  href={l.to}
+                  className="hover:text-red-600"
+                  onClick={onLink}
+                >
+                  {l.label}
+                </Link>
+              </motion.span>
             ))}
           </motion.nav>
         </>

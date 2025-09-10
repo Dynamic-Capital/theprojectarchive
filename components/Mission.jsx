@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import { motion } from 'framer-motion';
 import ParallaxSection from './ParallaxSection';
@@ -7,12 +8,12 @@ const textVariants = {
   show: { opacity: 1, y: 0 },
 };
 
-export default function Contact() {
+export default function Mission() {
   return (
     <ParallaxSection
-      id="contact"
-      image="https://picsum.photos/1920/1080?random=25"
-      alt="Background image for Contact section"
+      id="mission"
+      image="https://picsum.photos/1920/1080?random=22"
+      alt="Background image for Mission section"
     >
       <motion.h2
         className="text-3xl font-bold mb-4"
@@ -21,7 +22,7 @@ export default function Contact() {
         whileInView="show"
         viewport={{ once: true, amount: 0.5 }}
       >
-        Contact
+        Mission
       </motion.h2>
       <motion.p
         className="max-w-md mx-auto"
@@ -30,8 +31,8 @@ export default function Contact() {
         whileInView="show"
         viewport={{ once: true, amount: 0.5 }}
       >
-        Get in touch to discuss your project or schedule a session with our
-        team.
+        Our mission is to deliver striking visuals that tell compelling stories
+        for every client.
       </motion.p>
     </ParallaxSection>
   );
