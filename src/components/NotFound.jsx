@@ -49,8 +49,12 @@ export default function NotFound() {
           404 Not Found
         </motion.h1>
       )}
+      <p className="text-lg">
+        The page you're looking for doesn't exist. Use the button below to
+        return to the homepage.
+      </p>
       <motion.button
-        onClick={() => navigate('/')}
+        onClick={() => navigate('/', { replace: true })}
         whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
         whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
         className="px-4 py-2 bg-blue-500 text-white rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400"
