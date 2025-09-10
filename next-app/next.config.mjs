@@ -24,7 +24,6 @@ if (bucketUrl) {
 }
 
 const nextConfig = {
-  output: 'export',
   reactStrictMode: true,
   images: {
     remotePatterns,
@@ -40,7 +39,10 @@ const nextConfig = {
             key: 'Access-Control-Allow-Methods',
             value: 'GET,POST,OPTIONS',
           },
-          { key: 'Access-Control-Allow-Headers', value: 'Content-Type' },
+          {
+            key: 'Access-Control-Allow-Headers',
+            value: 'Origin, Content-Type, Accept, Authorization',
+          },
         ],
       },
     ];
