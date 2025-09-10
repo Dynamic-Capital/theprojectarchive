@@ -18,10 +18,16 @@ Update `NEXT_ALLOWED_ORIGIN` and `SPACE_BUCKET_URL` in `.env` to match your envi
 
 ## Production build
 
-Create an optimized production build in the `out` folder:
+Create an optimized production build in the `out` folder and sync it to the top-level `_static` directory:
 
 ```bash
 npm run build
+```
+
+To rebuild automatically when files in `app/` change and refresh `_static`:
+
+```bash
+npm run watch-static
 ```
 
 ## Docker

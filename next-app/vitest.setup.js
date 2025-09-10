@@ -24,3 +24,11 @@ class MockIntersectionObserver {
 global.IntersectionObserver = MockIntersectionObserver;
 window.scrollTo = vi.fn();
 HTMLCanvasElement.prototype.getContext = vi.fn();
+
+if (!SVGElement.prototype.getComputedTextLength) {
+  SVGElement.prototype.getComputedTextLength = () => 0;
+}
+
+if (!SVGElement.prototype.getTotalLength) {
+  SVGElement.prototype.getTotalLength = () => 0;
+}
