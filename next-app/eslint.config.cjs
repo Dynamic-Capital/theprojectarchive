@@ -21,6 +21,8 @@ module.exports = [
     settings: { react: { version: 'detect' } },
     rules: {
       'no-unused-vars': 'warn',
+      'react/jsx-uses-react': 'warn',
+      'react/jsx-uses-vars': 'warn',
     },
   },
 ];

@@ -1,5 +1,4 @@
 "use client";
-import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import ParallaxSection from './ParallaxSection';
 
@@ -83,7 +82,7 @@ export default function Starters() {
         Starters
       </motion.h2>
       <div className="grid gap-4 max-w-3xl mx-auto sm:grid-cols-2">
-        {starters.map((s, i) => (
+        {starters.map((s) => (
           <motion.div
             key={s.title}
             className="p-4 glass rounded text-left"
