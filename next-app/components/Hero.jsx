@@ -23,6 +23,21 @@ const itemDown = (reduce) => ({
   show: { opacity: 1, y: 0, transition: { duration: reduce ? 0 : 0.6 } },
 });
 
+const curvedText = (reduce) => ({
+  hidden: { opacity: 0, y: reduce ? 0 : -20, rotate: 0 },
+  show: {
+    opacity: 1,
+    y: 0,
+    rotate: reduce ? 0 : 360,
+    transition: {
+      duration: reduce ? 0 : 0.6,
+      rotate: reduce
+        ? { }
+        : { duration: 20, repeat: Infinity, ease: "linear" },
+    },
+  },
+});
+
 const ctaContainer = {
   hidden: { opacity: 0 },
   show: {
@@ -49,20 +64,35 @@ export default function Hero() {
         sizes="100vw"
         priority
       />
-      <div className="container relative z-10 bg-black/50 p-8 rounded-lg max-w-xl">
-      <motion.h1
-          className="text-4xl md:text-5xl font-bold text-white mb-4"
-          variants={itemUp(reduceMotion)}
-        >
+      <div className="container relative z-10 bg-black/50 p-8 rounded-lg max-w-xl flex flex-col items-center justify-center text-center">
+        <motion.h1 className="sr-only" variants={itemUp(reduceMotion)}>
           The Project Archive
         </motion.h1>
+        <motion.svg
+          className="mb-4"
+          width="200"
+          height="200"
+          viewBox="0 0 200 200"
+          variants={curvedText(reduceMotion)}
+        >
+          <path
+            id="brandCircle"
+            d="M 100,100 m -75,0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"
+            fill="none"
+          />
+          <motion.text className="fill-white text-xl tracking-widest">
+            <textPath href="#brandCircle" startOffset="50%" textAnchor="middle">
+              The Project Archive
+            </textPath>
+          </motion.text>
+        </motion.svg>
         <motion.p
           className="tagline text-lg text-gray-200 mb-6"
           variants={itemDown(reduceMotion)}
         >
           Professional Photography
         </motion.p>
-          <motion.div
+        <motion.div
           className="cta-group flex flex-col sm:flex-row gap-4 justify-center"
           variants={ctaContainer}
         >
