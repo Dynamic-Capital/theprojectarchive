@@ -26,13 +26,19 @@ Spacing, radii, typography, and color tokens are defined as CSS custom propertie
 
 ## Production build
 
-Create an optimized production build in the repository's `out` folder, which is excluded from version control:
+Create an optimized production build in the repository's `build` folder, which is excluded from version control:
 
 ```bash
 npm run build
 ```
 
-To rebuild automatically when files in `app/` change and refresh the local `out/` directory:
+After building, preview the static site locally:
+
+```bash
+npm run start
+```
+
+To rebuild automatically when files in `app/` change and refresh the local `build/` directory:
 
 ```bash
 npm run watch-static
@@ -44,7 +50,7 @@ The hero section showcases a rotating 3D cube using `three` and `@react-three/fi
 
 ## Docker
 
-A multi-stage `Dockerfile` builds the site and serves the generated `out` directory
+A multi-stage `Dockerfile` builds the site and serves the generated `build` directory
 with Nginx. Build and run the production container locally:
 
 ```bash
@@ -57,7 +63,7 @@ docker run --rm -p 8080:80 tpa-site
 
 ## Deployment
 
-GitHub Actions in `.github/workflows/deploy.yml` builds the site and deploys the `out/` directory to a DigitalOcean Droplet via SCP. Configure the following secrets in your repository settings:
+GitHub Actions in `.github/workflows/deploy.yml` builds the site and deploys the `build/` directory to a DigitalOcean Droplet via SCP. Configure the following secrets in your repository settings:
 
 - `DO_SSH_HOST` – Droplet IP or hostname
 - `DO_SSH_USER` – SSH user
@@ -79,7 +85,7 @@ The script checks `DO_APP_ID_<ENV>` for an existing App Platform ID. If set, the
 #### Output Directory
 
 The output directory is an optional path to where the build assets will be located,
-relative to the build context. This project writes its static build to `out/`. If not set,
+relative to the build context. This project writes its static build to `build/`. If not set,
 App Platform will automatically scan for these directory names: `_static`, `dist`, `public`, `build`.
 
 ### Kubernetes
@@ -100,7 +106,7 @@ The workflow `.github/workflows/deploy-k8s.yml` automates this process. Configur
 
 ## Buildpack Deployment
 
-The site can be built and deployed using [Paketo Buildpacks](https://paketo.io/). The `project.toml` configures both the Node.js runtime and an Nginx web server so the static files in `out/` are served automatically.
+The site can be built and deployed using [Paketo Buildpacks](https://paketo.io/). The `project.toml` configures both the Node.js runtime and an Nginx web server so the static files in `build/` are served automatically.
 
 ```toml
 [[build.buildpacks]]
@@ -112,18 +118,18 @@ id = "paketo-buildpacks/web-servers"
 [[build.env]]
 BP_NODE_VERSION = "18.x"
 BP_WEB_SERVER = "nginx"
-BP_WEB_SERVER_ROOT = "out"
+BP_WEB_SERVER_ROOT = "build"
 ```
 
-When deploying to platforms like DigitalOcean App Platform, the `.do/app.yaml` file lists both buildpacks so the build image includes Nginx to serve the contents of `out/`.
+When deploying to platforms like DigitalOcean App Platform, the `.do/app.yaml` file lists both buildpacks so the build image includes Nginx to serve the contents of `build/`.
 
-The `npm start` script runs the Next.js server for local preview.
+The `npm start` script serves the contents of `build/` locally using `serve`.
 
 ### Environment variables
 
 - `BP_NODE_VERSION` – Node runtime used during build (e.g., `18.x`).
 - `BP_WEB_SERVER` – web server to run (e.g., `nginx`).
-- `BP_WEB_SERVER_ROOT` – directory containing built assets (`out`).
+- `BP_WEB_SERVER_ROOT` – directory containing built assets (`build`).
 - `NODE_ENV` – set to `production` for optimized runtime behavior.
 - `MAINTENANCE_MODE` – set to `true` to redirect users to `/coming-soon`.
 
