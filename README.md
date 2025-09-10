@@ -26,11 +26,15 @@ npm run build
 
 ## Docker
 
-Build and run the production container locally:
+A multi-stage `Dockerfile` builds the site and serves the generated `out` directory
+with Nginx. Build and run the production container locally:
 
 ```bash
+# Build the image
 docker build -t tpa-site .
-docker run -p 8080:80 tpa-site
+
+# Run the container and map port 80 to 8080 on the host
+docker run --rm -p 8080:80 tpa-site
 ```
 
 ## Deployment
