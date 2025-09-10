@@ -4,6 +4,7 @@
 const allowedOrigin = process.env.NEXT_ALLOWED_ORIGIN ?? 'https://theprojectarchive.com';
 
 const nextConfig = {
+  reactStrictMode: true,
   images: {
     remotePatterns: [
       {
@@ -20,7 +21,7 @@ const nextConfig = {
           { key: 'Access-Control-Allow-Origin', value: allowedOrigin },
           {
             key: 'Access-Control-Allow-Methods',
-            value: 'GET,POST',
+            value: 'GET,POST,OPTIONS',
           },
           { key: 'Access-Control-Allow-Headers', value: 'Content-Type' },
         ],

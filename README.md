@@ -10,8 +10,11 @@ Install dependencies and start the development server:
 
 ```bash
 npm install
+cp .env.example .env
 npm run dev
 ```
+
+Update `NEXT_ALLOWED_ORIGIN` and `SPACE_BUCKET_URL` in `.env` to match your environment.
 
 ## Production build
 
