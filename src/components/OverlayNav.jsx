@@ -22,6 +22,7 @@ const links = [
   { href: '#mission', label: 'Mission' },
   { href: '#approach', label: 'Approach' },
   { href: '#numbers', label: 'In Numbers' },
+  { href: '#starters', label: 'Starters' },
   { href: '#services', label: 'Services' },
   { href: '#contact', label: 'Contact' }
 ];

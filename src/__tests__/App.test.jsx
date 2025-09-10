@@ -16,3 +16,8 @@ test('renders site header link', () => {
     screen.getByRole('link', { name: /The Project Archive/i }),
   ).toBeInTheDocument();
 });
+
+test('renders starters section', () => {
+  render(<App />);
+  expect(screen.getByRole('heading', { name: /Starters/i })).toBeInTheDocument();
+});
