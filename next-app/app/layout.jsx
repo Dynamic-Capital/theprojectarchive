@@ -6,6 +6,8 @@ export const metadata = {
   icons: {
     icon: '/favicon.svg',
   },
+  description:
+    'Creative studio in the Maldives offering design, development, and photography services.',
 };
 
 export default function RootLayout({ children }) {

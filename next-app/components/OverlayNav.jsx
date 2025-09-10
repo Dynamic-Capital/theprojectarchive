@@ -25,6 +25,7 @@ const links = [
   { to: '/numbers', label: 'In Numbers' },
   { to: '/starters', label: 'Starters' },
   { to: '/services', label: 'Services' },
+  { to: '/testimonials', label: 'Testimonials' },
   { to: '/contact', label: 'Contact' }
 ];
 
