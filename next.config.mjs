@@ -24,9 +24,11 @@ if (bucketUrl) {
 }
 
 const nextConfig = {
+  output: 'export',
   reactStrictMode: true,
   images: {
     remotePatterns,
+    unoptimized: true,
   },
   async headers() {
     return [
