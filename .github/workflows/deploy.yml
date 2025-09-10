@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 env:
-  BUILD_DIR: out
+  BUILD_DIR: _static
 
 jobs:
   lint-and-test:
@@ -17,8 +17,11 @@ jobs:
           node-version: 18
           cache: npm
       - run: npm ci
+        working-directory: next-app
       - run: npm run lint
+        working-directory: next-app
       - run: npm test
+        working-directory: next-app
 
   build:
     needs: lint-and-test
@@ -30,10 +33,12 @@ jobs:
           node-version: 18
           cache: npm
       - run: npm ci
+        working-directory: next-app
       - run: npm run build
+        working-directory: next-app
       - uses: actions/upload-artifact@v4
         with:
-          name: out
+          name: static
           path: ${{ env.BUILD_DIR }}
 
   deploy:
@@ -42,7 +47,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v4
         with:
-          name: out
+          name: static
           path: ${{ env.BUILD_DIR }}
       - name: Deploy to DigitalOcean
         uses: appleboy/scp-action@v0.1.7
