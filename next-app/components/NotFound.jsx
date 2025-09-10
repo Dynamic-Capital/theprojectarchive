@@ -53,7 +53,7 @@ export default function NotFound() {
         onClick={() => router.push('/')}
         whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
         whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
-        className="px-4 py-2 bg-blue-500 text-white rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400"
+        className="px-4 py-2 bg-accent text-background rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent"
       >
         Go Home
       </motion.button>

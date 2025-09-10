@@ -55,7 +55,7 @@ export default function OverlayNav({ open, onLink }) {
               <motion.span key={l.to} variants={linkVariants}>
                 <Link
                   href={l.to}
-                  className="hover:text-red-600"
+                  className="hover:text-accent"
                   onClick={onLink}
                 >
                   {l.label}
