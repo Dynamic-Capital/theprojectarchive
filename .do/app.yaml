@@ -1,12 +1,12 @@
 static_sites:
   - name: theprojectarchive
     source_dir: /
-    build_command: "npm ci && npm run build"
+    build_command: "npm ci && npm run build && cd /_static"
     # The output directory is an optional path to where the build assets will be
     # located, relative to the build context. If not set, App Platform will
     # automatically scan for these directory names: _static, dist, public, build.
-    # The build script outputs static files to the "_static" directory.
-    output_dir: _static
+    # The build script outputs static files to the "/_static" directory.
+    output_dir: /_static
     buildpacks:
       - paketo-buildpacks/nodejs-legacy
       - paketo-buildpacks/web-servers
