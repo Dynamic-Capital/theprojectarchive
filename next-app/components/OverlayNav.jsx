@@ -59,11 +59,7 @@ export default function OverlayNav({ open, onLink }) {
         <div ref={trapRef}>
           <motion.div
             key="backdrop"
-            style={{
-              position: 'fixed',
-              inset: 0,
-              background: 'rgba(0,0,0,0.5)',
-            }}
+            className="overlay-backdrop"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -71,18 +67,10 @@ export default function OverlayNav({ open, onLink }) {
           />
           <motion.nav
             key="nav"
-            style={{
-              position: 'fixed',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 'var(--space-5)',
-              fontSize: 'var(--fs-3)',
-              fontWeight: 750,
-              textAlign: 'center',
-            }}
+            className="overlay-nav"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Main navigation"
             aria-hidden={!open}
             variants={navVariants}
             initial="hidden"

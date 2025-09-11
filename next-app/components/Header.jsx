@@ -29,78 +29,36 @@ export default function Header({ onToggle, open }) {
 
   return (
     <motion.header
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: 'var(--space-4)',
-        background: 'color-mix(in oklab, var(--bg), transparent 20%)',
-        backdropFilter: 'blur(12px)',
-        boxShadow: 'var(--shadow-1)',
-        zIndex: 'var(--z-sticky)',
-        color: 'var(--text)',
-        y,
-      }}
+      className="site-header"
+      style={{ y }}
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
     >
-      <Link href="/" style={{ fontSize: 'var(--fs-2)', fontWeight: 750 }}>
+      <Link href="/" className="site-header__brand">
         The Project Archive
       </Link>
-      <div
-        style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)' }}
-      >
+      <div className="site-header__actions">
         {mounted && (
           <button
             onClick={toggleTheme}
             aria-label="Toggle theme"
-            style={{ fontSize: 'var(--fs-2)' }}
+            aria-pressed={theme === 'dark'}
+            className="theme-toggle"
           >
             {theme === 'light' ? '🌙' : '☀️'}
           </button>
         )}
         <motion.button
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            width: '2rem',
-            height: '1.5rem',
-          }}
+          className="menu-toggle"
           type="button"
           aria-label={open ? 'Close menu' : 'Open menu'}
           onClick={onToggle}
           initial={false}
           animate={open ? 'open' : 'closed'}
         >
-          <motion.span
-            style={{
-              display: 'block',
-              height: '2px',
-              background: 'var(--text)',
-            }}
-            variants={topBar}
-          ></motion.span>
-          <motion.span
-            style={{
-              display: 'block',
-              height: '2px',
-              background: 'var(--text)',
-            }}
-            variants={middleBar}
-          ></motion.span>
-          <motion.span
-            style={{
-              display: 'block',
-              height: '2px',
-              background: 'var(--text)',
-            }}
-            variants={bottomBar}
-          ></motion.span>
+          <motion.span className="menu-bar" variants={topBar}></motion.span>
+          <motion.span className="menu-bar" variants={middleBar}></motion.span>
+          <motion.span className="menu-bar" variants={bottomBar}></motion.span>
         </motion.button>
       </div>
     </motion.header>

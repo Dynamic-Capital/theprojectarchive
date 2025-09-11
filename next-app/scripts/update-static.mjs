@@ -18,15 +18,32 @@ const targetDir = path.resolve(
   process.env.STATIC_OUT_DIR ?? '_static',
 );
 
-console.log('Running next build...');
-execSync('next build', { cwd: projectDir, stdio: 'inherit' });
+try {
+  console.log('Running next build...');
+  try {
+    execSync('next build', { cwd: projectDir, stdio: 'inherit' });
+  } catch (error) {
+    throw new Error(`next build failed: ${error.message}`);
+  }
 
-if (!existsSync(outDir)) {
-  throw new Error('Missing out directory; ensure next.config.mjs sets output: "export"');
+  if (!existsSync(outDir)) {
+    throw new Error(
+      'Missing out directory; ensure next.config.mjs sets output: "export"',
+    );
+  }
+
+  await rm(targetDir, { recursive: true, force: true }).catch((err) => {
+    throw new Error(`Failed to remove ${targetDir}: ${err.message}`);
+  });
+  await mkdir(targetDir, { recursive: true }).catch((err) => {
+    throw new Error(`Failed to create ${targetDir}: ${err.message}`);
+  });
+  await cp(outDir, targetDir, { recursive: true }).catch((err) => {
+    throw new Error(`Failed to copy files: ${err.message}`);
+  });
+
+  console.log(`Synced static files to ${targetDir}`);
+} catch (err) {
+  console.error(err);
+  process.exit(1);
 }
-
-await rm(targetDir, { recursive: true, force: true });
-await mkdir(targetDir, { recursive: true });
-await cp(outDir, targetDir, { recursive: true });
-
-console.log(`Synced static files to ${targetDir}`);
