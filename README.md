@@ -28,10 +28,16 @@ Spacing, radii, typography, and color tokens are defined as CSS custom propertie
 
 ## Production build
 
-Create an optimized production build in the repository's `/_static` folder, which is excluded from version control:
+Create an optimized production build in the repository's `/_static` folder, which is excluded from version control. The build script verifies that the directory exists:
 
 ```bash
 npm run build
+```
+
+To check for the directory without rebuilding:
+
+```bash
+npm run verify-static
 ```
 
 After building, preview the static site locally:
