@@ -6,7 +6,7 @@
     "postinstall": "npm --prefix next-app install",
     "dev": "npm --prefix next-app run dev",
     "build": "npm --prefix next-app run build",
-    "start": "npx -y serve@latest _static",
+    "start": "NODE_ENV=production node server.js",
     "test": "npm --prefix next-app run test",
     "lint": "npm --prefix next-app run lint",
     "format": "npm --prefix next-app run format",
