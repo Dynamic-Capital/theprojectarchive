@@ -12,14 +12,14 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: digitalocean/action-doctl@v2
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
+      - uses: digitalocean/action-doctl@5727c67aa3c2c34ae9462d5a0ecfea8a1b31e5ce # v2
         with:
           token: ${{ secrets.DO_API_TOKEN }}
       - name: Log in to registry
         run: doctl registry login
       - name: Build and push image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@ca052bb54ab0790a636c9b5f226502c73d547a25 # v5
         with:
           context: .
           push: true
@@ -35,4 +35,3 @@ jobs:
           if [ -f k8s/ingress.yaml ]; then
             kubectl apply -f k8s/ingress.yaml
           fi
-

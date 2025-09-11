@@ -1,8 +1,8 @@
-"use client";
+'use client';
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
-import CurvedLoop from './CurvedLoopText.js';
+import CurvedLoop from './CurvedLoopText.jsx';
 import Hero3D from './Hero3D';
 import Button from './Button';
 
@@ -45,7 +45,7 @@ export default function Hero() {
         alignItems: 'center',
         justifyContent: 'center',
         textAlign: 'center',
-        position: 'relative'
+        position: 'relative',
       }}
       variants={container}
       initial="hidden"
@@ -64,7 +64,8 @@ export default function Hero() {
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7))',
+          background:
+            'linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7))',
           zIndex: 1,
         }}
       />
@@ -81,7 +82,7 @@ export default function Hero() {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          textAlign: 'center'
+          textAlign: 'center',
         }}
       >
         <motion.h1 className="sr-only" variants={itemUp(reduceMotion)}>
@@ -97,7 +98,7 @@ export default function Hero() {
               style={{
                 color: 'var(--text)',
                 fontSize: 'var(--fs-2)',
-                letterSpacing: '0.1em'
+                letterSpacing: '0.1em',
               }}
             >
               We're a Creative studio capturing stories in the Maldives
@@ -106,8 +107,12 @@ export default function Hero() {
             <CurvedLoop
               text={{
                 text: "We're a Creative studio capturing stories in the Maldives",
-                font: { fontFamily: 'sans-serif', fontWeight: '400', fontSize: 32 },
-                color: 'var(--text)'
+                font: {
+                  fontFamily: 'sans-serif',
+                  fontWeight: '400',
+                  fontSize: 32,
+                },
+                color: 'var(--text)',
               }}
               direction="left"
               baseVelocity={50}
@@ -122,11 +127,12 @@ export default function Hero() {
           style={{
             fontSize: 'var(--fs-2)',
             color: 'var(--text)',
-            marginBottom: 'var(--space-5)'
+            marginBottom: 'var(--space-5)',
           }}
           variants={itemDown(reduceMotion)}
         >
-          Your journey fuels our creativity. Together, we'll craft an impact, one story at a time.
+          Your journey fuels our creativity. Together, we'll craft an impact,
+          one story at a time.
         </motion.p>
         <motion.div
           className="cta-group"
@@ -135,14 +141,22 @@ export default function Hero() {
             flexDirection: 'row',
             flexWrap: 'wrap',
             gap: 'var(--space-4)',
-            justifyContent: 'center'
+            justifyContent: 'center',
           }}
           variants={ctaContainer}
         >
-          <Button href="#contact" variant="primary" variants={itemDown(reduceMotion)}>
+          <Button
+            href="#contact"
+            variant="primary"
+            variants={itemDown(reduceMotion)}
+          >
             Contact Us
           </Button>
-          <Button href="#services" variant="secondary" variants={itemDown(reduceMotion)}>
+          <Button
+            href="#services"
+            variant="secondary"
+            variants={itemDown(reduceMotion)}
+          >
             Explore Portfolio
           </Button>
         </motion.div>

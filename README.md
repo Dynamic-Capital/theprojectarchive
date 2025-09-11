@@ -98,6 +98,8 @@ Manifests for running the site in a Kubernetes cluster are in `k8s/`. Build and 
 
 Ensure `kubectl` is configured for your cluster and you are authenticated to the container registry.
 
+The deployment sets modest CPU/memory requests (`100m`/`128Mi`) and limits (`200m`/`256Mi`) and exposes liveness and readiness probes on the root path.
+
 The workflow `.github/workflows/deploy-k8s.yml` automates this process. Configure these secrets:
 
 - `DO_API_TOKEN` – DigitalOcean API token
@@ -136,4 +138,3 @@ The `npm start` script serves the contents of `build/` locally using `serve`.
 ## Accessibility
 
 Animated components respect the user's `prefers-reduced-motion` setting, and the lightbox dialog traps focus for keyboard users.
-
