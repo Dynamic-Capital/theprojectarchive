@@ -32,6 +32,7 @@ const nextConfig = {
     remotePatterns,
     unoptimized: true,
   },
+  output: 'export',
   trailingSlash: true,
 };
 
