@@ -31,6 +31,8 @@ const nextConfig = {
     loader: 'akamai',
     path: '',
     remotePatterns,
+    // Disable the Image Optimization API when using static exports
+    unoptimized: true,
   },
   trailingSlash: true,
 };
