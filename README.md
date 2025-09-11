@@ -53,7 +53,7 @@ npm run build:standalone
 npm run start:standalone
 ```
 
-The build sets `NEXT_STANDALONE=true`, producing a `.next/standalone` directory with only the files needed to run the app, ideal for Docker or PM2 deployments.
+The build sets `NEXT_STANDALONE=true`, producing a `.next/standalone` directory with only the files needed to run the app; `start:standalone` launches it via `node .next/standalone/server.js`, ideal for Docker or PM2 deployments.
 
 To inspect bundle sizes and locate large dependencies, run:
 

@@ -11,7 +11,9 @@
     "test": "vitest run",
     "lint": "eslint . --ext js,jsx,mjs --no-error-on-unmatched-pattern",
     "format": "prettier . --write",
-    "watch-static": "chokidar \"app/**\" -c \"npm run build\""
+    "watch-static": "chokidar \"app/**\" -c \"npm run build\"",
+    "build:standalone": "NEXT_STANDALONE=true next build",
+    "start:standalone": "node .next/standalone/server.js"
   },
   "keywords": [],
   "author": "",
