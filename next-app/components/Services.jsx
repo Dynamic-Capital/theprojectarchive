@@ -45,22 +45,16 @@ export default function Services({ openLightbox, images = [] }) {
   };
 
   return (
-    <ParallaxSection
-      id="services"
-      image="https://picsum.photos/1920/1080?random=24"
-      alt="Background image for Services section"
-      title="Services"
-      description="Explore the range of photography services we offer for individuals and businesses."
-    >
-      <div
-        style={{
-          position: 'relative',
-          width: '18rem',
-          height: '13rem',
-          marginInline: 'auto',
-          marginTop: 'var(--space-6)'
-        }}
+      <ParallaxSection
+        id="services"
+        image="https://picsum.photos/1920/1080?random=24"
+        alt="Background image for Services section"
+        title="Services"
+        description="Explore the range of photography services we offer for individuals and businesses."
       >
+        <div
+          className="relative mx-auto mt-[var(--space-6)] w-full max-w-sm h-52 sm:max-w-md sm:h-56"
+        >
         {cards.slice(0, 3).map((img, i) => (
           <motion.div
             key={img.src}
