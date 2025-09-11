@@ -8,8 +8,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: digitalocean/action-doctl@v2
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
+      - uses: digitalocean/action-doctl@5727c67aa3c2c34ae9462d5a0ecfea8a1b31e5ce # v2
         with:
           token: ${{ secrets.DO_API_TOKEN }}
       - name: Deploy to DigitalOcean App Platform

@@ -17,3 +17,24 @@ spec:
           image: ${IMAGE}
           ports:
             - containerPort: 80
+          resources:
+            # Adjust requests/limits based on expected load
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "200m"
+              memory: "256Mi"
+          livenessProbe:
+            # Probe root path to ensure web server responds
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
