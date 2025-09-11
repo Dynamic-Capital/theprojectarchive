@@ -6,9 +6,14 @@ import { vi } from 'vitest';
 // rendered directly in tests. Strip those out before creating the `img`
 // element to avoid React warnings during test runs.
 vi.mock('next/image', () => ({
-  default: ({ priority, fill, ...props }) => {
+  default: ({ priority, fill, blurDataURL, placeholder, ...props }) => {
     void priority;
     void fill;
+    // `blurDataURL` and `placeholder` are Next.js specific props that
+    // aren't valid on standard `img` elements. Strip them to avoid React
+    // warnings about unknown DOM attributes during tests.
+    void blurDataURL;
+    void placeholder;
     return React.createElement('img', props);
   },
 }));
