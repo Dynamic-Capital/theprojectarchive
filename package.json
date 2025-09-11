@@ -5,7 +5,8 @@
   "scripts": {
     "postinstall": "npm --prefix next-app install",
     "dev": "npm --prefix next-app run dev",
-    "build": "npm --prefix next-app run build",
+    "build": "npm --prefix next-app run build && npm run verify-static",
+    "verify-static": "node scripts/verify-static.mjs",
     "start": "npx -y serve@latest _static",
     "test": "npm --prefix next-app run test",
     "lint": "npm --prefix next-app run lint",
