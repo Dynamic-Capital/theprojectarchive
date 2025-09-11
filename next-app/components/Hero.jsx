@@ -100,7 +100,14 @@ export default function Hero() {
           textAlign: 'center',
         }}
       >
-        <motion.h1 className="sr-only" variants={itemUp(reduceMotion)}>
+        <motion.h1
+          style={{
+            color: 'var(--text)',
+            fontSize: 'var(--fs-2)',
+            letterSpacing: '0.1em',
+          }}
+          variants={itemUp(reduceMotion)}
+        >
           We're a Creative studio capturing stories in the Maldives
         </motion.h1>
         <motion.div
