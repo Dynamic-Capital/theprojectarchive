@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "npm --prefix next-app install",
     "dev": "npm --prefix next-app run dev",
-    "build": "cd next-app && npm run build",
+    "build": "npm --prefix next-app run build",
     "start": "node server.js",
     "test": "npm --prefix next-app run test",
     "lint": "npm --prefix next-app run lint",
