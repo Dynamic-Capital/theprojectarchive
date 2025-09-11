@@ -1,6 +1,11 @@
 'use client';
-import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import React, { useRef } from 'react';
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from 'framer-motion';
 import Image from 'next/image';
 import CurvedLoop from './CurvedLoopText.jsx';
 import Hero3D from './Hero3D';
@@ -36,8 +41,16 @@ const ctaContainer = {
 
 export default function Hero() {
   const reduceMotion = useReducedMotion();
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start start', 'end start'],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
+
   return (
     <motion.section
+      ref={ref}
       id="home"
       style={{
         minHeight: '100dvh',
@@ -46,10 +59,12 @@ export default function Hero() {
         justifyContent: 'center',
         textAlign: 'center',
         position: 'relative',
+        y: reduceMotion ? 0 : y,
       }}
       variants={container}
       initial="hidden"
-      animate="show"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.8 }}
     >
       <Image
         src="https://picsum.photos/1920/1080?random=11"
