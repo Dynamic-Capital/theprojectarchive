@@ -5,15 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "node scripts/update-static.mjs",
+    "build": "next build",
+    "postbuild": "rimraf ../_static && shx mkdir -p ../_static && shx cp -r out/* ../_static/",
     "start": "npx -y serve@latest ../_static",
     "test": "vitest run",
     "lint": "eslint . --ext js,jsx,mjs --no-error-on-unmatched-pattern",
     "format": "prettier . --write",
-    "watch-static": "chokidar \"app/**\" -c \"npm run build\"",
-    "build:standalone": "NEXT_STANDALONE=true next build",
-    "start:standalone": "next start",
-    "analyze": "ANALYZE=true npm run build:standalone"
+    "watch-static": "chokidar \"app/**\" -c \"npm run build\""
   },
   "keywords": [],
   "author": "",
@@ -46,6 +44,8 @@
     "jsdom": "^26.1.0",
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",
+    "rimraf": "^6.0.1",
+    "shx": "^0.4.0",
     "tailwindcss": "^4.1.13",
     "vitest": "^3.2.4",
     "vitest-axe": "^0.1.0"

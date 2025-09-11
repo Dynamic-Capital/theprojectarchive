@@ -26,11 +26,12 @@ if (bucketUrl) {
 
 const nextConfig = {
   reactStrictMode: true,
-  output: process.env.NEXT_STANDALONE === 'true' ? 'standalone' : 'export',
+  output: 'export',
   images: {
     remotePatterns,
     unoptimized: true,
   },
+  trailingSlash: true,
 };
 
 export default withBundleAnalyzer(nextConfig);
