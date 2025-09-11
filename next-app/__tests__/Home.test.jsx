@@ -44,7 +44,9 @@ describe('Home', () => {
   it('traps focus within lightbox and has no accessibility violations', async () => {
     mockPathname = '/';
     const { container } = render(<Home />);
-    const imgs = await screen.findAllByAltText('Gallery image 1');
+    const imgs = await screen.findAllByAltText(
+      'Bride and groom pose on a sunny beach during a wedding shoot'
+    );
     fireEvent.click(imgs[0]);
     const closeBtn = await screen.findByRole('button', { name: /close image/i });
     expect(document.activeElement).toBe(closeBtn);
