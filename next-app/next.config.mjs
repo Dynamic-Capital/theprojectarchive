@@ -32,6 +32,7 @@ const nextConfig = {
     remotePatterns,
     unoptimized: true,
   },
+  output: 'export',
   trailingSlash: true,
   // Generate a static export so the build creates an `out` directory
   // that can be moved to `/_static` for deployment.
