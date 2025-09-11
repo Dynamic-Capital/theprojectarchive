@@ -26,12 +26,10 @@ if (bucketUrl) {
 
 const nextConfig = {
   reactStrictMode: true,
-  output: 'export',
   images: {
     loader: 'akamai',
     path: '',
     remotePatterns,
-    // Disable the Image Optimization API when using static exports
     unoptimized: true,
   },
   trailingSlash: true,
