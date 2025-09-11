@@ -2,7 +2,13 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: tpa-site
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
+  tls:
+    - hosts:
+        - example.com
+      secretName: tpa-site-tls
   rules:
     - host: example.com
       http:
