@@ -1,0 +1,40 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: color-mix(in oklab, var(--bg), transparent 20%);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-1);
+  z-index: var(--z-sticky);
+  color: var(--text);
+}
+
+.brand {
+  font-size: var(--fs-2);
+  font-weight: 750;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.themeToggle {
+  font-size: var(--fs-2);
+}
+
+.menuButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0.625rem;
+}
+
+.bar {
+  display: block;
+  height: 2px;
+  background: var(--text);
+}

@@ -16,6 +16,8 @@ npm run dev
 
 Update `NEXT_ALLOWED_ORIGIN`, `SPACE_BUCKET_URL`, and `MAINTENANCE_MODE` in `.env` to match your environment.
 
+`NEXT_ALLOWED_ORIGIN` restricts incoming requests to the specified origin and is enforced in `server.js`.
+
 ## Maintenance mode
 
 Set `MAINTENANCE_MODE=true` to redirect all traffic to `/coming-soon`. The middleware in `next-app/middleware.ts` reads `process.env.MAINTENANCE_MODE`, similar to how `next-app/next.config.mjs` uses `SPACE_BUCKET_URL`.
