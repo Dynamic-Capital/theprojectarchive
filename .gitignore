@@ -6,5 +6,8 @@ dist/
 dist-ssr/
 *.local
 
+_static/
+.turbo
+
 *storybook.log
 storybook-static

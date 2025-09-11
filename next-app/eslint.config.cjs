@@ -8,6 +8,9 @@ const tsParser = require('@typescript-eslint/parser');
 
 module.exports = [
   {
+    ignores: ['.next/**', 'out/**'],
+  },
+  {
     files: ['**/*.{js,jsx,ts,tsx,mjs}'],
     plugins: { react: reactPlugin, '@typescript-eslint': tseslint, storybook },
     languageOptions: {
