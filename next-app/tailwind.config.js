@@ -1,6 +1,9 @@
+import forms from '@tailwindcss/forms';
+import typography from '@tailwindcss/typography';
+
 export default {
   darkMode: 'class',
-  content: ['./app/**/*.{js,jsx}', './components/**/*.{js,jsx}'],
+  content: ['./app/**/*.{js,jsx,ts,tsx}', './components/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
       colors: {
@@ -42,5 +45,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [forms, typography],
 };

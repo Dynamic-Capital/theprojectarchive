@@ -5,3 +5,6 @@ build/
 dist/
 dist-ssr/
 *.local
+
+*storybook.log
+storybook-static

@@ -2,14 +2,21 @@
   "name": "theprojectarchive-root",
   "version": "1.0.0",
   "private": true,
+  "workspaces": ["next-app"],
   "scripts": {
-    "postinstall": "npm --prefix next-app install",
-    "dev": "npm --prefix next-app run dev",
-    "build": "npm --prefix next-app run build",
-    "start": "npm --prefix next-app run start",
-    "test": "npm --prefix next-app run test",
-    "lint": "npm --prefix next-app run lint",
-    "format": "npm --prefix next-app run format",
-    "watch-static": "npm --prefix next-app run watch-static"
-  }
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "start": "turbo run start",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "format": "turbo run format",
+    "watch-static": "turbo run watch-static",
+    "analyze": "turbo run analyze",
+    "deploy": "npm run lint && npm run build && pm2 startOrReload ecosystem.config.js"
+  },
+  "devDependencies": {
+    "pm2": "^5.3.0",
+    "turbo": "^2.1.3"
+  },
+  "packageManager": "npm@11.4.2"
 }

@@ -15,5 +15,7 @@ FROM nginx:alpine
 COPY --from=build /_static /usr/share/nginx/html
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log
+HEALTHCHECK --interval=30s --timeout=5s \
+  CMD wget -q -O - http://localhost/ || exit 1
 EXPOSE 80
 CMD ["sh", "-c", "echo Starting Nginx to serve static assets && nginx -g 'daemon off;'"]

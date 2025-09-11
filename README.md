@@ -44,6 +44,14 @@ To rebuild automatically when files in `app/` change and refresh the local `_sta
 npm run watch-static
 ```
 
+### Analyze bundle size
+
+Generate a build with bundle analysis enabled:
+
+```bash
+npm run analyze
+```
+
 ## 3D Animation
 
 The hero section showcases a rotating 3D cube using `three` and `@react-three/fiber`. Animations respect the user's `prefers-reduced-motion` setting and fall back to a static placeholder when motion is reduced. Import `Hero3D` into any component to render the scene.
@@ -71,6 +79,12 @@ GitHub Actions in `.github/workflows/deploy.yml` builds the site and deploys the
 - `DO_DEPLOY_PATH` – Target path on the Droplet
 
 Optional assets can be served from a DigitalOcean Space; see `.env.example` for configuration.
+
+For a local one-command deploy that lints, builds, and starts the app with PM2:
+
+```bash
+npm run deploy
+```
 
 ### DigitalOcean App Platform
 

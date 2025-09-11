@@ -29,15 +29,14 @@ class MockIntersectionObserver {
   disconnect() {}
 }
 
-global.IntersectionObserver = MockIntersectionObserver;
+globalThis.IntersectionObserver = MockIntersectionObserver;
 class MockResizeObserver {
   constructor() {}
   observe() {}
   unobserve() {}
   disconnect() {}
 }
-
-global.ResizeObserver = MockResizeObserver;
+globalThis.ResizeObserver = MockResizeObserver;
 window.scrollTo = vi.fn();
 HTMLCanvasElement.prototype.getContext = vi.fn();
 
