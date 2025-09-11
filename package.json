@@ -6,7 +6,7 @@
     "postinstall": "npm --prefix next-app install",
     "dev": "npm --prefix next-app run dev",
     "build": "cd next-app && npm run build",
-    "start": "npm --prefix next-app run start",
+    "start": "node server.js",
     "test": "npm --prefix next-app run test",
     "lint": "npm --prefix next-app run lint",
     "format": "npm --prefix next-app run format",
@@ -14,5 +14,6 @@
     "build:standalone": "npm --prefix next-app run build:standalone",
     "start:standalone": "npm --prefix next-app run start:standalone",
     "analyze": "npm --prefix next-app run analyze"
-  }
+  },
+  "type": "module"
 }
