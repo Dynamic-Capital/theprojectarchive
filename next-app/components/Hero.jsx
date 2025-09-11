@@ -7,14 +7,9 @@ import {
   useTransform,
 } from 'framer-motion';
 import Image from 'next/image';
-import dynamic from 'next/dynamic';
 import CurvedLoop from './CurvedLoopText.jsx';
 import Button from './Button';
-
-const Hero3D = dynamic(() => import('./Hero3D'), {
-  ssr: false,
-  loading: () => <div style={{ height: '300px' }} />,
-});
+import Hero3D from './Hero3D';
 
 const container = {
   hidden: { opacity: 0 },
