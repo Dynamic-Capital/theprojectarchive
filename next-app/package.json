@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "node scripts/update-static.mjs",
-    "start": "npx -y serve@latest ../build",
+    "start": "npx -y serve@latest ../_static",
     "test": "vitest run",
     "lint": "eslint . --ext js,jsx,mjs --no-error-on-unmatched-pattern",
     "format": "prettier . --write",
