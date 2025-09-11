@@ -1,7 +1,12 @@
 node_modules/
 .next/
 out/
+_static/
 build/
 dist/
 dist-ssr/
 *.local
+
+# PWA generated files
+next-app/public/sw.js
+next-app/public/workbox-*.js
