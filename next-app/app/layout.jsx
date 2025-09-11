@@ -11,7 +11,8 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 logRuntimeInfo();
 
 export const metadata = {
-  title: 'The Project Archive - Creative studio for design, development, and photography',
+  title:
+    'The Project Archive - Creative studio for design, development, and photography',
   icons: {
     icon: '/favicon.svg',
   },
@@ -23,7 +24,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={inter.variable}>
       <body>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={false}
+        >
           <ClientLayout>{children}</ClientLayout>
         </ThemeProvider>
       </body>

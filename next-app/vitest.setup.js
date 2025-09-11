@@ -6,17 +6,23 @@ import { vi } from 'vitest';
 // rendered directly in tests. Strip those out before creating the `img`
 // element to avoid React warnings during test runs.
 vi.mock('next/image', () => ({
-  default: ({ priority, fill, ...props }) =>
-    React.createElement('img', props),
+  default: ({ priority, fill, ...props }) => React.createElement('img', props),
 }));
 
 vi.mock('next/link', () => ({
-  default: ({ children, ...props }) => React.createElement('a', props, children),
+  default: ({ children, ...props }) =>
+    React.createElement('a', props, children),
 }));
 
 vi.mock('next/navigation', () => ({
   useRouter: () => ({ push: vi.fn() }),
   usePathname: () => '/',
+}));
+
+// Mock react-three helpers that require WebGL APIs during tests
+vi.mock('@react-three/drei', () => ({
+  OrbitControls: () => null,
+  Box: ({ children }) => React.createElement('group', null, children),
 }));
 
 class MockIntersectionObserver {

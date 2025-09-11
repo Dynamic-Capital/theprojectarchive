@@ -2,6 +2,8 @@
 /** @type {import('next').NextConfig} */
 // Allow Next.js Image component to load from the DigitalOcean Space
 // configured in SPACE_BUCKET_URL in addition to the default sample images.
+import nextPWA from 'next-pwa';
+
 const bucketUrl = process.env.SPACE_BUCKET_URL;
 
 const remotePatterns = [
@@ -20,6 +22,23 @@ if (bucketUrl) {
   }
 }
 
+const withPWA = nextPWA({
+  dest: 'public',
+  disable: process.env.NODE_ENV === 'development',
+  runtimeCaching: [
+    {
+      urlPattern: /^https:\/\/picsum\.photos\/.*$/i,
+      handler: 'CacheFirst',
+      options: {
+        cacheName: 'image-cache',
+        expiration: {
+          maxEntries: 50,
+        },
+      },
+    },
+  ],
+});
+
 const nextConfig = {
   reactStrictMode: true,
   output: 'export',
@@ -29,4 +48,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withPWA(nextConfig);

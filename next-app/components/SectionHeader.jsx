@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { motion, useReducedMotion } from 'framer-motion';
 import { textVariants } from '../lib/animations';
 
@@ -18,6 +18,7 @@ export default function SectionHeader({ title, children }) {
       {children && (
         <motion.p
           style={{ maxWidth: '32rem', marginInline: 'auto' }}
+          className="prose"
           variants={textVariants(reduceMotion)}
           initial="hidden"
           whileInView="show"
