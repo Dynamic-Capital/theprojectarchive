@@ -7,9 +7,14 @@ import {
   useTransform,
 } from 'framer-motion';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import CurvedLoop from './CurvedLoopText.jsx';
-import Hero3D from './Hero3D';
 import Button from './Button';
+
+const Hero3D = dynamic(() => import('./Hero3D'), {
+  ssr: false,
+  loading: () => <div style={{ height: '300px' }} />,
+});
 
 const container = {
   hidden: { opacity: 0 },
@@ -68,12 +73,21 @@ export default function Hero() {
       viewport={{ once: true, amount: 0.8 }}
     >
       <Image
-        src="https://picsum.photos/1920/1080?random=11"
+        src="https://picsum.photos/id/1015/1920/1080"
         alt="A creative workspace with a camera and photo prints on a desk"
-        fill
+        width={1920}
+        height={1080}
+        placeholder="blur"
+        blurDataURL="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
         sizes="100vw"
         priority
-        style={{ objectFit: 'cover' }}
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+        }}
       />
       <div
         aria-hidden="true"

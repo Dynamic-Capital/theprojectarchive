@@ -87,7 +87,10 @@ export default function Services({ openLightbox, images = [] }) {
             <Image
               src={img.src}
               alt={img.alt}
-              fill
+              width={400}
+              height={300}
+              placeholder="blur"
+              blurDataURL="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
               sizes="100%"
               style={{ objectFit: 'cover' }}
               draggable={false}
