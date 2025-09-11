@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "rm -rf _static && mkdir -p _static && cp -r out/* _static/",
-    "start": "npx -y serve@latest _static",
+    "postbuild": "rm -rf ../_static && mkdir -p ../_static && cp -r out/* ../_static/",
+    "start": "npx -y serve@latest ../_static",
     "test": "vitest run",
     "lint": "eslint . --ext js,jsx,mjs --no-error-on-unmatched-pattern",
     "format": "prettier . --write",
