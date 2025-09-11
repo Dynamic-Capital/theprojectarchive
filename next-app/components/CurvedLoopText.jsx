@@ -18,15 +18,27 @@ import {
  * @framerIntrinsicWidth 400
  * @framerIntrinsicHeight 200
  * @framerDisableUnlink
- */ export default function CurvedLoop(props) {
+ */ export default function CurvedLoop({
+  text = {
+    text: 'Framer University',
+    font: { fontFamily: 'sans-serif', fontWeight: '400', fontSize: 64 },
+    color: '#999999',
+  },
+  direction = 'left',
+  baseVelocity = 50,
+  curveAmount = 300,
+  draggable = true,
+  fade = true,
+}) {
   const measureRef = useRef(null);
   const tspansRef = useRef([]);
   const pathRef = useRef(null);
   const [pathLength, setPathLength] = useState(0);
-  const [spacing, setSpacing] = useState(0); // Use completely static IDs based on component props to ensure consistency
+  const [spacing, setSpacing] = useState(0);
+  // Use completely static IDs based on component props to ensure consistency
   const staticId = useMemo(() => {
     // Create a deterministic hash from props that will be consistent across SSR/client
-    const propsString = `${props.text.text}-${props.curveAmount}-${props.direction}-${props.baseVelocity}`;
+    const propsString = `${text.text}-${curveAmount}-${direction}-${baseVelocity}`;
     let hash = 0;
     for (let i = 0; i < propsString.length; i++) {
       const char = propsString.charCodeAt(i);
@@ -34,36 +46,43 @@ import {
       hash = hash & hash; // Convert to 32-bit integer
     }
     return Math.abs(hash).toString(36);
-  }, [props.text.text, props.curveAmount, props.direction, props.baseVelocity]);
+  }, [text.text, curveAmount, direction, baseVelocity]);
   const pathId = `curve-${staticId}`;
   const fadeGradientId = `fadeGradient-${staticId}`;
   const fadeMaskId = `fadeMask-${staticId}`;
-  const pathD = `M-100,400 Q720,${400 + props.curveAmount} 1540,400`;
+  const pathD = `M-100,400 Q720,${400 + curveAmount} 1540,400`;
   const defaultVelocity = useMotionValue(1);
   const isDragging = useRef(false);
-  const dragVelocity = useRef(0); // Transform scroll velocity into a factor that affects marquee speed
+  const dragVelocity = useRef(0);
+  // Transform scroll velocity into a factor that affects marquee speed
   const velocityFactor = useTransform(defaultVelocity, [0, 1e3], [0, 5], {
     clamp: false,
-  }); // Convert baseVelocity to the correct direction
+  });
+  // Convert baseVelocity to the correct direction
   const actualBaseVelocity =
-    props.direction === 'left' ? -props.baseVelocity : props.baseVelocity; // Reference to track if mouse is hovering
-  const isHovered = useRef(false); // Direction factor for changing direction based on scroll or drag
-  const directionFactor = useRef(1); // Process text to ensure proper spacing
+    direction === 'left' ? -baseVelocity : baseVelocity;
+  // Reference to track if mouse is hovering
+  const isHovered = useRef(false);
+  // Direction factor for changing direction based on scroll or drag
+  const directionFactor = useRef(1);
+  // Process text to ensure proper spacing
   const processedText = useMemo(() => {
     // Remove any trailing spaces first
-    const trimmedText = props.text.text.trim(); // Add two non-breaking spaces to ensure visible gap
+    const trimmedText = text.text.trim();
+    // Add two non-breaking spaces to ensure visible gap
     return trimmedText + '\xa0\xa0';
-  }, [props]); // Measure text width and set up path
+  }, [text]);
+  // Measure text width and set up path
   useEffect(() => {
     if (measureRef.current) {
       setSpacing(measureRef.current.getComputedTextLength());
     }
-  }, [props]);
+  }, [text]);
   useEffect(() => {
     if (pathRef.current) {
       setPathLength(pathRef.current.getTotalLength());
     }
-  }, [props.curveAmount]); // Calculate number of repeats needed based on path length and text spacing
+  }, [curveAmount]);
   const calculatedRepeats = Math.ceil(pathLength / spacing) + 2;
   const ready = pathLength > 0 && spacing > 0;
   useAnimationFrame((t, delta) => {
@@ -112,7 +131,7 @@ import {
   });
   const lastPointerPosition = useRef({ x: 0, y: 0 });
   const handlePointerDown = (e) => {
-    if (!props.draggable) return;
+    if (!draggable) return;
     e.currentTarget.setPointerCapture(e.pointerId);
     e.currentTarget.style.cursor = 'grabbing';
     isDragging.current = true;
@@ -120,7 +139,7 @@ import {
     dragVelocity.current = 0;
   };
   const handlePointerMove = (e) => {
-    if (!props.draggable) return;
+    if (!draggable) return;
     if (!isDragging.current) return;
     const currentPosition = { x: e.clientX, y: e.clientY }; // Calculate delta from last position
     const deltaX = currentPosition.x - lastPointerPosition.current.x; // Update drag velocity based on horizontal movement
@@ -128,12 +147,12 @@ import {
     lastPointerPosition.current = currentPosition;
   };
   const handlePointerUp = (e) => {
-    if (!props.draggable) return;
+    if (!draggable) return;
     e.currentTarget.releasePointerCapture(e.pointerId);
     e.currentTarget.style.cursor = 'grab';
     isDragging.current = false;
   };
-  const cursorStyle = props.draggable
+  const cursorStyle = draggable
     ? isDragging.current
       ? 'grabbing'
       : 'grab'
@@ -162,11 +181,11 @@ import {
         aspectRatio: '1440 / 800',
         overflow: 'visible',
         display: 'block',
-        fill: props.text.color,
-        fontFamily: props.text.font.fontFamily,
-        fontSize: props.text.font.fontSize,
-        letterSpacing: props.text.font.letterSpacing,
-        lineHeight: props.text.font.lineHeight,
+        fill: text.color,
+        fontFamily: text.font.fontFamily,
+        fontSize: text.font.fontSize,
+        letterSpacing: text.font.letterSpacing,
+        lineHeight: text.font.lineHeight,
       },
       children: [
         /*#__PURE__*/ _jsx('text', {
@@ -189,7 +208,7 @@ import {
               fill: 'none',
               stroke: 'transparent',
             }),
-            props.fade &&
+            fade &&
               /*#__PURE__*/ _jsxs(_Fragment, {
                 children: [
                   /*#__PURE__*/ _jsxs('linearGradient', {
@@ -235,9 +254,9 @@ import {
         }),
         ready &&
           /*#__PURE__*/ _jsx('text', {
-            fontWeight: props.text.font.fontWeight,
+            fontWeight: text.font.fontWeight,
             xmlSpace: 'preserve',
-            mask: props.fade ? `url(#${fadeMaskId})` : undefined,
+            mask: fade ? `url(#${fadeMaskId})` : undefined,
             onPointerDown: handlePointerDown,
             onPointerMove: handlePointerMove,
             onPointerUp: handlePointerUp,
@@ -266,20 +285,6 @@ import {
 } // ------------------------------------------------------------ //
 // PROPERTY CONTROLS
 // ------------------------------------------------------------ //
-// DEFAULT PROPS
-// ------------------------------------------------------------ //
-CurvedLoop.defaultProps = {
-  text: {
-    text: 'Framer University',
-    font: { fontFamily: 'sans-serif', fontWeight: '400', fontSize: 64 },
-    color: '#999999',
-  },
-  direction: 'left',
-  baseVelocity: 50,
-  curveAmount: 300,
-  draggable: true,
-  fade: true,
-};
 CurvedLoop.displayName = 'Curved Loop Text';
 export const __FramerMetadata__ = {
   exports: {

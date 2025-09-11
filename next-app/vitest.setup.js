@@ -2,8 +2,12 @@ import '@testing-library/jest-dom/vitest';
 import React from 'react';
 import { vi } from 'vitest';
 
+// next/image adds several props that aren't valid DOM attributes when
+// rendered directly in tests. Strip those out before creating the `img`
+// element to avoid React warnings during test runs.
 vi.mock('next/image', () => ({
-  default: (props) => React.createElement('img', props),
+  default: ({ priority, fill, ...props }) =>
+    React.createElement('img', props),
 }));
 
 vi.mock('next/link', () => ({
