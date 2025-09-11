@@ -6,3 +6,6 @@ dist/
 dist-ssr/
 *.local
 _static/
+
+# Environment variables
+**/.env

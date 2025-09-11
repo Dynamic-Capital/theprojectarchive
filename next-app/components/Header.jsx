@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTheme } from 'next-themes';
+import styles from '../styles/Header.module.css';
 
 const topBar = {
   closed: { rotate: 0, y: 0 },
@@ -29,75 +30,35 @@ export default function Header({ onToggle, open }) {
 
   return (
     <motion.header
-      className="safe-p sticky top-0 w-full"
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        background: 'color-mix(in oklab, var(--bg), transparent 20%)',
-        backdropFilter: 'blur(12px)',
-        boxShadow: 'var(--shadow-1)',
-        zIndex: 'var(--z-sticky)',
-        color: 'var(--text)',
-        y,
-      }}
+      className={`safe-p sticky top-0 w-full ${styles.header}`}
+      style={{ y }}
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
     >
-      <Link href="/" style={{ fontSize: 'var(--fs-2)', fontWeight: 750 }}>
+      <Link href="/" className={styles.brand}>
         The Project Archive
       </Link>
-      <div
-        style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)' }}
-      >
+      <div className={styles.actions}>
         {mounted && (
           <button
             onClick={toggleTheme}
             aria-label="Toggle theme"
-            style={{ fontSize: 'var(--fs-2)' }}
+            className={styles.themeToggle}
           >
             {theme === 'light' ? '🌙' : '☀️'}
           </button>
         )}
         <motion.button
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            width: '2.75rem',
-            height: '2.75rem',
-            padding: '0.625rem',
-          }}
+          className={styles.menuButton}
           type="button"
           aria-label={open ? 'Close menu' : 'Open menu'}
           onClick={onToggle}
           initial={false}
           animate={open ? 'open' : 'closed'}
         >
-          <motion.span
-            style={{
-              display: 'block',
-              height: '2px',
-              background: 'var(--text)',
-            }}
-            variants={topBar}
-          ></motion.span>
-          <motion.span
-            style={{
-              display: 'block',
-              height: '2px',
-              background: 'var(--text)',
-            }}
-            variants={middleBar}
-          ></motion.span>
-          <motion.span
-            style={{
-              display: 'block',
-              height: '2px',
-              background: 'var(--text)',
-            }}
-            variants={bottomBar}
-          ></motion.span>
+          <motion.span className={styles.bar} variants={topBar}></motion.span>
+          <motion.span className={styles.bar} variants={middleBar}></motion.span>
+          <motion.span className={styles.bar} variants={bottomBar}></motion.span>
         </motion.button>
       </div>
     </motion.header>
