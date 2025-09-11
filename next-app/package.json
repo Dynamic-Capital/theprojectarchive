@@ -10,7 +10,10 @@
     "test": "vitest run",
     "lint": "eslint . --ext js,jsx,mjs --no-error-on-unmatched-pattern",
     "format": "prettier . --write",
-    "watch-static": "chokidar \"app/**\" -c \"npm run build\""
+    "watch-static": "chokidar \"app/**\" -c \"npm run build\"",
+    "build:standalone": "NEXT_STANDALONE=true next build",
+    "start:standalone": "next start",
+    "analyze": "ANALYZE=true npm run build:standalone"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +32,7 @@
     "three": "^0.151.0"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^14.2.32",
     "@tailwindcss/postcss": "^4.1.13",
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",

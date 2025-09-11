@@ -10,6 +10,9 @@
     "test": "npm --prefix next-app run test",
     "lint": "npm --prefix next-app run lint",
     "format": "npm --prefix next-app run format",
-    "watch-static": "npm --prefix next-app run watch-static"
+    "watch-static": "npm --prefix next-app run watch-static",
+    "build:standalone": "npm --prefix next-app run build:standalone",
+    "start:standalone": "npm --prefix next-app run start:standalone",
+    "analyze": "npm --prefix next-app run analyze"
   }
 }

@@ -1,7 +1,11 @@
 /* eslint-env node */
+import bundleAnalyzer from '@next/bundle-analyzer';
 /** @type {import('next').NextConfig} */
 // Allow Next.js Image component to load from the DigitalOcean Space
 // configured in SPACE_BUCKET_URL in addition to the default sample images.
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+});
 const bucketUrl = process.env.SPACE_BUCKET_URL;
 
 const remotePatterns = [
@@ -22,11 +26,11 @@ if (bucketUrl) {
 
 const nextConfig = {
   reactStrictMode: true,
-  output: 'export',
+  output: process.env.NEXT_STANDALONE === 'true' ? 'standalone' : 'export',
   images: {
     remotePatterns,
     unoptimized: true,
   },
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);
