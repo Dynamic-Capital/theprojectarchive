@@ -11,8 +11,12 @@ const outDir = path.join(projectDir, 'out');
 // Copy the static build output to the repository root so the buildpack can
 // serve it via the web server configured in project.toml. Allow overriding the
 // destination directory with STATIC_OUT_DIR for platforms that expect a
-// different name (e.g. "dist" or "public").
-const targetDir = path.resolve(projectDir, '..', process.env.STATIC_OUT_DIR ?? 'build');
+// different name (e.g. "dist" or "public"). Defaults to "_static".
+const targetDir = path.resolve(
+  projectDir,
+  '..',
+  process.env.STATIC_OUT_DIR ?? '_static',
+);
 
 console.log('Running next build...');
 execSync('next build', { cwd: projectDir, stdio: 'inherit' });
