@@ -11,6 +11,7 @@ export default function ParallaxSection({
   title,
   description,
   children,
+  priority = false,
 }) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -24,6 +25,7 @@ export default function ParallaxSection({
     <section
       id={id}
       ref={ref}
+      className="scroll-mt-header"
       style={{
         position: 'relative',
         minHeight: '100dvh',
@@ -45,7 +47,7 @@ export default function ParallaxSection({
           alt={alt}
           fill
           sizes="100vw"
-          priority={true}
+          priority={priority}
           style={{ objectFit: 'cover' }}
         />
       </motion.div>

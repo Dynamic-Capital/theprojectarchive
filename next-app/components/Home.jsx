@@ -181,7 +181,7 @@ export default function Home() {
       <motion.button
         style={{
           position: 'fixed',
-          bottom: 'var(--space-4)',
+          bottom: 'max(var(--space-4), env(safe-area-inset-bottom))',
           right: 'var(--space-4)',
           width: '3rem',
           height: '3rem',

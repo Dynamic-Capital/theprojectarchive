@@ -29,15 +29,11 @@ export default function Header({ onToggle, open }) {
 
   return (
     <motion.header
+      className="safe-p sticky top-0 w-full"
       style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: 'var(--space-4)',
         background: 'color-mix(in oklab, var(--bg), transparent 20%)',
         backdropFilter: 'blur(12px)',
         boxShadow: 'var(--shadow-1)',
@@ -68,8 +64,9 @@ export default function Header({ onToggle, open }) {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
-            width: '2rem',
-            height: '1.5rem',
+            width: '2.75rem',
+            height: '2.75rem',
+            padding: '0.625rem',
           }}
           type="button"
           aria-label={open ? 'Close menu' : 'Open menu'}

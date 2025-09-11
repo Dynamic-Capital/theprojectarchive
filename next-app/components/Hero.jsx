@@ -52,6 +52,7 @@ export default function Hero() {
     <motion.section
       ref={ref}
       id="home"
+      className="scroll-mt-header"
       style={{
         minHeight: '100dvh',
         display: 'flex',
@@ -85,7 +86,7 @@ export default function Hero() {
         }}
       />
       <div
-        className="container"
+        className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8"
         style={{
           position: 'relative',
           zIndex: 10,

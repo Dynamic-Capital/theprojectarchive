@@ -1,4 +1,16 @@
 /* Base */
+:root {
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+}
+.safe-p {
+  padding: var(--safe-top) var(--safe-right) var(--safe-bottom) var(--safe-left);
+}
+.scroll-mt-header {
+  scroll-margin-top: 5rem;
+}
 html { color-scheme: dark light; hanging-punctuation: first last; }
 body {
   background: radial-gradient(1200px 800px at 20% -10%, rgba(42,59,144,.20), transparent 60%),
@@ -7,12 +19,6 @@ body {
   font-family: var(--font-sans);
   font-size: var(--fs-1);
   line-height: var(--lh-normal);
-}
-
-/* App container helpers */
-.container {
-  width: min(100% - 2*var(--gutter), var(--container));
-  margin-inline: auto;
 }
 
 /* Typography */
