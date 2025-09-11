@@ -44,6 +44,25 @@ To rebuild automatically when files in `app/` change and refresh the local `_sta
 npm run watch-static
 ```
 
+## Next.js build helpers
+
+Run a standard Next.js production server build:
+
+```bash
+npm run build:standalone
+npm run start:standalone
+```
+
+The build sets `NEXT_STANDALONE=true`, producing a `.next/standalone` directory with only the files needed to run the app, ideal for Docker or PM2 deployments.
+
+To inspect bundle sizes and locate large dependencies, run:
+
+```bash
+npm run analyze
+```
+
+This enables `@next/bundle-analyzer` when `ANALYZE=true` is present during `next build`.
+
 ## 3D Animation
 
 The hero section showcases a rotating 3D cube using `three` and `@react-three/fiber`. Animations respect the user's `prefers-reduced-motion` setting and fall back to a static placeholder when motion is reduced. Import `Hero3D` into any component to render the scene.
