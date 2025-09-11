@@ -33,6 +33,9 @@ const nextConfig = {
     unoptimized: true,
   },
   trailingSlash: true,
+  // Generate a static export so the build creates an `out` directory
+  // that can be moved to `/_static` for deployment.
+  output: 'export',
 };
 
 export default withBundleAnalyzer(nextConfig);
