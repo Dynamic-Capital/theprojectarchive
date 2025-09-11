@@ -1,10 +1,11 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
+import Layout from './Layout';
 
 export default function ComingSoon() {
   return (
-    <motion.main
+    <Layout
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -15,9 +16,6 @@ export default function ComingSoon() {
         padding: 'var(--space-4)',
         textAlign: 'center'
       }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
     >
       <motion.h1
         style={{ fontSize: 'var(--fs-5)', fontWeight: 750 }}
@@ -68,6 +66,6 @@ export default function ComingSoon() {
           Instagram
         </a>
       </motion.div>
-    </motion.main>
+    </Layout>
   );
 }

@@ -2,6 +2,7 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import Button from './Button';
+import Layout from './Layout';
 
 const glitch = {
   initial: {
@@ -32,7 +33,7 @@ export default function NotFound() {
   const router = useRouter();
 
   return (
-    <motion.div
+    <Layout
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -43,9 +44,6 @@ export default function NotFound() {
         padding: 'var(--space-4)',
         textAlign: 'center'
       }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: shouldReduceMotion ? 0 : 0.5 }}
     >
       {shouldReduceMotion ? (
         <p style={{ fontSize: 'var(--fs-3)', fontWeight: 750 }}>404 Not Found</p>
@@ -62,6 +60,6 @@ export default function NotFound() {
       <Button onClick={() => router.push('/')} variant="primary">
         Go Home
       </Button>
-    </motion.div>
+    </Layout>
   );
 }
