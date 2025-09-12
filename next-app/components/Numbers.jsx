@@ -1,15 +1,21 @@
 "use client";
 import React, { useRef, useState, useEffect } from 'react';
-import { useInView, animate } from 'framer-motion';
+import { useInView, animate, useReducedMotion } from 'framer-motion';
 import ParallaxSection from './ParallaxSection';
 
-function Counter({ value = 0 }) {
+function Counter({ value = 0, label = '' }) {
   const target = Number(value) || 0;
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
+  const shouldReduceMotion = useReducedMotion();
   const [display, setDisplay] = useState(0);
 
   useEffect(() => {
+    if (shouldReduceMotion) {
+      setDisplay(target);
+      return;
+    }
+
     if (isInView) {
       const controls = animate(0, target, {
         duration: 2,
@@ -17,11 +23,13 @@ function Counter({ value = 0 }) {
       });
       return () => controls.stop();
     }
-  }, [isInView, target]);
+  }, [isInView, target, shouldReduceMotion]);
 
   return (
     <span
       ref={ref}
+      aria-live="polite"
+      aria-label={`${target} ${label}`.trim()}
       style={{ fontSize: 'var(--fs-5)', fontWeight: 750, display: 'block' }}
     >
       {display}
@@ -30,6 +38,12 @@ function Counter({ value = 0 }) {
 }
 
 export default function Numbers() {
+  const stats = [
+    { label: 'Projects', value: 150 },
+    { label: 'Clients', value: 85 },
+    { label: 'Awards', value: 12 },
+  ];
+
   return (
     <ParallaxSection
       id="numbers"
@@ -42,18 +56,12 @@ export default function Numbers() {
       <div
         style={{ display: 'flex', gap: 'var(--space-6)', justifyContent: 'center' }}
       >
-        <div style={{ textAlign: 'center' }}>
-          <Counter value={150} />
-          <p>Projects</p>
-        </div>
-        <div style={{ textAlign: 'center' }}>
-          <Counter value={85} />
-          <p>Clients</p>
-        </div>
-        <div style={{ textAlign: 'center' }}>
-          <Counter value={12} />
-          <p>Awards</p>
-        </div>
+        {stats.map(({ label, value }) => (
+          <div key={label} style={{ textAlign: 'center' }}>
+            <Counter value={value} label={label} />
+            <p>{label}</p>
+          </div>
+        ))}
       </div>
     </ParallaxSection>
   );
