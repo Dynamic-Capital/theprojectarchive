@@ -47,7 +47,7 @@ export default function ServicesStack({ items = [], topOffsetClass = 'top-24' })
               <h3 className="text-lg font-semibold">{it.title}</h3>
               <p className="mt-2 text-sm text-muted">{it.description}</p>
               {it.cta && (
-                <a href={it.href || '#contact'} className="mt-4 inline-block rounded-full bg-accent/90 hover:bg-accent text-bg0 px-4 py-2 text-sm">
+                <a href={it.href || '#contact'} className="mt-4 inline-block rounded-full bg-accent/90 hover:bg-accent text-bg0 px-4 py-2 text-sm whitespace-nowrap">
                   {it.cta}
                 </a>
               )}
@@ -100,7 +100,7 @@ export default function ServicesStack({ items = [], topOffsetClass = 'top-24' })
                   {it.cta && (
                     <a
                       href={it.href || '#contact'}
-                      className="mt-6 inline-flex items-center gap-2 rounded-full bg-accent/90 hover:bg-accent text-bg0 px-5 py-2 text-sm font-medium"
+                      className="mt-6 inline-flex items-center gap-2 rounded-full bg-accent/90 hover:bg-accent text-bg0 px-5 py-2 text-sm font-medium whitespace-nowrap"
                     >
                       {it.cta} <span aria-hidden>→</span>
                     </a>
