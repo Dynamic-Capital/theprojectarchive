@@ -2,17 +2,19 @@
 import WebSocket from 'ws';
 
 function usage() {
-  console.error('Usage: DIGITALOCEAN_TOKEN=... node scripts/do-app-logs.js <app-id> <deployment-id> <component-name> [--type <type>] [--stream]');
+  console.error(
+    'Usage: DIGITALOCEAN_TOKEN=... node scripts/do-app-logs.js <app-id> <component-name> [deployment-id] [--type <type>] [--stream]'
+  );
 }
 
 const token = process.env.DIGITALOCEAN_TOKEN;
 const args = process.argv.slice(2);
-if (!token || args.length < 3) {
+if (!token || args.length < 2) {
   usage();
   process.exit(1);
 }
 
-let [appId, deploymentId, componentName, ...rest] = args;
+let [appId, componentName, deploymentId, ...rest] = args;
 let type = 'run';
 let stream = false;
 for (let i = 0; i < rest.length; i++) {
@@ -24,6 +26,25 @@ for (let i = 0; i < rest.length; i++) {
     i++;
   } else if (arg.startsWith('--type=')) {
     type = arg.split('=')[1];
+  }
+}
+
+if (!deploymentId || deploymentId === 'latest') {
+  const depRes = await fetch(`https://api.digitalocean.com/v2/apps/${appId}/deployments`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+  if (!depRes.ok) {
+    console.error(`Failed to fetch deployments with status ${depRes.status}`);
+    process.exit(1);
+  }
+  const depData = await depRes.json();
+  deploymentId = depData.deployments?.[0]?.id;
+  if (!deploymentId) {
+    console.error('No deployments found');
+    process.exit(1);
   }
 }
 

@@ -15,9 +15,11 @@ This guide outlines how to integrate and manage logs for applications running on
   ```bash
   ./scripts/do-app-logs.sh <app-id> [component] [type]
   ```
-- **API script**: `scripts/do-app-logs.js` pulls logs via the REST API.
+- **API script**: `scripts/do-app-logs.js` pulls logs via the REST API and
+  automatically uses the latest deployment when no ID is supplied.
   ```bash
-  DIGITALOCEAN_TOKEN=... node scripts/do-app-logs.js <app-id> <deployment-id> <component> [--type run] [--stream]
+  # fetch the latest deploy logs for the "web" component
+  DIGITALOCEAN_TOKEN=... node scripts/do-app-logs.js <app-id> web --type deploy
   ```
 
 ## 4. Streaming Live Logs
