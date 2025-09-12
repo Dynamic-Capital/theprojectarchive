@@ -11,6 +11,7 @@ import CurvedLoop from './CurvedLoopText.jsx';
 import Button from './Button';
 import Hero3D from './Hero3D';
 
+const HERO_TAGLINE = "We're a Creative studio capturing stories in the Maldives";
 const container = {
   hidden: { opacity: 0 },
   show: {
@@ -118,7 +119,7 @@ export default function Hero() {
           }}
           variants={itemUp(reduceMotion)}
         >
-          We're a Creative studio capturing stories in the Maldives
+          {HERO_TAGLINE}
         </motion.h1>
         <motion.div
           style={{ marginBottom: 'var(--space-4)' }}
@@ -133,12 +134,12 @@ export default function Hero() {
                 letterSpacing: '0.1em',
               }}
             >
-              We're a Creative studio capturing stories in the Maldives
+              {HERO_TAGLINE}
             </span>
           ) : (
             <CurvedLoop
               text={{
-                text: "We're a Creative studio capturing stories in the Maldives",
+                text: HERO_TAGLINE,
                 font: {
                   fontFamily: 'sans-serif',
                   fontWeight: '400',
