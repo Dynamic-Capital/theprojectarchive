@@ -9,7 +9,8 @@
     "start": "NODE_ENV=production node server.js",
     "test": "npm --prefix next-app run test",
     "lint": "npm --prefix next-app run lint",
-    "format": "npm --prefix next-app run format"
+    "format": "npm --prefix next-app run format",
+    "check": "npm run lint && npm test"
   },
   "engines": {
     "node": ">=20"

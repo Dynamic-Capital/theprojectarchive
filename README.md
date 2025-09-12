@@ -14,6 +14,12 @@ cp .env.example .env
 npm run dev
 ```
 
+Ensure Node.js 20 is installed (a `.nvmrc` file is provided for `nvm` users). Run linting and tests together with:
+
+```bash
+npm run check
+```
+
 Update `NEXT_ALLOWED_ORIGIN`, `SPACE_BUCKET_URL`, and `MAINTENANCE_MODE` in `.env` to match your environment.
 
 `NEXT_ALLOWED_ORIGIN` restricts incoming requests to the specified origin and is enforced in `server.js`.
