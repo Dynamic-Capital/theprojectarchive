@@ -41,13 +41,36 @@
 
 .desktopNav {
   display: none;
+}
+
+.desktopNavList {
+  display: flex;
+  list-style: none;
   gap: var(--space-5);
+  margin: 0;
+  padding: 0;
+}
+
+.desktopNavItem {
+  margin: 0;
+}
+
+.desktopNav a {
+  text-decoration: none;
+}
+
+.desktopNav a:focus {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.active {
+  text-decoration: underline;
 }
 
 @media (min-width: 768px) {
   .desktopNav {
-    display: flex;
-    align-items: center;
+    display: block;
   }
   .menuButton {
     display: none;
