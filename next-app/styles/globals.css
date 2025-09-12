@@ -48,6 +48,14 @@ a:hover { opacity: .9; }
 .button:hover { transform: translateY(-1px); background: color-mix(in oklab, var(--surface), white 3%); }
 .button--primary { background: var(--brand-500); border-color: transparent; color: #fff; }
 .button--danger  { background: var(--error); border-color: transparent; color: #fff; }
+.compact-email-button {
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  border-radius: 999px;
+  overflow: hidden;
+  gap: var(--space-2);
+}
 
 /* Forms */
 label { display: inline-block; font-size: var(--fs-0); color: var(--muted); margin-bottom: .25rem; }

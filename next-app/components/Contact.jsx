@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import ParallaxSection from './ParallaxSection';
 import { textVariants } from '../lib/animations';
 import Button from './Button';
+import CompactEmailButton from './CompactEmailButton';
 
 export default function Contact() {
   const [status, setStatus] = useState(null);
@@ -78,6 +79,7 @@ export default function Contact() {
           </p>
         )}
       </motion.form>
+      <CompactEmailButton style={{ marginTop: 'var(--space-4)' }} />
     </ParallaxSection>
   );
 }
