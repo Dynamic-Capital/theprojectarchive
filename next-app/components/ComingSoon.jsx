@@ -41,8 +41,8 @@ export default function ComingSoon() {
       >
         <p>
           Contact us at{' '}
-          <a href="mailto:info@theprojectarchive.com">
-            info@theprojectarchive.com
+          <a href="mailto:info@theprojectarchive.org">
+            info@theprojectarchive.org
           </a>
         </p>
         <p>
