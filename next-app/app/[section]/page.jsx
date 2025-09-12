@@ -18,7 +18,7 @@ export function generateStaticParams() {
 }
 
 export default function SectionPage({ params }) {
-  const section = params?.section;
+  const section = params?.section?.toLowerCase();
   if (!section || !sections.includes(section)) {
     notFound();
   }

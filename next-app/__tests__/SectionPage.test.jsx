@@ -1,5 +1,5 @@
-import { render, screen } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { render, screen, cleanup } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
 vi.mock('next/navigation', () => ({ notFound: vi.fn() }));
 vi.mock('../components/Home', () => ({ default: () => <div>Home component</div> }));
@@ -9,6 +9,10 @@ import { notFound } from 'next/navigation';
 
 beforeEach(() => {
   notFound.mockClear();
+});
+
+afterEach(() => {
+  cleanup();
 });
 
 describe('SectionPage', () => {
@@ -31,6 +35,12 @@ describe('SectionPage', () => {
 
   it('renders Home for a valid section', () => {
     render(<SectionPage params={{ section: 'about' }} />);
+    expect(screen.getByText('Home component')).toBeInTheDocument();
+    expect(notFound).not.toHaveBeenCalled();
+  });
+
+  it('allows mixed-case section names', () => {
+    render(<SectionPage params={{ section: 'About' }} />);
     expect(screen.getByText('Home component')).toBeInTheDocument();
     expect(notFound).not.toHaveBeenCalled();
   });
