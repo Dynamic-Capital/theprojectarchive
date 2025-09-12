@@ -60,6 +60,7 @@ describe('POST /api/contact', () => {
     });
     const res = await POST(req);
     expect(res.status).toBe(500);
+    expect(errorSpy).toHaveBeenCalled();
     errorSpy.mockRestore();
   });
 
@@ -77,6 +78,7 @@ describe('POST /api/contact', () => {
     });
     const res = await POST(req);
     expect(res.status).toBe(500);
+    expect(errorSpy).toHaveBeenCalled();
     errorSpy.mockRestore();
   });
 
@@ -94,6 +96,7 @@ describe('POST /api/contact', () => {
     });
     const res = await POST(req);
     expect(res.status).toBe(500);
+    expect(errorSpy).toHaveBeenCalled();
     errorSpy.mockRestore();
   });
 

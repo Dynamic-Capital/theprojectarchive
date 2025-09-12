@@ -2,8 +2,8 @@ import '@testing-library/jest-dom/vitest';
 import React from 'react';
 import { vi } from 'vitest';
 
-process.env.ALLOWED_ORIGINS = 'http://localhost:3000';
-process.env.NODE_ENV = process.env.NODE_ENV || 'test';
+process.env.ALLOWED_ORIGINS ??= 'http://localhost:3000';
+process.env.NODE_ENV ??= 'test';
 
 // next/image adds several props that aren't valid DOM attributes when
 // rendered directly in tests. Strip those out before creating the `img`
