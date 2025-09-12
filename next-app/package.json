@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && rm -rf _static && mv out _static",
+    "build": "next build && rm -rf ../_static && mv out ../_static",
     "start": "npx -y serve@latest ../_static",
     "test": "vitest run",
     "lint": "eslint . --ext js,jsx,mjs --no-error-on-unmatched-pattern",

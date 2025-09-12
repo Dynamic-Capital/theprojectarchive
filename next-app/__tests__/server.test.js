@@ -22,7 +22,7 @@ describe('server startup', () => {
 });
 
 describe('static file handling', () => {
-  const staticDir = join(process.cwd(), '_static');
+  const staticDir = new URL('../../_static', import.meta.url).pathname;
   let server;
   let exitSpy;
   beforeAll(async () => {
@@ -127,7 +127,7 @@ describe('allowed origin handling', () => {
 });
 
 describe('static server preflight', () => {
-  const staticDir = join(process.cwd(), '_static');
+  const staticDir = new URL('../../_static', import.meta.url).pathname;
   let server;
   let exitSpy;
   beforeAll(async () => {
