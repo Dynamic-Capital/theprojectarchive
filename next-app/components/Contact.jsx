@@ -1,5 +1,8 @@
 "use client";
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { motion, useReducedMotion } from 'framer-motion';
 import ParallaxSection from './ParallaxSection';
 import { textVariants } from '../lib/animations';
@@ -8,22 +11,24 @@ import CompactEmailButton from './CompactEmailButton';
 
 export default function Contact() {
   const [status, setStatus] = useState(null);
-  const [errors, setErrors] = useState({ name: '', email: '', message: '' });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
+  const schema = z.object({
+    name: z.string().trim().min(1, 'Please enter your name.'),
+    email: z
+      .string()
+      .trim()
+      .email('Please enter a valid email address.'),
+    message: z.string().trim().min(1, 'Please enter a message.'),
+  });
 
-    const newErrors = { name: '', email: '', message: '' };
-    if (!data.name?.trim()) newErrors.name = 'Please enter your name.';
-    if (!data.email?.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))
-      newErrors.email = 'Please enter a valid email address.';
-    if (!data.message?.trim()) newErrors.message = 'Please enter a message.';
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({ resolver: zodResolver(schema) });
 
-    setErrors(newErrors);
-    if (newErrors.name || newErrors.email || newErrors.message) return;
-
+  const onSubmit = async (data) => {
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
@@ -32,7 +37,7 @@ export default function Contact() {
       });
       if (res.ok) {
         setStatus('success');
-        e.target.reset();
+        reset();
       } else {
         setStatus('error');
       }
@@ -52,7 +57,7 @@ export default function Contact() {
       overlay
     >
       <motion.form
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         style={{ maxWidth: '32rem', marginInline: 'auto', textAlign: 'left' }}
         variants={textVariants(reduceMotion)}
         initial="hidden"
@@ -62,43 +67,40 @@ export default function Contact() {
         <label htmlFor="name">Name</label>
         <input
           id="name"
-          name="name"
           type="text"
-          required
+          {...register('name')}
           aria-invalid={!!errors.name}
           aria-describedby="name-error"
-          onChange={() => setErrors((e) => ({ ...e, name: '' }))}
+          required
         />
         <span id="name-error" className="error-text">
-          {errors.name}
+          {errors.name?.message}
         </span>
 
         <label htmlFor="email">Email</label>
         <input
           id="email"
-          name="email"
           type="email"
-          required
+          {...register('email')}
           aria-invalid={!!errors.email}
           aria-describedby="email-error"
-          onChange={() => setErrors((e) => ({ ...e, email: '' }))}
+          required
         />
         <span id="email-error" className="error-text">
-          {errors.email}
+          {errors.email?.message}
         </span>
 
         <label htmlFor="message">Message</label>
         <textarea
           id="message"
-          name="message"
           rows="5"
-          required
+          {...register('message')}
           aria-invalid={!!errors.message}
           aria-describedby="message-error"
-          onChange={() => setErrors((e) => ({ ...e, message: '' }))}
+          required
         />
         <span id="message-error" className="error-text">
-          {errors.message}
+          {errors.message?.message}
         </span>
 
         <Button type="submit" style={{ marginTop: 'var(--space-2)' }}>
