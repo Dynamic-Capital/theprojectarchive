@@ -10,6 +10,7 @@ import Numbers from './Numbers';
 import ServicesStack from './ServicesStack';
 import Testimonials from './Testimonials';
 import Contact from './Contact';
+import TiltCard from './TiltCard';
 
 export default function Home() {
   const { scrollY } = useScroll();
@@ -77,6 +78,10 @@ export default function Home() {
       <ServicesStack items={serviceItems} />
       <Testimonials />
       <Contact />
+      <TiltCard className="mx-auto my-16 max-w-sm p-8 glass rounded-xl text-center">
+        <h3 className="text-lg font-semibold">Interactive Card</h3>
+        <p className="mt-2 text-sm">Move your cursor to tilt.</p>
+      </TiltCard>
       <motion.button
         style={{
           position: 'fixed',
