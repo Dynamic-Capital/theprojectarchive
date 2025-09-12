@@ -1,15 +1,16 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
+import SafeSpace from './SafeSpace';
 
 export default function Footer() {
   const colors = ['var(--brand-600)', 'var(--brand-500)', 'var(--accent-500)'];
   return (
-    <motion.footer
+    <SafeSpace
+      as={motion.footer}
       style={{
         background: 'var(--bg)',
         color: 'var(--text)',
-        padding: 'var(--space-4)',
         textAlign: 'center',
         display: 'flex',
         flexDirection: 'column',
@@ -51,6 +52,6 @@ export default function Footer() {
           Instagram
         </a>
       </div>
-    </motion.footer>
+    </SafeSpace>
   );
 }
