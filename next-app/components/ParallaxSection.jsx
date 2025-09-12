@@ -18,6 +18,7 @@ export default function ParallaxSection({
   description,
   children,
   priority = false,
+  overlay = false,
 }) {
   if (!id || !image || !alt) {
     return null;
@@ -60,6 +61,20 @@ export default function ParallaxSection({
           style={{ objectFit: 'cover' }}
         />
       </motion.div>
+      {overlay && (
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background:
+              typeof overlay === 'string'
+                ? overlay
+                : 'linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7))',
+            zIndex: 1,
+          }}
+        />
+      )}
       <motion.div
         style={{
           position: 'relative',

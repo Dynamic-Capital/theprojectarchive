@@ -8,10 +8,22 @@ import CompactEmailButton from './CompactEmailButton';
 
 export default function Contact() {
   const [status, setStatus] = useState(null);
+  const [errors, setErrors] = useState({ name: '', email: '', message: '' });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
+
+    const newErrors = { name: '', email: '', message: '' };
+    if (!data.name?.trim()) newErrors.name = 'Please enter your name.';
+    if (!data.email?.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))
+      newErrors.email = 'Please enter a valid email address.';
+    if (!data.message?.trim()) newErrors.message = 'Please enter a message.';
+
+    setErrors(newErrors);
+    if (newErrors.name || newErrors.email || newErrors.message) return;
+
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
@@ -34,9 +46,10 @@ export default function Contact() {
   return (
     <ParallaxSection
       id="contact"
-      image="https://picsum.photos/1920/1080?random=25"
+      image="https://picsum.photos/id/1027/1600/900"
       alt="Background image for Contact section"
       title="Contact"
+      overlay
     >
       <motion.form
         onSubmit={handleSubmit}
@@ -47,7 +60,18 @@ export default function Contact() {
         viewport={{ once: true, amount: 0.5 }}
       >
         <label htmlFor="name">Name</label>
-        <input id="name" name="name" type="text" required />
+        <input
+          id="name"
+          name="name"
+          type="text"
+          required
+          aria-invalid={!!errors.name}
+          aria-describedby="name-error"
+          onChange={() => setErrors((e) => ({ ...e, name: '' }))}
+        />
+        <span id="name-error" className="error-text">
+          {errors.name}
+        </span>
 
         <label htmlFor="email">Email</label>
         <input
@@ -55,7 +79,13 @@ export default function Contact() {
           name="email"
           type="email"
           required
+          aria-invalid={!!errors.email}
+          aria-describedby="email-error"
+          onChange={() => setErrors((e) => ({ ...e, email: '' }))}
         />
+        <span id="email-error" className="error-text">
+          {errors.email}
+        </span>
 
         <label htmlFor="message">Message</label>
         <textarea
@@ -63,7 +93,13 @@ export default function Contact() {
           name="message"
           rows="5"
           required
+          aria-invalid={!!errors.message}
+          aria-describedby="message-error"
+          onChange={() => setErrors((e) => ({ ...e, message: '' }))}
         />
+        <span id="message-error" className="error-text">
+          {errors.message}
+        </span>
 
         <Button type="submit" style={{ marginTop: 'var(--space-2)' }}>
           Send Message
