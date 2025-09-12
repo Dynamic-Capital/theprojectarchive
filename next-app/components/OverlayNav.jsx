@@ -60,7 +60,12 @@ export default function OverlayNav({ open, onLink }) {
   return (
     <AnimatePresence>
       {open && (
-        <div ref={trapRef} role="dialog" aria-modal="true">
+        <div
+          ref={trapRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Site navigation"
+        >
           <motion.div
             key="backdrop"
             style={{
@@ -77,6 +82,7 @@ export default function OverlayNav({ open, onLink }) {
           <motion.nav
             id="overlay-nav"
             key="nav"
+            aria-label="Primary"
             style={{
               position: 'fixed',
               top: '50%',

@@ -1,6 +1,7 @@
 'use client';
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import { useScroll, useReducedMotion } from 'framer-motion';
 import { useMemo, useRef } from 'react';
+import ServiceCard from './ServiceCard';
 
 // Tailwind helpers used below:
 // .glass -> translucent card (add in globals if you don't have it yet)
@@ -66,61 +67,16 @@ export default function ServicesStack({ items = [], topOffsetClass = 'top-24' })
       {/* Pinned viewport for the stack */}
       <div className={`sticky ${topOffsetClass} h-[calc(100vh-6rem)]`}>
         <div className="relative h-full">
-          {items.map((it, i) => {
-            const { start, mid, end } = slices[i];
-
-            // Animate each card within its slice
-            const opacity = useTransform(scrollYProgress, [start, mid * 0.95, end], [0, 1, 1]);
-            const scale   = useTransform(scrollYProgress, [start, mid], [0.94, 1]);
-            const y       = useTransform(scrollYProgress, [start, end], [50, -30]);   // slight lift as it “locks in”
-            const blur    = useTransform(scrollYProgress, [start, mid], ['blur(6px)', 'blur(0px)']);      // ease-in clarity
-            // Subtle spin and shadow to emphasize depth as each card becomes active
-            const rotate  = useTransform(scrollYProgress, [start, mid, end], [i % 2 === 0 ? -8 : 8, 0, 0]);
-            const shadow  = useTransform(scrollYProgress, [start, mid, end], [
-              '0px 0px 0px rgba(0,0,0,0)',
-              '0px 16px 32px rgba(0,0,0,0.15)',
-              '0px 16px 32px rgba(0,0,0,0.15)'
-            ]);
-
-            return (
-              <motion.article
-                key={i}
-                className="absolute inset-0 flex items-center justify-center px-4"
-                style={{ zIndex: items.length - i }}
-              >
-                <motion.div
-                  className="glass rounded-2xl max-w-3xl w-full p-8 md:p-10 shadow-glass bg-white/5"
-                  style={{
-                    opacity,
-                    scale,
-                    y,
-                    filter: blur,
-                    rotate,
-                    boxShadow: shadow,
-                  }}
-                >
-                  <div className="text-sm uppercase tracking-wide text-accent/90">{String(i + 1).padStart(2, '0')}</div>
-                  <h3 className="mt-1 text-2xl md:text-3xl font-semibold">{it.title}</h3>
-                  <p className="mt-3 text-sm md:text-base text-muted">{it.description}</p>
-
-                  {it.points?.length ? (
-                    <ul className="mt-4 grid gap-2 text-sm text-text/90 list-disc pl-5">
-                      {it.points.map((p, k) => <li key={k}>{p}</li>)}
-                    </ul>
-                  ) : null}
-
-                  {it.cta && (
-                    <a
-                      href={it.href || '#contact'}
-                      className="mt-6 inline-flex items-center gap-2 rounded-full bg-accent/90 hover:bg-accent text-background px-5 py-2 text-sm font-medium whitespace-nowrap"
-                    >
-                      {it.cta} <span aria-hidden>→</span>
-                    </a>
-                  )}
-                </motion.div>
-              </motion.article>
-            );
-          })}
+          {items.map((it, i) => (
+            <ServiceCard
+              key={i}
+              index={i}
+              item={it}
+              slice={slices[i]}
+              total={items.length}
+              scrollYProgress={scrollYProgress}
+            />
+          ))}
         </div>
       </div>
     </section>

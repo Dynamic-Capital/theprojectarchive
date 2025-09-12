@@ -7,7 +7,8 @@ export default function Mission() {
     <ParallaxSection
       id="mission"
       image="https://picsum.photos/id/1035/1600/900"
-      alt="Background image for Mission section"
+      alt=""
+      decorative
       overlay
       title="Mission"
       description="Our mission is to deliver striking visuals that tell compelling stories for every client."

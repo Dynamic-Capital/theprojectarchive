@@ -1,5 +1,5 @@
 'use client';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import Hero from './Hero';
@@ -16,6 +16,14 @@ export default function Home() {
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 300], [100, 0]);
   const opacity = useTransform(scrollY, [0, 300], [0, 1]);
+  const [showButton, setShowButton] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = scrollY.on('change', (latest) => {
+      setShowButton(latest > 50);
+    });
+    return () => unsubscribe();
+  }, [scrollY]);
   const reduceMotion = useReducedMotion();
 
   const pathname = usePathname();
@@ -100,8 +108,11 @@ export default function Home() {
           boxShadow: 'var(--shadow-1)',
           y,
           opacity,
+          pointerEvents: showButton ? 'auto' : 'none',
         }}
         aria-label="Scroll to top"
+        aria-hidden={!showButton}
+        tabIndex={showButton ? 0 : -1}
         onClick={() =>
           window.scrollTo({
             top: 0,

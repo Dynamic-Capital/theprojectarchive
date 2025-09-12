@@ -29,7 +29,8 @@ export default function Services({ openLightbox, images = [] }) {
       <ParallaxSection
         id="services"
         image="https://picsum.photos/id/1050/1600/900"
-        alt="Background image for Services section"
+        alt=""
+        decorative
         title="Services"
         description="Explore the range of photography services we offer for individuals and businesses."
         overlay

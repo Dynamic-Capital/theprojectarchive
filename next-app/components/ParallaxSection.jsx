@@ -13,14 +13,15 @@ import SectionHeader from './SectionHeader';
 export default function ParallaxSection({
   id,
   image,
-  alt,
+  alt = '',
+  decorative = false,
   title,
   description,
   children,
   priority = false,
   overlay = false,
 }) {
-  if (!id || !image || !alt) {
+  if (!id || !image || (!decorative && !alt)) {
     return null;
   }
   const ref = useRef(null);
@@ -45,7 +46,8 @@ export default function ParallaxSection({
       >
         <Image
           src={image}
-          alt={alt}
+          alt={decorative ? '' : alt}
+          aria-hidden={decorative ? true : undefined}
           fill
           sizes="100vw"
           priority={priority}
