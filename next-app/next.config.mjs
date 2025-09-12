@@ -1,6 +1,5 @@
 /* eslint-env node */
 import bundleAnalyzer from '@next/bundle-analyzer';
-import { PHASE_DEVELOPMENT_SERVER } from 'next/constants.js';
 /** @type {import('next').NextConfig} */
 // Allow Next.js Image component to load from the DigitalOcean Space
 // configured in SPACE_BUCKET_URL in addition to the default sample images.
@@ -25,8 +24,7 @@ if (bucketUrl) {
   }
 }
 
-/** @param {string} phase */
-export default function (phase) {
+export default function () {
   const nextConfig = {
     reactStrictMode: true,
     images: {
@@ -42,18 +40,12 @@ export default function (phase) {
 
   const commonRewrites = [
     { source: '/favicon.ico', destination: '/favicon.svg' },
+    // Route the landing page to a static HTML file so the app behaves
+    // like a traditional static site.
+    { source: '/', destination: '/index.html' },
   ];
 
-  if (phase === PHASE_DEVELOPMENT_SERVER) {
-    // Serve the root page when requesting `/index.html` so the app
-    // behaves like a traditional static site during development.
-    nextConfig.rewrites = async () => [
-      ...commonRewrites,
-      { source: '/index.html', destination: '/' },
-    ];
-  } else {
-    nextConfig.rewrites = async () => commonRewrites;
-  }
+  nextConfig.rewrites = async () => commonRewrites;
 
   return withBundleAnalyzer(nextConfig);
 }
