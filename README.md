@@ -46,6 +46,12 @@ After building, the app can be started with the Node.js server:
 npm run start
 ```
 
+To build and start the app in one step for a local production preview:
+
+```bash
+npm run preview
+```
+
 To generate a static export in `next-app/out/` (and copy it to `/_static/` for
 deployment) run:
 
