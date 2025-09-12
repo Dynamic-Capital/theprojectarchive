@@ -9,6 +9,14 @@ services:
     http_port: 8080
     routes:
       - path: /
+    envs:
+      - key: SITE_URL
+        value: https://theprojectarchives-4ud4t.ondigitalocean.app/
+        scope: RUN_AND_BUILD_TIME
+        required: true
+      - key: NEXT_PUBLIC_SITE_URL
+        value: https://theprojectarchives-4ud4t.ondigitalocean.app/
+        scope: RUN_AND_BUILD_TIME
   - name: api
     source_dir: /
     build_command: npm ci
@@ -19,6 +27,14 @@ services:
     http_port: 8080
     routes:
       - path: /api
+    envs:
+      - key: SITE_URL
+        value: https://theprojectarchives-4ud4t.ondigitalocean.app/
+        scope: RUN_AND_BUILD_TIME
+        required: true
+      - key: NEXT_PUBLIC_SITE_URL
+        value: https://theprojectarchives-4ud4t.ondigitalocean.app/
+        scope: RUN_AND_BUILD_TIME
 functions:
   - name: hello
     source_dir: functions/hello
