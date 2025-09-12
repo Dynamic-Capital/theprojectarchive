@@ -8,6 +8,7 @@
     "build": "npm --prefix next-app run build",
     "export": "npm run build && rm -rf _static && mkdir -p _static && cp -R next-app/out/. _static",
     "start": "NODE_ENV=production node server.js",
+    "preview": "npm run build && npm run start",
     "test": "npm --prefix next-app run test",
     "lint": "npm --prefix next-app run lint",
     "format": "npm --prefix next-app run format",
