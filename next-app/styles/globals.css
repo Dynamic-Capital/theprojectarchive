@@ -163,4 +163,18 @@ img { border-radius: var(--radius-xs); }
   );
   border: 1px solid color-mix(in oklab, var(--brand-500), transparent 90%);
   backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(at 20% 20%, color-mix(in oklab, white, transparent 75%), transparent 60%),
+    linear-gradient(120deg, color-mix(in oklab, white, transparent 80%) 0%, transparent 60%);
+  mix-blend-mode: screen;
+  opacity: .5;
+  pointer-events: none;
 }
