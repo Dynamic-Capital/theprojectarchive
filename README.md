@@ -145,26 +145,26 @@ The site can be built and deployed using [Paketo Buildpacks](https://paketo.io/)
 
 ```toml
 [[build.buildpacks]]
-id = "paketo-buildpacks/nodejs-legacy"
+id = "paketo-buildpacks/nodejs"
 
 [[build.buildpacks]]
 id = "paketo-buildpacks/web-servers"
 
 [[build.env]]
-BP_NODE_VERSION = "18.x"
+BP_NODE_VERSION = "20.x"
 BP_WEB_SERVER = "nginx"
 BP_WEB_SERVER_ROOT = "/_static"
+BP_NODE_RUN_SCRIPTS = "export"
 ```
 
-When deploying to platforms like DigitalOcean App Platform, `.do/app.yaml` defines a web service that runs `npm start` to serve the app.
-
-The `npm start` script runs `server.js`, which serves the built assets from `/_static/` or the Next.js application as needed.
+When deployed to platforms like DigitalOcean App Platform, the buildpacks install dependencies, run the `export` script to generate the static site, and launch Nginx to serve the built assets.
 
 ### Environment variables
 
-- `BP_NODE_VERSION` – Node runtime used during build (e.g., `18.x`).
+- `BP_NODE_VERSION` – Node runtime used during build (e.g., `20.x`).
 - `BP_WEB_SERVER` – web server to run (e.g., `nginx`).
 - `BP_WEB_SERVER_ROOT` – directory containing built assets (`/_static`).
+- `BP_NODE_RUN_SCRIPTS` – npm scripts to run during build (`export`).
 - `NODE_ENV` – set to `production` for optimized runtime behavior.
 - `MAINTENANCE_MODE` – set to `true` to redirect users to `/coming-soon`.
 

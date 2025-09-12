@@ -4,8 +4,6 @@ services:
     environment_slug: node-js
     instance_size_slug: basic-xxs
     instance_count: 1
-    build_command: "npm ci && npm run build"
-    run_command: "npm start"
-    http_port: 3000
+    http_port: 8080
     routes:
       - path: /
