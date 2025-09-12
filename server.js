@@ -4,6 +4,7 @@ import { readFileSync, existsSync, createReadStream } from "fs";
 import { stat } from "fs/promises";
 import { join, resolve, extname } from "path";
 import { createRequire } from "module";
+import mime from "mime-types";
 
 const require = createRequire(import.meta.url);
 
@@ -20,6 +21,8 @@ const mimeTypes = {
   ".jpg": "image/jpeg",
   ".svg": "image/svg+xml",
   ".ico": "image/x-icon",
+  ".txt": "text/plain",
+  ".xml": "application/xml",
 };
 
 export async function startServer(appInstance) {
@@ -82,7 +85,7 @@ export async function startServer(appInstance) {
           const ext = extname(finalPath);
           res.setHeader(
             "Content-Type",
-            mimeTypes[ext] || "application/octet-stream",
+            mimeTypes[ext] || mime.lookup(ext) || "application/octet-stream",
           );
           createReadStream(finalPath).pipe(res);
         } catch {

@@ -14,5 +14,8 @@
   "engines": {
     "node": ">=20"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "mime-types": "^2.1.35"
+  }
 }
