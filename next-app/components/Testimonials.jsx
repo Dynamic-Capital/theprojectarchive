@@ -54,7 +54,8 @@ export default function Testimonials() {
     <ParallaxSection
       id="testimonials"
       image="https://picsum.photos/id/1057/1600/900"
-      alt="Background image for Testimonials section"
+      alt=""
+      decorative
       overlay
     >
       <motion.h2

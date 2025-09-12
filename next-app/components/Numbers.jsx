@@ -50,7 +50,8 @@ export default function Numbers() {
     <ParallaxSection
       id="numbers"
       image="https://picsum.photos/id/1045/1600/900"
-      alt="Background image for In Numbers section"
+      alt=""
+      decorative
       overlay
     >
       <h2

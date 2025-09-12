@@ -29,6 +29,7 @@ export default function Contact() {
   } = useForm({ resolver: zodResolver(schema) });
 
   const onSubmit = async (data) => {
+    setStatus(null);
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
@@ -52,7 +53,8 @@ export default function Contact() {
     <ParallaxSection
       id="contact"
       image="https://picsum.photos/id/1027/1600/900"
-      alt="Background image for Contact section"
+      alt=""
+      decorative
       title="Contact"
       overlay
     >
@@ -68,10 +70,11 @@ export default function Contact() {
         <input
           id="name"
           type="text"
-          {...register('name')}
+          {...register('name', { onChange: () => setStatus(null) })}
           aria-invalid={!!errors.name}
           aria-describedby="name-error"
           required
+          autoComplete="name"
         />
         <span id="name-error" className="error-text">
           {errors.name?.message}
@@ -81,10 +84,11 @@ export default function Contact() {
         <input
           id="email"
           type="email"
-          {...register('email')}
+          {...register('email', { onChange: () => setStatus(null) })}
           aria-invalid={!!errors.email}
           aria-describedby="email-error"
           required
+          autoComplete="email"
         />
         <span id="email-error" className="error-text">
           {errors.email?.message}
@@ -94,10 +98,11 @@ export default function Contact() {
         <textarea
           id="message"
           rows="5"
-          {...register('message')}
+          {...register('message', { onChange: () => setStatus(null) })}
           aria-invalid={!!errors.message}
           aria-describedby="message-error"
           required
+          autoComplete="off"
         />
         <span id="message-error" className="error-text">
           {errors.message?.message}
