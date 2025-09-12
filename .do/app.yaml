@@ -1,10 +1,11 @@
 static_sites:
   - name: theprojectarchive
     source_dir: /
-    build_command: npm --prefix next-app run build
-    output_dir: next-app/out
+    build_command: npm run build
+    output_dir: _static
     buildpacks:
       - paketo-buildpacks/nodejs-legacy
+      - paketo-buildpacks/procfile
       - paketo-buildpacks/web-servers
     environment_slug: node-js
     routes:
