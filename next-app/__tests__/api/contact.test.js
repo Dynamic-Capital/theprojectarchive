@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { POST } from '../../app/api/contact/route.js';
+import { POST, _clearRateLimit } from '../../app/api/contact/route.js';
 import nodemailer from 'nodemailer';
 
 vi.mock('nodemailer', () => ({
@@ -12,9 +12,11 @@ vi.mock('nodemailer', () => ({
 
 describe('POST /api/contact', () => {
   beforeEach(() => {
+    vi.clearAllMocks();
     process.env.BUSINESS_EMAIL = 'biz@example.com';
     process.env.BUSINESS_EMAIL_APP_PASSWORD = 'app-pass';
     delete process.env.RECAPTCHA_SECRET;
+    _clearRateLimit();
   });
 
   it('sends an email on success', async () => {
@@ -57,6 +59,57 @@ describe('POST /api/contact', () => {
     });
     const res = await POST(req);
     expect(res.status).toBe(500);
+  });
+
+  it('returns 500 when BUSINESS_EMAIL is missing', async () => {
+    delete process.env.BUSINESS_EMAIL;
+    const req = new Request('http://localhost/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: 'Ann',
+        email: 'ann@example.com',
+        message: 'Hello',
+      }),
+    });
+    const res = await POST(req);
+    expect(res.status).toBe(500);
+  });
+
+  it('returns 500 when BUSINESS_EMAIL_APP_PASSWORD is missing', async () => {
+    delete process.env.BUSINESS_EMAIL_APP_PASSWORD;
+    const req = new Request('http://localhost/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: 'Sam',
+        email: 'sam@example.com',
+        message: 'Hello',
+      }),
+    });
+    const res = await POST(req);
+    expect(res.status).toBe(500);
+  });
+
+  it('rate limits repeated requests', async () => {
+    const init = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-forwarded-for': '1.2.3.4',
+      },
+      body: JSON.stringify({
+        name: 'Bob',
+        email: 'bob@example.com',
+        message: 'Hello',
+      }),
+    };
+    for (let i = 0; i < 5; i++) {
+      const res = await POST(new Request('http://localhost/api/contact', init));
+      expect(res.status).toBe(200);
+    }
+    const res = await POST(new Request('http://localhost/api/contact', init));
+    expect(res.status).toBe(429);
   });
 
   it('verifies captcha when secret is set', async () => {
