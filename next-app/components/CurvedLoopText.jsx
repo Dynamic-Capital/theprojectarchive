@@ -88,7 +88,7 @@ import {
   const calculatedRepeats = Math.ceil(pathLength / spacing) + 2;
   const ready = pathLength > 0 && spacing > 0;
   useAnimationFrame((t, delta) => {
-    if (!ready || tspansRef.current.length === 0) return;
+    if (!ready || tspansRef.current.length === 0 || isHovered.current) return;
     if (isDragging.current) {
       // Apply drag velocity directly to text positions
       tspansRef.current.forEach((tspan) => {
@@ -188,6 +188,10 @@ import {
         fontSize: text.font.fontSize,
         letterSpacing: text.font.letterSpacing,
         lineHeight: text.font.lineHeight,
+        textRendering: 'geometricPrecision',
+        fontKerning: 'normal',
+        fontVariantLigatures: 'none',
+        WebkitFontSmoothing: 'antialiased',
       },
       children: [
         /*#__PURE__*/ _jsx('text', {
