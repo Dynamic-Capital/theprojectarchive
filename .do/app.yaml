@@ -2,7 +2,7 @@ static_sites:
   - name: theprojectarchive
     source_dir: /
     build_command: "npm ci && npm run build"
-    output_dir: "dist"
+    output_dir: "_static"
     buildpacks:
       - paketo-buildpacks/nodejs-legacy
       - paketo-buildpacks/procfile
