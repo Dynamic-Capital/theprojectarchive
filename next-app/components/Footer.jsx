@@ -3,6 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 export default function Footer() {
+  const colors = ['var(--brand-600)', 'var(--brand-500)', 'var(--accent-500)'];
   return (
     <motion.footer
       style={{
@@ -21,7 +22,12 @@ export default function Footer() {
       <p>
         Copyright &copy; {new Date().getFullYear()}{' '}
         <span
-          style={{ color: 'var(--brand-500)', fontFamily: 'var(--font-sans)' }}
+          style={{
+            background: `linear-gradient(90deg, ${colors.join(', ')})`,
+            WebkitBackgroundClip: 'text',
+            color: 'transparent',
+            fontFamily: 'var(--font-sans)',
+          }}
         >
           The Project Archive
         </span>
