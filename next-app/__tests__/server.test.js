@@ -22,7 +22,7 @@ describe('server startup', () => {
 });
 
 describe('static file handling', () => {
-  const staticDir = join(process.cwd(), '../_static');
+  const staticDir = join(process.cwd(), '_static');
   let server;
   let exitSpy;
   beforeAll(async () => {
@@ -92,5 +92,74 @@ describe('allowed origin handling', () => {
     server.close();
     exitSpy.mockRestore();
     delete process.env.NEXT_ALLOWED_ORIGIN;
+  });
+
+  it('responds to preflight requests', async () => {
+    const appMock = {
+      prepare: vi.fn().mockResolvedValue(),
+      getRequestHandler: vi.fn().mockReturnValue((req, res) => {
+        res.end('ok');
+      }),
+    };
+    process.env.NEXT_ALLOWED_ORIGIN = 'https://allowed.com';
+    const exitSpy = vi.spyOn(process, 'exit').mockImplementation(() => {});
+    const server = await startServer(appMock);
+
+    const res = await fetch(`http://localhost:${server.address().port}`, {
+      method: 'OPTIONS',
+      headers: { Origin: 'https://allowed.com' },
+    });
+    expect(res.status).toBe(204);
+    expect(res.headers.get('access-control-allow-origin')).toBe(
+      'https://allowed.com',
+    );
+    expect(res.headers.get('access-control-allow-methods')).toBe(
+      'GET,OPTIONS',
+    );
+    expect(res.headers.get('access-control-allow-headers')).toBe(
+      'Content-Type',
+    );
+  
+    server.close();
+    exitSpy.mockRestore();
+    delete process.env.NEXT_ALLOWED_ORIGIN;
+  });
+});
+
+describe('static server preflight', () => {
+  const staticDir = join(process.cwd(), '_static');
+  let server;
+  let exitSpy;
+  beforeAll(async () => {
+    mkdirSync(staticDir, { recursive: true });
+    writeFileSync(join(staticDir, 'index.html'), '<h1>hi</h1>');
+    process.env.NODE_ENV = 'production';
+    process.env.NEXT_ALLOWED_ORIGIN = 'https://allowed.com';
+    exitSpy = vi.spyOn(process, 'exit').mockImplementation(() => {});
+    server = await startServer();
+  });
+  afterAll(() => {
+    server && server.close();
+    rmSync(staticDir, { recursive: true, force: true });
+    delete process.env.NODE_ENV;
+    delete process.env.NEXT_ALLOWED_ORIGIN;
+    exitSpy.mockRestore();
+  });
+
+  it('handles preflight', async () => {
+    const res = await fetch(`http://localhost:${server.address().port}`, {
+      method: 'OPTIONS',
+      headers: { Origin: 'https://allowed.com' },
+    });
+    expect(res.status).toBe(204);
+    expect(res.headers.get('access-control-allow-origin')).toBe(
+      'https://allowed.com',
+    );
+    expect(res.headers.get('access-control-allow-methods')).toBe(
+      'GET,OPTIONS',
+    );
+    expect(res.headers.get('access-control-allow-headers')).toBe(
+      'Content-Type',
+    );
   });
 });

@@ -38,6 +38,19 @@ export async function startServer(appInstance) {
           res.end("Forbidden");
           return;
         }
+        if (req.method === "OPTIONS") {
+          if (allowedOrigin) {
+            res.writeHead(204, {
+              "Access-Control-Allow-Origin": allowedOrigin,
+              "Access-Control-Allow-Methods": "GET,OPTIONS",
+              "Access-Control-Allow-Headers": "Content-Type",
+            });
+          } else {
+            res.writeHead(204);
+          }
+          res.end();
+          return;
+        }
         if (allowedOrigin) {
           res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
         }
@@ -107,6 +120,19 @@ export async function startServer(appInstance) {
       ) {
         res.statusCode = 403;
         res.end("Forbidden");
+        return;
+      }
+      if (req.method === "OPTIONS") {
+        if (allowedOrigin) {
+          res.writeHead(204, {
+            "Access-Control-Allow-Origin": allowedOrigin,
+            "Access-Control-Allow-Methods": "GET,OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type",
+          });
+        } else {
+          res.writeHead(204);
+        }
+        res.end();
         return;
       }
       if (allowedOrigin) {

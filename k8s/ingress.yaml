@@ -7,10 +7,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - example.com
+        - ${INGRESS_HOST}
       secretName: tpa-site-tls
   rules:
-    - host: example.com
+    - host: ${INGRESS_HOST}
       http:
         paths:
           - path: /
