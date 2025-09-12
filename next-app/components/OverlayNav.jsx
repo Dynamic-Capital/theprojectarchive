@@ -1,23 +1,8 @@
 'use client';
 import Link from 'next/link';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import { createFocusTrap } from 'focus-trap';
-
-const navVariants = {
-  hidden: { y: -30, opacity: 0 },
-  show: {
-    y: 0,
-    opacity: 1,
-    transition: { when: 'beforeChildren', staggerChildren: 0.1 },
-  },
-  exit: { y: -30, opacity: 0 },
-};
-
-const linkVariants = {
-  hidden: { opacity: 0, y: -10 },
-  show: { opacity: 1, y: 0 },
-};
 
 const links = [
   { to: '/', label: 'Home' },
@@ -32,11 +17,30 @@ const links = [
 
 export default function OverlayNav({ open, onLink }) {
   const trapRef = useRef(null);
+  const shouldReduce = useReducedMotion();
+
+  const navVariants = {
+    hidden: { opacity: 0, y: shouldReduce ? 0 : -30 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: shouldReduce
+        ? { duration: 0 }
+        : { when: 'beforeChildren', staggerChildren: 0.1 },
+    },
+    exit: { opacity: 0, y: shouldReduce ? 0 : -30 },
+  };
+
+  const linkVariants = {
+    hidden: { opacity: 0, y: shouldReduce ? 0 : -10 },
+    show: { opacity: 1, y: 0, transition: shouldReduce ? { duration: 0 } : undefined },
+  };
 
   useEffect(() => {
     if (!open) return;
     const trap = createFocusTrap(trapRef.current, {
       fallbackFocus: trapRef.current,
+      initialFocus: '#overlay-nav a',
     });
     trap.activate();
     return () => trap.deactivate();
@@ -67,34 +71,44 @@ export default function OverlayNav({ open, onLink }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={shouldReduce ? { duration: 0 } : undefined}
             onClick={onLink}
           />
           <motion.nav
+            id="overlay-nav"
             key="nav"
             style={{
               position: 'fixed',
               top: '50%',
               left: '50%',
               transform: 'translate(-50%, -50%)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 'var(--space-5)',
               fontSize: 'var(--fs-3)',
               fontWeight: 750,
               textAlign: 'center',
             }}
-            variants={navVariants}
-            initial="hidden"
-            animate="show"
-            exit="exit"
           >
-            {links.map((l) => (
-              <motion.span key={l.to} variants={linkVariants}>
-                <Link href={l.to} onClick={onLink}>
-                  {l.label}
-                </Link>
-              </motion.span>
-            ))}
+            <motion.ul
+              style={{
+                listStyle: 'none',
+                margin: 0,
+                padding: 0,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 'var(--space-5)',
+              }}
+              variants={navVariants}
+              initial="hidden"
+              animate="show"
+              exit="exit"
+            >
+              {links.map((l) => (
+                <motion.li key={l.to} variants={linkVariants}>
+                  <Link href={l.to} onClick={onLink}>
+                    {l.label}
+                  </Link>
+                </motion.li>
+              ))}
+            </motion.ul>
           </motion.nav>
         </div>
       )}

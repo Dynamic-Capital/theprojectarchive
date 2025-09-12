@@ -1,9 +1,10 @@
 'use client';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { useTheme } from 'next-themes';
 import styles from '../styles/Header.module.css';
+import DesktopNav from './DesktopNav';
 
 const topBar = {
   closed: { rotate: 0, y: 0 },
@@ -23,6 +24,7 @@ const bottomBar = {
 export default function Header({ onToggle, open }) {
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 100], [0, -20]);
+  const shouldReduce = useReducedMotion();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -31,13 +33,15 @@ export default function Header({ onToggle, open }) {
   return (
     <motion.header
       className={`safe-p sticky top-0 w-full ${styles.header}`}
-      style={{ y }}
-      initial={{ y: -20, opacity: 0 }}
+      style={{ y: shouldReduce ? 0 : y }}
+      initial={shouldReduce ? false : { y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
+      transition={shouldReduce ? { duration: 0 } : undefined}
     >
       <Link href="/" className={styles.brand}>
         The Project Archive
       </Link>
+      <DesktopNav />
       <div className={styles.actions}>
         {mounted && (
           <button
@@ -52,13 +56,16 @@ export default function Header({ onToggle, open }) {
           className={styles.menuButton}
           type="button"
           aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-controls="overlay-nav"
+          aria-expanded={open}
           onClick={onToggle}
           initial={false}
           animate={open ? 'open' : 'closed'}
+          transition={shouldReduce ? { duration: 0 } : undefined}
         >
-          <motion.span className={styles.bar} variants={topBar}></motion.span>
-          <motion.span className={styles.bar} variants={middleBar}></motion.span>
-          <motion.span className={styles.bar} variants={bottomBar}></motion.span>
+          <motion.span className={styles.bar} variants={topBar} transition={shouldReduce ? { duration: 0 } : undefined}></motion.span>
+          <motion.span className={styles.bar} variants={middleBar} transition={shouldReduce ? { duration: 0 } : undefined}></motion.span>
+          <motion.span className={styles.bar} variants={bottomBar} transition={shouldReduce ? { duration: 0 } : undefined}></motion.span>
         </motion.button>
       </div>
     </motion.header>
