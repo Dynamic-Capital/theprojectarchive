@@ -68,6 +68,7 @@ npm run check
 ```
 
 Update `ALLOWED_ORIGINS`, `SPACE_BUCKET_URL`, `NEXT_PUBLIC_SITE_URL`, and `MAINTENANCE_MODE` in `.env` to match your environment.
+`NEXT_PUBLIC_SITE_URL` is required and the app will throw an error if it is missing.
 
 `ALLOWED_ORIGINS` restricts incoming requests to the specified origins (comma-separated) and is enforced in `server.js`.
 
@@ -211,7 +212,7 @@ When deployed to platforms like DigitalOcean App Platform, the buildpacks instal
 - `BP_NODE_RUN_SCRIPTS` – npm scripts to run during build (`export`).
 - `NODE_ENV` – set to `production` for optimized runtime behavior.
 - `MAINTENANCE_MODE` – set to `true` to redirect users to `/coming-soon`.
-- `NEXT_PUBLIC_SITE_URL` – base URL used for metadata, sitemap, and robots.
+- `NEXT_PUBLIC_SITE_URL` – base URL used for metadata, sitemap, and robots. **Required.**
 
 ## Accessibility
 
