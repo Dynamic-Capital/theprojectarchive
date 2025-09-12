@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "postinstall": "npm --prefix next-app install && npm --prefix next-app run build",
+    "postinstall": "npm --prefix next-app install && npm run build",
     "dev": "npm --prefix next-app run dev",
-    "build": "npm --prefix next-app run build",
-    "export": "npm run build && rm -rf _static && mkdir -p _static && cp -R next-app/out/. _static && node -e \"if(!require('fs').existsSync('_static/_next')){console.error('Error: _static/_next is missing');process.exit(1);}\"",
+    "build": "npm --prefix next-app run build && rm -rf _static && mkdir -p _static && cp -R next-app/out/. _static && node -e \"if(!require('fs').existsSync('_static/_next')){console.error('Error: _static/_next is missing');process.exit(1);}\"",
+    "export": "npm run build",
     "analyze": "ANALYZE=true npm --prefix next-app run build",
     "start": "NODE_ENV=production node server.js",
     "preview": "npm run build && npm run start",

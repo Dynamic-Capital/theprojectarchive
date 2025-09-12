@@ -34,7 +34,7 @@ Spacing, radii, typography, and color tokens are defined as CSS custom propertie
 
 ## Production build
 
-Create an optimized production build:
+Create an optimized production build and generate the static site in `/_static/`:
 
 ```bash
 npm run build
@@ -52,12 +52,7 @@ To build and start the app in one step for a local production preview:
 npm run preview
 ```
 
-To generate a static export in `next-app/out/` (and copy it to `/_static/` for
-deployment) run:
-
-```bash
-npm run export
-```
+`npm run export` is an alias for `npm run build`.
 
 To rebuild automatically when files in `app/` change and refresh the local
 `/_static/` directory:
