@@ -21,7 +21,7 @@ describe('Contact', () => {
     fireEvent.change(screen.getByLabelText(/name/i), {
       target: { value: 'Jane' },
     });
-    fireEvent.change(screen.getByLabelText(/email/i), {
+    fireEvent.change(screen.getByLabelText(/^email$/i), {
       target: { value: 'jane@example.com' },
     });
     fireEvent.change(screen.getByLabelText(/message/i), {
@@ -41,7 +41,7 @@ describe('Contact', () => {
     fireEvent.change(screen.getByLabelText(/name/i), {
       target: { value: 'Jane' },
     });
-    fireEvent.change(screen.getByLabelText(/email/i), {
+    fireEvent.change(screen.getByLabelText(/^email$/i), {
       target: { value: 'jane@example.com' },
     });
     fireEvent.change(screen.getByLabelText(/message/i), {
@@ -50,6 +50,13 @@ describe('Contact', () => {
     fireEvent.click(screen.getByRole('button', { name: /send message/i }));
     await screen.findByText(/failed to send message/i);
     global.fetch = origFetch;
+  });
+
+  it('renders quick email link', () => {
+    render(<Contact />);
+    expect(
+      screen.getByRole('link', { name: /email us/i })
+    ).toBeInTheDocument();
   });
 });
 
