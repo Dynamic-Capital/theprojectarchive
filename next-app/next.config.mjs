@@ -36,9 +36,8 @@ export default function (phase) {
       unoptimized: true,
     },
     trailingSlash: true,
-    // Generate a static export so the build creates an `out` directory
-    // that can be moved to `/_static` for deployment.
-    output: 'export',
+    // Build output will run on a Node.js server rather than generating a
+    // purely static export.
   };
 
   if (phase === PHASE_DEVELOPMENT_SERVER) {
