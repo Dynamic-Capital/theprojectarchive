@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 import styles from '../styles/Header.module.css';
 
 const links = [
@@ -29,6 +30,7 @@ const linkVariants = {
 };
 
 export default function DesktopNav() {
+  const pathname = usePathname();
   return (
     <motion.nav
       className={styles.desktopNav}
@@ -36,15 +38,28 @@ export default function DesktopNav() {
       initial="hidden"
       animate="visible"
     >
-      {links.map((l) => (
-        <motion.span
-          key={l.to}
-          variants={linkVariants}
-          whileHover={{ scale: 1.05 }}
-        >
-          <Link href={l.to}>{l.label}</Link>
-        </motion.span>
-      ))}
+      <ul className={styles.desktopNavList}>
+        {links.map((l) => {
+          const isActive = pathname === l.to;
+          return (
+            <motion.li
+              key={l.to}
+              variants={linkVariants}
+              whileHover={{ scale: 1.05 }}
+              whileFocus={{ scale: 1.05 }}
+              className={styles.desktopNavItem}
+            >
+              <Link
+                href={l.to}
+                className={isActive ? styles.active : undefined}
+                aria-current={isActive ? 'page' : undefined}
+              >
+                {l.label}
+              </Link>
+            </motion.li>
+          );
+        })}
+      </ul>
     </motion.nav>
   );
 }
