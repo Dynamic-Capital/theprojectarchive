@@ -13,7 +13,9 @@ RUN npm run build
 
 # Production stage: serve with nginx
 FROM nginx:alpine
-COPY --from=build /_static /usr/share/nginx/html
+# Copy the static export from the Next.js build stage into Nginx's web root.
+# `npm run build` in the previous stage generates an `out` directory at `/app/out`.
+COPY --from=build /app/out /usr/share/nginx/html
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log
 EXPOSE 80
