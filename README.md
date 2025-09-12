@@ -29,6 +29,27 @@ const services = [
 
 The component respects the user's `prefers-reduced-motion` setting and falls back to a simple list when motion is disabled.
 
+### Google Business email setup
+
+To forward contact form submissions to your Google Business inbox:
+
+1. Generate an App Password at <https://myaccount.google.com/apppasswords> for your Workspace mailbox.
+2. Add the following to your `.env`:
+
+   ```bash
+   BUSINESS_EMAIL=studio@example.com
+   BUSINESS_EMAIL_APP_PASSWORD=your_app_password
+   # Optional: enable spam protection with reCAPTCHA v3
+   RECAPTCHA_SECRET=your_recaptcha_secret
+   ```
+3. Restart the dev server and verify the endpoint locally:
+
+   ```bash
+   curl -X POST http://localhost:3000/api/contact \
+     -H 'Content-Type: application/json' \
+     -d '{"name":"Test","email":"user@example.com","message":"Hello"}'
+   ```
+   A `200` response indicates the message was accepted and forwarded to your inbox.
 
 ## Development
 
