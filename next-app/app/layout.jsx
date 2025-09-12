@@ -12,8 +12,8 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'The Project Archive',
-  url: 'https://theprojectarchive.com',
-  logo: 'https://theprojectarchive.com/favicon.svg',
+  url: 'https://theprojectarchives-4ud4t.ondigitalocean.app',
+  logo: 'https://theprojectarchives-4ud4t.ondigitalocean.app/favicon.svg',
   sameAs: [
     'https://www.instagram.com/theprojectarchive',
     'https://twitter.com/theprojectarchive',
@@ -23,7 +23,7 @@ const jsonLd = {
 logRuntimeInfo();
 
 export const metadata = {
-  metadataBase: new URL('https://theprojectarchive.com'),
+  metadataBase: new URL('https://theprojectarchives-4ud4t.ondigitalocean.app'),
   alternates: {
     canonical: '/',
   },
@@ -39,11 +39,11 @@ export const metadata = {
       'The Project Archive - Creative studio for design, development, and photography',
     description:
       'Creative studio in the Maldives offering design, development, and photography services.',
-    url: 'https://theprojectarchive.com',
+    url: 'https://theprojectarchives-4ud4t.ondigitalocean.app',
     siteName: 'The Project Archive',
     images: [
       {
-        url: 'https://theprojectarchive.com/favicon.svg',
+        url: 'https://theprojectarchives-4ud4t.ondigitalocean.app/favicon.svg',
         width: 1200,
         height: 630,
         alt: 'The Project Archive logo',
@@ -57,7 +57,7 @@ export const metadata = {
       'The Project Archive - Creative studio for design, development, and photography',
     description:
       'Creative studio in the Maldives offering design, development, and photography services.',
-    images: ['https://theprojectarchive.com/favicon.svg'],
+    images: ['https://theprojectarchives-4ud4t.ondigitalocean.app/favicon.svg'],
   },
   robots: {
     index: true,
