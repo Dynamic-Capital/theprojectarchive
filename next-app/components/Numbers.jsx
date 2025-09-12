@@ -52,7 +52,7 @@ export default function Numbers() {
       image="https://picsum.photos/id/1045/1600/900"
       alt=""
       decorative
-      overlay
+      overlay="linear-gradient(180deg, color-mix(in oklab, var(--brand-500), transparent 20%), color-mix(in oklab, var(--accent-500), transparent 80%))"
     >
       <h2
         style={{

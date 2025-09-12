@@ -56,7 +56,7 @@ export default function Testimonials() {
       image="https://picsum.photos/id/1057/1600/900"
       alt=""
       decorative
-      overlay
+      overlay="linear-gradient(180deg, color-mix(in oklab, var(--brand-600), transparent 20%), color-mix(in oklab, var(--brand-500), transparent 80%))"
     >
       <motion.h2
         style={{ fontSize: 'var(--fs-4)', fontWeight: 750, marginBottom: 'var(--space-6)' }}

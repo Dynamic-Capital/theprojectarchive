@@ -92,7 +92,7 @@ export default function Hero() {
           position: 'absolute',
           inset: 0,
           background:
-            'linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7))',
+            'linear-gradient(to bottom, color-mix(in oklab, var(--brand-500), transparent 40%), color-mix(in oklab, var(--brand-600), transparent 90%))',
           zIndex: 1,
         }}
       />
