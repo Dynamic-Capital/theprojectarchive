@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { LayoutGroup, motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import styles from '../styles/Header.module.css';
 
@@ -32,34 +32,38 @@ const linkVariants = {
 export default function DesktopNav() {
   const pathname = usePathname();
   return (
-    <motion.nav
-      className={styles.desktopNav}
-      variants={navVariants}
-      initial="hidden"
-      animate="visible"
-    >
-      <ul className={styles.desktopNavList}>
-        {links.map((l) => {
-          const isActive = pathname === l.to;
-          return (
-            <motion.li
-              key={l.to}
-              variants={linkVariants}
-              whileHover={{ scale: 1.05 }}
-              whileFocus={{ scale: 1.05 }}
-              className={styles.desktopNavItem}
-            >
-              <Link
-                href={l.to}
-                className={isActive ? styles.active : undefined}
-                aria-current={isActive ? 'page' : undefined}
+    <LayoutGroup>
+      <motion.nav
+        className={styles.desktopNav}
+        variants={navVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <ul className={styles.desktopNavList}>
+          {links.map((l) => {
+            const isActive = pathname === l.to;
+            return (
+              <motion.li
+                key={l.to}
+                variants={linkVariants}
+                whileHover={{ scale: 1.05 }}
+                whileFocus={{ scale: 1.05 }}
+                className={styles.desktopNavItem}
               >
-                {l.label}
-              </Link>
-            </motion.li>
-          );
-        })}
-      </ul>
-    </motion.nav>
+                <Link href={l.to} aria-current={isActive ? 'page' : undefined}>
+                  {l.label}
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-underline"
+                      className={styles.underline}
+                    />
+                  )}
+                </Link>
+              </motion.li>
+            );
+          })}
+        </ul>
+      </motion.nav>
+    </LayoutGroup>
   );
 }
