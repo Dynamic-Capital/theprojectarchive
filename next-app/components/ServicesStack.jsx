@@ -9,6 +9,11 @@ export default function ServicesStack({ items = [], topOffsetClass = 'top-24' })
   const prefersReduced = useReducedMotion();
   const ref = useRef(null);
 
+  // Avoid rendering an empty section when no services are provided
+  if (items.length === 0) {
+    return null;
+  }
+
   // Long container to allow scroll playtime (≈ one viewport per card)
   // Adjust factor (e.g., 0.85) to make the section shorter/longer.
   const sectionHeightVh = Math.max(1, items.length) * 90;
