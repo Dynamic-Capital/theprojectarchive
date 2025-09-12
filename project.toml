@@ -7,5 +7,5 @@ id = "paketo-buildpacks/web-servers"
 [[build.env]]
 BP_NODE_VERSION = "20.x"
 BP_WEB_SERVER = "nginx"
-BP_WEB_SERVER_ROOT = "/_static"
+BP_WEB_SERVER_ROOT = "_static"
 BP_NODE_RUN_SCRIPTS = "export"
