@@ -117,7 +117,9 @@ export default function Hero() {
             color: 'var(--brand-500)',
             fontFamily: 'var(--font-sans)',
             fontSize: 'var(--fs-2)',
+            fontWeight: 700,
             letterSpacing: '0.1em',
+            textRendering: 'geometricPrecision',
           }}
           variants={itemUp(reduceMotion)}
         >
@@ -134,7 +136,9 @@ export default function Hero() {
                 color: 'var(--brand-500)',
                 fontFamily: 'var(--font-sans)',
                 fontSize: 'var(--fs-2)',
+                fontWeight: 700,
                 letterSpacing: '0.1em',
+                textRendering: 'geometricPrecision',
               }}
             >
               {HERO_TAGLINE}
