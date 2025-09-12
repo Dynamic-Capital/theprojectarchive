@@ -40,10 +40,13 @@ export default function () {
 
   const commonRewrites = [
     { source: '/favicon.ico', destination: '/favicon.svg' },
-    // Route the landing page to a static HTML file so the app behaves
-    // like a traditional static site.
-    { source: '/', destination: '/index.html' },
   ];
+
+  // Optionally route the landing page to a static HTML file when serving
+  // pre-exported files from a static server.
+  if (process.env.SERVE_STATIC_EXPORT === 'true') {
+    commonRewrites.push({ source: '/', destination: '/index.html' });
+  }
 
   nextConfig.rewrites = async () => commonRewrites;
 
