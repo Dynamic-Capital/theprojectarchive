@@ -9,6 +9,7 @@ const require = createRequire(import.meta.url);
 
 const port = process.env.PORT || 3000;
 
+// Static assets are built into the repository root "_static" directory
 const staticDir = resolve(new URL("./_static", import.meta.url).pathname);
 const mimeTypes = {
   ".html": "text/html",
