@@ -10,8 +10,22 @@ const require = createRequire(import.meta.url);
 
 const port = process.env.PORT || 3000;
 
-// Static assets are built into the repository root "_static" directory
-const staticDir = resolve(new URL("./_static", import.meta.url).pathname);
+// Determine where prebuilt static assets live. Prefer the repository root
+// "_static" directory, but fall back to the Next.js "out" directory if the
+// project was built but not exported yet.
+function resolveStaticDir() {
+  const candidates = [
+    resolve(new URL("./_static", import.meta.url).pathname),
+    resolve(new URL("./next-app/out", import.meta.url).pathname),
+  ];
+  for (const dir of candidates) {
+    if (existsSync(join(dir, "index.html")) && existsSync(join(dir, "_next"))) {
+      return dir;
+    }
+  }
+  return null;
+}
+
 const mimeTypes = {
   ".html": "text/html",
   ".js": "text/javascript",
@@ -27,6 +41,7 @@ const mimeTypes = {
 
 export async function startServer(appInstance) {
   const dev = process.env.NODE_ENV !== "production";
+  const staticDir = resolveStaticDir();
   let allowedOriginsEnv =
     process.env.ALLOWED_ORIGINS || process.env.NEXT_ALLOWED_ORIGIN;
   if (!allowedOriginsEnv) {
@@ -44,11 +59,7 @@ export async function startServer(appInstance) {
     // Only serve prebuilt static assets when the expected build output exists.
     // The `_static` directory includes a placeholder `index.html` in version control,
     // so check for the Next.js `_next` directory to ensure a real build is present.
-    if (
-      !dev &&
-      existsSync(join(staticDir, "index.html")) &&
-      existsSync(join(staticDir, "_next"))
-    ) {
+    if (!dev && staticDir) {
       const requestHandler = async (req, res) => {
         const origin = req.headers.origin;
         const corsOrigin = allowAll
