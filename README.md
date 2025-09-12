@@ -156,9 +156,9 @@ BP_WEB_SERVER = "nginx"
 BP_WEB_SERVER_ROOT = "/_static"
 ```
 
-When deploying to platforms like DigitalOcean App Platform, the `.do/app.yaml` file lists both buildpacks so the build image includes Nginx to serve the contents of `/_static/`.
+When deploying to platforms like DigitalOcean App Platform, `.do/app.yaml` defines a web service that runs `npm start` to serve the app.
 
-The `npm start` script serves the contents of `/_static/` locally using `serve`.
+The `npm start` script runs `server.js`, which serves the built assets from `/_static/` or the Next.js application as needed.
 
 ### Environment variables
 

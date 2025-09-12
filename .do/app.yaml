@@ -1,15 +1,11 @@
-static_sites:
+services:
   - name: theprojectarchive
     source_dir: /
-    build_command: "npm ci && npm run build"
-    output_dir: "_static"
-    buildpacks:
-      - paketo-buildpacks/nodejs-legacy
-      - paketo-buildpacks/procfile
-      - paketo-buildpacks/web-servers
     environment_slug: node-js
+    instance_size_slug: basic-xxs
+    instance_count: 1
+    build_command: "npm ci && npm run build"
+    run_command: "npm start"
+    http_port: 3000
     routes:
       - path: /
-      - source: /*
-        destination: /index.html
-        status_code: 200
