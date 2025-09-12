@@ -5,6 +5,7 @@ import { motion, useScroll, useReducedMotion } from 'framer-motion';
 import { useTheme } from 'next-themes';
 import styles from '../styles/Header.module.css';
 import DesktopNav from './DesktopNav';
+import SafeSpace from './SafeSpace';
 
 const topBar = {
   closed: { rotate: 0, y: 0 },
@@ -51,8 +52,9 @@ export default function Header({ onToggle, open }) {
   const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
 
   return (
-    <motion.header
-      className={`safe-p sticky top-0 w-full ${styles.header}`}
+    <SafeSpace
+      as={motion.header}
+      className={`sticky top-0 w-full ${styles.header}`}
       variants={headerVariants}
       initial={shouldReduce ? false : 'initial'}
       animate={hidden && !shouldReduce ? 'hidden' : 'visible'}
@@ -83,11 +85,23 @@ export default function Header({ onToggle, open }) {
           animate={open ? 'open' : 'closed'}
           transition={shouldReduce ? { duration: 0 } : undefined}
         >
-          <motion.span className={styles.bar} variants={topBar} transition={shouldReduce ? { duration: 0 } : undefined}></motion.span>
-          <motion.span className={styles.bar} variants={middleBar} transition={shouldReduce ? { duration: 0 } : undefined}></motion.span>
-          <motion.span className={styles.bar} variants={bottomBar} transition={shouldReduce ? { duration: 0 } : undefined}></motion.span>
+          <motion.span
+            className={styles.bar}
+            variants={topBar}
+            transition={shouldReduce ? { duration: 0 } : undefined}
+          ></motion.span>
+          <motion.span
+            className={styles.bar}
+            variants={middleBar}
+            transition={shouldReduce ? { duration: 0 } : undefined}
+          ></motion.span>
+          <motion.span
+            className={styles.bar}
+            variants={bottomBar}
+            transition={shouldReduce ? { duration: 0 } : undefined}
+          ></motion.span>
         </motion.button>
       </div>
-    </motion.header>
+    </SafeSpace>
   );
 }
