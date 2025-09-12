@@ -20,7 +20,7 @@ export default function ServiceCard({ index, item, slice, total, scrollYProgress
       style={{ zIndex: total - index }}
     >
       <motion.div
-        className="glass rounded-2xl max-w-3xl w-full p-8 md:p-10 shadow-glass bg-white/5"
+        className="glass rounded-2xl max-w-3xl w-full p-8 md:p-10 shadow-glass"
         style={{ opacity, scale, y, filter: blur, rotate, boxShadow: shadow }}
       >
         <div className="text-sm uppercase tracking-wide text-accent/90">{String(index + 1).padStart(2, '0')}</div>

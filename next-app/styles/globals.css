@@ -162,7 +162,7 @@ img { border-radius: var(--radius-xs); }
     color-mix(in oklab, var(--brand-500), transparent 92%),
     color-mix(in oklab, var(--brand-500), transparent 98%)
   );
-  border: 1px solid color-mix(in oklab, var(--brand-500), transparent 90%);
+  border: 1px solid color-mix(in oklab, var(--border), transparent 40%);
   backdrop-filter: blur(12px);
   position: relative;
   overflow: hidden;
@@ -173,8 +173,8 @@ img { border-radius: var(--radius-xs); }
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(at 20% 20%, color-mix(in oklab, white, transparent 75%), transparent 60%),
-    linear-gradient(120deg, color-mix(in oklab, white, transparent 80%) 0%, transparent 60%);
+    radial-gradient(at 20% 20%, color-mix(in oklab, var(--brand-500), transparent 75%), transparent 60%),
+    linear-gradient(120deg, color-mix(in oklab, var(--brand-500), transparent 80%) 0%, transparent 60%);
   mix-blend-mode: screen;
   opacity: .5;
   pointer-events: none;
