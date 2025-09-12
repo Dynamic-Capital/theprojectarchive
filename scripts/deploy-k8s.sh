@@ -33,6 +33,11 @@ fi
 IMAGE="$1"
 INGRESS_HOST="$2"
 
+if [ ! -d "_static/_next" ]; then
+  echo "Error: build output missing. Run 'npm run export' before deploying." >&2
+  exit 1
+fi
+
 echo "Building $IMAGE"
 docker build -t "$IMAGE" .
 
