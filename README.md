@@ -48,14 +48,15 @@ npm run watch-static
 
 ## Next.js build helpers
 
-Run a standard Next.js production server build:
+Run a standard Next.js production server build without the static export:
 
 ```bash
-npm run build:standalone
-npm run start:standalone
+npm --prefix next-app run build
+npm --prefix next-app run start
 ```
 
-The build sets `NEXT_STANDALONE=true`, producing a `.next/standalone` directory with only the files needed to run the app; `start:standalone` launches it via `node .next/standalone/server.js`, ideal for Docker or PM2 deployments.
+The root `npm run build` command sets `NEXT_OUTPUT=export` to produce the static
+`/_static` directory. Omit that variable when building for `next start`.
 
 To inspect bundle sizes and locate large dependencies, run:
 
