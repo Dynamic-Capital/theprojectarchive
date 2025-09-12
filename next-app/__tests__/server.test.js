@@ -74,6 +74,32 @@ describe('static file handling', () => {
 });
 
 describe('allowed origin handling', () => {
+  it('warns when ALLOWED_ORIGINS is missing', async () => {
+    const appMock = {
+      prepare: vi.fn().mockResolvedValue(),
+      getRequestHandler: vi.fn().mockReturnValue((req, res) => {
+        res.end('ok');
+      }),
+    };
+    delete process.env.ALLOWED_ORIGINS;
+    delete process.env.NEXT_ALLOWED_ORIGIN;
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const exitSpy = vi.spyOn(process, 'exit').mockImplementation(() => {});
+    const server = await startServer(appMock);
+
+    const res = await fetch(`http://localhost:${server.address().port}`, {
+      headers: { Origin: 'https://example.com' },
+    });
+    expect(res.status).toBe(200);
+    expect(warnSpy).toHaveBeenCalledWith(
+      '[CORS] ALLOWED_ORIGINS is missing, defaulting to "*"',
+    );
+
+    server.close();
+    warnSpy.mockRestore();
+    exitSpy.mockRestore();
+  });
+
   it('blocks disallowed origins', async () => {
     const appMock = {
       prepare: vi.fn().mockResolvedValue(),
