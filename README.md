@@ -34,7 +34,7 @@ Spacing, radii, typography, and color tokens are defined as CSS custom propertie
 
 ## Production build
 
-Create an optimized production build in the repository's `/_static` folder, which is excluded from version control:
+Create an optimized production build in the repository's `/_static` folder, which is excluded from version control. The generated files are ephemeral and **should not be committed**; use the provided `Dockerfile` to build and serve the static assets during deployment:
 
 ```bash
 npm run build
