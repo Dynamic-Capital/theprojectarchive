@@ -66,6 +66,10 @@ export default function Home() {
       cta: 'Get a quote',
       href: '#contact',
     },
+    {
+      title: 'Drone Photography',
+      description: 'Aerial imagery capturing unique perspectives from above.',
+    },
   ];
 
   return (

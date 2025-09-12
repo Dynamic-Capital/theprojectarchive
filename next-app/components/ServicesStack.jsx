@@ -74,6 +74,13 @@ export default function ServicesStack({ items = [], topOffsetClass = 'top-24' })
             const scale   = useTransform(scrollYProgress, [start, mid], [0.94, 1]);
             const y       = useTransform(scrollYProgress, [start, end], [50, -30]);   // slight lift as it “locks in”
             const blur    = useTransform(scrollYProgress, [start, mid], ['blur(6px)', 'blur(0px)']);      // ease-in clarity
+            // Subtle spin and shadow to emphasize depth as each card becomes active
+            const rotate  = useTransform(scrollYProgress, [start, mid, end], [i % 2 === 0 ? -8 : 8, 0, 0]);
+            const shadow  = useTransform(scrollYProgress, [start, mid, end], [
+              '0px 0px 0px rgba(0,0,0,0)',
+              '0px 16px 32px rgba(0,0,0,0.15)',
+              '0px 16px 32px rgba(0,0,0,0.15)'
+            ]);
 
             return (
               <motion.article
@@ -88,6 +95,8 @@ export default function ServicesStack({ items = [], topOffsetClass = 'top-24' })
                     scale,
                     y,
                     filter: blur,
+                    rotate,
+                    boxShadow: shadow,
                   }}
                 >
                   <div className="text-sm uppercase tracking-wide text-accent/90">{String(i + 1).padStart(2, '0')}</div>
