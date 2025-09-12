@@ -140,3 +140,9 @@ img { border-radius: var(--radius-xs); }
 @media (min-width: 768px) { :root { --container: 720px; } }
 @media (min-width: 1024px){ :root { --container: 960px; } }
 @media (min-width: 1280px){ :root { --container: 1140px; } }
+
+.glass{
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+  border: 1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(12px);
+}

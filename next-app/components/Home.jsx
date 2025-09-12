@@ -1,48 +1,17 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
-import {
-  AnimatePresence,
-  motion,
-  useScroll,
-  useTransform,
-  useReducedMotion,
-} from 'framer-motion';
-import { createFocusTrap } from 'focus-trap';
+import { useEffect } from 'react';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
-import Image from 'next/image';
 import Hero from './Hero';
 import About from './About';
 import Mission from './Mission';
 import Approach from './Approach';
 import Numbers from './Numbers';
-import Services from './Services';
+import ServicesStack from './ServicesStack';
 import Testimonials from './Testimonials';
 import Contact from './Contact';
-import serviceImages from '../lib/serviceImages';
 
 export default function Home() {
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxImg, setLightboxImg] = useState('');
-  const [lightboxAlt, setLightboxAlt] = useState('');
-  const lightboxRef = useRef(null);
-  const openLightbox = (src, alt) => {
-    setLightboxImg(src);
-    setLightboxAlt(alt);
-    setLightboxOpen(true);
-  };
-  const closeLightbox = () => setLightboxOpen(false);
-
-  useEffect(() => {
-    if (!lightboxOpen) return;
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
-        closeLightbox();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxOpen]);
-
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 300], [100, 0]);
   const opacity = useTransform(scrollY, [0, 300], [0, 1]);
@@ -53,6 +22,7 @@ export default function Home() {
   const supportsSmoothScroll =
     typeof document !== 'undefined' &&
     'scrollBehavior' in document.documentElement.style;
+
   useEffect(() => {
     const section = pathname.slice(1);
     if (section) {
@@ -78,18 +48,24 @@ export default function Home() {
     }
   }, [pathname, supportsSmoothScroll]);
 
-  useEffect(() => {
-    let trap;
-    if (lightboxOpen && lightboxRef.current) {
-      trap = createFocusTrap(lightboxRef.current, {
-        initialFocus: '.close-btn',
-        escapeDeactivates: true,
-      });
-      trap.activate();
-    }
-    return () => trap?.deactivate();
-  }, [lightboxOpen]);
-
+  const serviceItems = [
+    {
+      title: 'Portrait Photography',
+      description: 'Professional headshots and portrait sessions.',
+      cta: 'Book a session',
+      href: '#contact',
+    },
+    {
+      title: 'Event Coverage',
+      description: 'Document corporate events or family gatherings with style.',
+    },
+    {
+      title: 'Product Shoots',
+      description: 'Clean and vibrant images to showcase your products online.',
+      cta: 'Get a quote',
+      href: '#contact',
+    },
+  ];
 
   return (
     <>
@@ -98,63 +74,9 @@ export default function Home() {
       <Mission />
       <Approach />
       <Numbers />
-      <Services openLightbox={openLightbox} images={serviceImages} />
+      <ServicesStack items={serviceItems} />
       <Testimonials />
       <Contact />
-      <AnimatePresence>
-        {lightboxOpen && (
-          <motion.div
-            ref={lightboxRef}
-            style={{
-              position: 'fixed',
-              inset: 0,
-              background: 'rgba(0,0,0,0.8)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              zIndex: 'var(--z-modal)',
-            }}
-            role="dialog"
-            aria-modal="true"
-            aria-hidden={!lightboxOpen}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            onClick={closeLightbox}
-          >
-            <Image
-              src={lightboxImg}
-              alt={lightboxAlt}
-              width={400}
-              height={300}
-              onClick={(e) => e.stopPropagation()}
-            />
-            <motion.button
-              className="close-btn"
-              style={{
-                position: 'absolute',
-                top: 'var(--space-4)',
-                right: 'var(--space-4)',
-                width: '2rem',
-                height: '2rem',
-                borderRadius: '50%',
-                border: 'var(--border-1)',
-                background: 'var(--surface)',
-                color: 'var(--text)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-              aria-label="Close image"
-              onClick={closeLightbox}
-              whileHover={reduceMotion ? undefined : { scale: 1.2 }}
-              whileTap={reduceMotion ? undefined : { scale: 0.9 }}
-            >
-              &times;
-            </motion.button>
-          </motion.div>
-        )}
-      </AnimatePresence>
       <motion.button
         style={{
           position: 'fixed',
@@ -185,3 +107,4 @@ export default function Home() {
     </>
   );
 }
+

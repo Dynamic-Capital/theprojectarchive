@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, within } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { describe, it, expect, vi, beforeAll } from 'vitest';
 import { axe } from 'vitest-axe';
 import Home from '../components/Home';
@@ -6,16 +6,6 @@ import Home from '../components/Home';
 let mockPathname = '/';
 vi.mock('next/navigation', () => ({
   usePathname: () => mockPathname,
-}));
-
-vi.mock('focus-trap', () => ({
-  createFocusTrap: (el, opts) => ({
-    activate: () => {
-      const selector = opts?.initialFocus;
-      if (selector) el.querySelector(selector)?.focus();
-    },
-    deactivate: () => {},
-  }),
 }));
 
 beforeAll(() => {
@@ -41,21 +31,9 @@ describe('Home', () => {
     spy.mockRestore();
   });
 
-  it('traps focus within lightbox and has no accessibility violations', async () => {
+  it('renders without accessibility violations', async () => {
     mockPathname = '/';
     const { container } = render(<Home />);
-    const imgs = await screen.findAllByAltText(
-      'Bride and groom pose on a sunny beach during a wedding shoot'
-    );
-    fireEvent.click(imgs[0]);
-    const dialog = await screen.findByRole('dialog');
-    const closeBtn = await screen.findByRole('button', { name: /close image/i });
-    expect(document.activeElement).toBe(closeBtn);
-    expect(
-      within(dialog).getByAltText(
-        'Bride and groom pose on a sunny beach during a wedding shoot'
-      )
-    ).toBeInTheDocument();
     const results = await axe(container);
     expect(results.violations).toEqual([]);
   });
