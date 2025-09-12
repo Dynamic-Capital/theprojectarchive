@@ -69,7 +69,9 @@ export async function startServer(appInstance) {
           res.end("Not found");
           return;
         }
-        let filePath = join(staticDir, urlPath);
+        // Prevent `path.join` from discarding `staticDir` when `urlPath` is absolute
+        const safePath = urlPath.replace(/^\/+/g, "");
+        let filePath = join(staticDir, safePath);
         const resolvedPath = resolve(filePath);
         if (!resolvedPath.startsWith(staticDir)) {
           res.statusCode = 403;
