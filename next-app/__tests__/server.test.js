@@ -32,14 +32,16 @@ describe('environment defaults', () => {
     delete process.env.NODE_ENV;
     const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
     const exitSpy = vi.spyOn(process, 'exit').mockImplementation(() => {});
+    process.env.PORT = '0';
     const server = await startServer(appMock);
     expect(warnSpy).toHaveBeenCalledWith(
       '[Env] NODE_ENV is missing, defaulting to "development"',
     );
-    server.close();
+    await new Promise((resolve) => server.close(resolve));
     warnSpy.mockRestore();
     exitSpy.mockRestore();
     delete process.env.NODE_ENV;
+    delete process.env.PORT;
   });
 });
 
@@ -52,13 +54,17 @@ describe('static file handling', () => {
     writeFileSync(join(staticDir, 'index.html'), '<h1>hi</h1>');
     mkdirSync(join(staticDir, '_next'), { recursive: true });
     process.env.NODE_ENV = 'production';
+    process.env.PORT = '0';
     exitSpy = vi.spyOn(process, 'exit').mockImplementation(() => {});
     server = await startServer();
   });
-  afterAll(() => {
-    server && server.close();
+  afterAll(async () => {
+    if (server) {
+      await new Promise((resolve) => server.close(resolve));
+    }
     rmSync(staticDir, { recursive: true, force: true });
     delete process.env.NODE_ENV;
+    delete process.env.PORT;
     exitSpy.mockRestore();
   });
 
@@ -107,19 +113,32 @@ describe('allowed origin handling', () => {
     delete process.env.NEXT_ALLOWED_ORIGIN;
     const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
     const exitSpy = vi.spyOn(process, 'exit').mockImplementation(() => {});
+    process.env.PORT = '0';
     const server = await startServer(appMock);
 
     const res = await fetch(`http://localhost:${server.address().port}`, {
       headers: { Origin: 'https://example.com' },
     });
-    expect(res.status).toBe(200);
+    expect(res.status).toBe(403);
     expect(warnSpy).toHaveBeenCalledWith(
-      '[CORS] ALLOWED_ORIGINS is missing, defaulting to "*"',
+      '[CORS] ALLOWED_ORIGINS is missing, defaulting to "http://localhost:3000"',
     );
 
-    server.close();
+    const allowedRes = await fetch(
+      `http://localhost:${server.address().port}`,
+      {
+        headers: { Origin: 'http://localhost:3000' },
+      },
+    );
+    expect(allowedRes.status).toBe(200);
+    expect(allowedRes.headers.get('access-control-allow-origin')).toBe(
+      'http://localhost:3000',
+    );
+
+    await new Promise((resolve) => server.close(resolve));
     warnSpy.mockRestore();
     exitSpy.mockRestore();
+    delete process.env.PORT;
   });
 
   it('blocks disallowed origins', async () => {
@@ -130,6 +149,7 @@ describe('allowed origin handling', () => {
       }),
     };
     process.env.ALLOWED_ORIGINS = 'https://allowed.com';
+    process.env.PORT = '0';
     const exitSpy = vi.spyOn(process, 'exit').mockImplementation(() => {});
     const server = await startServer(appMock);
 
@@ -138,9 +158,10 @@ describe('allowed origin handling', () => {
     });
     expect(res.status).toBe(403);
 
-    server.close();
+    await new Promise((resolve) => server.close(resolve));
     exitSpy.mockRestore();
     delete process.env.ALLOWED_ORIGINS;
+    delete process.env.PORT;
   });
 
   it('responds to preflight requests', async () => {
@@ -151,6 +172,7 @@ describe('allowed origin handling', () => {
       }),
     };
     process.env.ALLOWED_ORIGINS = 'https://allowed.com';
+    process.env.PORT = '0';
     const exitSpy = vi.spyOn(process, 'exit').mockImplementation(() => {});
     const server = await startServer(appMock);
 
@@ -169,9 +191,10 @@ describe('allowed origin handling', () => {
       'Content-Type',
     );
   
-    server.close();
+    await new Promise((resolve) => server.close(resolve));
     exitSpy.mockRestore();
     delete process.env.ALLOWED_ORIGINS;
+    delete process.env.PORT;
   });
 });
 
@@ -185,14 +208,18 @@ describe('static server preflight', () => {
     mkdirSync(join(staticDir, '_next'), { recursive: true });
     process.env.NODE_ENV = 'production';
     process.env.ALLOWED_ORIGINS = 'https://allowed.com';
+    process.env.PORT = '0';
     exitSpy = vi.spyOn(process, 'exit').mockImplementation(() => {});
     server = await startServer();
   });
-  afterAll(() => {
-    server && server.close();
+  afterAll(async () => {
+    if (server) {
+      await new Promise((resolve) => server.close(resolve));
+    }
     rmSync(staticDir, { recursive: true, force: true });
     delete process.env.NODE_ENV;
     delete process.env.ALLOWED_ORIGINS;
+    delete process.env.PORT;
     exitSpy.mockRestore();
   });
 
