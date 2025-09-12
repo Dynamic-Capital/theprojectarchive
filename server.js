@@ -9,7 +9,7 @@ const require = createRequire(import.meta.url);
 
 const port = process.env.PORT || 3000;
 
-const staticDir = resolve("./_static");
+const staticDir = resolve(new URL("./next-app/_static", import.meta.url).pathname);
 const mimeTypes = {
   ".html": "text/html",
   ".js": "text/javascript",
