@@ -24,6 +24,8 @@ jobs:
           context: .
           push: true
           tags: ${{ env.IMAGE }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
       - name: Save kubeconfig
         run: doctl kubernetes cluster kubeconfig save ${{ secrets.DO_K8S_CLUSTER }}
       - name: Deploy manifests
