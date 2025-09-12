@@ -27,8 +27,12 @@ const mimeTypes = {
 
 export async function startServer(appInstance) {
   const dev = process.env.NODE_ENV !== "production";
-  const allowedOriginsEnv =
-    process.env.ALLOWED_ORIGINS || process.env.NEXT_ALLOWED_ORIGIN || "*";
+  let allowedOriginsEnv =
+    process.env.ALLOWED_ORIGINS || process.env.NEXT_ALLOWED_ORIGIN;
+  if (!allowedOriginsEnv) {
+    console.warn('[CORS] ALLOWED_ORIGINS is missing, defaulting to "*"');
+    allowedOriginsEnv = "*";
+  }
   const allowedOrigins = allowedOriginsEnv
     .split(",")
     .map((o) => o.trim())
