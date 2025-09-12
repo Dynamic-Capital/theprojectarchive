@@ -8,3 +8,5 @@ services:
     http_port: 8080
     routes:
       - path: /
+        index_document: index.html
+        catchall_document: index.html
