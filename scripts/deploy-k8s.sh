@@ -20,16 +20,18 @@ if ! kubectl config current-context >/dev/null 2>&1; then
 fi
 
 usage() {
-  echo "Usage: $0 <image>"
+  echo "Usage: $0 <image> <host>"
   echo "  image: full image name, e.g. registry.digitalocean.com/registry/tpa-site:latest"
+  echo "  host: ingress host domain"
 }
 
-if [ "$#" -ne 1 ]; then
+if [ "$#" -ne 2 ]; then
   usage
   exit 1
 fi
 
-  IMAGE="$1"
+IMAGE="$1"
+INGRESS_HOST="$2"
 
 echo "Building $IMAGE"
 docker build -t "$IMAGE" .
@@ -38,10 +40,10 @@ echo "Pushing $IMAGE"
 docker push "$IMAGE"
 
 echo "Applying manifests"
-export IMAGE
+export IMAGE INGRESS_HOST
 envsubst < k8s/deployment.yaml | kubectl apply -f -
 kubectl apply -f k8s/service.yaml
 if [ -f k8s/ingress.yaml ]; then
-  kubectl apply -f k8s/ingress.yaml
+  envsubst < k8s/ingress.yaml | kubectl apply -f -
 fi
 

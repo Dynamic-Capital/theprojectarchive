@@ -114,8 +114,10 @@ App Platform will automatically scan for these directory names: `/_static`, `dis
 Manifests for running the site in a Kubernetes cluster are in `k8s/`. Build and push the container image and apply the manifests with:
 
 ```bash
-./scripts/deploy-k8s.sh registry.digitalocean.com/<registry>/tpa-site:latest
+./scripts/deploy-k8s.sh registry.digitalocean.com/<registry>/tpa-site:latest <your-domain>
 ```
+
+The second argument sets `INGRESS_HOST`, which replaces `${INGRESS_HOST}` in `k8s/ingress.yaml` via `envsubst`.
 
 Ensure `kubectl` is configured for your cluster and you are authenticated to the container registry.
 
