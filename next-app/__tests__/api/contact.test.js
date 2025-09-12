@@ -48,47 +48,65 @@ describe('POST /api/contact', () => {
     nodemailer.createTransport.mockReturnValueOnce({
       sendMail: vi.fn().mockRejectedValue(new Error('fail')),
     });
-    const req = new Request('http://localhost/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: 'Bob',
-        email: 'bob@example.com',
-        message: 'Hello',
-      }),
-    });
-    const res = await POST(req);
-    expect(res.status).toBe(500);
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    try {
+      const req = new Request('http://localhost/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: 'Bob',
+          email: 'bob@example.com',
+          message: 'Hello',
+        }),
+      });
+      const res = await POST(req);
+      expect(res.status).toBe(500);
+      expect(errorSpy).toHaveBeenCalled();
+    } finally {
+      errorSpy.mockRestore();
+    }
   });
 
   it('returns 500 when BUSINESS_EMAIL is missing', async () => {
     delete process.env.BUSINESS_EMAIL;
-    const req = new Request('http://localhost/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: 'Ann',
-        email: 'ann@example.com',
-        message: 'Hello',
-      }),
-    });
-    const res = await POST(req);
-    expect(res.status).toBe(500);
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    try {
+      const req = new Request('http://localhost/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: 'Ann',
+          email: 'ann@example.com',
+          message: 'Hello',
+        }),
+      });
+      const res = await POST(req);
+      expect(res.status).toBe(500);
+      expect(errorSpy).toHaveBeenCalled();
+    } finally {
+      errorSpy.mockRestore();
+    }
   });
 
   it('returns 500 when BUSINESS_EMAIL_APP_PASSWORD is missing', async () => {
     delete process.env.BUSINESS_EMAIL_APP_PASSWORD;
-    const req = new Request('http://localhost/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: 'Sam',
-        email: 'sam@example.com',
-        message: 'Hello',
-      }),
-    });
-    const res = await POST(req);
-    expect(res.status).toBe(500);
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    try {
+      const req = new Request('http://localhost/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: 'Sam',
+          email: 'sam@example.com',
+          message: 'Hello',
+        }),
+      });
+      const res = await POST(req);
+      expect(res.status).toBe(500);
+      expect(errorSpy).toHaveBeenCalled();
+    } finally {
+      errorSpy.mockRestore();
+    }
   });
 
   it('rate limits repeated requests', async () => {
