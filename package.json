@@ -15,5 +15,8 @@
     "start:standalone": "npm --prefix next-app run start:standalone",
     "analyze": "npm --prefix next-app run analyze"
   },
+  "engines": {
+    "node": ">=20"
+  },
   "type": "module"
 }
