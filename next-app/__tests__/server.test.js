@@ -28,6 +28,7 @@ describe('static file handling', () => {
   beforeAll(async () => {
     mkdirSync(staticDir, { recursive: true });
     writeFileSync(join(staticDir, 'index.html'), '<h1>hi</h1>');
+    mkdirSync(join(staticDir, '_next'), { recursive: true });
     process.env.NODE_ENV = 'production';
     exitSpy = vi.spyOn(process, 'exit').mockImplementation(() => {});
     server = await startServer();
@@ -133,6 +134,7 @@ describe('static server preflight', () => {
   beforeAll(async () => {
     mkdirSync(staticDir, { recursive: true });
     writeFileSync(join(staticDir, 'index.html'), '<h1>hi</h1>');
+    mkdirSync(join(staticDir, '_next'), { recursive: true });
     process.env.NODE_ENV = 'production';
     process.env.NEXT_ALLOWED_ORIGIN = 'https://allowed.com';
     exitSpy = vi.spyOn(process, 'exit').mockImplementation(() => {});

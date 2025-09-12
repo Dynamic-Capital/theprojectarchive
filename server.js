@@ -31,10 +31,14 @@ export async function startServer(appInstance) {
   const sslKeyPath = process.env.SSL_KEY_PATH;
   const sslCertPath = process.env.SSL_CERT_PATH;
   try {
-    // Only serve prebuilt static assets when an index file exists.
-    // This avoids returning 404 responses when the build output is missing
-    // but the `_static` directory is present (e.g., on a fresh deployment).
-    if (!dev && existsSync(join(staticDir, "index.html"))) {
+    // Only serve prebuilt static assets when the expected build output exists.
+    // The `_static` directory includes a placeholder `index.html` in version control,
+    // so check for the Next.js `_next` directory to ensure a real build is present.
+    if (
+      !dev &&
+      existsSync(join(staticDir, "index.html")) &&
+      existsSync(join(staticDir, "_next"))
+    ) {
       const requestHandler = async (req, res) => {
         if (
           allowedOrigin &&
