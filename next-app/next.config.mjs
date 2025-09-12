@@ -34,8 +34,8 @@ export default function () {
       unoptimized: true,
     },
     trailingSlash: true,
-    // Build output will run on a Node.js server rather than generating a
-    // purely static export.
+    output: 'export',
+    // Build output is exported to static HTML for deployment.
   };
 
   const commonRewrites = [

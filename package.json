@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "postinstall": "npm --prefix next-app install",
+    "postinstall": "npm --prefix next-app install && npm --prefix next-app run build",
     "dev": "npm --prefix next-app run dev",
     "build": "npm --prefix next-app run build",
     "export": "npm run build && rm -rf _static && mkdir -p _static && cp -R next-app/out/. _static",
