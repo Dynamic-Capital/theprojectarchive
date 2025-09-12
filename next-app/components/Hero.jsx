@@ -11,8 +11,10 @@ import CurvedLoop from './CurvedLoopText.jsx';
 import Button from './Button';
 import Hero3D from './Hero3D';
 
-const HERO_TAGLINE =
-  "The Project Archive – we're a creative studio capturing stories in the Maldives";
+const HERO_TITLE = 'Crafting visual stories in the Maldives';
+const HERO_TAGLINE = 'Design · Development · Photography';
+const HERO_DESCRIPTION =
+  'From websites to imagery, we bring ideas to life for brands that want to stand out.';
 const container = {
   hidden: { opacity: 0 },
   show: {
@@ -123,7 +125,7 @@ export default function Hero() {
           }}
           variants={itemUp(reduceMotion)}
         >
-          {HERO_TAGLINE}
+          {HERO_TITLE}
         </motion.h1>
         <motion.div
           style={{ marginBottom: 'var(--space-4)' }}
@@ -135,8 +137,8 @@ export default function Hero() {
               style={{
                 color: 'var(--brand-500)',
                 fontFamily: 'var(--font-sans)',
-                fontSize: 'var(--fs-2)',
-                fontWeight: 700,
+                fontSize: 'var(--fs-1)',
+                fontWeight: 600,
                 letterSpacing: '0.1em',
                 textRendering: 'geometricPrecision',
               }}
@@ -149,8 +151,8 @@ export default function Hero() {
                 text: HERO_TAGLINE,
                 font: {
                   fontFamily: 'var(--font-sans)',
-                  fontWeight: '700',
-                  fontSize: 32,
+                  fontWeight: '600',
+                  fontSize: 24,
                 },
                 color: 'var(--brand-500)',
               }}
@@ -171,8 +173,7 @@ export default function Hero() {
           }}
           variants={itemDown(reduceMotion)}
         >
-          Your journey fuels our creativity. Together, we'll craft an impact,
-          one story at a time.
+          {HERO_DESCRIPTION}
         </motion.p>
         <motion.div
           className="cta-group"

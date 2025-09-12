@@ -7,7 +7,7 @@ describe('Hero', () => {
     render(<Hero />);
     expect(
       screen.getByRole('heading', {
-        name: /we're a creative studio capturing stories in the maldives/i,
+        name: /crafting visual stories in the maldives/i,
       })
     ).toBeInTheDocument();
   });
