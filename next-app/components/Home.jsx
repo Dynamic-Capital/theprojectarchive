@@ -23,9 +23,11 @@ import serviceImages from '../lib/serviceImages';
 export default function Home() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImg, setLightboxImg] = useState('');
+  const [lightboxAlt, setLightboxAlt] = useState('');
   const lightboxRef = useRef(null);
-  const openLightbox = (img) => {
-    setLightboxImg(img);
+  const openLightbox = (src, alt) => {
+    setLightboxImg(src);
+    setLightboxAlt(alt);
     setLightboxOpen(true);
   };
   const closeLightbox = () => setLightboxOpen(false);
@@ -122,7 +124,7 @@ export default function Home() {
           >
             <Image
               src={lightboxImg}
-              alt="Selected service image"
+              alt={lightboxAlt}
               width={400}
               height={300}
               onClick={(e) => e.stopPropagation()}

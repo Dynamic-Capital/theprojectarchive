@@ -18,7 +18,10 @@ export default function Footer() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
     >
-      <p>Copyright &copy; 2025 The project archive. All rights reserved.</p>
+      <p>
+        Copyright &copy; {new Date().getFullYear()} The project archive. All rights
+        reserved.
+      </p>
       <nav
         aria-label="Footer"
         style={{ display: 'flex', gap: 'var(--space-4)', justifyContent: 'center' }}

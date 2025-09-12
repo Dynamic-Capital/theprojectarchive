@@ -1,21 +1,13 @@
 import { createServer as createHttpServer } from "http";
 import { createServer as createHttpsServer } from "https";
-import {
-  readFileSync,
-  existsSync,
-  statSync,
-  createReadStream,
-} from "fs";
+import { readFileSync, existsSync, createReadStream } from "fs";
+import { stat } from "fs/promises";
 import { join, resolve, extname } from "path";
 import { createRequire } from "module";
 
 const require = createRequire(import.meta.url);
 
 const port = process.env.PORT || 3000;
-const dev = process.env.NODE_ENV !== "production";
-const allowedOrigin = process.env.NEXT_ALLOWED_ORIGIN;
-const sslKeyPath = process.env.SSL_KEY_PATH;
-const sslCertPath = process.env.SSL_CERT_PATH;
 
 const staticDir = resolve("./_static");
 const mimeTypes = {
@@ -30,9 +22,13 @@ const mimeTypes = {
 };
 
 export async function startServer(appInstance) {
+  const dev = process.env.NODE_ENV !== "production";
+  const allowedOrigin = process.env.NEXT_ALLOWED_ORIGIN;
+  const sslKeyPath = process.env.SSL_KEY_PATH;
+  const sslCertPath = process.env.SSL_CERT_PATH;
   try {
     if (!dev && existsSync(staticDir)) {
-      const requestHandler = (req, res) => {
+      const requestHandler = async (req, res) => {
         if (
           allowedOrigin &&
           req.headers.origin &&
@@ -45,19 +41,33 @@ export async function startServer(appInstance) {
         if (allowedOrigin) {
           res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
         }
-        const urlPath = decodeURIComponent(req.url.split("?")[0]);
-        let filePath = join(staticDir, urlPath);
+        let urlPath;
         try {
-          const stats = statSync(filePath);
+          urlPath = decodeURIComponent(req.url.split("?")[0]);
+        } catch {
+          res.statusCode = 404;
+          res.end("Not found");
+          return;
+        }
+        let filePath = join(staticDir, urlPath);
+        const resolvedPath = resolve(filePath);
+        if (!resolvedPath.startsWith(staticDir)) {
+          res.statusCode = 403;
+          res.end("Forbidden");
+          return;
+        }
+        try {
+          const stats = await stat(resolvedPath);
+          let finalPath = resolvedPath;
           if (stats.isDirectory()) {
-            filePath = join(filePath, "index.html");
+            finalPath = join(resolvedPath, "index.html");
           }
-          const ext = extname(filePath);
+          const ext = extname(finalPath);
           res.setHeader(
             "Content-Type",
             mimeTypes[ext] || "application/octet-stream",
           );
-          createReadStream(filePath).pipe(res);
+          createReadStream(finalPath).pipe(res);
         } catch {
           res.statusCode = 404;
           res.end("Not found");

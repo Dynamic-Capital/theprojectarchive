@@ -50,7 +50,7 @@ export default function Services({ openLightbox, images = [] }) {
             dragConstraints={{ left: 0, right: 0 }}
             whileDrag={{ rotate: 5 }}
             onDragEnd={handleDragEnd}
-            onClick={() => openLightbox && openLightbox(img.src)}
+            onClick={() => openLightbox && openLightbox(img.src, img.alt)}
           >
             <Image
               src={img.src}

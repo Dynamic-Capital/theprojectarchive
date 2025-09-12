@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, within } from '@testing-library/react';
 import { describe, it, expect, vi, beforeAll } from 'vitest';
 import { axe } from 'vitest-axe';
 import Home from '../components/Home';
@@ -48,8 +48,14 @@ describe('Home', () => {
       'Bride and groom pose on a sunny beach during a wedding shoot'
     );
     fireEvent.click(imgs[0]);
+    const dialog = await screen.findByRole('dialog');
     const closeBtn = await screen.findByRole('button', { name: /close image/i });
     expect(document.activeElement).toBe(closeBtn);
+    expect(
+      within(dialog).getByAltText(
+        'Bride and groom pose on a sunny beach during a wedding shoot'
+      )
+    ).toBeInTheDocument();
     const results = await axe(container);
     expect(results.violations).toEqual([]);
   });
