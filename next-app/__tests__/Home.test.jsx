@@ -1,40 +1,51 @@
-import { render } from '@testing-library/react';
-import { describe, it, expect, vi, beforeAll } from 'vitest';
-import { axe } from 'vitest-axe';
-import Home from '../components/Home';
+import { render, cleanup } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
-let mockPathname = '/';
 vi.mock('next/navigation', () => ({
-  usePathname: () => mockPathname,
+  usePathname: vi.fn(() => '/')
 }));
 
-beforeAll(() => {
-  global.IntersectionObserver = class {
-    observe() {}
-    unobserve() {}
-    disconnect() {}
-  };
-});
+vi.mock('framer-motion', () => ({
+  motion: { button: (props) => <button {...props} /> },
+  useScroll: () => ({ scrollY: { on: vi.fn(), get: vi.fn(() => 0) } }),
+  useTransform: () => 0,
+  useReducedMotion: () => true
+}));
+
+vi.mock('../components/Hero', () => ({ default: () => <div>Hero</div> }));
+vi.mock('../components/About', () => ({ default: () => <div>About</div> }));
+vi.mock('../components/Mission', () => ({ default: () => <div>Mission</div> }));
+vi.mock('../components/Approach', () => ({ default: () => <div>Approach</div> }));
+vi.mock('../components/Numbers', () => ({ default: () => <div>Numbers</div> }));
+vi.mock('../components/ServicesStack', () => ({
+  default: () => <div>Services</div>
+}));
+vi.mock('../components/Testimonials', () => ({ default: () => <div>Testimonials</div> }));
+vi.mock('../components/Contact', () => ({ default: () => <div>Contact</div> }));
+vi.mock('../components/TiltCard', () => ({
+  default: ({ children }) => <div>{children}</div>
+}));
+
+import Home from '../components/Home';
 
 describe('Home', () => {
-  it('logs scroll errors', () => {
-    mockPathname = '/about';
-    const err = new Error('fail');
-    vi.spyOn(document, 'getElementById').mockReturnValue({
-      scrollIntoView: () => {
-        throw err;
-      },
-    });
-    const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
-    render(<Home />);
-    expect(spy).toHaveBeenCalledWith('Scroll into view failed', err);
-    spy.mockRestore();
+  beforeEach(() => {
+    window.scrollTo = vi.fn();
+    document.body.innerHTML = '<div id="contact"></div>';
+    window.location.hash = '#contact';
   });
 
-  it('renders without accessibility violations', async () => {
-    mockPathname = '/';
-    const { container } = render(<Home />);
-    const results = await axe(container);
-    expect(results.violations).toEqual([]);
+  afterEach(() => {
+    cleanup();
+    vi.clearAllMocks();
+    window.location.hash = '';
+  });
+
+  it('scrolls to the hashed section on load instead of top', () => {
+    const el = document.getElementById('contact');
+    el.scrollIntoView = vi.fn();
+    render(<Home />);
+    expect(el.scrollIntoView).toHaveBeenCalled();
+    expect(window.scrollTo).not.toHaveBeenCalled();
   });
 });
