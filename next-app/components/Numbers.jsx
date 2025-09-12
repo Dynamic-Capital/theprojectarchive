@@ -47,8 +47,9 @@ export default function Numbers() {
   return (
     <ParallaxSection
       id="numbers"
-      image="https://picsum.photos/1920/1080?random=30"
+      image="https://picsum.photos/id/1045/1600/900"
       alt="Background image for In Numbers section"
+      overlay
     >
       <h2 style={{ fontSize: 'var(--fs-4)', fontWeight: 750, marginBottom: 'var(--space-6)' }}>
         In Numbers

@@ -57,6 +57,8 @@ input, select, textarea {
 }
 input::placeholder, textarea::placeholder { color: color-mix(in oklab, var(--muted), white 20%); }
 input:focus, select:focus, textarea:focus { border-color: color-mix(in oklab, var(--brand-500), white 20%); box-shadow: 0 0 0 4px color-mix(in oklab, var(--brand-500), transparent 82%); }
+input[aria-invalid="true"], textarea[aria-invalid="true"] { border-color: var(--error); }
+.error-text { color: var(--error); font-size: var(--fs-0); }
 
 /* Cards / surfaces */
 .card {

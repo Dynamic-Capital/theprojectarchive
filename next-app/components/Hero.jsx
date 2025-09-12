@@ -70,7 +70,7 @@ export default function Hero() {
       viewport={{ once: true, amount: 0.8 }}
     >
       <Image
-        src="https://picsum.photos/id/1015/1920/1080"
+        src="https://picsum.photos/id/1004/1920/1080"
         alt="A creative workspace with a camera and photo prints on a desk"
         width={1920}
         height={1080}

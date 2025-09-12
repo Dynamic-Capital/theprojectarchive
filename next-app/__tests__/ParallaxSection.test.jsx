@@ -21,7 +21,7 @@ describe('ParallaxSection', () => {
     const { container } = render(
       <ParallaxSection
         id="test"
-        image="https://picsum.photos/200/300"
+        image="https://picsum.photos/id/1011/1600/900"
         alt="Sample background"
       >
         <p>Content</p>
