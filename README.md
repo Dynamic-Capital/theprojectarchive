@@ -103,6 +103,10 @@ Use `scripts/deploy-do-app.sh` to deploy the app to DigitalOcean App Platform wi
 
 The script checks `DO_APP_ID_<ENV>` for an existing App Platform ID. If set, the app is updated; otherwise a new one is created using `.do/app.yaml`.
 
+#### App Logs
+
+Logging for App Platform deployments is covered in [docs/digitalocean-app-logs.md](docs/digitalocean-app-logs.md). The guide includes helper scripts for fetching build, deploy, runtime, and crash logs via both `doctl` and the REST API.
+
 #### Output Directory
 
 The output directory is an optional path to where the build assets will be located,
