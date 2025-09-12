@@ -11,7 +11,8 @@ import CurvedLoop from './CurvedLoopText.jsx';
 import Button from './Button';
 import Hero3D from './Hero3D';
 
-const HERO_TAGLINE = "We're a Creative studio capturing stories in the Maldives";
+const HERO_TAGLINE =
+  "The Project Archive – we're a creative studio capturing stories in the Maldives";
 const container = {
   hidden: { opacity: 0 },
   show: {
@@ -113,7 +114,8 @@ export default function Hero() {
       >
         <motion.h1
           style={{
-            color: 'var(--text)',
+            color: 'var(--brand-500)',
+            fontFamily: 'var(--font-sans)',
             fontSize: 'var(--fs-2)',
             letterSpacing: '0.1em',
           }}
@@ -129,7 +131,8 @@ export default function Hero() {
           {reduceMotion ? (
             <span
               style={{
-                color: 'var(--text)',
+                color: 'var(--brand-500)',
+                fontFamily: 'var(--font-sans)',
                 fontSize: 'var(--fs-2)',
                 letterSpacing: '0.1em',
               }}
@@ -141,11 +144,11 @@ export default function Hero() {
               text={{
                 text: HERO_TAGLINE,
                 font: {
-                  fontFamily: 'sans-serif',
-                  fontWeight: '400',
+                  fontFamily: 'var(--font-sans)',
+                  fontWeight: '700',
                   fontSize: 32,
                 },
-                color: 'var(--text)',
+                color: 'var(--brand-500)',
               }}
               direction="left"
               baseVelocity={50}
