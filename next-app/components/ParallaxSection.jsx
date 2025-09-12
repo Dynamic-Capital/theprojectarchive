@@ -21,9 +21,15 @@ export default function ParallaxSection({
   priority = false,
   overlay = false,
 }) {
-  if (!id || !image || (!decorative && !alt)) {
+  // Allow the section to render even if the author forgets an alt text.
+  // When no alt is provided we fall back to treating the image as
+  // decorative instead of hiding the entire section which previously
+  // caused parts of the landing page to disappear.
+  if (!id || !image) {
     return null;
   }
+  const isDecorative = decorative || !alt;
+  const imageAlt = isDecorative ? '' : alt;
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -50,8 +56,8 @@ export default function ParallaxSection({
       >
         <Image
           src={image}
-          alt={decorative ? '' : alt}
-          aria-hidden={decorative ? true : undefined}
+          alt={imageAlt}
+          aria-hidden={isDecorative ? true : undefined}
           fill
           sizes="100vw"
           priority={priority}
