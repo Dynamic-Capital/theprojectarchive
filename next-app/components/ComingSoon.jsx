@@ -41,13 +41,13 @@ export default function ComingSoon() {
       >
         <p>
           Contact us at{' '}
-          <a href="mailto:info@theprojectarchives-4ud4t.ondigitalocean.app">
-            info@theprojectarchives-4ud4t.ondigitalocean.app
+          <a href="mailto:hello@theprojectarchive.mv">
+            hello@theprojectarchive.mv
           </a>
         </p>
         <p>
           Call{' '}
-          <a href="tel:+9601234567">+960 123-4567</a>
+          <a href="tel:+9607495687">+960 7495687</a>
         </p>
       </motion.div>
       <motion.div
