@@ -6,14 +6,9 @@
     "postinstall": "npm --prefix next-app install",
     "dev": "npm --prefix next-app run dev",
     "build": "npm --prefix next-app run build",
-    "start": "NODE_ENV=production node server.js",
     "test": "npm --prefix next-app run test",
     "lint": "npm --prefix next-app run lint",
-    "format": "npm --prefix next-app run format",
-    "watch-static": "npm --prefix next-app run watch-static",
-    "build:standalone": "npm --prefix next-app run build:standalone",
-    "start:standalone": "npm --prefix next-app run start:standalone",
-    "analyze": "npm --prefix next-app run analyze"
+    "format": "npm --prefix next-app run format"
   },
   "engines": {
     "node": ">=20"

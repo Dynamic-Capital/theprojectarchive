@@ -5,14 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && rm -rf ../_static && mv out ../_static && rm -rf out",
-    "start": "npx -y serve@latest ../_static",
+    "build": "next build",
     "test": "vitest run",
     "lint": "eslint . --ext js,jsx,mjs --no-error-on-unmatched-pattern",
-    "format": "prettier . --write",
-    "watch-static": "chokidar \"app/**\" -c \"npm run build\"",
-    "build:standalone": "NEXT_STANDALONE=true next build",
-    "start:standalone": "node .next/standalone/server.js"
+    "format": "prettier . --write"
   },
   "keywords": [],
   "author": "",
