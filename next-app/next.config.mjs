@@ -37,18 +37,5 @@ export default function () {
     output: 'export',
     // Build output is exported to static HTML for deployment.
   };
-
-  const commonRewrites = [
-    { source: '/favicon.ico', destination: '/favicon.svg' },
-  ];
-
-  // Optionally route the landing page to a static HTML file when serving
-  // pre-exported files from a static server.
-  if (process.env.SERVE_STATIC_EXPORT === 'true') {
-    commonRewrites.push({ source: '/', destination: '/index.html' });
-  }
-
-  nextConfig.rewrites = async () => commonRewrites;
-
   return withBundleAnalyzer(nextConfig);
 }

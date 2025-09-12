@@ -59,6 +59,52 @@ export async function startServer(appInstance) {
     .map((o) => o.trim())
     .filter(Boolean);
   const allowAll = allowedOrigins.includes("*");
+  function handleCors(req, res) {
+    const origin = req.headers.origin;
+    const corsOrigin = allowAll
+      ? "*"
+      : origin && allowedOrigins.includes(origin)
+      ? origin
+      : null;
+    if (!allowAll && allowedOrigins.length > 0 && origin && !corsOrigin) {
+      res.statusCode = 403;
+      res.end("Forbidden");
+      return true;
+    }
+    if (req.method === "OPTIONS") {
+      if (corsOrigin) {
+        res.writeHead(204, {
+          "Access-Control-Allow-Origin": corsOrigin,
+          "Access-Control-Allow-Methods": "GET,OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type",
+        });
+      } else if (allowAll) {
+        res.writeHead(204, {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type",
+        });
+      } else {
+        res.writeHead(204);
+      }
+      res.end();
+      return true;
+    }
+    if (corsOrigin) {
+      res.setHeader("Access-Control-Allow-Origin", corsOrigin);
+    } else if (allowAll) {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+    }
+    return false;
+  }
+
+  function applyRewrites(url) {
+    if (url === "/favicon.ico") return "/favicon.svg";
+    if (process.env.SERVE_STATIC_EXPORT === "true" && url === "/") {
+      return "/index.html";
+    }
+    return url;
+  }
   const sslKeyPath = process.env.SSL_KEY_PATH;
   const sslCertPath = process.env.SSL_CERT_PATH;
   try {
@@ -67,41 +113,7 @@ export async function startServer(appInstance) {
     // so check for the Next.js `_next` directory to ensure a real build is present.
     if (!dev && staticDir) {
       const requestHandler = async (req, res) => {
-        const origin = req.headers.origin;
-        const corsOrigin = allowAll
-          ? "*"
-          : origin && allowedOrigins.includes(origin)
-          ? origin
-          : null;
-        if (!allowAll && allowedOrigins.length > 0 && origin && !corsOrigin) {
-          res.statusCode = 403;
-          res.end("Forbidden");
-          return;
-        }
-        if (req.method === "OPTIONS") {
-          if (corsOrigin) {
-            res.writeHead(204, {
-              "Access-Control-Allow-Origin": corsOrigin,
-              "Access-Control-Allow-Methods": "GET,OPTIONS",
-              "Access-Control-Allow-Headers": "Content-Type",
-            });
-          } else if (allowAll) {
-            res.writeHead(204, {
-              "Access-Control-Allow-Origin": "*",
-              "Access-Control-Allow-Methods": "GET,OPTIONS",
-              "Access-Control-Allow-Headers": "Content-Type",
-            });
-          } else {
-            res.writeHead(204);
-          }
-          res.end();
-          return;
-        }
-        if (corsOrigin) {
-          res.setHeader("Access-Control-Allow-Origin", corsOrigin);
-        } else if (allowAll) {
-          res.setHeader("Access-Control-Allow-Origin", "*");
-        }
+        if (handleCors(req, res)) return;
         let urlPath;
         try {
           urlPath = decodeURIComponent(req.url.split("?")[0]);
@@ -110,6 +122,7 @@ export async function startServer(appInstance) {
           res.end("Not found");
           return;
         }
+        urlPath = applyRewrites(urlPath);
         // Prevent `path.join` from discarding `staticDir` when `urlPath` is absolute
         const safePath = urlPath.replace(/^\/+/g, "");
         let filePath = join(staticDir, safePath);
@@ -165,41 +178,10 @@ export async function startServer(appInstance) {
     await app.prepare();
 
     const requestHandler = (req, res) => {
-      const origin = req.headers.origin;
-      const corsOrigin = allowAll
-        ? "*"
-        : origin && allowedOrigins.includes(origin)
-        ? origin
-        : null;
-      if (!allowAll && allowedOrigins.length > 0 && origin && !corsOrigin) {
-        res.statusCode = 403;
-        res.end("Forbidden");
-        return;
-      }
-      if (req.method === "OPTIONS") {
-        if (corsOrigin) {
-          res.writeHead(204, {
-            "Access-Control-Allow-Origin": corsOrigin,
-            "Access-Control-Allow-Methods": "GET,OPTIONS",
-            "Access-Control-Allow-Headers": "Content-Type",
-          });
-        } else if (allowAll) {
-          res.writeHead(204, {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET,OPTIONS",
-            "Access-Control-Allow-Headers": "Content-Type",
-          });
-        } else {
-          res.writeHead(204);
-        }
-        res.end();
-        return;
-      }
-      if (corsOrigin) {
-        res.setHeader("Access-Control-Allow-Origin", corsOrigin);
-      } else if (allowAll) {
-        res.setHeader("Access-Control-Allow-Origin", "*");
-      }
+      if (handleCors(req, res)) return;
+      const [pathname, qs] = req.url.split("?", 2);
+      const rewritten = applyRewrites(pathname);
+      req.url = qs ? `${rewritten}?${qs}` : rewritten;
       handle(req, res);
     };
 

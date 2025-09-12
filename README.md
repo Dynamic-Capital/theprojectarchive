@@ -7,10 +7,10 @@ Global CSS is processed during the build using PostCSS.
 
 ## Getting Started
 
-Install the required packages:
+Install dependencies:
 
 ```bash
-npm install framer-motion tailwindcss @tailwindcss/postcss
+npm install
 ```
 
 ### Usage
