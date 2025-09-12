@@ -2,6 +2,7 @@ import { createServer as createHttpServer } from "http";
 import { createServer as createHttpsServer } from "https";
 import { readFileSync, existsSync, createReadStream } from "fs";
 import { stat } from "fs/promises";
+import { createGzip } from "zlib";
 import { join, resolve, extname } from "path";
 import { createRequire } from "module";
 import mime from "mime-types";
@@ -138,19 +139,40 @@ export async function startServer(appInstance) {
           if (stats.isDirectory()) {
             finalPath = join(resolvedPath, "index.html");
           }
-          const ext = extname(finalPath);
-          res.setHeader(
-            "Content-Type",
-            mimeTypes[ext] || mime.lookup(ext) || "application/octet-stream",
-          );
-          createReadStream(finalPath).pipe(res);
+            const ext = extname(finalPath);
+            res.setHeader(
+              "Content-Type",
+              mimeTypes[ext] || mime.lookup(ext) || "application/octet-stream",
+            );
+            if (ext === ".html") {
+              res.setHeader("Cache-Control", "public, max-age=0, must-revalidate");
+            } else {
+              res.setHeader(
+                "Cache-Control",
+                "public, max-age=31536000, immutable",
+              );
+            }
+            const accept = req.headers["accept-encoding"] || "";
+            if (accept.includes("gzip")) {
+              res.setHeader("Content-Encoding", "gzip");
+              createReadStream(finalPath).pipe(createGzip()).pipe(res);
+            } else {
+              createReadStream(finalPath).pipe(res);
+            }
         } catch {
-          const indexPath = join(staticDir, "index.html");
-          res.statusCode = 200;
-          res.setHeader("Content-Type", "text/html");
-          createReadStream(indexPath).pipe(res);
-        }
-      };
+            const indexPath = join(staticDir, "index.html");
+            res.statusCode = 200;
+            res.setHeader("Content-Type", "text/html");
+            res.setHeader("Cache-Control", "public, max-age=0, must-revalidate");
+            const accept = req.headers["accept-encoding"] || "";
+            if (accept.includes("gzip")) {
+              res.setHeader("Content-Encoding", "gzip");
+              createReadStream(indexPath).pipe(createGzip()).pipe(res);
+            } else {
+              createReadStream(indexPath).pipe(res);
+            }
+          }
+        };
 
       const server =
         sslKeyPath && sslCertPath

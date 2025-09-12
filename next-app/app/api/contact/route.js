@@ -1,6 +1,34 @@
 import nodemailer from 'nodemailer';
 import { z } from 'zod';
 
+const rateLimitWindowMs = 60_000;
+const rateLimitMax = 5;
+const rateLimitMap = new Map();
+
+function getIp(req) {
+  return (
+    req.headers.get('x-forwarded-for')?.split(',')[0].trim() || 'local'
+  );
+}
+
+function isRateLimited(ip) {
+  const now = Date.now();
+  const entry = rateLimitMap.get(ip);
+  if (entry && now - entry.start < rateLimitWindowMs) {
+    if (entry.count >= rateLimitMax) {
+      return true;
+    }
+    entry.count += 1;
+    return false;
+  }
+  rateLimitMap.set(ip, { count: 1, start: now });
+  return false;
+}
+
+export function _clearRateLimit() {
+  rateLimitMap.clear();
+}
+
 const schema = z.object({
   name: z.string().min(1),
   email: z.string().email(),
@@ -12,6 +40,11 @@ export async function POST(req) {
   try {
     const data = await req.json();
     const { name, email, message, token } = schema.parse(data);
+
+    const ip = getIp(req);
+    if (isRateLimited(ip)) {
+      return new Response(null, { status: 429 });
+    }
 
     if (
       !process.env.BUSINESS_EMAIL ||

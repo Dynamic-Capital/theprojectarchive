@@ -48,8 +48,10 @@ To forward contact form submissions to your Google Business inbox:
    curl -X POST http://localhost:3000/api/contact \
      -H 'Content-Type: application/json' \
      -d '{"name":"Test","email":"user@example.com","message":"Hello"}'
-   ```
-   A `200` response indicates the message was accepted and forwarded to your inbox.
+     ```
+     A `200` response indicates the message was accepted and forwarded to your inbox.
+
+     The endpoint applies basic rate limiting (5 requests per minute per IP) to prevent abuse.
 
 ## Development
 
