@@ -1,5 +1,6 @@
 /* eslint-env node */
 import bundleAnalyzer from '@next/bundle-analyzer';
+import { PHASE_DEVELOPMENT_SERVER } from 'next/constants.js';
 /** @type {import('next').NextConfig} */
 // Allow Next.js Image component to load from the DigitalOcean Space
 // configured in SPACE_BUCKET_URL in addition to the default sample images.
@@ -24,18 +25,29 @@ if (bucketUrl) {
   }
 }
 
-const nextConfig = {
-  reactStrictMode: true,
-  images: {
-    loader: 'akamai',
-    path: '',
-    remotePatterns,
-    unoptimized: true,
-  },
-  trailingSlash: true,
-  // Generate a static export so the build creates an `out` directory
-  // that can be moved to `/_static` for deployment.
-  output: 'export',
-};
+/** @param {string} phase */
+export default function (phase) {
+  const nextConfig = {
+    reactStrictMode: true,
+    images: {
+      loader: 'akamai',
+      path: '',
+      remotePatterns,
+      unoptimized: true,
+    },
+    trailingSlash: true,
+    // Generate a static export so the build creates an `out` directory
+    // that can be moved to `/_static` for deployment.
+    output: 'export',
+  };
 
-export default withBundleAnalyzer(nextConfig);
+  if (phase === PHASE_DEVELOPMENT_SERVER) {
+    // Serve the root page when requesting `/index.html` so the app
+    // behaves like a traditional static site during development.
+    nextConfig.rewrites = async () => [
+      { source: '/index.html', destination: '/' },
+    ];
+  }
+
+  return withBundleAnalyzer(nextConfig);
+}
