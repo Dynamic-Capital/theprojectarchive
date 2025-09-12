@@ -41,6 +41,13 @@ describe('Numbers', () => {
     expect(screen.getByLabelText('12 Awards')).toHaveTextContent('12');
   });
 
+  it('renders animated icons for each stat', () => {
+    render(<Numbers />);
+    expect(screen.getByText('🚀')).toBeInTheDocument();
+    expect(screen.getByText('👥')).toBeInTheDocument();
+    expect(screen.getByText('🏆')).toBeInTheDocument();
+  });
+
   it('skips animation when reduced motion is enabled', () => {
     useReducedMotion.mockReturnValue(true);
     render(<Numbers />);
