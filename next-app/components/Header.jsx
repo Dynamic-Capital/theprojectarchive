@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import { motion, useScroll, useReducedMotion } from 'framer-motion';
 import { useTheme } from 'next-themes';
 import styles from '../styles/Header.module.css';
 import DesktopNav from './DesktopNav';
@@ -21,21 +21,41 @@ const bottomBar = {
   open: { rotate: -45, y: -7 },
 };
 
+const headerVariants = {
+  initial: { y: -20, opacity: 0 },
+  visible: { y: 0, opacity: 1 },
+  hidden: { y: '-100%', opacity: 0 },
+};
+
 export default function Header({ onToggle, open }) {
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 100], [0, -20]);
   const shouldReduce = useReducedMotion();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [hidden, setHidden] = useState(false);
+
   useEffect(() => setMounted(true), []);
+
+  useEffect(() => {
+    if (shouldReduce) return;
+    return scrollY.on('change', (latest) => {
+      const previous = scrollY.getPrevious();
+      if (latest > previous && latest > 50) {
+        setHidden(true);
+      } else {
+        setHidden(false);
+      }
+    });
+  }, [scrollY, shouldReduce]);
+
   const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
 
   return (
     <motion.header
       className={`safe-p sticky top-0 w-full ${styles.header}`}
-      style={{ y: shouldReduce ? 0 : y }}
-      initial={shouldReduce ? false : { y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
+      variants={headerVariants}
+      initial={shouldReduce ? false : 'initial'}
+      animate={hidden && !shouldReduce ? 'hidden' : 'visible'}
       transition={shouldReduce ? { duration: 0 } : undefined}
     >
       <Link href="/" className={styles.brand}>
