@@ -14,7 +14,9 @@ export default function ClientLayout({ children }) {
     <>
       <Header onToggle={toggleNav} open={navOpen} />
       <OverlayNav open={navOpen} onLink={closeNav} />
-      <PageTransition>{children}</PageTransition>
+      <main id="main-content" tabIndex="-1">
+        <PageTransition>{children}</PageTransition>
+      </main>
       <Footer />
       <ChatWidget />
     </>
