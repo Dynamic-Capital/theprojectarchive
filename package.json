@@ -6,6 +6,7 @@
     "postinstall": "npm --prefix next-app install",
     "dev": "npm --prefix next-app run dev",
     "build": "npm --prefix next-app run build && rm -rf _static && cp -R next-app/out _static",
+    "export": "npm --prefix next-app run build && rm -rf _static && cp -R next-app/out _static",
     "start": "NODE_ENV=production node server.js",
     "test": "npm --prefix next-app run test",
     "lint": "npm --prefix next-app run lint",
