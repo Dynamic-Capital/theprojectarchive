@@ -10,7 +10,10 @@ out/
 build/
 dist/
 dist-ssr/
-_static/
+# Static export directory
+_static/*
+!_static/.gitkeep
+!_static/index.html
 
 # Logs
 *.log
