@@ -4,6 +4,7 @@ import Header from './Header';
 import OverlayNav from './OverlayNav';
 import Footer from './Footer';
 import PageTransition from './PageTransition';
+import ChatWidget from './ChatWidget';
 
 export default function ClientLayout({ children }) {
   const [navOpen, setNavOpen] = useState(false);
@@ -15,6 +16,7 @@ export default function ClientLayout({ children }) {
       <OverlayNav open={navOpen} onLink={closeNav} />
       <PageTransition>{children}</PageTransition>
       <Footer />
+      <ChatWidget />
     </>
   );
 }
