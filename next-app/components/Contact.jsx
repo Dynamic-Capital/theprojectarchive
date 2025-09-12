@@ -30,7 +30,9 @@ export default function Contact() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
-      if (res.ok) {
+      const contentType = res.headers?.get?.('content-type');
+      const isJson = contentType ? contentType.includes('application/json') : true;
+      if (res.ok && isJson) {
         setStatus('success');
         e.target.reset();
       } else {

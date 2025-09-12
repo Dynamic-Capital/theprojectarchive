@@ -7,10 +7,11 @@ Global CSS is processed during the build using PostCSS.
 
 ## Getting Started
 
-Install dependencies:
+Install dependencies for both the root server and the Next.js app:
 
 ```bash
 npm install
+npm --prefix next-app install
 ```
 
 ### Usage
@@ -57,6 +58,7 @@ Install dependencies and start the development server:
 
 ```bash
 npm install
+npm --prefix next-app install
 cp .env.example .env
 npm run dev
 ```
@@ -73,7 +75,7 @@ Update `ALLOWED_ORIGINS`, `SPACE_BUCKET_URL`, `NEXT_PUBLIC_SITE_URL`, and `MAINT
 
 ## Maintenance mode
 
-Set `MAINTENANCE_MODE=true` to redirect all traffic to `/coming-soon`. The middleware in `next-app/middleware.ts` reads `process.env.MAINTENANCE_MODE`, similar to how `next-app/next.config.mjs` uses `SPACE_BUCKET_URL`.
+Set `MAINTENANCE_MODE=true` to redirect all traffic to `/coming-soon`. The middleware in `next-app/middleware.ts` reads `process.env.MAINTENANCE_MODE` and runs on all routes except `/_next`, `/api`, and `/coming-soon`.
 
 ## Design Tokens
 

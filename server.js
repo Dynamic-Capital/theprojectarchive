@@ -25,18 +25,6 @@ function resolveStaticDir() {
   return null;
 }
 
-const mimeTypes = {
-  ".html": "text/html",
-  ".js": "text/javascript",
-  ".css": "text/css",
-  ".json": "application/json",
-  ".png": "image/png",
-  ".jpg": "image/jpeg",
-  ".svg": "image/svg+xml",
-  ".ico": "image/x-icon",
-  ".txt": "text/plain",
-  ".xml": "application/xml",
-};
 
 export async function startServer(appInstance) {
   if (!process.env.NODE_ENV) {
@@ -114,15 +102,28 @@ export async function startServer(appInstance) {
     if (!dev && staticDir) {
       const requestHandler = async (req, res) => {
         if (handleCors(req, res)) return;
+        if (req.method !== "GET") {
+          res.statusCode = 404;
+          res.setHeader("Content-Type", "application/json");
+          res.end(JSON.stringify({ error: "Not found" }));
+          return;
+        }
         let urlPath;
         try {
           urlPath = decodeURIComponent(req.url.split("?")[0]);
         } catch {
           res.statusCode = 404;
-          res.end("Not found");
+          res.setHeader("Content-Type", "application/json");
+          res.end(JSON.stringify({ error: "Not found" }));
           return;
         }
         urlPath = applyRewrites(urlPath);
+        if (urlPath.startsWith("/api/")) {
+          res.statusCode = 404;
+          res.setHeader("Content-Type", "application/json");
+          res.end(JSON.stringify({ error: "Not found" }));
+          return;
+        }
         // Prevent `path.join` from discarding `staticDir` when `urlPath` is absolute
         const safePath = urlPath.replace(/^\/+/g, "");
         let filePath = join(staticDir, safePath);
@@ -141,14 +142,20 @@ export async function startServer(appInstance) {
           const ext = extname(finalPath);
           res.setHeader(
             "Content-Type",
-            mimeTypes[ext] || mime.lookup(ext) || "application/octet-stream",
+            mime.lookup(ext) || "application/octet-stream",
           );
           createReadStream(finalPath).pipe(res);
         } catch {
-          const indexPath = join(staticDir, "index.html");
-          res.statusCode = 200;
-          res.setHeader("Content-Type", "text/html");
-          createReadStream(indexPath).pipe(res);
+          if (extname(urlPath)) {
+            res.statusCode = 404;
+            res.setHeader("Content-Type", "application/json");
+            res.end(JSON.stringify({ error: "Not found" }));
+          } else {
+            const indexPath = join(staticDir, "index.html");
+            res.statusCode = 200;
+            res.setHeader("Content-Type", "text/html");
+            createReadStream(indexPath).pipe(res);
+          }
         }
       };
 
