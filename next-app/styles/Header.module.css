@@ -38,3 +38,18 @@
   height: 2px;
   background: var(--text);
 }
+
+.desktopNav {
+  display: none;
+  gap: var(--space-5);
+}
+
+@media (min-width: 768px) {
+  .desktopNav {
+    display: flex;
+    align-items: center;
+  }
+  .menuButton {
+    display: none;
+  }
+}
