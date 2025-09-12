@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
 import ParallaxSection from './ParallaxSection';
@@ -11,6 +11,13 @@ export default function Services({ openLightbox, images = [] }) {
   const [cards, setCards] = useState(
     images.length > 0 ? images : serviceImages
   );
+
+  // Keep the displayed cards in sync with the `images` prop. Without this
+  // effect the component would continue to show the initial images even if
+  // a new set is provided by the parent after the first render.
+  useEffect(() => {
+    setCards(images.length > 0 ? images : serviceImages);
+  }, [images]);
 
   const handleDragEnd = (_, info) => {
     if (info.offset.x > 100) {
