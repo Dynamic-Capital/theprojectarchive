@@ -1,6 +1,7 @@
 services:
   - name: theprojectarchive
     source_dir: /
+    build_command: npm ci && npm run export
     environment_slug: node-js
     instance_size_slug: basic-xxs
     instance_count: 1
