@@ -19,8 +19,13 @@ export default function Footer() {
       viewport={{ once: true }}
     >
       <p>
-        Copyright &copy; {new Date().getFullYear()} The project archive. All rights
-        reserved.
+        Copyright &copy; {new Date().getFullYear()}{' '}
+        <span
+          style={{ color: 'var(--brand-500)', fontFamily: 'var(--font-sans)' }}
+        >
+          The Project Archive
+        </span>
+        . All rights reserved.
       </p>
       <nav
         aria-label="Footer"
