@@ -8,7 +8,6 @@ import mime from "mime-types";
 
 const require = createRequire(import.meta.url);
 
-const port = process.env.PORT || 3000;
 
 // Determine where prebuilt static assets live. Prefer the repository root
 // "_static" directory, but fall back to the Next.js "out" directory if the
@@ -45,12 +44,15 @@ export async function startServer(appInstance) {
     process.env.NODE_ENV = 'development';
   }
   const dev = process.env.NODE_ENV !== "production";
+  const port = process.env.PORT || 3000;
   const staticDir = resolveStaticDir();
   let allowedOriginsEnv =
     process.env.ALLOWED_ORIGINS || process.env.NEXT_ALLOWED_ORIGIN;
   if (!allowedOriginsEnv) {
-    console.warn('[CORS] ALLOWED_ORIGINS is missing, defaulting to "*"');
-    allowedOriginsEnv = "*";
+    console.warn(
+      '[CORS] ALLOWED_ORIGINS is missing, defaulting to "http://localhost:3000"',
+    );
+    allowedOriginsEnv = "http://localhost:3000";
   }
   const allowedOrigins = allowedOriginsEnv
     .split(",")
