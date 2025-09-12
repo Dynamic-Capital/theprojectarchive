@@ -18,7 +18,7 @@
   "author": "",
   "license": "ISC",
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "dependencies": {
     "@react-three/fiber": "^8.18.0",
