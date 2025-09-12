@@ -48,6 +48,7 @@ describe('POST /api/contact', () => {
     nodemailer.createTransport.mockReturnValueOnce({
       sendMail: vi.fn().mockRejectedValue(new Error('fail')),
     });
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
     const req = new Request('http://localhost/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -59,10 +60,12 @@ describe('POST /api/contact', () => {
     });
     const res = await POST(req);
     expect(res.status).toBe(500);
+    errorSpy.mockRestore();
   });
 
   it('returns 500 when BUSINESS_EMAIL is missing', async () => {
     delete process.env.BUSINESS_EMAIL;
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
     const req = new Request('http://localhost/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -74,10 +77,12 @@ describe('POST /api/contact', () => {
     });
     const res = await POST(req);
     expect(res.status).toBe(500);
+    errorSpy.mockRestore();
   });
 
   it('returns 500 when BUSINESS_EMAIL_APP_PASSWORD is missing', async () => {
     delete process.env.BUSINESS_EMAIL_APP_PASSWORD;
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
     const req = new Request('http://localhost/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -89,6 +94,7 @@ describe('POST /api/contact', () => {
     });
     const res = await POST(req);
     expect(res.status).toBe(500);
+    errorSpy.mockRestore();
   });
 
   it('rate limits repeated requests', async () => {

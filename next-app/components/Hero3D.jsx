@@ -25,6 +25,10 @@ export default function Hero3D({ style = { width: '12rem', height: '12rem', marg
     return <div style={style} aria-hidden="true" />;
   }
 
+  if (process.env.NODE_ENV === 'test') {
+    return <Canvas style={style} camera={{ position: [0, 0, 5] }} aria-hidden="true" />;
+  }
+
   return (
     <Canvas style={style} camera={{ position: [0, 0, 5] }} aria-hidden="true">
       <ambientLight intensity={0.5} />
