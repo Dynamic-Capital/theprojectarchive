@@ -81,7 +81,7 @@ describe('allowed origin handling', () => {
         res.end('ok');
       }),
     };
-    process.env.NEXT_ALLOWED_ORIGIN = 'https://allowed.com';
+    process.env.ALLOWED_ORIGINS = 'https://allowed.com';
     const exitSpy = vi.spyOn(process, 'exit').mockImplementation(() => {});
     const server = await startServer(appMock);
 
@@ -92,7 +92,7 @@ describe('allowed origin handling', () => {
 
     server.close();
     exitSpy.mockRestore();
-    delete process.env.NEXT_ALLOWED_ORIGIN;
+    delete process.env.ALLOWED_ORIGINS;
   });
 
   it('responds to preflight requests', async () => {
@@ -102,7 +102,7 @@ describe('allowed origin handling', () => {
         res.end('ok');
       }),
     };
-    process.env.NEXT_ALLOWED_ORIGIN = 'https://allowed.com';
+    process.env.ALLOWED_ORIGINS = 'https://allowed.com';
     const exitSpy = vi.spyOn(process, 'exit').mockImplementation(() => {});
     const server = await startServer(appMock);
 
@@ -123,7 +123,7 @@ describe('allowed origin handling', () => {
   
     server.close();
     exitSpy.mockRestore();
-    delete process.env.NEXT_ALLOWED_ORIGIN;
+    delete process.env.ALLOWED_ORIGINS;
   });
 });
 
@@ -136,7 +136,7 @@ describe('static server preflight', () => {
     writeFileSync(join(staticDir, 'index.html'), '<h1>hi</h1>');
     mkdirSync(join(staticDir, '_next'), { recursive: true });
     process.env.NODE_ENV = 'production';
-    process.env.NEXT_ALLOWED_ORIGIN = 'https://allowed.com';
+    process.env.ALLOWED_ORIGINS = 'https://allowed.com';
     exitSpy = vi.spyOn(process, 'exit').mockImplementation(() => {});
     server = await startServer();
   });
@@ -144,7 +144,7 @@ describe('static server preflight', () => {
     server && server.close();
     rmSync(staticDir, { recursive: true, force: true });
     delete process.env.NODE_ENV;
-    delete process.env.NEXT_ALLOWED_ORIGIN;
+    delete process.env.ALLOWED_ORIGINS;
     exitSpy.mockRestore();
   });
 

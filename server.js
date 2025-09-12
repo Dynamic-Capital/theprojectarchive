@@ -27,7 +27,13 @@ const mimeTypes = {
 
 export async function startServer(appInstance) {
   const dev = process.env.NODE_ENV !== "production";
-  const allowedOrigin = process.env.NEXT_ALLOWED_ORIGIN;
+  const allowedOriginsEnv =
+    process.env.ALLOWED_ORIGINS || process.env.NEXT_ALLOWED_ORIGIN || "*";
+  const allowedOrigins = allowedOriginsEnv
+    .split(",")
+    .map((o) => o.trim())
+    .filter(Boolean);
+  const allowAll = allowedOrigins.includes("*");
   const sslKeyPath = process.env.SSL_KEY_PATH;
   const sslCertPath = process.env.SSL_CERT_PATH;
   try {
@@ -40,19 +46,27 @@ export async function startServer(appInstance) {
       existsSync(join(staticDir, "_next"))
     ) {
       const requestHandler = async (req, res) => {
-        if (
-          allowedOrigin &&
-          req.headers.origin &&
-          req.headers.origin !== allowedOrigin
-        ) {
+        const origin = req.headers.origin;
+        const corsOrigin = allowAll
+          ? "*"
+          : origin && allowedOrigins.includes(origin)
+          ? origin
+          : null;
+        if (!allowAll && allowedOrigins.length > 0 && origin && !corsOrigin) {
           res.statusCode = 403;
           res.end("Forbidden");
           return;
         }
         if (req.method === "OPTIONS") {
-          if (allowedOrigin) {
+          if (corsOrigin) {
             res.writeHead(204, {
-              "Access-Control-Allow-Origin": allowedOrigin,
+              "Access-Control-Allow-Origin": corsOrigin,
+              "Access-Control-Allow-Methods": "GET,OPTIONS",
+              "Access-Control-Allow-Headers": "Content-Type",
+            });
+          } else if (allowAll) {
+            res.writeHead(204, {
+              "Access-Control-Allow-Origin": "*",
               "Access-Control-Allow-Methods": "GET,OPTIONS",
               "Access-Control-Allow-Headers": "Content-Type",
             });
@@ -62,8 +76,10 @@ export async function startServer(appInstance) {
           res.end();
           return;
         }
-        if (allowedOrigin) {
-          res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
+        if (corsOrigin) {
+          res.setHeader("Access-Control-Allow-Origin", corsOrigin);
+        } else if (allowAll) {
+          res.setHeader("Access-Control-Allow-Origin", "*");
         }
         let urlPath;
         try {
@@ -126,19 +142,27 @@ export async function startServer(appInstance) {
     await app.prepare();
 
     const requestHandler = (req, res) => {
-      if (
-        allowedOrigin &&
-        req.headers.origin &&
-        req.headers.origin !== allowedOrigin
-      ) {
+      const origin = req.headers.origin;
+      const corsOrigin = allowAll
+        ? "*"
+        : origin && allowedOrigins.includes(origin)
+        ? origin
+        : null;
+      if (!allowAll && allowedOrigins.length > 0 && origin && !corsOrigin) {
         res.statusCode = 403;
         res.end("Forbidden");
         return;
       }
       if (req.method === "OPTIONS") {
-        if (allowedOrigin) {
+        if (corsOrigin) {
           res.writeHead(204, {
-            "Access-Control-Allow-Origin": allowedOrigin,
+            "Access-Control-Allow-Origin": corsOrigin,
+            "Access-Control-Allow-Methods": "GET,OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type",
+          });
+        } else if (allowAll) {
+          res.writeHead(204, {
+            "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "GET,OPTIONS",
             "Access-Control-Allow-Headers": "Content-Type",
           });
@@ -148,8 +172,10 @@ export async function startServer(appInstance) {
         res.end();
         return;
       }
-      if (allowedOrigin) {
-        res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
+      if (corsOrigin) {
+        res.setHeader("Access-Control-Allow-Origin", corsOrigin);
+      } else if (allowAll) {
+        res.setHeader("Access-Control-Allow-Origin", "*");
       }
       handle(req, res);
     };
