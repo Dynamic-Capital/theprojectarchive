@@ -1,5 +1,8 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeAll, afterAll } from 'vitest';
 import { startServer } from '../../server.js';
+import { mkdirSync, writeFileSync, rmSync } from 'fs';
+import { join } from 'path';
+import http from 'http';
 
 describe('server startup', () => {
   it('logs and exits on startup failure', async () => {
@@ -15,5 +18,79 @@ describe('server startup', () => {
     expect(exitSpy).toHaveBeenCalledWith(1);
     consoleSpy.mockRestore();
     exitSpy.mockRestore();
+  });
+});
+
+describe('static file handling', () => {
+  const staticDir = join(process.cwd(), '../_static');
+  let server;
+  let exitSpy;
+  beforeAll(async () => {
+    mkdirSync(staticDir, { recursive: true });
+    writeFileSync(join(staticDir, 'index.html'), '<h1>hi</h1>');
+    process.env.NODE_ENV = 'production';
+    exitSpy = vi.spyOn(process, 'exit').mockImplementation(() => {});
+    server = await startServer();
+  });
+  afterAll(() => {
+    server && server.close();
+    rmSync(staticDir, { recursive: true, force: true });
+    delete process.env.NODE_ENV;
+    exitSpy.mockRestore();
+  });
+
+  it('rejects path traversal', async () => {
+    await new Promise((resolve) => {
+      http.get(
+        {
+          port: server.address().port,
+          path: '/../server.js',
+        },
+        (res) => {
+          expect(res.statusCode).toBe(403);
+          res.resume();
+          res.on('end', resolve);
+        },
+      );
+    });
+  });
+
+  it('handles malformed URLs', async () => {
+    await new Promise((resolve) => {
+      http.get(
+        {
+          port: server.address().port,
+          path: '/%E0%A4%A',
+        },
+        (res) => {
+          expect(res.statusCode).toBe(404);
+          res.resume();
+          res.on('end', resolve);
+        },
+      );
+    });
+  });
+});
+
+describe('allowed origin handling', () => {
+  it('blocks disallowed origins', async () => {
+    const appMock = {
+      prepare: vi.fn().mockResolvedValue(),
+      getRequestHandler: vi.fn().mockReturnValue((req, res) => {
+        res.end('ok');
+      }),
+    };
+    process.env.NEXT_ALLOWED_ORIGIN = 'https://allowed.com';
+    const exitSpy = vi.spyOn(process, 'exit').mockImplementation(() => {});
+    const server = await startServer(appMock);
+
+    const res = await fetch(`http://localhost:${server.address().port}`, {
+      headers: { Origin: 'https://evil.com' },
+    });
+    expect(res.status).toBe(403);
+
+    server.close();
+    exitSpy.mockRestore();
+    delete process.env.NEXT_ALLOWED_ORIGIN;
   });
 });

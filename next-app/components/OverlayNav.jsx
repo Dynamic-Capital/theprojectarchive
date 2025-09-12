@@ -56,7 +56,7 @@ export default function OverlayNav({ open, onLink }) {
   return (
     <AnimatePresence>
       {open && (
-        <div ref={trapRef}>
+        <div ref={trapRef} role="dialog" aria-modal="true">
           <motion.div
             key="backdrop"
             style={{
@@ -83,7 +83,6 @@ export default function OverlayNav({ open, onLink }) {
               fontWeight: 750,
               textAlign: 'center',
             }}
-            aria-hidden={!open}
             variants={navVariants}
             initial="hidden"
             animate="show"
