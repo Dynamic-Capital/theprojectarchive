@@ -111,8 +111,10 @@ export async function startServer(appInstance) {
           );
           createReadStream(finalPath).pipe(res);
         } catch {
-          res.statusCode = 404;
-          res.end("Not found");
+          const indexPath = join(staticDir, "index.html");
+          res.statusCode = 200;
+          res.setHeader("Content-Type", "text/html");
+          createReadStream(indexPath).pipe(res);
         }
       };
 
