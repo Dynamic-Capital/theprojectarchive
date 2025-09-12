@@ -27,7 +27,7 @@ export default function Approach() {
       image="https://picsum.photos/id/1018/1600/900"
       alt=""
       decorative
-      overlay
+      overlay="linear-gradient(135deg, color-mix(in oklab, var(--brand-600), transparent 20%), color-mix(in oklab, var(--brand-500), transparent 80%))"
       title="Approach"
       description="We combine technical expertise with artistic vision to craft memorable imagery."
     >

@@ -33,10 +33,14 @@ export default function ParallaxSection({
   const reduceMotion = useReducedMotion();
 
   return (
-    <section
+    <motion.section
       id={id}
       ref={ref}
       className="scroll-mt-header relative flex min-h-[100dvh] items-center justify-center overflow-hidden"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, amount: 0.5 }}
+      transition={{ duration: reduceMotion ? 0 : 0.6 }}
     >
       <motion.div
         className="absolute inset-0"
@@ -82,6 +86,6 @@ export default function ParallaxSection({
         )}
         {children}
       </motion.div>
-    </section>
+    </motion.section>
   );
 }

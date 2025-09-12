@@ -1,5 +1,5 @@
 'use client';
-import { useScroll, useReducedMotion } from 'framer-motion';
+import { useScroll, useReducedMotion, motion } from 'framer-motion';
 import { useMemo, useRef } from 'react';
 import ServiceCard from './ServiceCard';
 
@@ -40,7 +40,14 @@ export default function ServicesStack({ items = [], topOffsetClass = 'top-24' })
   if (prefersReduced) {
     // Accessible fallback: simple stacked list (no transforms)
     return (
-      <section id="services" className="mx-auto max-w-7xl px-4 py-16">
+      <section
+        id="services"
+        className="mx-auto max-w-7xl px-4 py-16"
+        style={{
+          background:
+            'linear-gradient(180deg, color-mix(in oklab, var(--brand-500), transparent 85%), color-mix(in oklab, var(--accent-500), transparent 95%))',
+        }}
+      >
         <h2 className="text-2xl md:text-3xl font-semibold">Services</h2>
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
           {items.map((it, i) => (
@@ -63,7 +70,20 @@ export default function ServicesStack({ items = [], topOffsetClass = 'top-24' })
   }
 
   return (
-    <section id="services" ref={ref} className="relative" style={{ height: `min(600vh, ${sectionHeightVh}vh)` }}>
+    <motion.section
+      id="services"
+      ref={ref}
+      className="relative"
+      style={{
+        height: `min(600vh, ${sectionHeightVh}vh)`,
+        background:
+          'linear-gradient(180deg, color-mix(in oklab, var(--brand-500), transparent 85%), color-mix(in oklab, var(--accent-500), transparent 95%))',
+      }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: prefersReduced ? 0 : 0.6 }}
+    >
       {/* Pinned viewport for the stack */}
       <div className={`sticky ${topOffsetClass} h-[calc(100vh-6rem)]`}>
         <div className="relative h-full">
@@ -79,7 +99,7 @@ export default function ServicesStack({ items = [], topOffsetClass = 'top-24' })
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 

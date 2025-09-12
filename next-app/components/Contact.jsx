@@ -56,7 +56,7 @@ export default function Contact() {
       alt=""
       decorative
       title="Contact"
-      overlay
+      overlay="linear-gradient(180deg, color-mix(in oklab, var(--accent-500), transparent 20%), color-mix(in oklab, var(--brand-600), transparent 80%))"
     >
       <motion.form
         onSubmit={handleSubmit(onSubmit)}
