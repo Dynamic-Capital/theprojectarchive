@@ -2,9 +2,6 @@
 id = "paketo-buildpacks/nodejs"
 
 [[build.buildpacks]]
-id = "paketo-buildpacks/procfile"
-
-[[build.buildpacks]]
 id = "paketo-buildpacks/web-servers"
 
 [[build.env]]
