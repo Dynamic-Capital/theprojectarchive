@@ -17,6 +17,11 @@ ENV_UPPER=$(printf '%s' "$ENVIRONMENT" | tr '[:lower:]' '[:upper:]')
 APP_ID_VAR="DO_APP_ID_${ENV_UPPER}"
 APP_ID="${!APP_ID_VAR:-}"
 
+if [ ! -d "_static/_next" ]; then
+  echo "Error: build output missing. Run 'npm run export' before deploying." >&2
+  exit 1
+fi
+
 doctl auth init -t "$TOKEN" >/dev/null 2>&1
 
 if [ -n "$APP_ID" ]; then
