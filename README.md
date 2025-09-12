@@ -71,8 +71,7 @@ To inspect bundle sizes and locate large dependencies, run:
 ```bash
 npm run analyze
 ```
-
-This enables `@next/bundle-analyzer` when `ANALYZE=true` is present during `next build`.
+This runs `next build` with `ANALYZE=true` so `@next/bundle-analyzer` generates an interactive report.
 
 ## 3D Animation
 
