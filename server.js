@@ -28,7 +28,10 @@ export async function startServer(appInstance) {
   const sslKeyPath = process.env.SSL_KEY_PATH;
   const sslCertPath = process.env.SSL_CERT_PATH;
   try {
-    if (!dev && existsSync(staticDir)) {
+    // Only serve prebuilt static assets when an index file exists.
+    // This avoids returning 404 responses when the build output is missing
+    // but the `_static` directory is present (e.g., on a fresh deployment).
+    if (!dev && existsSync(join(staticDir, "index.html"))) {
       const requestHandler = async (req, res) => {
         if (
           allowedOrigin &&
