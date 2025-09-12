@@ -21,6 +21,28 @@ describe('server startup', () => {
   });
 });
 
+describe('environment defaults', () => {
+  it('warns when NODE_ENV is missing', async () => {
+    const appMock = {
+      prepare: vi.fn().mockResolvedValue(),
+      getRequestHandler: vi.fn().mockReturnValue((req, res) => {
+        res.end('ok');
+      }),
+    };
+    delete process.env.NODE_ENV;
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const exitSpy = vi.spyOn(process, 'exit').mockImplementation(() => {});
+    const server = await startServer(appMock);
+    expect(warnSpy).toHaveBeenCalledWith(
+      '[Env] NODE_ENV is missing, defaulting to "development"',
+    );
+    server.close();
+    warnSpy.mockRestore();
+    exitSpy.mockRestore();
+    delete process.env.NODE_ENV;
+  });
+});
+
 describe('static file handling', () => {
   const staticDir = new URL('../../_static', import.meta.url).pathname;
   let server;
