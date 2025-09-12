@@ -40,15 +40,14 @@ Create an optimized production build:
 npm run build
 ```
 
-The generated static files live in `next-app/out/`. After building, preview the
-site locally:
+After building, the app can be started with the Node.js server:
 
 ```bash
 npm run start
 ```
 
-To copy the build output into the repository's `/_static/` directory (useful for
-deployments) run:
+To generate a static export in `next-app/out/` (and copy it to `/_static/` for
+deployment) run:
 
 ```bash
 npm run export
@@ -60,17 +59,6 @@ To rebuild automatically when files in `app/` change and refresh the local
 ```bash
 npm run watch-static
 ```
-
-## Next.js build helpers
-
-Run a standard Next.js production server build:
-
-```bash
-npm run build:standalone
-npm run start:standalone
-```
-
-The build sets `NEXT_STANDALONE=true`, producing a `.next/standalone` directory with only the files needed to run the app; `start:standalone` launches it via `node .next/standalone/server.js`, ideal for Docker or PM2 deployments.
 
 To inspect bundle sizes and locate large dependencies, run:
 
@@ -86,15 +74,15 @@ The hero section showcases a rotating 3D cube using `three` and `@react-three/fi
 
 ## Docker
 
-A multi-stage `Dockerfile` builds the site and serves the generated `/_static` directory
-with Nginx. Build and run the production container locally:
+The multi-stage `Dockerfile` builds the app and runs it with a Node.js
+server. Build and run the production container locally:
 
 ```bash
 # Build the image
 docker build -t tpa-site .
 
-# Run the container and map port 80 to 8080 on the host
-docker run --rm -p 8080:80 tpa-site
+# Run the container and map port 3000 to 3000 on the host
+docker run --rm -p 3000:3000 tpa-site
 ```
 
 ## Deployment
