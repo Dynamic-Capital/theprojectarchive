@@ -142,7 +142,11 @@ img { border-radius: var(--radius-xs); }
 @media (min-width: 1280px){ :root { --container: 1140px; } }
 
 .glass{
-  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
-  border: 1px solid rgba(255,255,255,.08);
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--brand-500), transparent 92%),
+    color-mix(in oklab, var(--brand-500), transparent 98%)
+  );
+  border: 1px solid color-mix(in oklab, var(--brand-500), transparent 90%);
   backdrop-filter: blur(12px);
 }
