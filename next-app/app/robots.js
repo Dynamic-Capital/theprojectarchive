@@ -1,9 +1,7 @@
 /** @type {import('next').MetadataRoute.Robots} */
 export default function robots() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
-  if (!siteUrl) {
-    throw new Error('NEXT_PUBLIC_SITE_URL is not defined');
-  }
+  // Fall back to localhost if NEXT_PUBLIC_SITE_URL is missing
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
   return {
     rules: {
       userAgent: '*',

@@ -70,7 +70,7 @@ npm run check
 ```
 
 Update `ALLOWED_ORIGINS`, `SPACE_BUCKET_URL`, `SITE_URL`, `NEXT_PUBLIC_SITE_URL`, and `MAINTENANCE_MODE` in `.env` to match your environment.
-`SITE_URL` and `NEXT_PUBLIC_SITE_URL` are required and the app will throw an error if either is missing.
+`SITE_URL` is required. `NEXT_PUBLIC_SITE_URL` defaults to `http://localhost:3000` but should be set in production.
 
 `ALLOWED_ORIGINS` restricts incoming requests to the specified origins (comma-separated) and is enforced in `server.js`.
 
@@ -215,7 +215,7 @@ When deployed to platforms like DigitalOcean App Platform, the buildpacks instal
 - `NODE_ENV` – set to `production` for optimized runtime behavior.
 - `MAINTENANCE_MODE` – set to `true` to redirect users to `/coming-soon`.
 - `SITE_URL` – base URL of the deployed site. **Required.**
-- `NEXT_PUBLIC_SITE_URL` – base URL used for metadata, sitemap, and robots. **Required.**
+- `NEXT_PUBLIC_SITE_URL` – base URL used for metadata, sitemap, and robots. Defaults to `http://localhost:3000`.
 
 ## Accessibility
 

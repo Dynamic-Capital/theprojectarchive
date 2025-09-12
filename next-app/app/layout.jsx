@@ -8,10 +8,8 @@ import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
-if (!siteUrl) {
-  throw new Error('NEXT_PUBLIC_SITE_URL is not defined');
-}
+// Use provided NEXT_PUBLIC_SITE_URL or default to localhost for development
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
 const jsonLd = {
   '@context': 'https://schema.org',
