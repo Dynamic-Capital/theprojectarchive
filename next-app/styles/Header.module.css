@@ -56,6 +56,8 @@
 }
 
 .desktopNav a {
+  position: relative;
+  padding-bottom: 0.25rem;
   text-decoration: none;
 }
 
@@ -64,11 +66,17 @@
   outline-offset: 2px;
 }
 
-.active {
-  text-decoration: underline;
+.underline {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  border-radius: 1px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .desktopNav {
     display: block;
   }
