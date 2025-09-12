@@ -8,12 +8,14 @@ import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'The Project Archive',
-  url: 'https://theprojectarchives-4ud4t.ondigitalocean.app',
-  logo: 'https://theprojectarchives-4ud4t.ondigitalocean.app/favicon.svg',
+  url: siteUrl,
+  logo: `${siteUrl}/favicon.svg`,
   sameAs: [
     'https://www.instagram.com/theprojectarchive',
     'https://twitter.com/theprojectarchive',
@@ -23,7 +25,7 @@ const jsonLd = {
 logRuntimeInfo();
 
 export const metadata = {
-  metadataBase: new URL('https://theprojectarchives-4ud4t.ondigitalocean.app'),
+  metadataBase: new URL(siteUrl),
   alternates: {
     canonical: '/',
   },
@@ -39,14 +41,14 @@ export const metadata = {
       'The Project Archive - Creative studio for design, development, and photography',
     description:
       'Creative studio in the Maldives offering design, development, and photography services.',
-    url: 'https://theprojectarchives-4ud4t.ondigitalocean.app',
+    url: siteUrl,
     siteName: 'The Project Archive',
     images: [
       {
-        url: 'https://theprojectarchives-4ud4t.ondigitalocean.app/favicon.svg',
+        url: `${siteUrl}/og-image.svg`,
         width: 1200,
         height: 630,
-        alt: 'The Project Archive logo',
+        alt: 'The Project Archive preview',
       },
     ],
     type: 'website',
@@ -57,7 +59,7 @@ export const metadata = {
       'The Project Archive - Creative studio for design, development, and photography',
     description:
       'Creative studio in the Maldives offering design, development, and photography services.',
-    images: ['https://theprojectarchives-4ud4t.ondigitalocean.app/favicon.svg'],
+    images: [`${siteUrl}/og-image.svg`],
   },
   robots: {
     index: true,
