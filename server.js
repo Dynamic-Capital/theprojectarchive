@@ -40,6 +40,10 @@ const mimeTypes = {
 };
 
 export async function startServer(appInstance) {
+  if (!process.env.NODE_ENV) {
+    console.warn('[Env] NODE_ENV is missing, defaulting to "development"');
+    process.env.NODE_ENV = 'development';
+  }
   const dev = process.env.NODE_ENV !== "production";
   const staticDir = resolveStaticDir();
   let allowedOriginsEnv =
