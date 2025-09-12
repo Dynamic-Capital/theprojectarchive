@@ -4,6 +4,32 @@ This repository contains the marketing site for The Project Archive, a creative 
 
 Global CSS is processed during the build using PostCSS.
 
+
+## Getting Started
+
+Install the required packages:
+
+```bash
+npm install framer-motion tailwindcss @tailwindcss/postcss
+```
+
+### Usage
+
+```jsx
+import ServicesStack from "./components/ServicesStack";
+
+const services = [
+  { title: "Portrait Photography", description: "Professional headshots and portrait sessions." },
+  { title: "Event Coverage", description: "Document corporate events or family gatherings with style." },
+  { title: "Product Shoots", description: "Clean and vibrant images to showcase your products online.", cta: "Get a quote", href: "#contact" }
+];
+
+<ServicesStack items={services} />
+```
+
+The component respects the user's `prefers-reduced-motion` setting and falls back to a simple list when motion is disabled.
+
+
 ## Development
 
 Install dependencies and start the development server:
