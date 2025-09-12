@@ -20,7 +20,7 @@ Ensure Node.js 20 is installed (a `.nvmrc` file is provided for `nvm` users). Ru
 npm run check
 ```
 
-Update `ALLOWED_ORIGINS`, `SPACE_BUCKET_URL`, and `MAINTENANCE_MODE` in `.env` to match your environment.
+Update `ALLOWED_ORIGINS`, `SPACE_BUCKET_URL`, `NEXT_PUBLIC_SITE_URL`, and `MAINTENANCE_MODE` in `.env` to match your environment.
 
 `ALLOWED_ORIGINS` restricts incoming requests to the specified origins (comma-separated) and is enforced in `server.js`.
 
@@ -169,6 +169,7 @@ When deployed to platforms like DigitalOcean App Platform, the buildpacks instal
 - `BP_NODE_RUN_SCRIPTS` – npm scripts to run during build (`export`).
 - `NODE_ENV` – set to `production` for optimized runtime behavior.
 - `MAINTENANCE_MODE` – set to `true` to redirect users to `/coming-soon`.
+- `NEXT_PUBLIC_SITE_URL` – base URL used for metadata, sitemap, and robots.
 
 ## Accessibility
 
