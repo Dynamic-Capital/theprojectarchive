@@ -26,7 +26,7 @@ export default function Hero3D({ style = { width: '12rem', height: '12rem', marg
   }
 
   return (
-    <Canvas style={style} camera={{ position: [0, 0, 5] }}>
+    <Canvas style={style} camera={{ position: [0, 0, 5] }} aria-hidden="true">
       <ambientLight intensity={0.5} />
       <RotatingBox reduceMotion={reduceMotion} />
     </Canvas>
