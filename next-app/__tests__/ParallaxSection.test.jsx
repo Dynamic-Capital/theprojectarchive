@@ -19,7 +19,11 @@ import ParallaxSection from '../components/ParallaxSection';
 describe('ParallaxSection', () => {
   it('disables parallax when reduced motion is preferred', () => {
     const { container } = render(
-      <ParallaxSection id="test" image="https://picsum.photos/200/300">
+      <ParallaxSection
+        id="test"
+        image="https://picsum.photos/200/300"
+        alt="Sample background"
+      >
         <p>Content</p>
       </ParallaxSection>
     );

@@ -12,13 +12,37 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
+  '@type': 'LocalBusiness',
   name: 'The Project Archive',
   url: siteUrl,
   logo: `${siteUrl}/favicon.svg`,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Malé',
+    addressCountry: 'MV',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: '4.175278',
+    longitude: '73.508889',
+  },
   sameAs: [
     'https://www.instagram.com/theprojectarchive',
     'https://twitter.com/theprojectarchive',
+  ],
+  makesOffer: [
+    {
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Service', name: 'Design' },
+    },
+    {
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Service', name: 'Development' },
+    },
+    {
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Service', name: 'Photography' },
+    },
   ],
 };
 

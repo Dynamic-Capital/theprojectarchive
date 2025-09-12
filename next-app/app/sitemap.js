@@ -16,5 +16,7 @@ export default function sitemap() {
   return routes.map((route) => ({
     url: `${siteUrl}/${route}`,
     lastModified: new Date(),
+    changefreq: route === '' ? 'monthly' : 'yearly',
+    priority: route === '' ? 1 : route === 'services' ? 0.8 : 0.5,
   }));
 }

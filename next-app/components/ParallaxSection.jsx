@@ -4,16 +4,22 @@ import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion
 import Image from 'next/image';
 import SectionHeader from './SectionHeader';
 
+/**
+ * Section with a parallax background image.
+ * @param {string} id - Unique id used for anchor navigation.
+ * @param {string} image - Background image URL.
+ * @param {string} alt - Descriptive alternative text for the image.
+ */
 export default function ParallaxSection({
   id,
   image,
-  alt = '',
+  alt,
   title,
   description,
   children,
   priority = false,
 }) {
-  if (!id || !image) {
+  if (!id || !image || !alt) {
     return null;
   }
   const ref = useRef(null);
