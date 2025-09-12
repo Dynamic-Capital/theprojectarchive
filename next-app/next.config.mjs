@@ -41,12 +41,19 @@ export default function (phase) {
     output: 'export',
   };
 
+  const commonRewrites = [
+    { source: '/favicon.ico', destination: '/favicon.svg' },
+  ];
+
   if (phase === PHASE_DEVELOPMENT_SERVER) {
     // Serve the root page when requesting `/index.html` so the app
     // behaves like a traditional static site during development.
     nextConfig.rewrites = async () => [
+      ...commonRewrites,
       { source: '/index.html', destination: '/' },
     ];
+  } else {
+    nextConfig.rewrites = async () => commonRewrites;
   }
 
   return withBundleAnalyzer(nextConfig);
