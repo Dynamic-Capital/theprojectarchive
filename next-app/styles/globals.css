@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Base */
 :root {
   --safe-top: env(safe-area-inset-top, 0px);
