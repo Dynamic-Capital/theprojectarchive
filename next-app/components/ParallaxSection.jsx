@@ -13,6 +13,9 @@ export default function ParallaxSection({
   children,
   priority = false,
 }) {
+  if (!id || !image) {
+    return null;
+  }
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,

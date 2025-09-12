@@ -11,12 +11,15 @@ const sections = [
   'contact',
 ];
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return sections.map((section) => ({ section }));
 }
 
 export default function SectionPage({ params }) {
-  if (!sections.includes(params.section)) {
+  const section = params?.section;
+  if (!section || !sections.includes(section)) {
     notFound();
   }
   return <Home />;

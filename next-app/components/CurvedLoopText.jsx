@@ -1,3 +1,5 @@
+"use client";
+
 import {
   jsx as _jsx,
   jsxs as _jsxs,
