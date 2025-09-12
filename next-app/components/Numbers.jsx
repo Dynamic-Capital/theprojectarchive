@@ -3,20 +3,21 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useInView, animate } from 'framer-motion';
 import ParallaxSection from './ParallaxSection';
 
-function Counter({ value }) {
+function Counter({ value = 0 }) {
+  const target = Number(value) || 0;
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
   const [display, setDisplay] = useState(0);
 
   useEffect(() => {
     if (isInView) {
-      const controls = animate(0, value, {
+      const controls = animate(0, target, {
         duration: 2,
         onUpdate: (v) => setDisplay(Math.floor(v)),
       });
       return () => controls.stop();
     }
-  }, [isInView, value]);
+  }, [isInView, target]);
 
   return (
     <span
