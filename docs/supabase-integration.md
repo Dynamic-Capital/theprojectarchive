@@ -37,6 +37,11 @@ These variables must be available at build and runtime:
 
 Set them in DigitalOcean App Platform via `.do/app.yaml` and configure matching GitHub secrets so deployment workflows can pass them through.
 
+The `save-contact` Edge Function also requires the following secrets to forward messages to your mailbox:
+
+- `BUSINESS_EMAIL`
+- `BUSINESS_EMAIL_APP_PASSWORD`
+
 ## Verification
 
 After deploying with the variables configured, test the endpoint:

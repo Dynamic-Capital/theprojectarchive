@@ -1,4 +1,3 @@
-import nodemailer from 'nodemailer';
 import { z } from 'zod';
 import { Redis } from '@upstash/redis';
 // Contact messages are persisted via a Supabase Edge Function to offload
@@ -74,12 +73,12 @@ export async function POST(req) {
       return new Response(null, { status: 429 });
     }
 
-    if (
-      !process.env.BUSINESS_EMAIL ||
-      !process.env.BUSINESS_EMAIL_APP_PASSWORD
-    ) {
-      console.error('Business email is not configured');
-      return Response.json({ error: 'Email not configured' }, { status: 500 });
+    if (!process.env.SUPABASE_SAVE_CONTACT_FUNCTION_URL) {
+      console.error('Contact function is not configured');
+      return Response.json(
+        { error: 'Contact function not configured' },
+        { status: 500 },
+      );
     }
 
     if (process.env.RECAPTCHA_SECRET) {
@@ -115,39 +114,30 @@ export async function POST(req) {
       }
     }
 
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 465,
-      secure: true,
-      auth: {
-        user: process.env.BUSINESS_EMAIL,
-        pass: process.env.BUSINESS_EMAIL_APP_PASSWORD,
-      },
-    });
-
-    await transporter.sendMail({
-      from: process.env.BUSINESS_EMAIL,
-      to: process.env.BUSINESS_EMAIL,
-      subject: `New contact from ${name}`,
-      replyTo: email,
-      text: message,
-    });
-
-    if (process.env.SUPABASE_SAVE_CONTACT_FUNCTION_URL) {
-      try {
-        await fetch(process.env.SUPABASE_SAVE_CONTACT_FUNCTION_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            ...(process.env.SUPABASE_SERVICE_ROLE_KEY
-              ? { Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}` }
-              : {}),
-          },
-          body: JSON.stringify({ name, email, message }),
-        });
-      } catch (error) {
-        console.error('Failed to store contact message', error);
+    try {
+      const res = await fetch(process.env.SUPABASE_SAVE_CONTACT_FUNCTION_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(process.env.SUPABASE_SERVICE_ROLE_KEY
+            ? { Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}` }
+            : {}),
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+      if (!res.ok) {
+        console.error('Supabase function returned', res.status);
+        return Response.json(
+          { error: 'Failed to send message' },
+          { status: 500 },
+        );
       }
+    } catch (error) {
+      console.error('Failed to store contact message', error);
+      return Response.json(
+        { error: 'Failed to send message' },
+        { status: 500 },
+      );
     }
 
     return new Response(null, { status: 200 });
@@ -155,7 +145,7 @@ export async function POST(req) {
     if (err instanceof z.ZodError) {
       return Response.json({ error: 'Invalid input' }, { status: 400 });
     }
-    console.error('Failed to send contact email', err);
+    console.error('Failed to send contact message', err);
     return Response.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
