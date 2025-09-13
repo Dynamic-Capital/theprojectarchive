@@ -14,7 +14,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative isolate flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#070707] px-6 text-center text-white"
+      className="relative isolate flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#070707] px-6 md:px-16 text-center text-white"
     >
       <div
         aria-hidden="true"
@@ -51,7 +51,7 @@ export default function Hero() {
 
       <div className="z-10 flex flex-col items-center">
         <MotionLogo
-          className="mb-6 h-24 w-24"
+          className="mb-6 h-24 w-24 md:h-32 md:w-32"
           animate={
             reduceMotion
               ? { rotate: 0, scale: 1 }
@@ -71,13 +71,13 @@ export default function Hero() {
                 }
           }
         />
-        <h1 className="font-sans text-4xl font-bold uppercase">
+        <h1 className="font-sans text-4xl md:text-6xl font-bold uppercase">
           The Project Archive
         </h1>
-        <p className="mt-4 text-lg text-gray-400">
+        <p className="mt-4 text-lg md:text-xl text-gray-400">
           Where stories live forever 🐾
         </p>
-        <div className="mt-8 flex gap-4">
+        <div className="mt-8 flex gap-4 md:gap-6">
           <motion.a
             href="#explore"
             className="rounded-md bg-[#f13d00] px-6 py-3 font-semibold text-white"

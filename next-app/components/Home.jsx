@@ -88,12 +88,12 @@ export default function Home() {
       <Mission />
       <Approach />
       <Numbers />
-      <p className="mx-auto max-w-2xl text-center">
+      <p className="mx-auto max-w-2xl px-4 text-center md:text-lg">
         We offer a full suite of creative services tailored to your brand.
       </p>
       <ServicesStack items={serviceItems} />
       <Contact />
-      <TiltCard className="mx-auto my-16 max-w-sm p-8 glass rounded-xl text-center">
+      <TiltCard className="mx-auto my-16 max-w-sm md:max-w-md p-8 md:p-10 glass rounded-xl text-center">
         <h3 className="text-lg font-semibold">Interactive Card</h3>
         <p className="mt-2 text-sm">Move your cursor to tilt.</p>
       </TiltCard>
