@@ -33,7 +33,8 @@ export default function Home() {
     'scrollBehavior' in document.documentElement.style;
 
   useEffect(() => {
-    const section = pathname.slice(1);
+    const hash = typeof window !== 'undefined' ? window.location.hash.slice(1) : '';
+    const section = pathname.slice(1) || hash;
     if (section) {
       const el = document.getElementById(section);
       if (el) {
