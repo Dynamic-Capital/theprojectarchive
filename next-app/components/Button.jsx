@@ -14,6 +14,7 @@ export default function Button({
   const variants = {
     primary: 'button button--primary',
     danger: 'button button--danger',
+    secondary: 'button button--secondary',
     brand3d: 'button button--3d',
   };
   const variantClass = variants[variant] ?? 'button';

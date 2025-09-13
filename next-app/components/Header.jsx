@@ -54,6 +54,7 @@ export default function Header({ onToggle, open }) {
   return (
     <SafeSpace
       as={motion.header}
+      aria-label="Site header"
       className={`sticky top-0 w-full ${styles.header}`}
       variants={headerVariants}
       initial={shouldReduce ? false : 'initial'}
