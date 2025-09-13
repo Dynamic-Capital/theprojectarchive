@@ -1,18 +1,43 @@
 import nodemailer from 'nodemailer';
 import { z } from 'zod';
+import { Redis } from '@upstash/redis';
 
 const rateLimitWindowMs = 60_000;
 const rateLimitMax = 5;
 const rateLimitMap = new Map();
+const redis =
+  process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
+    ? new Redis({
+        url: process.env.UPSTASH_REDIS_REST_URL,
+        token: process.env.UPSTASH_REDIS_REST_TOKEN,
+      })
+    : null;
 
 function getIp(req) {
   return (
-    req.headers.get('x-forwarded-for')?.split(',')[0].trim() || 'local'
+    req.ip ||
+    req.headers.get('x-real-ip') ||
+    req.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
+    'local'
   );
 }
 
-function isRateLimited(ip) {
+async function isRateLimited(ip) {
+  if (redis) {
+    const key = `rate_limit:${ip}`;
+    const count = await redis.incr(key);
+    if (count === 1) {
+      await redis.pexpire(key, rateLimitWindowMs);
+    }
+    return count > rateLimitMax;
+  }
+
   const now = Date.now();
+  for (const [key, entry] of rateLimitMap.entries()) {
+    if (now - entry.start >= rateLimitWindowMs) {
+      rateLimitMap.delete(key);
+    }
+  }
   const entry = rateLimitMap.get(ip);
   if (entry && now - entry.start < rateLimitWindowMs) {
     if (entry.count >= rateLimitMax) {
@@ -38,11 +63,16 @@ const schema = z.object({
 
 export async function POST(req) {
   try {
-    const data = await req.json();
+    let data;
+    try {
+      data = await req.json();
+    } catch {
+      return Response.json({ error: 'Invalid JSON' }, { status: 400 });
+    }
     const { name, email, message, token } = schema.parse(data);
 
     const ip = getIp(req);
-    if (isRateLimited(ip)) {
+    if (await isRateLimited(ip)) {
       return new Response(null, { status: 429 });
     }
 
@@ -73,7 +103,13 @@ export async function POST(req) {
         },
       );
       const verify = await verifyRes.json();
-      if (!verify.success) {
+      const expectedHostname = process.env.RECAPTCHA_HOSTNAME;
+      const expectedAction = process.env.RECAPTCHA_ACTION;
+      if (
+        !verify.success ||
+        (expectedHostname && verify.hostname !== expectedHostname) ||
+        (expectedAction && verify.action !== expectedAction)
+      ) {
         return Response.json(
           { error: 'Captcha verification failed' },
           { status: 400 },
