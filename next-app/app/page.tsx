@@ -1,4 +1,6 @@
-import '../styles/globals.css';
+"use client";
+
+import { motion, useReducedMotion } from 'framer-motion';
 import Hero from '../components/Hero';
 import Home from '../components/Home';
 
@@ -35,10 +37,17 @@ export const metadata = {
 };
 
 export default function Page() {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <>
+    <motion.main
+      className="flex flex-col"
+      initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={reduceMotion ? { duration: 0 } : { duration: 0.6, ease: 'easeOut' }}
+    >
       <Hero />
       <Home />
-    </>
+    </motion.main>
   );
 }
