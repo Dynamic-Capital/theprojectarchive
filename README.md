@@ -4,6 +4,8 @@ This repository contains the marketing site for The Project Archive, a creative 
 
 Global CSS is processed during the build using PostCSS.
 
+A high-level overview of the application features and data model is available in [docs/project-overview.md](docs/project-overview.md).
+
 
 ## Getting Started
 
