@@ -106,8 +106,10 @@ npm run check
 ```
 
 Update `ALLOWED_ORIGINS`, `SPACE_BUCKET_URL`, `SITE_URL`,
-`NEXT_PUBLIC_SITE_URL`, `MAINTENANCE_MODE`,
-`NEXT_PUBLIC_SUPABASE_BUCKET`, and
+`NEXT_PUBLIC_SITE_URL`, search-engine verification tokens
+(`NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`,
+`NEXT_PUBLIC_BING_SITE_VERIFICATION`),
+`MAINTENANCE_MODE`, `NEXT_PUBLIC_SUPABASE_BUCKET`, and
 `SUPABASE_SAVE_CONTACT_FUNCTION_URL` in `.env` to match your environment.
 `SITE_URL` is required. `NEXT_PUBLIC_SITE_URL` defaults to
 `http://localhost:3000` but should be set in production.
