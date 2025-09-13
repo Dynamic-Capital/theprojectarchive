@@ -6,6 +6,7 @@ import { createGzip } from "zlib";
 import { join, resolve, extname } from "path";
 import { createRequire } from "module";
 import mime from "mime-types";
+import "./db/index.js";
 
 const require = createRequire(import.meta.url);
 
