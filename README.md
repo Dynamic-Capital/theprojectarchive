@@ -274,6 +274,18 @@ When deployed to platforms like DigitalOcean App Platform, the buildpacks instal
 - **DDoS Protection** – Reroutes malicious traffic to keep the site accessible.
 - **Level 1 PCI Compliance** – Meets the highest global standard for secure online payments.
 
+## Uptime Monitoring
+
+Use the `scripts/uptime-monitor.js` script to check site availability and verify basic security headers:
+
+```bash
+node scripts/uptime-monitor.js https://example.com
+# or use the SITE_URL environment variable
+SITE_URL=https://example.com npm run uptime
+```
+
+The script issues a `HEAD` request (falling back to `GET` if necessary), reports the HTTP status and response time, and warns about missing security headers.
+
 ## Accessibility
 
 Animated components respect the user's `prefers-reduced-motion` setting, and the lightbox dialog traps focus for keyboard users.
