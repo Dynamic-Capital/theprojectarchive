@@ -13,39 +13,55 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: 'The Project Archive',
-  url: siteUrl,
-  logo: `${siteUrl}/logo-dark.svg`,
-  telephone: '+9607495687',
-  email: 'hello@theprojectarchive.mv',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Malé',
-    addressCountry: 'MV',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: '4.175278',
-    longitude: '73.508889',
-  },
-  sameAs: [
-    'https://www.instagram.com/theprojectarchive.mv/',
-    'https://www.facebook.com/61570311241783',
-    'https://www.tiktok.com/@theprojectarchive.mv',
-  ],
-  makesOffer: [
+  '@graph': [
     {
-      '@type': 'Offer',
-      itemOffered: { '@type': 'Service', name: 'Design' },
+      '@type': 'WebSite',
+      '@id': `${siteUrl}#website`,
+      url: siteUrl,
+      name: 'The Project Archive',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: `${siteUrl}/?q={search_term_string}`,
+        'query-input': 'required name=search_term_string',
+      },
     },
     {
-      '@type': 'Offer',
-      itemOffered: { '@type': 'Service', name: 'Development' },
-    },
-    {
-      '@type': 'Offer',
-      itemOffered: { '@type': 'Service', name: 'Photography' },
+      '@type': 'LocalBusiness',
+      '@id': `${siteUrl}#business`,
+      name: 'The Project Archive',
+      url: siteUrl,
+      logo: `${siteUrl}/logo-dark.svg`,
+      telephone: '+9607495687',
+      email: 'hello@theprojectarchive.mv',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Malé',
+        addressCountry: 'MV',
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: '4.175278',
+        longitude: '73.508889',
+      },
+      sameAs: [
+        'https://www.instagram.com/theprojectarchive.mv/',
+        'https://www.facebook.com/61570311241783',
+        'https://www.tiktok.com/@theprojectarchive.mv',
+      ],
+      makesOffer: [
+        {
+          '@type': 'Offer',
+          itemOffered: { '@type': 'Service', name: 'Design' },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: { '@type': 'Service', name: 'Development' },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: { '@type': 'Service', name: 'Photography' },
+        },
+      ],
     },
   ],
 };
@@ -61,6 +77,14 @@ export const metadata = {
     'The Project Archive - Creative studio for design, development, and photography',
   description:
     'Creative studio in the Maldives offering design, development, and photography services.',
+  keywords: [
+    'design',
+    'development',
+    'photography',
+    'Maldives',
+    'creative studio',
+  ],
+  authors: [{ name: 'The Project Archive', url: siteUrl }],
   icons: {
     icon: '/favicon.svg',
   },
@@ -92,6 +116,13 @@ export const metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      maxSnippet: -1,
+      maxImagePreview: 'large',
+      maxVideoPreview: -1,
+    },
   },
 };
 
