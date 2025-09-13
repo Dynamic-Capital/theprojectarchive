@@ -16,7 +16,7 @@ const jsonLd = {
   '@type': 'LocalBusiness',
   name: 'The Project Archive',
   url: siteUrl,
-  logo: `${siteUrl}/favicon.svg`,
+  logo: `${siteUrl}/logo-dark.svg`,
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Malé',
