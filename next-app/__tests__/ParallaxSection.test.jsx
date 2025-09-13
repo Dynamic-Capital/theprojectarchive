@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi, beforeAll } from 'vitest';
 
 beforeAll(() => {
@@ -29,5 +29,17 @@ describe('ParallaxSection', () => {
     );
     const wrapper = container.querySelector('section > div');
     expect(wrapper?.style.transform).toBe('none');
+  });
+
+  it('renders when alt text is omitted', () => {
+    render(
+      <ParallaxSection
+        id="no-alt"
+        image="https://picsum.photos/id/1011/1600/900"
+      >
+        <p>Visible content</p>
+      </ParallaxSection>
+    );
+    expect(screen.getByText('Visible content')).toBeInTheDocument();
   });
 });
