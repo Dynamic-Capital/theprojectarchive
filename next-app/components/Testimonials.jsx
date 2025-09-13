@@ -77,14 +77,7 @@ export default function Testimonials() {
           <AnimatePresence mode="wait">
             <motion.figure
               key={index}
-              style={{
-                textAlign: 'center',
-                padding: 'var(--space-5)',
-                background: 'var(--surface)',
-                border: 'var(--border-1)',
-                borderRadius: 'var(--radius-md)',
-                boxShadow: 'var(--shadow-1)'
-              }}
+              className="glass text-center p-5 rounded-md shadow-glass"
               variants={slideVariants(reduceMotion)}
               initial="enter"
               animate="center"
