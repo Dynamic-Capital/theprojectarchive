@@ -8,12 +8,12 @@ import SectionHeader from './SectionHeader';
  * Section with a parallax background image.
  * @param {string} id - Unique id used for anchor navigation.
  * @param {string} image - Background image URL.
- * @param {string} alt - Descriptive alternative text for the image.
+ * @param {string} [alt] - Descriptive alternative text for the image.
  */
 export default function ParallaxSection({
   id,
   image,
-  alt = '',
+  alt,
   decorative = false,
   title,
   description,
