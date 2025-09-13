@@ -1,5 +1,17 @@
+import React from 'react';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { describe, it, expect, vi, afterEach } from 'vitest';
+
+vi.mock('@hcaptcha/react-hcaptcha', () => ({
+  default: React.forwardRef((props, ref) => {
+    React.useImperativeHandle(ref, () => ({
+      executeAsync: () => Promise.resolve('test-token'),
+      resetCaptcha: () => {},
+    }));
+    return <div data-testid="hcaptcha-mock" />;
+  }),
+}));
+
 import Contact from '../components/Contact';
 
 describe('Contact', () => {

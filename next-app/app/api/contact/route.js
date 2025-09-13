@@ -82,32 +82,23 @@ export async function POST(req) {
       return Response.json({ error: 'Email not configured' }, { status: 500 });
     }
 
-    if (process.env.RECAPTCHA_SECRET) {
+    if (process.env.HCAPTCHA_SECRET) {
       if (!token) {
         return Response.json({ error: 'Missing captcha token' }, { status: 400 });
       }
       const params = new URLSearchParams({
-        secret: process.env.RECAPTCHA_SECRET,
+        secret: process.env.HCAPTCHA_SECRET,
         response: token,
       });
-      const verifyRes = await fetch(
-        'https://www.google.com/recaptcha/api/siteverify',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          body: params.toString(),
+      const verifyRes = await fetch('https://hcaptcha.com/siteverify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
-      );
+        body: params.toString(),
+      });
       const verify = await verifyRes.json();
-      const expectedHostname = process.env.RECAPTCHA_HOSTNAME;
-      const expectedAction = process.env.RECAPTCHA_ACTION;
-      if (
-        !verify.success ||
-        (expectedHostname && verify.hostname !== expectedHostname) ||
-        (expectedAction && verify.action !== expectedAction)
-      ) {
+      if (!verify.success) {
         return Response.json(
           { error: 'Captcha verification failed' },
           { status: 400 },

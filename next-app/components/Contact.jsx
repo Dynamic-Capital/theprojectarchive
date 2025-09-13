@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -8,9 +8,11 @@ import ParallaxSection from './ParallaxSection';
 import { textVariants } from '../lib/animations';
 import Button from './Button';
 import CompactEmailButton from './CompactEmailButton';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 
 export default function Contact() {
   const [status, setStatus] = useState(null);
+  const captchaRef = useRef(null);
 
   const schema = z.object({
     name: z.string().trim().min(1, 'Please enter your name.'),
@@ -31,10 +33,11 @@ export default function Contact() {
   const onSubmit = async (data) => {
     setStatus(null);
     try {
+      const token = await captchaRef.current?.executeAsync();
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, token }),
       });
       if (res.ok) {
         setStatus('success');
@@ -45,6 +48,7 @@ export default function Contact() {
     } catch {
       setStatus('error');
     }
+    captchaRef.current?.resetCaptcha();
   };
 
   const reduceMotion = useReducedMotion();
@@ -128,6 +132,11 @@ export default function Contact() {
           </p>
         )}
       </motion.form>
+      <HCaptcha
+        sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITEKEY}
+        size="invisible"
+        ref={captchaRef}
+      />
       <CompactEmailButton className="mt-4" />
     </ParallaxSection>
   );

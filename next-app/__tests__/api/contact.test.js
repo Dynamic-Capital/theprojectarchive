@@ -124,7 +124,7 @@ describe('POST /api/contact', () => {
   });
 
   it('verifies captcha when secret is set', async () => {
-    process.env.RECAPTCHA_SECRET = 'secret';
+    process.env.HCAPTCHA_SECRET = 'secret';
     const fetchSpy = vi
       .spyOn(global, 'fetch')
       .mockResolvedValue({ json: async () => ({ success: true }) });
@@ -144,7 +144,7 @@ describe('POST /api/contact', () => {
   });
 
   it('rejects invalid captcha', async () => {
-    process.env.RECAPTCHA_SECRET = 'secret';
+    process.env.HCAPTCHA_SECRET = 'secret';
     const fetchSpy = vi
       .spyOn(global, 'fetch')
       .mockResolvedValue({ json: async () => ({ success: false }) });
