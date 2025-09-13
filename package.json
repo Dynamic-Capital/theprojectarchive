@@ -10,6 +10,7 @@
     "analyze": "ANALYZE=true npm --prefix next-app run build",
     "start": "NODE_ENV=production node server.js",
     "preview": "npm run build && npm run start",
+    "migrate": "node scripts/migrate.js",
     "test": "npm --prefix next-app run test",
     "lint": "npm --prefix next-app run lint",
     "format": "npm --prefix next-app run format",
@@ -22,6 +23,7 @@
   "dependencies": {
     "mime-types": "^2.1.35",
     "nodemailer": "^6.10.1",
+    "pg": "^8.16.3",
     "ws": "^8.17.0",
     "zod": "^3.25.76"
   },

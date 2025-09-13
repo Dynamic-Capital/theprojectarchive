@@ -59,6 +59,23 @@ Contact form submissions are also saved in Supabase. Configure the Supabase tabl
 Row Level Security policy, and required environment variables as described in
 [docs/supabase-integration.md](docs/supabase-integration.md).
 
+### Database
+
+The application now uses a PostgreSQL database for persistent storage. Configure the
+connection in `.env`:
+
+```
+DATABASE_URL=postgres://tpa:tpa@localhost:5432/tpa
+DATABASE_POOL_MAX=10
+DATABASE_SSL=false
+```
+
+Apply database migrations after installing dependencies:
+
+```
+npm run migrate
+```
+
 ## Development
 
 Install dependencies and start the development server:
@@ -66,6 +83,7 @@ Install dependencies and start the development server:
 ```bash
 npm install
 cp .env.example .env
+npm run migrate
 npm run dev
 ```
 
@@ -183,6 +201,8 @@ Manifests for running the site in a Kubernetes cluster are in `k8s/`. Build and 
 The second argument sets `INGRESS_HOST`, which replaces `${INGRESS_HOST}` in `k8s/ingress.yaml` via `envsubst`.
 
 Ensure `kubectl` is configured for your cluster and you are authenticated to the container registry.
+
+The `k8s/postgres.yaml` manifest provisions a PostgreSQL database with a persistent volume. Credentials are supplied via `k8s/postgres-secret.yaml`, and `k8s/postgres-networkpolicy.yaml` restricts database access to the application pods. The app deployment (`k8s/deployment.yaml`) uses these values to form the `DATABASE_URL` environment variable.
 
 The deployment sets modest CPU/memory requests (`100m`/`128Mi`) and limits (`200m`/`256Mi`) and exposes liveness and readiness probes on the root path.
 

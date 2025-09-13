@@ -17,6 +17,16 @@ spec:
           image: ${IMAGE}
           ports:
             - containerPort: 80
+          envFrom:
+            - secretRef:
+                name: postgres-secret
+          env:
+            - name: DATABASE_URL
+              value: postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@postgres:5432/$(POSTGRES_DB)
+            - name: DATABASE_POOL_MAX
+              value: "10"
+            - name: DATABASE_SSL
+              value: "false"
           resources:
             # Adjust requests/limits based on expected load
             requests:
