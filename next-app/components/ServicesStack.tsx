@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion, useMotionValue, useTransform } from 'framer-motion';
 import { useCallback, type CSSProperties, type MouseEvent } from 'react';
+import Button from './Button';
 
 type ServiceItem = {
   title: string;
@@ -76,12 +77,12 @@ export default function ServicesStack({ items = [] }: ServicesStackProps) {
               </h3>
               <p className="mt-2 text-sm text-muted">{item.description}</p>
               {item.cta && (
-                <a
+                <Button
                   href={item.href || '#'}
-                  className="mt-4 inline-block rounded-full bg-accent/90 hover:bg-accent text-background px-4 py-2 text-sm whitespace-nowrap"
+                  className="mt-4 whitespace-nowrap"
                 >
                   {item.cta}
-                </a>
+                </Button>
               )}
             </article>
           ))}
@@ -131,14 +132,12 @@ export default function ServicesStack({ items = [] }: ServicesStackProps) {
             </h3>
             <p className="mt-2 text-sm text-muted">{item.description}</p>
             {item.cta && (
-              <motion.a
+              <Button
                 href={item.href || '#'}
-                className="mt-4 inline-block rounded-full bg-accent/90 hover:bg-accent text-background px-4 py-2 text-sm whitespace-nowrap"
-                whileHover={{ x: 4 }}
-                whileTap={{ scale: 0.95 }}
+                className="mt-4 whitespace-nowrap"
               >
                 {item.cta}
-              </motion.a>
+              </Button>
             )}
           </motion.article>
         ))}

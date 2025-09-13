@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import { useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import PortfolioPreview from './PortfolioPreview';
 import Testimonials from './Testimonials';
@@ -11,6 +11,7 @@ import Numbers from './Numbers';
 import ServicesStack from './ServicesStack';
 import Contact from './Contact';
 import TiltCard from './TiltCard';
+import Button from './Button';
 
 const serviceItems = [
   {
@@ -105,18 +106,12 @@ export default function Home() {
         <h3 className="text-lg font-semibold">Interactive Card</h3>
         <p className="mt-2 text-sm">Move your cursor to tilt.</p>
       </TiltCard>
-      <motion.button
+      <Button
+        className="fixed right-[var(--space-4)] bottom-[max(var(--space-4),env(safe-area-inset-bottom))] rounded-full"
         style={{
-          position: 'fixed',
-          bottom: 'max(var(--space-4), env(safe-area-inset-bottom))',
-          right: 'var(--space-4)',
           width: '3rem',
           height: '3rem',
-          borderRadius: '50%',
-          border: 'var(--border-1)',
-          background: 'var(--surface)',
-          color: 'var(--text)',
-          boxShadow: 'var(--shadow-1)',
+          padding: 0,
           y,
           opacity,
           pointerEvents: showButton ? 'auto' : 'none',
@@ -130,11 +125,9 @@ export default function Home() {
             behavior: supportsSmoothScroll ? 'smooth' : 'auto',
           })
         }
-        whileHover={reduceMotion ? undefined : { scale: 1.1 }}
-        whileTap={reduceMotion ? undefined : { scale: 0.95 }}
       >
         &#8679;
-      </motion.button>
+      </Button>
     </>
   );
 }

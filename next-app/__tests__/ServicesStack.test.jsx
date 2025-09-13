@@ -19,7 +19,7 @@ describe('ServicesStack', () => {
     ];
     render(<ServicesStack items={items} />);
     const link = screen.getByRole('link', { name: /book now/i });
-    expect(link).toHaveClass('px-4');
-    expect(link).toHaveClass('text-background');
+    expect(link).toHaveClass('button');
+    expect(link).toHaveClass('button--primary');
   });
 });
