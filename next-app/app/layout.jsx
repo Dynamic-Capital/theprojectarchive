@@ -2,6 +2,7 @@ import '../styles/reset.css';
 import '../styles/tokens.css';
 import '../styles/globals.css';
 import ClientLayout from '../components/ClientLayout';
+import Analytics from '../components/Analytics';
 import { ThemeProvider } from 'next-themes';
 import { logRuntimeInfo } from '../lib/logRuntime';
 import { Inter } from 'next/font/google';
@@ -109,6 +110,7 @@ export default function RootLayout({ children }) {
         <a href="#home" className="sr-only focus:not-sr-only">Skip to main content</a>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <ClientLayout>{children}</ClientLayout>
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>

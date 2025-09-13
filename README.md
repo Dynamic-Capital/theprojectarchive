@@ -71,6 +71,12 @@ Service images are loaded from a Supabase Storage bucket defined by
 `NEXT_PUBLIC_SUPABASE_BUCKET`. Images can be uploaded via the `/api/images`
 route, which returns the public URL and invalidates the cached metadata.
 
+### Analytics
+
+Page views and marketing events are tracked with Supabase Edge Functions.
+Events are stored in the `analytics_logs` table and can be summarized via
+the `analytics-report` function.
+
 ### Database
 
 The application now uses a PostgreSQL database for persistent storage. Configure the
