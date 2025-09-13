@@ -45,6 +45,11 @@ export default function ServicesStack({ items = [] }: ServicesStackProps) {
     [x, y]
   );
 
+  const handleMouseLeave = useCallback(() => {
+    x.set(0);
+    y.set(0);
+  }, [x, y]);
+
   if (items.length === 0) {
     return null;
   }
@@ -90,6 +95,7 @@ export default function ServicesStack({ items = [] }: ServicesStackProps) {
       <motion.div
         className="mt-8 space-y-6 md:space-y-0 md:relative md:perspective-[1000px]"
         onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
         style={{ rotateX, rotateY }}
       >
         {items.map((item, i) => (
