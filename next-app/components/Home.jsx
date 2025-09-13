@@ -3,12 +3,13 @@ import { useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import Hero from './Hero';
+import PortfolioPreview from './PortfolioPreview';
+import Testimonials from './Testimonials';
 import About from './About';
 import Mission from './Mission';
 import Approach from './Approach';
 import Numbers from './Numbers';
 import ServicesStack from './ServicesStack';
-import Testimonials from './Testimonials';
 import Contact from './Contact';
 import TiltCard from './TiltCard';
 
@@ -83,12 +84,16 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <PortfolioPreview />
+      <Testimonials />
       <About />
       <Mission />
       <Approach />
       <Numbers />
+      <p className="mx-auto max-w-2xl text-center">
+        We offer a full suite of creative services tailored to your brand.
+      </p>
       <ServicesStack items={serviceItems} />
-      <Testimonials />
       <Contact />
       <TiltCard className="mx-auto my-16 max-w-sm p-8 glass rounded-xl text-center">
         <h3 className="text-lg font-semibold">Interactive Card</h3>

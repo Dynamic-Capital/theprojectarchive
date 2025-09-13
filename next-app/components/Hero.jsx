@@ -13,6 +13,7 @@ import Hero3D from './Hero3D';
 
 const HERO_TITLE = 'Crafting visual stories in the Maldives';
 const HERO_TAGLINE = 'Design · Development · Photography';
+const HERO_SUBHEADING = 'We build immersive digital and visual experiences.';
 const HERO_DESCRIPTION =
   'From websites to imagery, we bring ideas to life for brands that want to stand out.';
 const container = {
@@ -73,10 +74,10 @@ export default function Hero() {
       initial="show"
     >
       <Image
-        src="https://picsum.photos/id/1004/1920/1080"
-        alt="A creative workspace with a camera and photo prints on a desk"
-        width={1920}
-        height={1080}
+        src="https://picsum.photos/id/1015/1600/900"
+        alt="Camera, laptop and notebook on a designer's desk"
+        width={1600}
+        height={900}
         placeholder="blur"
         blurDataURL="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
         sizes="100vw"
@@ -212,6 +213,18 @@ export default function Hero() {
             </>
           )}
         </motion.div>
+        <motion.h2
+          style={{
+            color: 'var(--accent-500)',
+            fontFamily: 'var(--font-sans)',
+            fontSize: 'var(--fs-2)',
+            fontWeight: 600,
+            marginBottom: 'var(--space-4)',
+          }}
+          variants={itemUp(reduceMotion)}
+        >
+          {HERO_SUBHEADING}
+        </motion.h2>
         <Hero3D />
         <motion.p
           style={{
@@ -236,7 +249,7 @@ export default function Hero() {
         >
             <Button
               href="#contact"
-              variant="brand3d"
+              variant="primary"
               variants={itemDown(reduceMotion)}
               style={{
                 fontSize: 'var(--fs-1)',
@@ -248,7 +261,7 @@ export default function Hero() {
             </Button>
             <Button
               href="#services"
-              variant="primary"
+              variant="secondary"
               variants={itemDown(reduceMotion)}
               style={{
                 fontSize: 'var(--fs-1)',

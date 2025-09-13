@@ -7,11 +7,8 @@ import styles from '../styles/Header.module.css';
 const links = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About' },
-  { to: '/mission', label: 'Mission' },
   { to: '/approach', label: 'Approach' },
-  { to: '/numbers', label: 'In Numbers' },
   { to: '/services', label: 'Services' },
-  { to: '/testimonials', label: 'Testimonials' },
   { to: '/contact', label: 'Contact' },
 ];
 
@@ -34,6 +31,7 @@ export default function DesktopNav() {
   return (
     <LayoutGroup>
       <motion.nav
+        aria-label="Main navigation"
         className={styles.desktopNav}
         variants={navVariants}
         initial="hidden"

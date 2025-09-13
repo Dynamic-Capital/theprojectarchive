@@ -20,7 +20,7 @@ html.dark { color-scheme: dark; }
 body {
   background: radial-gradient(
       1200px 800px at 20% -10%,
-      color-mix(in oklab, var(--brand-500), transparent 80%),
+      color-mix(in oklab, var(--brand-700), transparent 85%),
       transparent 60%
     ),
     linear-gradient(180deg, var(--bg), var(--bg));
@@ -57,6 +57,8 @@ a:hover { opacity: .9; }
 .button:hover { transform: translateY(-1px); background: color-mix(in oklab, var(--surface), white 3%); }
 .button--primary { background: var(--brand-500); border-color: transparent; color: #fff; }
 .button--danger  { background: var(--error); border-color: transparent; color: #fff; }
+.button--secondary { background: transparent; color: var(--brand-500); border-color: var(--brand-500); }
+.button--secondary:hover { background: color-mix(in oklab, var(--brand-500), transparent 90%); }
 .button--3d {
   position: relative;
   background: var(--brand-500);
