@@ -103,7 +103,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
-        <a href="#home" className="sr-only focus:not-sr-only">Skip to main content</a>
+        <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <ClientLayout>{children}</ClientLayout>
         </ThemeProvider>
