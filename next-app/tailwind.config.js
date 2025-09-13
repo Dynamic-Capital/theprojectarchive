@@ -5,6 +5,7 @@ export default {
     extend: {
       colors: {
         accent: 'var(--accent-500)',
+        brand: 'var(--brand-500)',
         text: 'var(--text)',
         background: 'var(--bg)',
         muted: 'var(--muted)',
