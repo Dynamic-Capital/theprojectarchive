@@ -217,6 +217,13 @@ When deployed to platforms like DigitalOcean App Platform, the buildpacks instal
 - `SITE_URL` – base URL of the deployed site. **Required.**
 - `NEXT_PUBLIC_SITE_URL` – base URL used for metadata, sitemap, and robots. Defaults to `http://localhost:3000`.
 
+## Security Features
+
+- **SSL Certificate** – Authenticates the site’s identity and enables an encrypted connection.
+- **TLS 1.3 Encryption** – Encrypts data using the latest industry-standard protocols.
+- **DDoS Protection** – Reroutes malicious traffic to keep the site accessible.
+- **Level 1 PCI Compliance** – Meets the highest global standard for secure online payments.
+
 ## Accessibility
 
 Animated components respect the user's `prefers-reduced-motion` setting, and the lightbox dialog traps focus for keyboard users.
