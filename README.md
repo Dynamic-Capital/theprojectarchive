@@ -115,6 +115,11 @@ Update `ALLOWED_ORIGINS`, `SPACE_BUCKET_URL`, `SITE_URL`,
 `ALLOWED_ORIGINS` restricts incoming requests to the specified origins
 (comma-separated) and is enforced in `server.js`.
 
+## Continuous Integration
+
+A GitHub Actions workflow (`.github/workflows/ci.yml`) runs linting and tests
+on pushes and pull requests to ensure code quality.
+
 ## Maintenance mode
 
 Set `MAINTENANCE_MODE=true` to redirect all traffic to `/coming-soon`. The middleware in `next-app/middleware.ts` reads `process.env.MAINTENANCE_MODE`, similar to how `next-app/next.config.mjs` uses `SPACE_BUCKET_URL`.
