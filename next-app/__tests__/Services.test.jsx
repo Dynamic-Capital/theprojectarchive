@@ -1,5 +1,10 @@
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
+vi.mock('../lib/serviceImages', () => ({
+  getServiceImages: vi.fn().mockResolvedValue([
+    { src: 'https://example.com/a.jpg', alt: 'a' },
+  ]),
+}));
 import Services from '../components/Services';
 
 describe('Services', () => {

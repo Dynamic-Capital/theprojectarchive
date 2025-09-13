@@ -1,7 +1,8 @@
 import nodemailer from 'nodemailer';
 import { z } from 'zod';
 import { Redis } from '@upstash/redis';
-import { supabaseServer } from '../../../lib/supabaseServer.js';
+// Contact messages are persisted via a Supabase Edge Function to offload
+// database work from the Next.js runtime.
 
 const rateLimitWindowMs = 60_000;
 const rateLimitMax = 5;
@@ -132,11 +133,19 @@ export async function POST(req) {
       text: message,
     });
 
-    if (supabaseServer) {
-      const { error } = await supabaseServer
-        .from('contact_messages')
-        .insert({ name, email, message });
-      if (error) {
+    if (process.env.SUPABASE_SAVE_CONTACT_FUNCTION_URL) {
+      try {
+        await fetch(process.env.SUPABASE_SAVE_CONTACT_FUNCTION_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            ...(process.env.SUPABASE_SERVICE_ROLE_KEY
+              ? { Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}` }
+              : {}),
+          },
+          body: JSON.stringify({ name, email, message }),
+        });
+      } catch (error) {
         console.error('Failed to store contact message', error);
       }
     }
