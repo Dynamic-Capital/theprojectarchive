@@ -2,9 +2,11 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion, useReducedMotion } from 'framer-motion';
 
 export default function PortfolioPreview() {
   const [loading, setLoading] = useState(true);
+  const reduceMotion = useReducedMotion();
   useEffect(() => {
     const t = setTimeout(() => setLoading(false), 500);
     return () => clearTimeout(t);
@@ -35,7 +37,14 @@ export default function PortfolioPreview() {
       <h2 id="portfolio-heading" className="text-center">Recent Work</h2>
       <div className="grid grid--3 mt-4 gap-4">
         {items.map((item) => (
-          <figure key={item.src} className="text-center">
+          <motion.figure
+            key={item.src}
+            className="glass text-center p-4 rounded-md shadow-glass"
+            whileHover={reduceMotion ? undefined : { scale: 1.03 }}
+            initial={reduceMotion ? undefined : { opacity: 0, y: 20 }}
+            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+          >
             <Link href="/portfolio" className="group block">
               <Image
                 src={item.src}
@@ -48,7 +57,7 @@ export default function PortfolioPreview() {
                 {item.title}
               </figcaption>
             </Link>
-          </figure>
+          </motion.figure>
         ))}
       </div>
       <p className="mt-6 text-center">

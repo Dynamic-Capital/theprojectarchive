@@ -33,6 +33,16 @@ const serviceItems = [
     title: 'Drone Photography',
     description: 'Aerial imagery capturing unique perspectives from above.',
   },
+  {
+    title: 'Photo Editing & Retouching',
+    description: 'Professional editing to make your images stand out.',
+    cta: 'Enhance my photos',
+    href: '#contact',
+  },
+  {
+    title: 'Studio Rentals',
+    description: 'Fully equipped studio space for your creative projects.',
+  },
 ];
 
 export default function Home() {
