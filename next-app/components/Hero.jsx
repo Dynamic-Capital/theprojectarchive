@@ -67,9 +67,7 @@ export default function Hero() {
         y: reduceMotion ? 0 : y,
       }}
       variants={container}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.8 }}
+      initial="show"
     >
       <Image
         src="https://picsum.photos/id/1004/1920/1080"
