@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer';
 import { z } from 'zod';
 import { Redis } from '@upstash/redis';
+import { supabaseServer } from '../../../lib/supabaseServer.js';
 
 const rateLimitWindowMs = 60_000;
 const rateLimitMax = 5;
@@ -134,6 +135,15 @@ export async function POST(req) {
       replyTo: email,
       text: message,
     });
+
+    if (supabaseServer) {
+      const { error } = await supabaseServer
+        .from('contact_messages')
+        .insert({ name, email, message });
+      if (error) {
+        console.error('Failed to store contact message', error);
+      }
+    }
 
     return new Response(null, { status: 200 });
   } catch (err) {
