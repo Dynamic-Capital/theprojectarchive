@@ -18,8 +18,12 @@
 html { color-scheme: light; hanging-punctuation: first last; }
 html.dark { color-scheme: dark; }
 body {
-  background: radial-gradient(1200px 800px at 20% -10%, rgba(42,59,144,.20), transparent 60%),
-              linear-gradient(180deg, var(--bg), var(--bg));
+  background: radial-gradient(
+      1200px 800px at 20% -10%,
+      color-mix(in oklab, var(--brand-500), transparent 80%),
+      transparent 60%
+    ),
+    linear-gradient(180deg, var(--bg), var(--bg));
   color: var(--text);
   font-family: var(--font-sans);
   font-size: var(--fs-1);
