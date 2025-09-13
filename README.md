@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="next-app/public/logo.svg" alt="The Project Archive logo" width="120" />
+</p>
+
 # The Project Archive
 
 This repository contains the marketing site for The Project Archive, a creative studio based in the Maldives. The site is built with [Next.js](https://nextjs.org/) and animated with [Framer Motion](https://www.framer.com/motion/). It now also supports simple 3D scenes via [Three.js](https://threejs.org/) and [@react-three/fiber](https://github.com/pmndrs/react-three-fiber).
@@ -220,3 +224,15 @@ When deployed to platforms like DigitalOcean App Platform, the buildpacks instal
 ## Accessibility
 
 Animated components respect the user's `prefers-reduced-motion` setting, and the lightbox dialog traps focus for keyboard users.
+
+## Branding
+
+Our visual identity uses a friendly cat motif and a bold orange palette.
+
+- **Font:** SFT Schrifted Sans
+- **Primary color:** `#FF4800`
+- **Neutrals:** `#070707`, `#373737`, `#B3B3B3`, `#E6E6E6`
+
+Brand assets, including `logo.svg`, `favicon.svg`, and a repeating `paw-pattern.svg`, live in `next-app/public/`.
+See [branding guidelines](docs/branding-guidelines.md) for full details on colors, typography, and pattern usage.
+

@@ -1,7 +1,11 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1200" height="630" fill="#ffffff"/>
-  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
-        font-size="64" fill="#000000" font-family="Arial, sans-serif">
-    The Project Archive
-  </text>
+  <rect width="1200" height="630" fill="#FF4800"/>
+  <g transform="translate(180 135) scale(6)">
+    <path d="M12 8 24 0 32 12 40 0 52 8v28c0 13-11 24-24 24S12 49 12 36V8Z" fill="#000"/>
+    <circle cx="24" cy="32" r="6" fill="#fff"/>
+    <circle cx="40" cy="32" r="6" fill="#fff"/>
+    <circle cx="24" cy="32" r="3" fill="#000"/>
+    <circle cx="40" cy="32" r="3" fill="#000"/>
+  </g>
+  <text x="760" y="335" font-size="96" font-family="SFT Schrifted Sans, Arial, sans-serif" fill="#000" text-anchor="middle">The Project Archive</text>
 </svg>
