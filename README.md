@@ -53,6 +53,12 @@ To forward contact form submissions to your Google Business inbox:
 
      The endpoint applies basic rate limiting (5 requests per minute per IP) to prevent abuse.
 
+### Supabase storage
+
+Contact form submissions are also saved in Supabase. Configure the Supabase table,
+Row Level Security policy, and required environment variables as described in
+[docs/supabase-integration.md](docs/supabase-integration.md).
+
 ## Development
 
 Install dependencies and start the development server:
