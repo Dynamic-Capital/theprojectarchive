@@ -42,7 +42,7 @@ export default function ParallaxSection({
     <motion.section
       id={id}
       ref={ref}
-      className="scroll-mt-header relative flex min-h-[100dvh] items-center justify-center overflow-hidden"
+      className="scroll-mt-header relative flex min-h-[80dvh] md:min-h-[90dvh] lg:min-h-[100dvh] items-center justify-center overflow-hidden py-16"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, amount: 0.5 }}
@@ -77,11 +77,8 @@ export default function ParallaxSection({
         />
       )}
       <motion.div
-        className="relative z-20 p-[var(--space-6)] rounded-[var(--radius-md)] text-center"
-        style={{
-          background: 'color-mix(in oklab, var(--surface), transparent 30%)',
-          backdropFilter: 'blur(8px)'
-        }}
+        className="relative z-20 text-center glass card"
+        style={{ maxWidth: '36rem', marginInline: 'auto' }}
         initial={{ opacity: 0, y: reduceMotion ? 0 : 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.5 }}
