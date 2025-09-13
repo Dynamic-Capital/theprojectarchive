@@ -59,6 +59,10 @@ Contact form submissions are also saved in Supabase. Configure the Supabase tabl
 Row Level Security policy, and required environment variables as described in
 [docs/supabase-integration.md](docs/supabase-integration.md).
 
+Service images are loaded from a Supabase Storage bucket defined by
+`NEXT_PUBLIC_SUPABASE_BUCKET`. Images can be uploaded via the `/api/images`
+route, which returns the public URL and invalidates the cached metadata.
+
 ### Database
 
 The application now uses a PostgreSQL database for persistent storage. Configure the
@@ -93,10 +97,15 @@ Ensure Node.js 20 is installed (a `.nvmrc` file is provided for `nvm` users). Ru
 npm run check
 ```
 
-Update `ALLOWED_ORIGINS`, `SPACE_BUCKET_URL`, `SITE_URL`, `NEXT_PUBLIC_SITE_URL`, and `MAINTENANCE_MODE` in `.env` to match your environment.
-`SITE_URL` is required. `NEXT_PUBLIC_SITE_URL` defaults to `http://localhost:3000` but should be set in production.
+Update `ALLOWED_ORIGINS`, `SPACE_BUCKET_URL`, `SITE_URL`,
+`NEXT_PUBLIC_SITE_URL`, `MAINTENANCE_MODE`,
+`NEXT_PUBLIC_SUPABASE_BUCKET`, and
+`SUPABASE_SAVE_CONTACT_FUNCTION_URL` in `.env` to match your environment.
+`SITE_URL` is required. `NEXT_PUBLIC_SITE_URL` defaults to
+`http://localhost:3000` but should be set in production.
 
-`ALLOWED_ORIGINS` restricts incoming requests to the specified origins (comma-separated) and is enforced in `server.js`.
+`ALLOWED_ORIGINS` restricts incoming requests to the specified origins
+(comma-separated) and is enforced in `server.js`.
 
 ## Maintenance mode
 

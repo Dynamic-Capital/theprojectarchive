@@ -4,19 +4,18 @@ import { motion, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
 import ParallaxSection from './ParallaxSection';
 import { stackCardVariants } from '../lib/animations';
-import serviceImages from '../lib/serviceImages';
+import { getServiceImages } from '../lib/serviceImages';
 
 export default function Services({ openLightbox, images = [] }) {
   const reduceMotion = useReducedMotion();
-  const [cards, setCards] = useState(
-    images.length > 0 ? images : serviceImages
-  );
+  const [cards, setCards] = useState(images);
 
-  // Keep the displayed cards in sync with the `images` prop. Without this
-  // effect the component would continue to show the initial images even if
-  // a new set is provided by the parent after the first render.
   useEffect(() => {
-    setCards(images.length > 0 ? images : serviceImages);
+    if (images.length === 0) {
+      getServiceImages().then(setCards);
+    } else {
+      setCards(images);
+    }
   }, [images]);
 
   const handleDragEnd = (_, info) => {

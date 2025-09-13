@@ -1,6 +1,7 @@
 # Supabase Integration
 
-This project stores contact form submissions in Supabase.
+This project stores contact form submissions in Supabase and uses Supabase
+Storage for service images.
 
 ## Database Schema
 
@@ -31,6 +32,8 @@ These variables must be available at build and runtime:
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 - `SUPABASE_SERVICE_ROLE_KEY`
+- `NEXT_PUBLIC_SUPABASE_BUCKET`
+- `SUPABASE_SAVE_CONTACT_FUNCTION_URL`
 
 Set them in DigitalOcean App Platform via `.do/app.yaml` and configure matching GitHub secrets so deployment workflows can pass them through.
 
@@ -45,3 +48,37 @@ curl -X POST "$SITE_URL/api/contact" \\
 ```
 
 A `200` response indicates the request was accepted. Check the `contact_messages` table in Supabase to confirm the row was created.
+
+## Storage Bucket
+
+1. In the Supabase dashboard create a **public** bucket, e.g. `service-images`.
+2. Upload images to this bucket. Their public URLs are used by the web app.
+3. Set the bucket name in `NEXT_PUBLIC_SUPABASE_BUCKET`.
+4. To upload images from the site, send a `POST` request with `multipart/form-data` to `/api/images` with the file field named `file`. The endpoint returns the public URL of the uploaded asset.
+
+## Edge Functions
+
+Longer running or database heavy work is handled by Supabase Edge
+Functions. The project includes a `save-contact` function that inserts
+contact form submissions into the database.
+
+### Local Development
+
+```bash
+supabase start
+supabase functions serve save-contact
+```
+
+### Deploy
+
+```bash
+supabase functions deploy save-contact
+```
+
+Expose the deployed URL via `SUPABASE_SAVE_CONTACT_FUNCTION_URL` so the
+Next.js API route can call it.
+
+## Security
+
+Enable Row Level Security on tables, restrict bucket access, and keep
+service role keys private. Refer to the [Supabase docs](https://supabase.com/docs) for details.
