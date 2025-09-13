@@ -188,7 +188,7 @@ export default function Hero() {
         >
           <Button
             href="#contact"
-            variant="primary"
+            variant="brand3d"
             variants={itemDown(reduceMotion)}
           >
             Contact Us
