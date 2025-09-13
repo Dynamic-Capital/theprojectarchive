@@ -5,7 +5,7 @@ export default function Button({
   href,
   variant = 'primary',
   className = '',
-  style,
+  style = undefined,
   children,
   ...props
 }) {

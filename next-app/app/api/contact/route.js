@@ -51,10 +51,6 @@ async function isRateLimited(ip) {
   return false;
 }
 
-export function _clearRateLimit() {
-  rateLimitMap.clear();
-}
-
 const schema = z.object({
   name: z.string().min(1),
   email: z.string().email(),
