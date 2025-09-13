@@ -1,3 +1,4 @@
+import '../../styles/globals.css';
 import ComingSoon from '../../components/ComingSoon';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
