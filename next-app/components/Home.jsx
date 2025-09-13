@@ -13,6 +13,29 @@ import ServicesStack from './ServicesStack';
 import Contact from './Contact';
 import TiltCard from './TiltCard';
 
+const serviceItems = [
+  {
+    title: 'Portrait Photography',
+    description: 'Professional headshots and portrait sessions.',
+    cta: 'Book a session',
+    href: '#contact',
+  },
+  {
+    title: 'Event Coverage',
+    description: 'Document corporate events or family gatherings with style.',
+  },
+  {
+    title: 'Product Shoots',
+    description: 'Clean and vibrant images to showcase your products online.',
+    cta: 'Get a quote',
+    href: '#contact',
+  },
+  {
+    title: 'Drone Photography',
+    description: 'Aerial imagery capturing unique perspectives from above.',
+  },
+];
+
 export default function Home() {
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 300], [100, 0]);
@@ -57,29 +80,6 @@ export default function Home() {
       }
     }
   }, [pathname, supportsSmoothScroll]);
-
-  const serviceItems = [
-    {
-      title: 'Portrait Photography',
-      description: 'Professional headshots and portrait sessions.',
-      cta: 'Book a session',
-      href: '#contact',
-    },
-    {
-      title: 'Event Coverage',
-      description: 'Document corporate events or family gatherings with style.',
-    },
-    {
-      title: 'Product Shoots',
-      description: 'Clean and vibrant images to showcase your products online.',
-      cta: 'Get a quote',
-      href: '#contact',
-    },
-    {
-      title: 'Drone Photography',
-      description: 'Aerial imagery capturing unique perspectives from above.',
-    },
-  ];
 
   return (
     <>
