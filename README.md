@@ -120,7 +120,7 @@ This runs `next build` with `ANALYZE=true` so `@next/bundle-analyzer` generates 
 
 ## 3D Animation
 
-The hero section showcases a rotating 3D cube using `three` and `@react-three/fiber`. Animations respect the user's `prefers-reduced-motion` setting and fall back to a static placeholder when motion is reduced. Import `Hero3D` into any component to render the scene.
+The hero section features a cat mascot with animated curved text tickers. Animations respect the user's `prefers-reduced-motion` setting and pause when motion is reduced.
 
 ## Docker
 

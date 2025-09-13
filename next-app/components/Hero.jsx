@@ -1,278 +1,102 @@
 'use client';
-import React, { useRef } from 'react';
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-} from 'framer-motion';
+
+import { motion, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
 import CurvedLoop from './CurvedLoopText.jsx';
-import Button from './Button';
-import Hero3D from './Hero3D';
 
-const HERO_TITLE = 'Crafting visual stories in the Maldives';
-const HERO_TAGLINE = 'Design · Development · Photography';
-const HERO_SUBHEADING = 'We build immersive digital and visual experiences.';
-const HERO_DESCRIPTION =
-  'From websites to imagery, we bring ideas to life for brands that want to stand out.';
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
-
-const itemUp = (reduce) => ({
-  hidden: { opacity: 0, y: reduce ? 0 : -20 },
-  show: { opacity: 1, y: 0, transition: { duration: reduce ? 0 : 0.6 } },
-});
-
-const itemDown = (reduce) => ({
-  hidden: { opacity: 0, y: reduce ? 0 : 20 },
-  show: { opacity: 1, y: 0, transition: { duration: reduce ? 0 : 0.6 } },
-});
-
-const ctaContainer = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
-  },
-};
+const TICKER_TEXT = 'ALL YOU NEED IS THE PROJECT ARCHIVE';
 
 export default function Hero() {
   const reduceMotion = useReducedMotion();
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start start', 'end start'],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
-  const catOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
 
   return (
     <motion.section
-      ref={ref}
       id="home"
-      className="scroll-mt-header"
-      style={{
-        minHeight: '100dvh',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        paddingTop: 'var(--space-8)',
-        textAlign: 'center',
-        position: 'relative',
-        y: reduceMotion ? 0 : y,
-      }}
-      variants={container}
-      initial="show"
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#070707] px-6 py-20 text-center text-white"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: reduceMotion ? 0 : 0.6 }}
     >
-      <Image
-        src="https://picsum.photos/id/1015/1600/900"
-        alt="Camera, laptop and notebook on a designer's desk"
-        width={1600}
-        height={900}
-        placeholder="blur"
-        blurDataURL="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
-        sizes="100vw"
-        priority
-        style={{
-          position: 'absolute',
-          inset: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-        }}
-      />
       <div
         aria-hidden="true"
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background:
-            'linear-gradient(to bottom, color-mix(in oklab, var(--brand-500), transparent 40%), color-mix(in oklab, var(--brand-600), transparent 90%))',
-          zIndex: 1,
-        }}
+        className="pointer-events-none absolute inset-0 bg-[url('/paw-print.svg')] bg-repeat opacity-10"
       />
-      <motion.div
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          fontSize: '4rem',
-          zIndex: 5,
-          opacity: reduceMotion ? 1 : catOpacity,
-          pointerEvents: 'none',
-        }}
-      >
-        🐱
-      </motion.div>
-      <div
-        className="mx-auto glass card w-full max-w-3xl lg:max-w-5xl"
-        style={{
-          position: 'relative',
-          zIndex: 10,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          textAlign: 'center',
-        }}
-      >
-        <div
-          aria-hidden="true"
-          style={{
-            position: 'absolute',
-            inset: 0,
-            backgroundImage: "url('/paw-print.svg')",
-            backgroundRepeat: 'repeat',
-            backgroundSize: '40px 40px',
-            opacity: 0.1,
-            pointerEvents: 'none',
-            zIndex: -1,
-          }}
+
+      {!reduceMotion && (
+        <>
+          <div className="absolute top-0 left-0 h-24 w-full overflow-hidden" aria-hidden="true">
+            <CurvedLoop
+              text={{
+                text: TICKER_TEXT,
+                font: {
+                  fontFamily: 'var(--font-sans)',
+                  fontWeight: '700',
+                  fontSize: 32,
+                },
+                color: '#fff',
+              }}
+              direction="right"
+              baseVelocity={40}
+              curveAmount={200}
+              draggable={false}
+              fade={false}
+            />
+          </div>
+          <div className="absolute bottom-0 left-0 h-24 w-full overflow-hidden" aria-hidden="true">
+            <CurvedLoop
+              text={{
+                text: TICKER_TEXT,
+                font: {
+                  fontFamily: 'var(--font-sans)',
+                  fontWeight: '700',
+                  fontSize: 32,
+                },
+                color: '#fff',
+              }}
+              direction="left"
+              baseVelocity={40}
+              curveAmount={-200}
+              draggable={false}
+              fade={false}
+            />
+          </div>
+        </>
+      )}
+
+      <div className="z-10 flex flex-col items-center">
+        <Image
+          src="/logo-light.svg"
+          alt="Cat mascot"
+          width={120}
+          height={120}
+          priority
+          className="mb-6"
         />
-        <motion.h1
-          style={{
-            color: 'var(--brand-500)',
-            fontFamily: 'var(--font-sans)',
-            fontSize: 'var(--fs-2)',
-            fontWeight: 700,
-            letterSpacing: '0.1em',
-            textRendering: 'geometricPrecision',
-          }}
-          variants={itemUp(reduceMotion)}
-        >
-          {HERO_TITLE}
-        </motion.h1>
-        <motion.div
-          style={{
-            marginBottom: 'var(--space-4)',
-            position: 'relative',
-            height: '6rem',
-            width: '100%',
-            overflow: 'hidden',
-          }}
-          variants={itemUp(reduceMotion)}
-          aria-hidden="true"
-        >
-          {reduceMotion ? (
-            <span
-              style={{
-                color: 'var(--brand-500)',
-                fontFamily: 'var(--font-sans)',
-                fontSize: 'var(--fs-1)',
-                fontWeight: 400,
-                letterSpacing: '0.1em',
-                textRendering: 'geometricPrecision',
-              }}
-            >
-              {HERO_TAGLINE}
-            </span>
-          ) : (
-            <>
-              <CurvedLoop
-                text={{
-                  text: HERO_TAGLINE,
-                  font: {
-                    fontFamily: 'var(--font-sans)',
-                    fontWeight: '400',
-                    fontSize: 24,
-                  },
-                  color: 'var(--brand-500)',
-                }}
-                direction="left"
-                baseVelocity={50}
-                curveAmount={200}
-                draggable={false}
-                fade={false}
-              />
-              <CurvedLoop
-                text={{
-                  text: HERO_TAGLINE,
-                  font: {
-                    fontFamily: 'var(--font-sans)',
-                    fontWeight: '400',
-                    fontSize: 24,
-                  },
-                  color: 'var(--brand-500)',
-                }}
-                direction="right"
-                baseVelocity={50}
-                curveAmount={-200}
-                draggable={false}
-                fade={false}
-              />
-            </>
-          )}
-        </motion.div>
-        <motion.h2
-          style={{
-            color: 'var(--accent-500)',
-            fontFamily: 'var(--font-sans)',
-            fontSize: 'var(--fs-2)',
-            fontWeight: 600,
-            marginBottom: 'var(--space-4)',
-          }}
-          variants={itemUp(reduceMotion)}
-        >
-          {HERO_SUBHEADING}
-        </motion.h2>
-        <Hero3D />
-        <motion.p
-          style={{
-            fontSize: 'var(--fs-2)',
-            color: 'var(--text)',
-            marginBottom: 'var(--space-5)',
-          }}
-          variants={itemDown(reduceMotion)}
-        >
-          {HERO_DESCRIPTION}
-        </motion.p>
-        <motion.div
-          className="cta-group"
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            gap: 'var(--space-4)',
-            justifyContent: 'center',
-          }}
-          variants={ctaContainer}
-        >
-            <Button
-              href="#contact"
-              variant="primary"
-              variants={itemDown(reduceMotion)}
-              style={{
-                fontSize: 'var(--fs-1)',
-                padding: 'var(--space-3) var(--space-6)',
-                fontWeight: 600,
-              }}
-            >
-              Contact Us
-            </Button>
-            <Button
-              href="#services"
-              variant="secondary"
-              variants={itemDown(reduceMotion)}
-              style={{
-                fontSize: 'var(--fs-1)',
-                padding: 'var(--space-3) var(--space-6)',
-                fontWeight: 600,
-              }}
-            >
-              Explore Portfolio
-            </Button>
-          </motion.div>
+        <h1 className="font-sans text-4xl font-bold uppercase">The Project Archive</h1>
+        <p className="mt-4 text-lg text-muted">
+          Where stories live forever 🐾
+        </p>
+        <div className="mt-8 flex gap-4">
+          <motion.a
+            href="#explore"
+            className="rounded-md bg-brand px-6 py-3 font-semibold text-white"
+            whileHover={reduceMotion ? undefined : { scale: 1.05, backgroundColor: '#d13200' }}
+            whileTap={reduceMotion ? undefined : { scale: 0.95 }}
+          >
+            Explore Now
+          </motion.a>
+          <motion.a
+            href="#learn"
+            className="rounded-md border border-white px-6 py-3 font-semibold text-white"
+            whileHover={reduceMotion ? undefined : { scale: 1.05, backgroundColor: 'rgba(255,255,255,0.1)' }}
+            whileTap={reduceMotion ? undefined : { scale: 0.95 }}
+          >
+            Learn More
+          </motion.a>
+        </div>
       </div>
     </motion.section>
   );
 }
+
