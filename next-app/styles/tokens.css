@@ -1,14 +1,14 @@
 :root {
   /* Color system */
-  --brand-50:#eef4ff; --brand-100:#dbe7ff; --brand-500:#2A3B90; --brand-600:#22317a; --accent-500:#EC2127;
-  --bg:#ffffff;
-  --bg-elev:#fafafb;
-  --surface:#f5f6f8;
-  --text:#101216;
-  --muted:#5a606b;
-  --border:#e6e8ec;
+  --brand-50:#ffe8e0; --brand-100:#ffd1c2; --brand-500:#ff3d00; --brand-600:#cc3100; --accent-500:#ff3d00;
+  --bg:#070707;
+  --bg-elev:#373737;
+  --surface:#373737;
+  --text:#ffffff;
+  --muted:#909195;
+  --border:#373737;
   --success:#22c55e; --warn:#f59e0b; --error:#ef4444;
-  --link:#60a5fa;
+  --link:#ff3d00;
 
   /* Typography scale (Major Third ~1.25) */
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
@@ -58,12 +58,12 @@
 
 /* Dark theme overrides */
 .dark {
-  --bg: #0b0c0f;
-  --bg-elev: #121319;
-  --surface: #161821;
-  --text: #e6e7ea;
-  --muted: #a9aeb6;
-  --border: #262938;
+  --bg: #070707;
+  --bg-elev: #373737;
+  --surface: #373737;
+  --text: #ffffff;
+  --muted: #909195;
+  --border: #373737;
 }
 
 /* Reduced motion */
