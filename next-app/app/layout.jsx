@@ -16,7 +16,8 @@ const jsonLd = {
   '@type': 'LocalBusiness',
   name: 'The Project Archive',
   url: siteUrl,
-  logo: `${siteUrl}/logo-dark.svg`,
+  logo:
+    'https://kagbqkivpimlhhcvhmry.supabase.co/storage/v1/object/public/project-contents/TPA%20-%20Black%20Logo.svg',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Malé',

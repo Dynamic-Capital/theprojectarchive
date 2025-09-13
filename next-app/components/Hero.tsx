@@ -1,13 +1,14 @@
 'use client';
 
 import { motion, useReducedMotion } from 'framer-motion';
-import CatLogo from '../public/tpa-black-logo.svg';
 import Button from './Button';
 
 const TAGLINE = 'ALL YOU NEED IS THE PROJECT ARCHIVE — ';
 const REPEATED_TAGLINE = TAGLINE.repeat(6);
 
-const MotionLogo = motion(CatLogo);
+const MotionLogo = motion.img;
+const LOGO_URL =
+  'https://kagbqkivpimlhhcvhmry.supabase.co/storage/v1/object/public/project-contents/TPA%20-%20Black%20Logo.svg';
 
 export default function Hero() {
   const reduceMotion = useReducedMotion();
@@ -52,6 +53,8 @@ export default function Hero() {
 
       <div className="z-10 flex flex-col items-center">
         <MotionLogo
+          src={LOGO_URL}
+          alt="The Project Archive logo"
           className="mb-6 h-24 w-24 md:h-32 md:w-32"
           animate={
             reduceMotion

@@ -1,9 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
-
-vi.mock('../public/tpa-black-logo.svg', () => ({
-  default: () => <svg />,
-}));
+import { describe, it, expect } from 'vitest';
 
 import Hero from '../components/Hero';
 
