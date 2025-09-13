@@ -2,6 +2,7 @@ import { defineConfig } from 'vitest/config';
 import { fileURLToPath } from 'url';
 
 const pgMock = fileURLToPath(new URL('./__mocks__/pg.js', import.meta.url));
+const nextAuthReactMock = fileURLToPath(new URL('./__mocks__/next-auth-react.js', import.meta.url));
 
 export default defineConfig({
   test: {
@@ -11,6 +12,7 @@ export default defineConfig({
   resolve: {
     alias: {
       pg: pgMock,
+      'next-auth/react': nextAuthReactMock,
     },
   },
   esbuild: {

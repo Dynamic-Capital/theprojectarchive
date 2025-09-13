@@ -10,6 +10,8 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 // Use provided NEXT_PUBLIC_SITE_URL or default to localhost for development
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+const bingSiteVerification = process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION;
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -131,6 +133,15 @@ export default function RootLayout({ children }) {
     <html lang="en" className={inter.variable}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {googleSiteVerification && (
+          <meta
+            name="google-site-verification"
+            content={googleSiteVerification}
+          />
+        )}
+        {bingSiteVerification && (
+          <meta name="msvalidate.01" content={bingSiteVerification} />
+        )}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
