@@ -18,20 +18,28 @@ const serviceItems = [
     description: 'Professional headshots and portrait sessions.',
     cta: 'Book a session',
     href: '#contact',
+    icon: '📷',
   },
   {
     title: 'Event Coverage',
     description: 'Document corporate events or family gatherings with style.',
+    cta: 'Get a quote',
+    href: '#contact',
+    icon: '🎉',
   },
   {
     title: 'Product Shoots',
     description: 'Clean and vibrant images to showcase your products online.',
     cta: 'Get a quote',
     href: '#contact',
+    icon: '🛍️',
   },
   {
     title: 'Drone Photography',
     description: 'Aerial imagery capturing unique perspectives from above.',
+    cta: 'Get a quote',
+    href: '#contact',
+    icon: '🚁',
   },
 ];
 
