@@ -20,6 +20,7 @@ export default function ParallaxSection({
   children,
   priority = false,
   overlay = false,
+  maxWidth = 'max-w-3xl lg:max-w-5xl',
 }) {
   // Allow the section to render even if the author forgets an alt text.
   // When no alt is provided we fall back to treating the image as
@@ -77,8 +78,7 @@ export default function ParallaxSection({
         />
       )}
       <motion.div
-        className="relative z-20 text-center glass card"
-        style={{ maxWidth: '36rem', marginInline: 'auto' }}
+        className={`relative z-20 text-center glass card mx-auto w-full ${maxWidth}`}
         initial={{ opacity: 0, y: reduceMotion ? 0 : 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.5 }}

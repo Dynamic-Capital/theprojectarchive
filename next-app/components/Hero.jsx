@@ -115,11 +115,10 @@ export default function Hero() {
         🐱
       </motion.div>
       <div
-        className="mx-auto glass card"
+        className="mx-auto glass card w-full max-w-3xl lg:max-w-5xl"
         style={{
           position: 'relative',
           zIndex: 10,
-          maxWidth: '36rem',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -169,7 +168,7 @@ export default function Hero() {
                 color: 'var(--brand-500)',
                 fontFamily: 'var(--font-sans)',
                 fontSize: 'var(--fs-1)',
-                fontWeight: 600,
+                fontWeight: 400,
                 letterSpacing: '0.1em',
                 textRendering: 'geometricPrecision',
               }}
@@ -183,7 +182,7 @@ export default function Hero() {
                   text: HERO_TAGLINE,
                   font: {
                     fontFamily: 'var(--font-sans)',
-                    fontWeight: '600',
+                    fontWeight: '400',
                     fontSize: 24,
                   },
                   color: 'var(--brand-500)',
@@ -199,7 +198,7 @@ export default function Hero() {
                   text: HERO_TAGLINE,
                   font: {
                     fontFamily: 'var(--font-sans)',
-                    fontWeight: '600',
+                    fontWeight: '400',
                     fontSize: 24,
                   },
                   color: 'var(--brand-500)',
