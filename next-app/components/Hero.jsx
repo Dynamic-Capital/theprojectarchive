@@ -51,6 +51,7 @@ export default function Hero() {
     offset: ['start start', 'end start'],
   });
   const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const catOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
 
   return (
     <motion.section
@@ -98,6 +99,21 @@ export default function Hero() {
           zIndex: 1,
         }}
       />
+      <motion.div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          fontSize: '4rem',
+          zIndex: 5,
+          opacity: reduceMotion ? 1 : catOpacity,
+          pointerEvents: 'none',
+        }}
+      >
+        🐱
+      </motion.div>
       <div
         className="mx-auto glass card"
         style={{
@@ -110,6 +126,19 @@ export default function Hero() {
           textAlign: 'center',
         }}
       >
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            backgroundImage: "url('/paw-print.svg')",
+            backgroundRepeat: 'repeat',
+            backgroundSize: '40px 40px',
+            opacity: 0.1,
+            pointerEvents: 'none',
+            zIndex: -1,
+          }}
+        />
         <motion.h1
           style={{
             color: 'var(--brand-500)',
@@ -124,7 +153,13 @@ export default function Hero() {
           {HERO_TITLE}
         </motion.h1>
         <motion.div
-          style={{ marginBottom: 'var(--space-4)' }}
+          style={{
+            marginBottom: 'var(--space-4)',
+            position: 'relative',
+            height: '6rem',
+            width: '100%',
+            overflow: 'hidden',
+          }}
           variants={itemUp(reduceMotion)}
           aria-hidden="true"
         >
@@ -142,22 +177,40 @@ export default function Hero() {
               {HERO_TAGLINE}
             </span>
           ) : (
-            <CurvedLoop
-              text={{
-                text: HERO_TAGLINE,
-                font: {
-                  fontFamily: 'var(--font-sans)',
-                  fontWeight: '600',
-                  fontSize: 24,
-                },
-                color: 'var(--brand-500)',
-              }}
-              direction="left"
-              baseVelocity={50}
-              curveAmount={300}
-              draggable={false}
-              fade={false}
-            />
+            <>
+              <CurvedLoop
+                text={{
+                  text: HERO_TAGLINE,
+                  font: {
+                    fontFamily: 'var(--font-sans)',
+                    fontWeight: '600',
+                    fontSize: 24,
+                  },
+                  color: 'var(--brand-500)',
+                }}
+                direction="left"
+                baseVelocity={50}
+                curveAmount={200}
+                draggable={false}
+                fade={false}
+              />
+              <CurvedLoop
+                text={{
+                  text: HERO_TAGLINE,
+                  font: {
+                    fontFamily: 'var(--font-sans)',
+                    fontWeight: '600',
+                    fontSize: 24,
+                  },
+                  color: 'var(--brand-500)',
+                }}
+                direction="right"
+                baseVelocity={50}
+                curveAmount={-200}
+                draggable={false}
+                fade={false}
+              />
+            </>
           )}
         </motion.div>
         <Hero3D />

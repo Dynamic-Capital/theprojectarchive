@@ -28,7 +28,7 @@ import {
   },
   direction = 'left',
   baseVelocity = 50,
-  curveAmount = 300,
+  curveAmount = 200,
   draggable = true,
   fade = true,
 }) {
@@ -52,7 +52,7 @@ import {
   const pathId = `curve-${staticId}`;
   const fadeGradientId = `fadeGradient-${staticId}`;
   const fadeMaskId = `fadeMask-${staticId}`;
-  const pathD = `M-100,400 Q720,${400 + curveAmount} 1540,400`;
+  const pathD = `M0,300 Q500,${300 - curveAmount} 1000,300`;
   const defaultVelocity = useMotionValue(1);
   const isDragging = useRef(false);
   const dragVelocity = useRef(0);
@@ -164,15 +164,17 @@ import {
     onHoverEnd: () => (isHovered.current = false),
     style: {
       visibility: ready ? 'visible' : 'hidden',
-      minHeight: '100vh',
       width: '100%',
       height: '100%',
+      position: 'absolute',
+      top: 0,
+      left: 0,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
     },
     children: /*#__PURE__*/ _jsxs('svg', {
-      viewBox: '0 0 1440 800',
+      viewBox: '0 0 1000 600',
       style: {
         position: 'absolute',
         top: '50%',
@@ -180,7 +182,7 @@ import {
         transform: 'translate(-50%, -50%)',
         userSelect: 'none',
         width: '100%',
-        aspectRatio: '1440 / 800',
+        aspectRatio: '1000 / 600',
         overflow: 'visible',
         display: 'block',
         fill: text.color,
