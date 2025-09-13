@@ -3,6 +3,7 @@
 import { motion, useReducedMotion, useMotionValue, useTransform } from 'framer-motion';
 import { useCallback, type CSSProperties, type MouseEvent } from 'react';
 import Button from './Button';
+import SectionHeader from './SectionHeader';
 
 type ServiceItem = {
   title: string;
@@ -16,20 +17,26 @@ interface ServicesStackProps {
   items?: ServiceItem[];
 }
 
-const containerVariants = {
+const containerVariants = (reduce: boolean) => ({
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15,
+      staggerChildren: reduce ? 0 : 0.15,
     },
   },
-};
+});
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0 },
-};
+const cardVariants = (reduce: boolean) => ({
+  hidden: { opacity: 0, y: reduce ? 0 : 24 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: reduce ? 0 : 0.4 },
+  },
+});
+
+const cardClass = 'glass border border-white/20 rounded-2xl p-6 shadow-lg';
 
 export default function ServicesStack({ items = [] }: ServicesStackProps) {
   const reduceMotion = useReducedMotion();
@@ -60,13 +67,10 @@ export default function ServicesStack({ items = [] }: ServicesStackProps) {
   if (reduceMotion) {
     return (
       <section id="services" className="mx-auto max-w-5xl px-4 py-16">
-        <h2 className="text-2xl md:text-3xl font-semibold">Services</h2>
+        <SectionHeader title="Services" />
         <div className="mt-8 space-y-6">
           {items.map((item, i) => (
-            <article
-              key={i}
-              className="bg-black/40 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-lg"
-            >
+            <article key={i} className={cardClass}>
               <h3 className="flex items-center text-lg font-semibold">
                 {item.icon && (
                   <span className="mr-2 text-xl" aria-hidden="true">
@@ -95,12 +99,12 @@ export default function ServicesStack({ items = [] }: ServicesStackProps) {
     <motion.section
       id="services"
       className="mx-auto max-w-5xl px-4 py-16"
-      variants={containerVariants}
+      variants={containerVariants(reduceMotion)}
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.2 }}
     >
-      <h2 className="text-2xl md:text-3xl font-semibold">Services</h2>
+      <SectionHeader title="Services" />
       <motion.div
         className="mt-8 space-y-6 md:space-y-0 md:relative md:perspective-[1000px]"
         onMouseMove={handleMouseMove}
@@ -110,11 +114,8 @@ export default function ServicesStack({ items = [] }: ServicesStackProps) {
         {items.map((item, i) => (
           <motion.article
             key={i}
-            variants={cardVariants}
-            className={
-              'bg-black/40 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-lg ' +
-              'md:translate-x-[var(--offset-x)] md:translate-y-[var(--offset-y)]'
-            }
+            variants={cardVariants(reduceMotion)}
+            className={`${cardClass} md:translate-x-[var(--offset-x)] md:translate-y-[var(--offset-y)]`}
             style={{
               '--offset-x': `${i * 32}px`,
               '--offset-y': `${i * -24}px`,
