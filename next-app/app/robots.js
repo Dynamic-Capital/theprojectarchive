@@ -3,10 +3,14 @@ export default function robots() {
   // Fall back to localhost if NEXT_PUBLIC_SITE_URL is missing
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
   return {
-    rules: {
-      userAgent: '*',
-      allow: '/',
-    },
+    rules: [
+      {
+        userAgent: '*',
+        allow: '/',
+        // Prevent indexing of application endpoints and unfinished pages
+        disallow: ['/api', '/coming-soon', '/404', '/500'],
+      },
+    ],
     sitemap: `${siteUrl}/sitemap.xml`,
   };
 }

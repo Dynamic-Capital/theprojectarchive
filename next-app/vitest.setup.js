@@ -30,6 +30,11 @@ vi.mock('next/navigation', () => ({
   usePathname: () => '/',
 }));
 
+vi.mock('next-auth/react', () => ({
+  SessionProvider: ({ children }) => React.createElement(React.Fragment, null, children),
+  useSession: () => ({ data: null, status: 'unauthenticated' }),
+}));
+
 class MockIntersectionObserver {
   constructor() {}
   observe() {}
