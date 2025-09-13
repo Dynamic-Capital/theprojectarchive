@@ -60,8 +60,10 @@ export default function Hero() {
       style={{
         minHeight: '100dvh',
         display: 'flex',
+        flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
+        paddingTop: 'var(--space-8)',
         textAlign: 'center',
         position: 'relative',
         y: reduceMotion ? 0 : y,
@@ -97,18 +99,14 @@ export default function Hero() {
         }}
       />
       <div
-        className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8"
+        className="mx-auto glass card"
         style={{
           position: 'relative',
           zIndex: 10,
-          background: 'color-mix(in oklab, var(--bg), transparent 50%)',
-          padding: 'var(--space-5)',
-          borderRadius: 'var(--radius-md)',
           maxWidth: '36rem',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          justifyContent: 'center',
           textAlign: 'center',
         }}
       >
@@ -184,21 +182,31 @@ export default function Hero() {
           }}
           variants={ctaContainer}
         >
-          <Button
-            href="#contact"
-            variant="brand3d"
-            variants={itemDown(reduceMotion)}
-          >
-            Contact Us
-          </Button>
-          <Button
-            href="#services"
-            variant="secondary"
-            variants={itemDown(reduceMotion)}
-          >
-            Explore Portfolio
-          </Button>
-        </motion.div>
+            <Button
+              href="#contact"
+              variant="brand3d"
+              variants={itemDown(reduceMotion)}
+              style={{
+                fontSize: 'var(--fs-1)',
+                padding: 'var(--space-3) var(--space-6)',
+                fontWeight: 600,
+              }}
+            >
+              Contact Us
+            </Button>
+            <Button
+              href="#services"
+              variant="primary"
+              variants={itemDown(reduceMotion)}
+              style={{
+                fontSize: 'var(--fs-1)',
+                padding: 'var(--space-3) var(--space-6)',
+                fontWeight: 600,
+              }}
+            >
+              Explore Portfolio
+            </Button>
+          </motion.div>
       </div>
     </motion.section>
   );

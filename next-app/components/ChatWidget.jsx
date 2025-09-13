@@ -30,14 +30,14 @@ export default function ChatWidget() {
   };
 
   return (
-    <div
-      style={{
-        position: 'fixed',
-        bottom: '1rem',
-        right: '1rem',
-        zIndex: 1000,
-      }}
-    >
+      <div
+        style={{
+          position: 'fixed',
+          bottom: 'var(--space-5)',
+          right: 'var(--space-5)',
+          zIndex: 1000,
+        }}
+      >
       <AnimatePresence initial={false} mode="wait">
         {open ? (
           <motion.div
