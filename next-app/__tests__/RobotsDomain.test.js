@@ -12,4 +12,11 @@ describe('robots sitemap URL', () => {
     const result = robots();
     expect(result.sitemap).toBe(`${domain}/sitemap.xml`);
   });
+
+  it('disallows non-public routes', () => {
+    const result = robots();
+    const disallowed = result.rules[0].disallow;
+    expect(disallowed).toContain('/api');
+    expect(disallowed).toContain('/coming-soon');
+  });
 });
