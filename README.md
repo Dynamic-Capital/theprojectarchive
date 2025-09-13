@@ -59,6 +59,23 @@ The site includes a basic Supabase-powered login page at `/login`. Set
 `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` in your `.env`
 to enable email and password authentication.
 
+## Supabase CLI
+
+Install the Supabase CLI locally to manage databases and Edge Functions:
+
+```bash
+npm run supabase:install
+```
+
+This downloads the CLI into `./bin`. Start or stop the local Supabase stack with:
+
+```bash
+npm run supabase:start
+npm run supabase:stop
+```
+
+Add `./bin` to your `PATH` if you want to invoke `supabase` directly.
+
 ## Development
 
 Install dependencies and start the development server:

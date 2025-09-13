@@ -15,6 +15,9 @@ _static/*
 !_static/.gitkeep
 !_static/index.html
 
+# Local Supabase CLI
+bin/
+
 # Logs
 *.log
 npm-debug.log*
