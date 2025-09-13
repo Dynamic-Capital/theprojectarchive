@@ -49,6 +49,7 @@ export default function ComingSoon() {
           Call{' '}
           <a href="tel:+9607495687">+960 7495687</a>
         </p>
+        <p>Location: The Project Archive, Malé, Maldives</p>
       </motion.div>
       <motion.div
         style={{ display: 'flex', gap: 'var(--space-4)' }}
@@ -56,14 +57,26 @@ export default function ComingSoon() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8 }}
       >
-        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-          Twitter
+        <a
+          href="https://www.instagram.com/theprojectarchive.mv/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Instagram
         </a>
-        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://www.facebook.com/61570311241783"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Facebook
         </a>
-        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-          Instagram
+        <a
+          href="https://www.tiktok.com/@theprojectarchive.mv"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          TikTok
         </a>
       </motion.div>
     </Layout>
