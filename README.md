@@ -120,7 +120,7 @@ Update `ALLOWED_ORIGINS`, `SPACE_BUCKET_URL`, `SITE_URL`,
 ## Continuous Integration
 
 A GitHub Actions workflow (`.github/workflows/ci.yml`) runs linting and tests
-on pushes and pull requests to ensure code quality.
+via `npm run check` on pushes and pull requests to ensure code quality.
 
 ## Maintenance mode
 

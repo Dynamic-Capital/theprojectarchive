@@ -16,5 +16,4 @@ jobs:
           cache: npm
       - run: npm ci --ignore-scripts
       - run: npm --prefix next-app ci
-      - run: npm run lint
-      - run: npm test
+      - run: npm run check
