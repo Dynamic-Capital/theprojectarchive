@@ -17,6 +17,14 @@ services:
       - key: NEXT_PUBLIC_SITE_URL
         value: https://theprojectarchives-4ud4t.ondigitalocean.app/
         scope: RUN_AND_BUILD_TIME
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        value: ${NEXT_PUBLIC_SUPABASE_URL}
+        scope: RUN_AND_BUILD_TIME
+        required: true
+      - key: NEXT_PUBLIC_SUPABASE_ANON_KEY
+        value: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+        scope: RUN_AND_BUILD_TIME
+        required: true
   - name: api
     source_dir: /
     build_command: npm ci
@@ -35,6 +43,14 @@ services:
       - key: NEXT_PUBLIC_SITE_URL
         value: https://theprojectarchives-4ud4t.ondigitalocean.app/
         scope: RUN_AND_BUILD_TIME
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        value: ${NEXT_PUBLIC_SUPABASE_URL}
+        scope: RUN_AND_BUILD_TIME
+        required: true
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        value: ${SUPABASE_SERVICE_ROLE_KEY}
+        scope: RUN_AND_BUILD_TIME
+        required: true
 functions:
   - name: hello
     source_dir: functions/hello
