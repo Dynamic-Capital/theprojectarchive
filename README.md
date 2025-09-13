@@ -31,18 +31,26 @@ The component respects the user's `prefers-reduced-motion` setting and falls bac
 
 ### Google Business email setup
 
-To forward contact form submissions to your Google Business inbox:
+Contact form submissions are processed by a Supabase Edge Function which saves
+them to the database and forwards the message to your Google Business inbox.
 
-1. Generate an App Password at <https://myaccount.google.com/apppasswords> for your Workspace mailbox.
-2. Add the following to your `.env`:
+1. Generate an App Password at <https://myaccount.google.com/apppasswords> for
+   your Workspace mailbox.
+2. Configure the `save-contact` function with your mailbox credentials:
 
    ```bash
-   BUSINESS_EMAIL=studio@example.com
-   BUSINESS_EMAIL_APP_PASSWORD=your_app_password
+   supabase secrets set BUSINESS_EMAIL=studio@example.com \
+     BUSINESS_EMAIL_APP_PASSWORD=your_app_password
+   ```
+3. Add the function details to your `.env` so the Next.js API can call it:
+
+   ```bash
+   SUPABASE_SAVE_CONTACT_FUNCTION_URL=https://<project>.functions.supabase.co/save-contact
+   SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
    # Optional: enable spam protection with reCAPTCHA v3
    RECAPTCHA_SECRET=your_recaptcha_secret
    ```
-3. Restart the dev server and verify the endpoint locally:
+4. Restart the dev server and verify the endpoint locally:
 
    ```bash
    curl -X POST http://localhost:3000/api/contact \
