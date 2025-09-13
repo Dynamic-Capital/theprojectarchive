@@ -1,8 +1,4 @@
-"use client";
-
-import { motion, useReducedMotion } from 'framer-motion';
-import Hero from '../components/Hero';
-import Home from '../components/Home';
+import PageClient from '../components/PageClient';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
@@ -37,17 +33,5 @@ export const metadata = {
 };
 
 export default function Page() {
-  const reduceMotion = useReducedMotion();
-
-  return (
-    <motion.main
-      className="flex flex-col"
-      initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={reduceMotion ? { duration: 0 } : { duration: 0.6, ease: 'easeOut' }}
-    >
-      <Hero />
-      <Home />
-    </motion.main>
-  );
+  return <PageClient />;
 }
