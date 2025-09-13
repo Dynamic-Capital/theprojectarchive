@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { Redis } from '@upstash/redis';
+import nodemailer from 'nodemailer';
 // Contact messages are persisted via a Supabase Edge Function to offload
 // database work from the Next.js runtime.
 
@@ -129,6 +130,30 @@ export async function POST(req) {
         { error: 'Failed to send message' },
         { status: 500 },
       );
+    }
+
+    // Send confirmation email
+    if (
+      process.env.BUSINESS_EMAIL &&
+      process.env.BUSINESS_EMAIL_APP_PASSWORD
+    ) {
+      try {
+        const transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            user: process.env.BUSINESS_EMAIL,
+            pass: process.env.BUSINESS_EMAIL_APP_PASSWORD,
+          },
+        });
+        await transporter.sendMail({
+          to: email,
+          from: process.env.BUSINESS_EMAIL,
+          subject: 'Thanks for contacting us',
+          text: `Hi ${name},\n\nThanks for your message. We will get back to you soon.`,
+        });
+      } catch (err) {
+        console.error('Failed to send confirmation email', err);
+      }
     }
 
     return new Response(null, { status: 200 });

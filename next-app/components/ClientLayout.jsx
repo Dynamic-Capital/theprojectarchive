@@ -1,5 +1,6 @@
 "use client";
 import { useState } from 'react';
+import { SessionProvider } from 'next-auth/react';
 import Header from './Header';
 import OverlayNav from './OverlayNav';
 import Footer from './Footer';
@@ -11,12 +12,12 @@ export default function ClientLayout({ children }) {
   const toggleNav = () => setNavOpen((o) => !o);
   const closeNav = () => setNavOpen(false);
   return (
-    <>
+    <SessionProvider>
       <Header onToggle={toggleNav} open={navOpen} />
       <OverlayNav open={navOpen} onLink={closeNav} />
       <PageTransition>{children}</PageTransition>
       <Footer />
       <ChatWidget />
-    </>
+    </SessionProvider>
   );
 }
