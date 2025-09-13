@@ -53,6 +53,12 @@ To forward contact form submissions to your Google Business inbox:
 
      The endpoint applies basic rate limiting (5 requests per minute per IP) to prevent abuse.
 
+## User Authentication
+
+The site includes a basic Supabase-powered login page at `/login`. Set
+`NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` in your `.env`
+to enable email and password authentication.
+
 ## Development
 
 Install dependencies and start the development server:
