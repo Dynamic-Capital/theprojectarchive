@@ -1,12 +1,6 @@
-import { describe, it, expect, beforeAll, afterAll, vi } from 'vitest';
-import { newDb } from 'pg-mem';
+import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 
-const mem = newDb();
-vi.mock('pg', () => {
-  const pg = mem.adapters.createPg();
-  return { ...pg, default: pg };
-});
-
+// Provide a fake connection string so the database module initializes.
 process.env.DATABASE_URL = 'postgres://user:pass@localhost:5432/test';
 
 async function loadDb() {
