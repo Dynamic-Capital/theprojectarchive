@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 
 export default function CompactEmailButton({
-  email = 'hello@theprojectarchive.com',
+  email = 'hello@theprojectarchive.mv',
   label = 'Email Us',
   className = '',
   style,

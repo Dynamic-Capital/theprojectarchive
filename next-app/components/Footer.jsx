@@ -45,11 +45,26 @@ export default function Footer() {
         style={{ display: 'flex', gap: 'var(--space-4)', justifyContent: 'center' }}
         aria-label="Social media links"
       >
-        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-          Twitter
-        </a>
-        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://www.instagram.com/theprojectarchive.mv/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Instagram
+        </a>
+        <a
+          href="https://www.facebook.com/61570311241783"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Facebook
+        </a>
+        <a
+          href="https://www.tiktok.com/@theprojectarchive.mv"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          TikTok
         </a>
       </div>
     </SafeSpace>

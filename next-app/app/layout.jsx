@@ -17,6 +17,8 @@ const jsonLd = {
   name: 'The Project Archive',
   url: siteUrl,
   logo: `${siteUrl}/logo-dark.svg`,
+  telephone: '+9607495687',
+  email: 'hello@theprojectarchive.mv',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Malé',
@@ -28,8 +30,9 @@ const jsonLd = {
     longitude: '73.508889',
   },
   sameAs: [
-    'https://www.instagram.com/theprojectarchive',
-    'https://twitter.com/theprojectarchive',
+    'https://www.instagram.com/theprojectarchive.mv/',
+    'https://www.facebook.com/61570311241783',
+    'https://www.tiktok.com/@theprojectarchive.mv',
   ],
   makesOffer: [
     {
