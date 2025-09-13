@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { POST, _clearRateLimit } from '../../app/api/contact/route.js';
 import nodemailer from 'nodemailer';
+
+let POST;
 
 vi.mock('nodemailer', () => ({
   default: {
@@ -11,12 +12,13 @@ vi.mock('nodemailer', () => ({
 }));
 
 describe('POST /api/contact', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     vi.clearAllMocks();
     process.env.BUSINESS_EMAIL = 'biz@example.com';
     process.env.BUSINESS_EMAIL_APP_PASSWORD = 'app-pass';
     delete process.env.RECAPTCHA_SECRET;
-    _clearRateLimit();
+    vi.resetModules();
+    ({ POST } = await import('../../app/api/contact/route.js'));
   });
 
   it('sends an email on success', async () => {
