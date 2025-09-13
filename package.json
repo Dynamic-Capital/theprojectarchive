@@ -14,6 +14,7 @@
     "test": "npm --prefix next-app run test",
     "lint": "npm --prefix next-app run lint",
     "format": "npm --prefix next-app run format",
+    "uptime": "node scripts/uptime-monitor.js",
     "check": "npm run lint && npm test"
   },
   "engines": {
