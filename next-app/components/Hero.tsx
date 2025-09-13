@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from 'framer-motion';
 import CatLogo from '../public/tpa-black-logo.svg';
+import Button from './Button';
 
 const TAGLINE = 'ALL YOU NEED IS THE PROJECT ARCHIVE — ';
 const REPEATED_TAGLINE = TAGLINE.repeat(6);
@@ -78,28 +79,10 @@ export default function Hero() {
           Where stories live forever 🐾
         </p>
         <div className="mt-8 flex gap-4 md:gap-6">
-          <motion.a
-            href="#explore"
-            className="rounded-md bg-[#f13d00] px-6 py-3 font-semibold text-white"
-            whileHover={
-              reduceMotion ? undefined : { scale: 1.05, opacity: 0.9 }
-            }
-            whileTap={reduceMotion ? undefined : { scale: 0.95 }}
-          >
-            Explore Now
-          </motion.a>
-          <motion.a
-            href="#learn"
-            className="rounded-md border border-white px-6 py-3 font-semibold text-white"
-            whileHover={
-              reduceMotion
-                ? undefined
-                : { scale: 1.05, backgroundColor: '#ffffff', color: '#000000' }
-            }
-            whileTap={reduceMotion ? undefined : { scale: 0.95 }}
-          >
+          <Button href="#explore">Explore Now</Button>
+          <Button href="#learn" variant="secondary">
             Learn More
-          </motion.a>
+          </Button>
         </div>
       </div>
     </section>
