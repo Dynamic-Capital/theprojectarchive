@@ -14,7 +14,10 @@ jobs:
         with:
           node-version: 20
           cache: npm
-      - run: npm ci --ignore-scripts
-      - run: npm --prefix next-app ci
-      - run: npm run lint
-      - run: npm test
+      - name: Install root dependencies
+        run: npm ci --ignore-scripts
+      - name: Install frontend dependencies
+        run: npm ci
+        working-directory: next-app
+      - name: Lint and test
+        run: npm run check
