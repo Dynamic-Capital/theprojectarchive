@@ -20,6 +20,7 @@
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
     "@react-three/fiber": "^8.18.0",
+    "@supabase/supabase-js": "^2.57.4",
     "@upstash/redis": "^1.35.3",
     "focus-trap": "^7.5.4",
     "framer-motion": "^12.23.12",
