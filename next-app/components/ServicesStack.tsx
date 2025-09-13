@@ -8,6 +8,7 @@ type ServiceItem = {
   description: string;
   cta?: string;
   href?: string;
+  icon?: string;
 };
 
 interface ServicesStackProps {
@@ -65,7 +66,14 @@ export default function ServicesStack({ items = [] }: ServicesStackProps) {
               key={i}
               className="bg-black/40 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-lg"
             >
-              <h3 className="text-lg font-semibold">{item.title}</h3>
+              <h3 className="flex items-center text-lg font-semibold">
+                {item.icon && (
+                  <span className="mr-2 text-xl" aria-hidden="true">
+                    {item.icon}
+                  </span>
+                )}
+                {item.title}
+              </h3>
               <p className="mt-2 text-sm text-muted">{item.description}</p>
               {item.cta && (
                 <a
@@ -113,7 +121,14 @@ export default function ServicesStack({ items = [] }: ServicesStackProps) {
             } as CSSProperties}
             whileHover={{ y: -4, scale: 1.02, rotateX: 3 }}
           >
-            <h3 className="text-lg font-semibold">{item.title}</h3>
+            <h3 className="flex items-center text-lg font-semibold">
+              {item.icon && (
+                <span className="mr-2 text-xl" aria-hidden="true">
+                  {item.icon}
+                </span>
+              )}
+              {item.title}
+            </h3>
             <p className="mt-2 text-sm text-muted">{item.description}</p>
             {item.cta && (
               <motion.a
