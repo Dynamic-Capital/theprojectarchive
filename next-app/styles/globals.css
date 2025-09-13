@@ -53,6 +53,26 @@ a:hover { opacity: .9; }
 .button:hover { transform: translateY(-1px); background: color-mix(in oklab, var(--surface), white 3%); }
 .button--primary { background: var(--brand-500); border-color: transparent; color: #fff; }
 .button--danger  { background: var(--error); border-color: transparent; color: #fff; }
+.button--3d {
+  position: relative;
+  background: var(--brand-500);
+  border-color: transparent;
+  color: #fff;
+  transform-style: preserve-3d;
+}
+.button--3d::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: color-mix(in oklab, var(--brand-500), black 15%);
+  transform: translate3d(0, 4px, -1px);
+  transition: transform var(--dur-1) var(--ease-std);
+}
+.button--3d:hover { transform: translateY(-2px); }
+.button--3d:hover::before { transform: translate3d(0, 6px, -1px); }
+.button--3d:active { transform: translateY(0); }
+.button--3d:active::before { transform: translate3d(0, 2px, -1px); }
 .compact-email-button {
   width: 3rem;
   height: 3rem;

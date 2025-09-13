@@ -11,12 +11,12 @@ export default function Button({
 }) {
   const reduceMotion = useReducedMotion();
   const Component = href ? motion.a : motion.button;
-  const variantClass =
-    variant === 'primary'
-      ? 'button button--primary'
-      : variant === 'danger'
-        ? 'button button--danger'
-        : 'button';
+  const variants = {
+    primary: 'button button--primary',
+    danger: 'button button--danger',
+    brand3d: 'button button--3d',
+  };
+  const variantClass = variants[variant] ?? 'button';
   return (
     <Component
       href={href}
