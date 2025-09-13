@@ -72,13 +72,7 @@ export default function Testimonials() {
           {`Showing testimonial ${index + 1} of ${testimonials.length}`}
         </p>
         <div
-          style={{
-            position: 'relative',
-            marginTop: 'var(--space-6)',
-            marginInline: 'auto',
-            maxWidth: '36rem',
-            overflow: 'hidden'
-          }}
+          className="relative mt-6 mx-auto w-full max-w-3xl lg:max-w-5xl overflow-hidden"
         >
           <AnimatePresence mode="wait">
             <motion.figure
@@ -121,14 +115,7 @@ export default function Testimonials() {
             &#8594;
           </motion.button>
         </div>
-        <div
-          style={{
-            marginTop: 'var(--space-4)',
-            display: 'flex',
-            justifyContent: 'center',
-            gap: 'var(--space-2)'
-          }}
-        >
+        <div className="mt-4 flex justify-center gap-2">
           {testimonials.map((_, i) => (
             <button
               key={i}

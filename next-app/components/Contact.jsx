@@ -60,69 +60,75 @@ export default function Contact() {
     >
       <motion.form
         onSubmit={handleSubmit(onSubmit)}
-        style={{ maxWidth: '32rem', marginInline: 'auto', textAlign: 'left' }}
+        className="mx-auto w-full max-w-3xl lg:max-w-5xl text-left grid gap-4 md:grid-cols-2"
         variants={textVariants(reduceMotion)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.5 }}
       >
-        <label htmlFor="name">Name</label>
-        <input
-          id="name"
-          type="text"
-          {...register('name', { onChange: () => setStatus(null) })}
-          aria-invalid={!!errors.name}
-          aria-describedby="name-error"
-          required
-          autoComplete="name"
-        />
-        <span id="name-error" className="error-text">
-          {errors.name?.message}
-        </span>
+        <div className="flex flex-col">
+          <label htmlFor="name">Name</label>
+          <input
+            id="name"
+            type="text"
+            {...register('name', { onChange: () => setStatus(null) })}
+            aria-invalid={!!errors.name}
+            aria-describedby="name-error"
+            required
+            autoComplete="name"
+          />
+          <span id="name-error" className="error-text">
+            {errors.name?.message}
+          </span>
+        </div>
 
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          {...register('email', { onChange: () => setStatus(null) })}
-          aria-invalid={!!errors.email}
-          aria-describedby="email-error"
-          required
-          autoComplete="email"
-        />
-        <span id="email-error" className="error-text">
-          {errors.email?.message}
-        </span>
+        <div className="flex flex-col">
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            {...register('email', { onChange: () => setStatus(null) })}
+            aria-invalid={!!errors.email}
+            aria-describedby="email-error"
+            required
+            autoComplete="email"
+          />
+          <span id="email-error" className="error-text">
+            {errors.email?.message}
+          </span>
+        </div>
 
-        <label htmlFor="message">Message</label>
-        <textarea
-          id="message"
-          rows="5"
-          {...register('message', { onChange: () => setStatus(null) })}
-          aria-invalid={!!errors.message}
-          aria-describedby="message-error"
-          required
-          autoComplete="off"
-        />
-        <span id="message-error" className="error-text">
-          {errors.message?.message}
-        </span>
+        <div className="flex flex-col md:col-span-2">
+          <label htmlFor="message">Message</label>
+          <textarea
+            id="message"
+            rows="5"
+            {...register('message', { onChange: () => setStatus(null) })}
+            aria-invalid={!!errors.message}
+            aria-describedby="message-error"
+            required
+            autoComplete="off"
+          />
+          <span id="message-error" className="error-text">
+            {errors.message?.message}
+          </span>
+        </div>
 
-        <Button type="submit" style={{ marginTop: 'var(--space-2)' }}>
+        <Button type="submit" className="md:col-span-2 mt-2">
           Send Message
         </Button>
         {status === 'success' && (
-          <p role="status" style={{ marginTop: 'var(--space-2)' }}>
+          <p role="status" className="md:col-span-2 mt-2">
             Message sent!
           </p>
         )}
         {status === 'error' && (
-          <p role="status" style={{ marginTop: 'var(--space-2)' }}>
+          <p role="status" className="md:col-span-2 mt-2">
             Failed to send message.
           </p>
         )}
       </motion.form>
-      <CompactEmailButton style={{ marginTop: 'var(--space-4)' }} />
+      <CompactEmailButton className="mt-4" />
     </ParallaxSection>
   );
 }

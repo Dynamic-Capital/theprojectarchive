@@ -32,28 +32,11 @@ export default function Approach() {
       description="We combine technical expertise with artistic vision to craft memorable imagery."
     >
       <ol
-        style={{
-          display: 'grid',
-          gap: 'var(--space-4)',
-          marginTop: 'var(--space-6)',
-          textAlign: 'left',
-          maxWidth: '32rem',
-          marginInline: 'auto'
-        }}
+        className="mt-6 grid grid-cols-1 gap-4 text-left mx-auto w-full max-w-3xl md:max-w-5xl md:grid-cols-3"
       >
         {steps.map(({ icon, title, text }) => (
-          <li
-            key={title}
-            style={{
-              display: 'flex',
-              gap: 'var(--space-3)',
-              alignItems: 'flex-start'
-            }}
-          >
-            <span
-              aria-hidden="true"
-              style={{ fontSize: 'var(--fs-3)' }}
-            >
+          <li key={title} className="flex items-start gap-3">
+            <span aria-hidden="true" className="text-[var(--fs-3)]">
               {icon}
             </span>
             <span>
