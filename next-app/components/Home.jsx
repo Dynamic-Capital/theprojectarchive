@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
-import Hero from './Hero';
 import PortfolioPreview from './PortfolioPreview';
 import Testimonials from './Testimonials';
 import About from './About';
@@ -83,7 +82,6 @@ export default function Home() {
 
   return (
     <>
-      <Hero />
       <PortfolioPreview />
       <Testimonials />
       <About />
