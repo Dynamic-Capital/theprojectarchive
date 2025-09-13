@@ -1,7 +1,14 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1200" height="630" fill="#ffffff"/>
-  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
-        font-size="64" fill="#000000" font-family="Arial, sans-serif">
-    The Project Archive
-  </text>
+  <rect width="1200" height="630" fill="#000"/>
+  <g transform="translate(408 123) scale(6)">
+    <polygon points="16,12 24,0 32,12" fill="#fff" stroke="#e5e5e5" stroke-width="0.5" stroke-linejoin="round"/>
+    <polygon points="48,12 40,0 32,12" fill="#fff" stroke="#e5e5e5" stroke-width="0.5" stroke-linejoin="round"/>
+    <circle cx="32" cy="36" r="24" fill="#fff" stroke="#e5e5e5" stroke-width="0.5"/>
+    <line x1="8" y1="36" x2="16" y2="36" stroke="#e5e5e5" stroke-width="0.5" stroke-linecap="round"/>
+    <line x1="48" y1="36" x2="56" y2="36" stroke="#e5e5e5" stroke-width="0.5" stroke-linecap="round"/>
+    <ellipse cx="24" cy="36" rx="6" ry="8" fill="#000"/>
+    <ellipse cx="40" cy="36" rx="6" ry="8" fill="#000"/>
+    <circle cx="32" cy="44" r="2" fill="#000"/>
+  </g>
+  <text x="50%" y="580" font-size="72" fill="#fff" text-anchor="middle" font-family="Arial, sans-serif">The Project Archive</text>
 </svg>
